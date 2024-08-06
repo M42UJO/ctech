@@ -38,14 +38,30 @@ require_once("config/db.php");
 
 
             <h2 class="h3 mb-3 fw-normal">กรุณาเข้าสู่ระบบ</h2>
-            <?php if (isset($_SESSION['error'])) : ?>
+            <?php if(isset($_SESSION['error'])) { ?>
                 <div class="alert alert-danger" role="alert">
-                    <?php
-                    echo $_SESSION['error'];
-                    unset($_SESSION['error']);
+                    <?php 
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
                     ?>
                 </div>
-            <?php endif; ?>
+            <?php } ?>
+            <?php if(isset($_SESSION['success'])) { ?>
+                <div class="alert alert-success" role="alert">
+                    <?php 
+                        echo $_SESSION['success'];
+                        unset($_SESSION['success']);
+                    ?>
+                </div>
+            <?php } ?>
+            <?php if(isset($_SESSION['warning'])) { ?>
+                <div class="alert alert-warning" role="alert">
+                    <?php 
+                        echo $_SESSION['warning'];
+                        unset($_SESSION['warning']);
+                    ?>
+                </div>
+            <?php } ?>
 
             <div class="form-floating">
                 <input type="email" class="form-control" id="floatingInput" name="email" required placeholder="name@example.com">
@@ -74,50 +90,8 @@ require_once("config/db.php");
 
 
 
-    <script src="script.js"></script>
-    <script>
-        document.getElementById('personal-info-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const idField = document.getElementById('thai-id');
-            if (idField) {
-                const idNumber = idField.value;
-                if (!/^\d+$/.test(idNumber)) {
-                    alert('Please enter a valid ID number (digits only).');
-                    return;
-                }
-            } else {
-                console.error('ID field not found');
-                return;
-            }
-
-            // Add other validations if needed
-
-            alert('Form submitted successfully!');
-        });
-
-        function formatThaiID(input) {
-            // Remove all non-digit characters
-            let value = input.value.replace(/\D/g, '');
-
-            // Add dashes at appropriate positions
-            if (value.length > 1) {
-                value = value.slice(0, 1) + '-' + value.slice(1);
-            }
-            if (value.length > 6) {
-                value = value.slice(0, 6) + '-' + value.slice(6);
-            }
-            if (value.length > 12) {
-                value = value.slice(0, 12) + '-' + value.slice(12);
-            }
-            if (value.length > 15) {
-                value = value.slice(0, 15) + '-' + value.slice(15);
-            }
-
-            // Limit the length to 17 characters (including dashes)
-            input.value = value.slice(0, 17);
-        }
-    </script>
+>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL " crossorigin="anonymous "></script>
 </body>

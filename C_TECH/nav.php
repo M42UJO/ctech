@@ -3,13 +3,13 @@
 require_once("config/db.php");
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินอยู่หรือไม่
-$isLoggedIn = isset($_SESSION['user_id']);
+$isLoggedIn = isset($_SESSION['user_login']);
 
 if ($isLoggedIn) {
-    $user_id = $_SESSION['user_id'];
+    $user_id = $_SESSION['user_login'];
     try {
         // เตรียมและดำเนินการคำสั่ง SQL
-        $stmt = $conn->prepare("SELECT * FROM applicant WHERE Applicant_ID = ?");
+        $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
         $stmt->execute([$user_id]);
         $userData = $stmt->fetch(PDO::FETCH_ASSOC); // ดึงข้อมูลเป็น associative array
     } catch (PDOException $e) {
