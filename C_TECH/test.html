@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<div class=" container ">
+        <div class="row ">
+            <div class="col-xs-12 col-md-12 ">
+                <!--<a href="# " onclick="hiddenn( '1') "><img src="../images/register_post.jpg " class="img-rounded img-responsive "></a>
+                <div style="margin-bottom:10px !important; margin-top:0px !important; "></div>
+                <div id="post_office ">
+                    <div class="well well-sm ">
+                        <font class="font-thai " style="font-size:18px;
+        ">&nbsp;&nbsp;&nbsp;&nbsp;1. ส่งธนาณัติ หรือตี๋วแลกเงิน จำนวนเงินตามหลักสูตรที่สมัคร ดูที่ใบสมัคร ซึ่งเงินจำนวนนี้จะเป็นส่วนหนึ่งของค่าเล่าเรียน โดยระบุชื่อผู้รับคือ <font style="color:#e6510a; ">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา</font> 77/1 หมู่ 4 ตำบลบ้านใหม่ อำเภอเมือง จังหวัดนครราชสีมา 30000 โดยสั่งจ่ายที่ไปรษณีย์นครราชสีมา</font><br>
+                        <font class="font-thai " style="font-size:18px; ">&nbsp;&nbsp;&nbsp;&nbsp;2. โอนผ่านบัญชีธนาคาร <font style="color:#e6510a; ">ชื่อบัญชี วิทยาลัยเทคโนโลยีชนะพลขันธ์ เลขที่บัญชี 3741055883 ธนาคารกรุงไทย ประเภทออมทรัพย์ สาขาสามแยกปักธงชัย</font> แล้วถ่ายรูปสลิปยืนยันมาที่ ID LINE : ctechkorat หรือ Inbox Facebook : c-tech</font>
+                        <br><a class="btn-gray " href="register2018.pdf "><font class="font-thai ">ดาวน์โหลดใบสมัคร คลิ๊กเลย!!</font></a>
+                    </div>
+                </div>-->
+                <div style="margin-bottom:10px !important; margin-top:0px !important; "></div>
+                <div class="row " style="padding-left:20px;padding-right:20px; ">
+                    <div class="col-xs-12 col-md-12 ">
+                        <div align="left "><font class="font-thai " style="font-size:20px ">คุณจำเป็นต้องกรอกข้อมูลในทุกช่องที่มี</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></div>
+                        <div style="margin-bottom:10px !important; margin-top:0px !important; "></div>
+                    </div>
+                </div>
+                <div id="online ">
+                <form name="checkForm " method="post " action="index.php?act=add " enctype="multipart/form-data ">
+                    
+                        <div class="row " style="padding-left:20px;padding-right:20px; ">
+                            <div class="panel panel-default ">
+                                <div class="panel-heading "><font class="font-thai " style="font: 600 16px/20px 'Prompt', sans-serif;color:#222222; ">ข้อมูลส่วนตัว</font></div>
+                                <div class="panel-body ">
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">คำนำหน้า</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                        <select class="form-control " name="title " required=" ">
+                                            <option value=" ">==เลือก==</option>
+                                            <option value="นาย ">นาย</option>
+                                            <option value="นาง ">นาง</option>
+                                            <option value="นางสาว ">นางสาว</option>
+                                        </select>
+                                        <div style="margin-bottom:10px !important; margin-top:0px !important; "></div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ชื่อ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="ชื่อ " name="f_name " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">สกุล</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="สกุล " name="l_name " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ชื่อ - สกุล อังกฤษ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="ชื่อ - สกุล อังกฤษ " name="en_name " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">เลขบัตรประชาชน</font>&nbsp;<font size="2 " color="#FF0000 ">** ตัวเลขเท่านั้น</font></label>
+                                            <input class="form-control " type="text " placeholder="เลขบัตรประชาชน " name="id_card " maxlength="13 " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 16px/20px 'Prompt', sans-serif;color:#222222; ">ชื่อเล่น</font>&nbsp;<font size="2 " color="#FF0000 "></font></label>
+                                            <input class="form-control " type="text " placeholder="ชื่อเล่น " name="nickname ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                        <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">วันเกิด</font>&nbsp;<font size="2 " color="#FF0000 ">*</font></label>
+                                        <select class="form-control " name="dd " required=" ">
+                                            <option value=" ">==เลือก==</option>
+                                                                                    <option value="1 ">1</option>
+                                                                                    <option value="2 ">2</option>
+                                                                                    <option value="3 ">3</option>
+                                                                                    <option value="4 ">4</option>
+                                                                                    <option value="5 ">5</option>
+                                                                                    <option value="6 ">6</option>
+                                                                                    <option value="7 ">7</option>
+                                                                                    <option value="8 ">8</option>
+                                                                                    <option value="9 ">9</option>
+                                                                                    <option value="10 ">10</option>
+                                                                                    <option value="11 ">11</option>
+                                                                                    <option value="12 ">12</option>
+                                                                                    <option value="13 ">13</option>
+                                                                                    <option value="14 ">14</option>
+                                                                                    <option value="15 ">15</option>
+                                                                                    <option value="16 ">16</option>
+                                                                                    <option value="17 ">17</option>
+                                                                                    <option value="18 ">18</option>
+                                                                                    <option value="19 ">19</option>
+                                                                                    <option value="20 ">20</option>
+                                                                                    <option value="21 ">21</option>
+                                                                                    <option value="22 ">22</option>
+                                                                                    <option value="23 ">23</option>
+                                                                                    <option value="24 ">24</option>
+                                                                                    <option value="25 ">25</option>
+                                                                                    <option value="26 ">26</option>
+                                                                                    <option value="27 ">27</option>
+                                                                                    <option value="28 ">28</option>
+                                                                                    <option value="29 ">29</option>
+                                                                                    <option value="30 ">30</option>
+                                                                                    <option value="31 ">31</option>
+                                                                                </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                        <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">เดือนเกิด</font>&nbsp;<font size="2 " color="#FF0000 ">*</font></label>
+                                        <select class="form-control " name="mm " required=" ">
+                                            <option value=" ">==เลือก==</option>
+                                            <option value="01 ">มกราคม</option>
+                                            <option value="02 ">กุมภาพันธ์</option>
+                                            <option value="03 ">มีนาคม</option>
+                                            <option value="04 ">เมษายน</option>
+                                            <option value="05 ">พฤษภาคม</option>
+                                            <option value="06 ">มิถุนายน</option>
+                                            <option value="07 ">กรกฎาคม</option>
+                                            <option value="08 ">สิงหาคม</option>
+                                            <option value="09 ">กันยายน</option>
+                                            <option value="10 ">ตุลาคม</option>
+                                            <option value="11 ">พฤศจิกายน</option>
+                                            <option value="12 ">ธันวาคม</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                        <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ปีเกิด</font>&nbsp;<font size="2 " color="#FF0000 ">*</font></label>
+                                        <select class="form-control " name="yy " required=" ">
+                                            <option value=" ">==เลือก==</option>
+                                                                                    <option value="2510 ">2510</option>
+                                                                                    <option value="2511 ">2511</option>
+                                                                                    <option value="2512 ">2512</option>
+                                                                                    <option value="2513 ">2513</option>
+                                                                                    <option value="2514 ">2514</option>
+                                                                                    <option value="2515 ">2515</option>
+                                                                                    <option value="2516 ">2516</option>
+                                                                                    <option value="2517 ">2517</option>
+                                                                                    <option value="2518 ">2518</option>
+                                                                                    <option value="2519 ">2519</option>
+                                                                                    <option value="2520 ">2520</option>
+                                                                                    <option value="2521 ">2521</option>
+                                                                                    <option value="2522 ">2522</option>
+                                                                                    <option value="2523 ">2523</option>
+                                                                                    <option value="2524 ">2524</option>
+                                                                                    <option value="2525 ">2525</option>
+                                                                                    <option value="2526 ">2526</option>
+                                                                                    <option value="2527 ">2527</option>
+                                                                                    <option value="2528 ">2528</option>
+                                                                                    <option value="2529 ">2529</option>
+                                                                                    <option value="2530 ">2530</option>
+                                                                                    <option value="2531 ">2531</option>
+                                                                                    <option value="2532 ">2532</option>
+                                                                                    <option value="2533 ">2533</option>
+                                                                                    <option value="2534 ">2534</option>
+                                                                                    <option value="2535 ">2535</option>
+                                                                                    <option value="2536 ">2536</option>
+                                                                                    <option value="2537 ">2537</option>
+                                                                                    <option value="2538 ">2538</option>
+                                                                                    <option value="2539 ">2539</option>
+                                                                                    <option value="2540 ">2540</option>
+                                                                                    <option value="2541 ">2541</option>
+                                                                                    <option value="2542 ">2542</option>
+                                                                                    <option value="2543 ">2543</option>
+                                                                                    <option value="2544 ">2544</option>
+                                                                                    <option value="2545 ">2545</option>
+                                                                                    <option value="2546 ">2546</option>
+                                                                                    <option value="2547 ">2547</option>
+                                                                                    <option value="2548 ">2548</option>
+                                                                                    <option value="2549 ">2549</option>
+                                                                                    <option value="2550 ">2550</option>
+                                                                                    <option value="2551 ">2551</option>
+                                                                                    <option value="2552 ">2552</option>
+                                                                                    <option value="2553 ">2553</option>
+                                                                                    <option value="2554 ">2554</option>
+                                                                                    <option value="2555 ">2555</option>
+                                                                                    <option value="2556 ">2556</option>
+                                                                                    <option value="2557 ">2557</option>
+                                                                                    <option value="2558 ">2558</option>
+                                                                                    <option value="2559 ">2559</option>
+                                                                                    <option value="2560 ">2560</option>
+                                                                                </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">กรุ๊ปเลือด</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="กรุ๊ปเลือด " name="blood " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ส่วนสูง</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="ส่วนสูง " name="height " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">น้ำหนัก</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="น้ำหนัก " name="weight " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">เชื้อชาติ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="เชื้อชาติ " name="race " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">สัญชาติ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="สัญชาติ " name="nationality " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ศาสนา</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="ศาสนา " name="religion " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">จำนวนพี่น้อง</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="จำนวนพี่น้อง " name="brethren " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">จำนวนพี่น้องที่กำลังศึกษาอยู่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="กำลังศึกษา " name="brethren_std " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">เบอร์โทร</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <div class="input-group ">
+                                                <div class="input-group-addon ">
+                                                    <i class="fa fa-phone "></i>
+                                                </div>
+                                                
+                                                <input type="text " class="form-control " name="phone_std " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">LineID</font></label>
+                                            <input type="text " class="form-control " placeholder="LineID " name="lineid ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">Facebook</font></label>
+                                            <input type="text " class="form-control " placeholder="Facebook " name="facebook ">
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-xs-12 col-md-5 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">E-Mail</font></label>
+                                            <input type="text " class="form-control " id="exampleInputEmail1 " aria-describedby="emailHelp " placeholder="E-Mail " name="email ">
+                                        </div>
+                                    </div>-->
+                                    <div class="col-xs-12 col-md-5 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">รูปภาพ 1 นิ้วครึ่ง</font>&nbsp;<font size="2 " color="#FF0000 ">**.jpg เท่านั้น</font></label>
+                                            <input type="file " class="form-control " name="pic ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading "><font class="font-thai " style="font: 600 16px/20px 'Prompt', sans-serif;color:#222222; ">ที่อยู่ปัจจุบัน</font></div>
+                                <div class="panel-body ">
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">บ้านเลขที่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="บ้านเลขที่ " name="no_std " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-1 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">หมู่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="หมู่ " name="moo_std " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ซอย</font></label>
+                                            <input type="text " class="form-control " placeholder="ซอย " name="soi_std ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ถนน</font></label>
+                                            <input type="text " class="form-control " placeholder="ถนน " name="road_std ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-4 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ตำบล</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="ตำบล " name="thumbon_std " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-6 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">อำเภอ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="อำเภอ " name="ampher_std ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-6 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">จังหวัด</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="จังหวัด " name="province_std " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">รหัสไปรษณีย์</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="zipcode_std " maxlength="5 " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading "><font class="font-thai " style="font: 600 16px/20px 'Prompt', sans-serif;color:#222222; ">ข้อมูลการศึกษา</font></div>
+                                <div class="panel-body ">
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">จบจากโรงเรียน</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input class="form-control " type="text " placeholder="โรงเรียน " name="school_std " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-4 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ตำบล</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="ตำบล " name="thumbon_s " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-6 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">อำเภอ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="อำเภอ " name="ampher_s " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-6 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">จังหวัด</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="จังหวัด " name="province_s " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">รหัสไปรษณีย์</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="zipcode_s " maxlength="5 " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">จบเมื่อ พ.ศ.</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="year_end_s " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ผลการเรียน</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="ผลการเรียน " name="gpa_s " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ระดับชั้น</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                        <select class="form-control " name="level_s " required=" ">
+                                            <option value=" ">==เลือก==</option>
+                                            <option value="ม.3 ">ม.3</option>
+                                            <option value="ม.6 ">ม.6</option>
+                                            <option value="ปวช. ">ปวช.</option>
+                                        </select>
+                                        <div style="margin-bottom:10px !important; margin-top:0px !important; "></div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">สาขาวิชา</font>&nbsp;</label>
+                                            <input type="text " class="form-control " placeholder="สาขาวิชา " name="branch_s ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">วุฒิการศึกษาอื่นๆ</font>&nbsp;</label>
+                                            <input type="text " class="form-control " placeholder="วุฒิการศึกษาอื่นๆ " name="other_s ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">สาขาวิชา</font>&nbsp;</label>
+                                            <input type="text " class="form-control " placeholder="สาขาวิชา " name="other_branch ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default ">
+                                <div class="panel-heading "><font class="font-thai " style="font: 600 16px/20px 'Prompt', sans-serif;color:#222222; ">ข้อมูลผู้ปกครอง</font></div>
+                                <div class="panel-body ">
+                                    <div class="col-xs-12 col-md-5 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">บิดาชื่อ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="บิดาชื่อ " name="name_f " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">สถานะ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                        <select class="form-control " name="status_f " required=" ">
+                                            <option value=" ">==เลือก==</option>
+                                            <option value="มีชีวิต ">มีชีวิต</option>
+                                            <option value="เสียชีวิต ">เสียชีวิต</option>
+                                        </select>
+                                        <div style="margin-bottom:10px !important; margin-top:0px !important; "></div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">อาชีพ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="อาชีพ " name="career_f " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">รายได้/เดือน</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="รายได้/เดือน " name="income_f " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">บ้านเลขที่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="บ้านเลขที่ " name="no_f " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-1 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">หมู่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="หมู่ " name="moo_f " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ซอย</font></label>
+                                            <input type="text " class="form-control " placeholder="ซอย " name="soi_f ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ถนน</font></label>
+                                            <input type="text " class="form-control " placeholder="ถนน " name="road_f ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ตำบล</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="ตำบล " name="thumbon_f " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">อำเภอ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="อำเภอ " name="ampher_f " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">จังหวัด</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="จังหวัด " name="province_f " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">รหัสไปรษณีย์</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="zipcode_f " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " maxlength="5 " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">เบอร์โทรบิดา</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <div class="input-group ">
+                                                <div class="input-group-addon ">
+                                                    <i class="fa fa-phone "></i>
+                                                </div>
+                                                
+                                                <input type="text " class="form-control " name="phone_f " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-5 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">มารดาชื่อ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="มารดาชื่อ " name="name_m " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">สถานะ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                        <select class="form-control " name="status_m " required=" ">
+                                            <option value=" ">==เลือก==</option>
+                                            <option value="มีชีวิต ">มีชีวิต</option>
+                                            <option value="เสียชีวิต ">เสียชีวิต</option>
+                                        </select>
+                                        <div style="margin-bottom:10px !important; margin-top:0px !important; "></div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">อาชีพ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="อาชีพ " name="career_m " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">รายได้/เดือน</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="รายได้/เดือน " name="income_m " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">บ้านเลขที่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="บ้านเลขที่ " name="no_m " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-1 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">หมู่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="หมู่ " name="moo_m " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ซอย</font></label>
+                                            <input type="text " class="form-control " placeholder="ซอย " name="soi_m ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ถนน</font></label>
+                                            <input type="text " class="form-control " placeholder="ถนน " name="road_m ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ตำบล</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="ตำบล " name="thumbon_m " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">อำเภอ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="อำเภอ " name="ampher_m " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">จังหวัด</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="จังหวัด " name="province_m " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">รหัสไปรษณีย์</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="zipcode_m " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " maxlength="5 " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">เบอร์โทรมารดา</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <div class="input-group ">
+                                                <div class="input-group-addon ">
+                                                    <i class="fa fa-phone "></i>
+                                                </div>
+                                                
+                                                <input type="text " class="form-control " name="phone_m " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ผู้ปกครองที่ไม่ใช่ บิดา-มารดา</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="ผู้ปกครองที่ไม่ใช่ บิดา-มารดา " name="name_g " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ความสัมพันธ์</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="ความสัมพันธ์ " name="relationship_g " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-2 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">บ้านเลขที่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="บ้านเลขที่ " name="no_g " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-1 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">หมู่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="หมู่ " name="moo_g " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ซอย</font></label>
+                                            <input type="text " class="form-control " placeholder="ซอย " name="soi_g ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ถนน</font></label>
+                                            <input type="text " class="form-control " placeholder="ถนน " name="road_g ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">ตำบล</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="ตำบล " name="thumbon_g " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">อำเภอ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="อำเภอ " name="ampher_g " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">จังหวัด</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="จังหวัด " name="province_g " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font class="font-thai " style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">รหัสไปรษณีย์</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="zipcode_g " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " maxlength="5 " required=" ">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 15px/20px 'Prompt', sans-serif;color:#222222; ">เบอร์โทรผู้ปกครอง</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                            <div class="input-group ">
+                                                <div class="input-group-addon ">
+                                                    <i class="fa fa-phone "></i>
+                                                </div>
+                                                
+                                                <input type="text " class="form-control " name="phone_g " pattern="[0-9]{1,} " title="กรอกตัวเลขเท่านั้น " required=" ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!--<div class="col-xs-12 col-md-6 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-12 control-label "><font class="font-thai " style="font-size:18px ">&nbsp;กำลังศึกษาอยู่ชั้น</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="กำลังศึกษาอยู่ชั้น " name="edu ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-12 control-label "><font class="font-thai " style="font-size:18px ">&nbsp;โรงเรียน</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input class="form-control " type="text " placeholder="โรงเรียน " name="school ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-12 control-label "><font class="font-thai " style="font-size:18px ">บ้านเลขที่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="บ้านเลขที่ " name="houseno ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-2 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-12 control-label "><font class="font-thai " style="font-size:18px ">หมู่</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="หมู่ " name="moo ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-12 control-label "><font class="font-thai " style="font-size:18px ">ซอย</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="ซอย " name="soi ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-12 control-label "><font class="font-thai " style="font-size:18px ">ถนน</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="ถนน " name="road ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-4 control-label "><font class="font-thai " style="font-size:18px ">ตำบล</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="thumbon ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-6 control-label "><font class="font-thai " style="font-size:18px ">อำเภอ</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="ampher ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-6 control-label "><font class="font-thai " style="font-size:18px ">จังหวัด</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="province ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-12 control-label "><font class="font-thai " style="font-size:18px ">รหัสไปรษณีย์</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="zipcode " maxlength="5 ">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-12 control-label "><font class="font-thai " style="font-size:18px ">โทรศัพท์บ้าน</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="โทรศัพท์บ้าน " name="telephone ">
+                                </div>
+                            </div>-->
+                            
+                            
+                            <!--<div class="col-xs-12 col-md-6 ">
+                                <div class="form-group ">
+                                    <label class="col-sm-12 control-label "><font class="font-thai " style="font-size:18px ">E-Mail</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                    <input type="text " class="form-control " placeholder="E-Mail " name="email ">
+                                </div>
+                            </div>-->
+                            <div class="panel panel-default ">
+                                <div class="panel-heading "><font class="font-thai " style="font: 600 16px/20px 'Prompt', sans-serif;color:#222222; ">ต้องการศึกษา</font></div>
+                                <div class="panel-body ">
+                                    <div class="col-xs-12 col-md-12 ">
+                                        <div class="form-group ">
+                                            <label class="col-sm-12 control-label "><font style="font: 400 16px/20px 'Prompt', sans-serif;color:#222222; ">ต้องการศึกษา</font>&nbsp;<font size="2 " color="#FF0000 ">**</font></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <font id="part "><select name="part " class="form-control " onchange="dochange( 'level', this.value) " required=" ">
+    <option value=" ">--- เลือกหลักสูตร ---</option>
+    <option value="1 ">ภาคปกติ</option> 
+    <option value="2 ">ภาคสมทบ(ภาคบ่าย)</option> 
+    <option value="3 ">ภาคทวิภาคี</option> 
+    </select>
+    </font>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <font id="level "><select name="level " class="form-control "><option value=" ">----------ไม่มี ---------</option></select></font>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <font id="late "><select name="late " class="form-control "><option value=" ">---------ไม่มี ---------</option></select></font>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-3 ">
+                                        <div class="form-group ">
+                                            <font id="subject "><select name="subject " class="form-control "><option value=" ">-------------ไม่มี -------------</option></select></font>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-12 ">
+                                <input type="submit " class="font-thai btn btn-success " name="OK_Submit " value="ok ">
+                                <br><br><a class="btn-gray " href="register2018.pdf "><font class="font-thai ">ดาวน์โหลดใบสมัคร คลิ๊กเลย!!</font></a>
+                            </div>
+                            <div class="col-xs-12 col-md-12 ">
+                                <font class="font-thai " style="font-size:18px; color:#FF0000; ">หากเกิดข้อผิดพลาดในการสมัคร กรุณาติดต่อได้ที่ 0883425813 อ.นา หรือ</font> <a href="http://www.c-tech.ac.th/board/ ">http://www.c-tech.ac.th/board/</a>
+                            </div>
+                            
+                        </div></form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
