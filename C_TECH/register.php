@@ -22,14 +22,14 @@ require_once("config/db.php");
 
 
 <body>
-<?php
+    <?php
     require_once("nav.php");
     ?>
-    <main class="form-signup mt-5">
+    <main class="form-signup mt-5 col-md-12">
         <form method="post" action="config/insertregister.php">
             <img src="https://img5.pic.in.th/file/secure-sv1/c-techlogo.png" alt="Your Logo" width="150" height="32"><br><br>
             <h1 class="h3 mb-3 fw-normal">สมัครสมาชิก</h1>
-            <img src="imagee/ktc-lost-thai.jpg" alt="" width="75%" class="mb-3">
+            
 
             <?php if (isset($_SESSION['error'])) : ?>
                 <div class="alert alert-danger" role="alert">
@@ -49,14 +49,21 @@ require_once("config/db.php");
                 </div>
             <?php endif; ?>
 
-            <div class="form-floating my-2">
-                <input type="text" class="form-control" id="thai-id" name="id_card_number" required maxlength="17" oninput="formatThaiID(this); generateUsername();" placeholder="x-xxxx-xxxxx-xx-x">
-                <label for="thai-id">กรอกเลขบัตรประชาชน</label>
+
+            
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" name="username" required placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
             </div>
-            <div class="form-floating my-2" style="display: none;">
-  <input type="text" class="form-control" id="username" name="username" readonly>
-  <label class="hidden" for="username">Username</label>
-</div>
+            <div class="form-floating my-2">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+                <label for="floatingPassword">password</label>
+            </div>
+            <div class="form-floating my-2">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name="c_password" required>
+                <label for="floatingPassword">Confirm Password</label>
+            </div>
+            
 
             <button class="btn btn-warning w-100 py-2 btn-custom" type="submit">ยืนยัน</button>
             <p class="mt-5 mb-3 text-body-secondary">ถ้าคุณมีบัญชีแล้ว <a style="color: orange;" href="login.php">คลิกที่นี่</a> เพื่อเข้าสู่ระบบ</p>
@@ -69,43 +76,7 @@ require_once("config/db.php");
 
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script>
-        function formatThaiID(input) {
-            let value = input.value.replace(/\D/g, '');
-            if (value.length > 1) {
-                value = value.slice(0, 1) + '-' + value.slice(1);
-            }
-            if (value.length > 6) {
-                value = value.slice(0, 6) + '-' + value.slice(6);
-            }
-            if (value.length > 12) {
-                value = value.slice(0, 12) + '-' + value.slice(12);
-            }
-            if (value.length > 15) {
-                value = value.slice(0, 15) + '-' + value.slice(15);
-            }
-            input.value = value.slice(0, 17);
 
-            generateUsername();
-        }
-
-        function generateUsername() {
-            let idCard = document.getElementById('thai-id').value.replace(/-/g, '');
-            if (idCard.length === 13) {
-                let username = Math.random().toString(36).substr(2, 8);
-                document.getElementById('username').value = username;
-            }
-        }
-
-        document.querySelector('form').addEventListener('submit', function(event) {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('thai-id').value;
-            const confirmation = confirm(`นี่คือ username ของคุณ: ${username}\n        password ของคุณ: ${password}\n\nคุณต้องการดำเนินการต่อหรือไม่?`);
-            if (!confirmation) {
-                event.preventDefault(); // ยกเลิกการส่งฟอร์มถ้าผู้ใช้ไม่ยืนยัน
-            }
-        });
-    </script>
 </body>
 
 </html>

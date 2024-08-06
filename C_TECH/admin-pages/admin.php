@@ -32,36 +32,7 @@ require_once("../config/db.php");
 
 
 
-    <main class="form-signin mt-5 col-md-12">
-        <form>
-            <img src="https://img5.pic.in.th/file/secure-sv1/c-techlogo.png" alt="Your Logo" width="150" height="32"><br><br>
-
-
-            <h2 class="h3 mb-3 fw-normal">Administrator</h2>
-            <h2 class="h4 mb-3 fw-normal">กรุณาเข้าสู่ระบบ</h2>
-
-            <div class="form-floating my-2">
-                <input type="text" class="form-control" id="floatingInput" placeholder="">
-                <label for="floatingInput">Username</label>
-            </div>
-            <div class="form-floating my-2">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-            </div>
-
-            <div class="form-check text-start my-3">
-                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">Remember me</label>
-            </div>
-
-
-            <button class="btn btn-warning w-100  btn-custom" type="submit">เข้าสู่ระบบ</button>
-            <!-- <p class="mt-5 mb-3 text-body-secondary">ถ้าไม่มีบัญชี <a style="color: orange;" href="register.php">คลิกที่นี่</a> เพิ่อสมัคร</p> -->
-
-        </form>
-    </main>
-
-    <br><br><br>
+    
 
     <!-- end login -->
 
