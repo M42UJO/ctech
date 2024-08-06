@@ -2,26 +2,21 @@
 session_start();
 require_once("config/db.php");
 
-
 if (!isset($_SESSION['user_login'])) {
     header('Location: login.php');
+    exit();
 }
 
-if (isset($_SESSION['user_login'])) {
-    $user_id = $_SESSION['user_login'];
-     //echo $user_id;
-}
+$user_id = $_SESSION['user_login'];
 
 try {
     $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
     $stmt->execute([$user_id]);
     $userData = $stmt->fetch();
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo "Error: " . htmlspecialchars($e->getMessage());
+    exit();
 }
-
-
-
 ?>
 <?php if (isset($_SESSION['error'])) : ?>
     <div class="alert alert-danger" role="alert">
@@ -127,8 +122,8 @@ try {
                         <input type="text" id="nickname" class="form-control" placeholder="ชื่อเล่น" name="nickname">
                     </div>
                     <div class="col-md-2">
-                        <label for="birth-day" class="form-label">วันเกิด <span class="required">**</span></label>
-                        <select id="birth-day" class="form-select" name="birth-day" required>
+                        <label for="birth_day" class="form-label">วันเกิด <span class="required">**</span></label>
+                        <select id="birth_day" class="form-select" name="birth_day" required>
                             <option value="">==เลือก==</option>
                             <option value="1">1</option>
                             <option value="2">2</option>

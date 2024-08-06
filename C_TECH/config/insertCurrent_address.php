@@ -5,8 +5,8 @@ require_once("db.php");
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
+if (isset($_SESSION['user_login'])) {
+    $user_id = $_SESSION['user_login'];
 }
 
 try {

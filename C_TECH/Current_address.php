@@ -2,24 +2,21 @@
 session_start();
 require_once("config/db.php");
 
-
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_login'])) {
     header('Location: login.php');
+    exit();
 }
 
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-    echo $user_id;
-}
+$user_id = $_SESSION['user_login'];
 
 try {
-    $stmt = $conn->prepare("SELECT * FROM applicant WHERE Applicant_ID = ?");
+    $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
     $stmt->execute([$user_id]);
     $userData = $stmt->fetch();
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo "Error: " . htmlspecialchars($e->getMessage());
+    exit();
 }
-
 ?>
 <?php if (isset($_SESSION['error'])) : ?>
     <div class="alert alert-danger" role="alert">
@@ -161,6 +158,6 @@ try {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL " crossorigin="anonymous "></script>
     <!-- <script src="script.js"></script> -->
-    < </body>
+     </body>
 
 </html>

@@ -2,18 +2,17 @@
 session_start();
 require_once("db.php");
 
-// ตรวจสอบว่าผู้ใช้ล็อกอินอยู่หรือไม่
 $isLoggedIn = isset($_SESSION['user_login']);
 
 if ($isLoggedIn) {
     $user_id = $_SESSION['user_login'];
     try {
-        // เตรียมและดำเนินการคำสั่ง SQL
         $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
         $stmt->execute([$user_id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC); // ดึงข้อมูลเป็น associative array
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        $errorMessage = "Error: " . htmlspecialchars($e->getMessage()); // ใช้ htmlspecialchars() เพื่อป้องกัน XSS
+        $errorMessage = "Error: " . htmlspecialchars($e->getMessage());
+        echo $errorMessage; // เพิ่มการแสดงข้อผิดพลาด
     }
 }
 
@@ -38,7 +37,7 @@ if (isset($_POST['submit'])) {
     $phone_number = htmlspecialchars($_POST['phone_number']);
     $line_id = htmlspecialchars($_POST['line_id']);
     $facebook = htmlspecialchars($_POST['facebook']);
-  
+
     // การจัดการไฟล์ภาพ
     $profile_image = null;
     if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
@@ -48,45 +47,31 @@ if (isset($_POST['submit'])) {
         $fileType = $_FILES['profile_image']['type'];
         $fileNameCmps = explode(".", $fileName);
         $fileExtension = strtolower(end($fileNameCmps));
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-        
+        $allowedExtensions = ['jpg', 'jpeg'];
+
         if (in_array($fileExtension, $allowedExtensions)) {
             $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
             $uploadFileDir = 'uploads/';
             $dest_path = $uploadFileDir . $newFileName;
 
             if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                $profile_image = $dest_path; // เก็บ path ของไฟล์ในฐานข้อมูล
+                $profile_image = $dest_path;
             }
         }
     }
 
     try {
-        $sql = $conn->prepare("UPDATE applicant SET 
-            prefix = :prefix, 
-            name = :name, 
-            lastname = :lastname, 
-            eng_name = :eng_name, 
-            id_card_number = :id_card_number, 
-            nickname = :nickname, 
-            birth_day = :birth_day, 
-            birth_month = :birth_month, 
-            birth_year = :birth_year, 
-            blood_group = :blood_group, 
-            height = :height, 
-            weight = :weight, 
-            nationality = :nationality, 
-            citizenship = :citizenship, 
-            religion = :religion, 
-            siblings_count = :siblings_count, 
-            studying_siblings_count = :studying_siblings_count, 
-            phone_number = :phone_number, 
-            line_id = :line_id, 
-            facebook = :facebook, 
-            profile_image = :profile_image
-            WHERE Applicant_ID = :user_login");
+        $sql = $conn->prepare("INSERT INTO applicant (
+            prefix, name, lastname, eng_name, id_card_number, nickname, birth_day, birth_month, birth_year, 
+            blood_group, height, weight, nationality, citizenship, religion, siblings_count, studying_siblings_count, 
+            phone_number, line_id, facebook, profile_image
+        ) VALUES (
+            :prefix, :name, :lastname, :eng_name, :id_card_number, :nickname, :birth_day, :birth_month, :birth_year, 
+            :blood_group, :height, :weight, :nationality, :citizenship, :religion, :siblings_count, :studying_siblings_count, 
+            :phone_number, :line_id, :facebook, :profile_image
+        )");
 
-        $sql->bindParam(':user_login', $user_id, PDO::PARAM_INT);
+        // Bind parameters as before
         $sql->bindParam(':prefix', $prefix);
         $sql->bindParam(':name', $name);
         $sql->bindParam(':lastname', $lastname);
@@ -112,18 +97,19 @@ if (isset($_POST['submit'])) {
         $result = $sql->execute();
 
         if ($result) {
-            $_SESSION['success'] = "Data has been updated successfully";
+            $_SESSION['success'] = "Data has been inserted successfully";
             header("Location: ../Current_address.php");
             exit();
         } else {
-            $_SESSION['error'] = "Data update failed";
+            $_SESSION['error'] = "Data insertion failed";
+            echo "Data insertion failed: " . $sql->errorInfo()[2];
             header("Location: ../Personal_info.php");
             exit();
         }
     } catch (PDOException $e) {
         $_SESSION['error'] = "Database Error: " . $e->getMessage();
+        echo "Database Error: " . $e->getMessage();
         header("Location: ../Personal_info.php");
         exit();
     }
 }
-?>
