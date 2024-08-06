@@ -2,20 +2,19 @@
 session_start();
 require_once("db.php");
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// ตรวจสอบว่าผู้ใช้ล็อกอินอยู่หรือไม่
+$isLoggedIn = isset($_SESSION['user_login']);
 
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-}
-
-try {
-    $stmt = $conn->prepare("SELECT * FROM applicant WHERE Applicant_ID = ?");
-    $stmt->execute([$user_id]);
-    $userData = $stmt->fetch();
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-    exit();
+if ($isLoggedIn) {
+    $user_id = $_SESSION['user_login'];
+    try {
+        // เตรียมและดำเนินการคำสั่ง SQL
+        $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
+        $stmt->execute([$user_id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC); // ดึงข้อมูลเป็น associative array
+    } catch (PDOException $e) {
+        $errorMessage = "Error: " . htmlspecialchars($e->getMessage()); // ใช้ htmlspecialchars() เพื่อป้องกัน XSS
+    }
 }
 
 if (isset($_POST['submit'])) {
@@ -39,11 +38,28 @@ if (isset($_POST['submit'])) {
     $phone_number = htmlspecialchars($_POST['phone_number']);
     $line_id = htmlspecialchars($_POST['line_id']);
     $facebook = htmlspecialchars($_POST['facebook']);
-    $profile_image = $_FILES['profile_image'];
   
+    // การจัดการไฟล์ภาพ
+    $profile_image = null;
+    if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
+        $fileTmpPath = $_FILES['profile_image']['tmp_name'];
+        $fileName = $_FILES['profile_image']['name'];
+        $fileSize = $_FILES['profile_image']['size'];
+        $fileType = $_FILES['profile_image']['type'];
+        $fileNameCmps = explode(".", $fileName);
+        $fileExtension = strtolower(end($fileNameCmps));
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        
+        if (in_array($fileExtension, $allowedExtensions)) {
+            $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+            $uploadFileDir = 'uploads/';
+            $dest_path = $uploadFileDir . $newFileName;
 
-
-
+            if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                $profile_image = $dest_path; // เก็บ path ของไฟล์ในฐานข้อมูล
+            }
+        }
+    }
 
     try {
         $sql = $conn->prepare("UPDATE applicant SET 
@@ -68,9 +84,9 @@ if (isset($_POST['submit'])) {
             line_id = :line_id, 
             facebook = :facebook, 
             profile_image = :profile_image
-            WHERE Applicant_ID = :user_id");
+            WHERE Applicant_ID = :user_login");
 
-        $sql->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql->bindParam(':user_login', $user_id, PDO::PARAM_INT);
         $sql->bindParam(':prefix', $prefix);
         $sql->bindParam(':name', $name);
         $sql->bindParam(':lastname', $lastname);
@@ -91,10 +107,11 @@ if (isset($_POST['submit'])) {
         $sql->bindParam(':phone_number', $phone_number);
         $sql->bindParam(':line_id', $line_id);
         $sql->bindParam(':facebook', $facebook);
-        $sql->bindParam(':profile_image', $fileNew);
-        $sql->execute();
+        $sql->bindParam(':profile_image', $profile_image);
 
-        if ($sql->execute()) {
+        $result = $sql->execute();
+
+        if ($result) {
             $_SESSION['success'] = "Data has been updated successfully";
             header("Location: ../Current_address.php");
             exit();

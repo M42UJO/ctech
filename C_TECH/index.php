@@ -67,3 +67,4 @@ require_once("config/db.php");
 </body>
 
 </html>
+อยากได้ page title bar ข้างในมี <h1 id="center" class=" mt-5"> ระบบรับสมัครนักศึกษา</h1>

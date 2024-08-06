@@ -120,7 +120,7 @@ try {
                     </div>
                     <div class="col-md-4">
                         <label for="id-number" class="form-label">เลขบัตรประชาชน <span class="required">** ตัวเลขเท่านั้น</span></label>
-                        <input type="text" class="form-control" id="thai-id" maxlength="17"  placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" required value="<?php echo htmlspecialchars($userData['id_card_number']); ?>">
+                        <input type="text" class="form-control" id="thai-id" maxlength="17"  placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" required >
                     </div>
                     <div class="col-md-2">
                         <label for="nickname" class="form-label">ชื่อเล่น</label>
