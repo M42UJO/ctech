@@ -3,17 +3,17 @@ session_start();
 require_once("config/db.php");
 
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_login'])) {
     header('Location: login.php');
 }
 
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
+if (isset($_SESSION['user_login'])) {
+    $user_id = $_SESSION['user_login'];
     // echo $user_id;
 }
 
 try {
-    $stmt = $conn->prepare("SELECT * FROM applicant WHERE Applicant_ID = ?");
+    $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
     $stmt->execute([$user_id]);
     $userData = $stmt->fetch();
 } catch (PDOException $e) {
@@ -23,14 +23,6 @@ try {
 
 
 ?>
-<?php if (isset($_SESSION['error'])) : ?>
-    <div class="alert alert-danger" role="alert">
-        <?php
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-        ?>
-    </div>
-<?php endif; ?>
 
 
 

@@ -31,7 +31,7 @@ if (isset($_POST['login'])) {
 
             if ($check_data->rowCount() > 0) {
                 if (password_verify($password, $row['password'])) {
-                    $_SESSION['user_id'] = $row['id'];
+                    $_SESSION['user_login'] = $row['User_ID'];
                     header("location: ../index.php");
                     exit();
                 } else {

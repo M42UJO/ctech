@@ -11,7 +11,7 @@ if ($isLoggedIn) {
         // เตรียมและดำเนินการคำสั่ง SQL
         $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
         $stmt->execute([$user_id]);
-        $userData = $stmt->fetch(PDO::FETCH_ASSOC); // ดึงข้อมูลเป็น associative array
+        $row = $stmt->fetch(PDO::FETCH_ASSOC); // ดึงข้อมูลเป็น associative array
     } catch (PDOException $e) {
         $errorMessage = "Error: " . htmlspecialchars($e->getMessage()); // ใช้ htmlspecialchars() เพื่อป้องกัน XSS
     }
@@ -70,7 +70,7 @@ if ($isLoggedIn) {
                                 <li>
                                     <hr class="dropdown-divider" />
                                 </li>
-                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                <li><a class="dropdown-item" href="config/logout.php">Logout</a></li>
                             </ul>
                         </li>
                     <?php else : ?>
