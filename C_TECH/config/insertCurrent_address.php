@@ -2,21 +2,19 @@
 session_start();
 require_once("db.php");
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-if (isset($_SESSION['user_login'])) {
-    $user_id = $_SESSION['user_login'];
+if (!isset($_SESSION['user_login'])) {
+    header('Location: login.php');
+    exit();
 }
 
+$user_id = $_SESSION['user_login'];
+
 try {
-    $stmt = $conn->prepare("SELECT * FROM applicant WHERE Applicant_ID = ?");
+    $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
     $stmt->execute([$user_id]);
     $userData = $stmt->fetch();
-
-    $address_id = $userData['Address_ID'];
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo "Error: " . htmlspecialchars($e->getMessage());
     exit();
 }
 
@@ -31,27 +29,13 @@ if (isset($_POST['submit'])) {
     $postal_code = htmlspecialchars($_POST['postal_code']);
 
     try {
-        // ใช้ INSERT เพื่อเพิ่มข้อมูลใหม่
-        $sql_insert = $conn->prepare("INSERT INTO current_address (
-                Address_ID, Applicant_ID, house_number, village, lane, road, sub_district, district, province, postal_code
-            ) VALUES (
-                :address_id, :user_id, :house_number, :village, :lane, :road, :sub_district, :district, :province, :postal_code
-            )");
+        // ตรวจสอบว่ามี Applicant_ID หรือไม่
+        $stmt_check = $conn->prepare("SELECT Address_ID FROM applicant WHERE User_ID = ?");
+        $stmt_check->execute([$user_id]);
+        $applicant = $stmt_check->fetch();
 
-        $sql_insert->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $sql_insert->bindParam(':address_id', $address_id, PDO::PARAM_INT);
-        $sql_insert->bindParam(':house_number', $house_number);
-        $sql_insert->bindParam(':village', $village);
-        $sql_insert->bindParam(':lane', $lane);
-        $sql_insert->bindParam(':road', $road);
-        $sql_insert->bindParam(':sub_district', $sub_district);
-        $sql_insert->bindParam(':district', $district);
-        $sql_insert->bindParam(':province', $province);
-        $sql_insert->bindParam(':postal_code', $postal_code);
-        $sql_insert->execute();
-
-        // ตรวจสอบว่ามีการแทรกข้อมูลใหม่สำเร็จแล้วค่อยทำการอัพเดต
-        if ($sql_insert->rowCount() > 0) {
+        if ($applicant && $applicant['Address_ID']) {
+            // Update existing address
             $sql_update = $conn->prepare("UPDATE current_address SET
                 house_number = :house_number,
                 village = :village,
@@ -63,7 +47,6 @@ if (isset($_POST['submit'])) {
                 postal_code = :postal_code
                 WHERE Address_ID = :address_id");
 
-            $sql_update->bindParam(':address_id', $address_id, PDO::PARAM_INT);
             $sql_update->bindParam(':house_number', $house_number);
             $sql_update->bindParam(':village', $village);
             $sql_update->bindParam(':lane', $lane);
@@ -72,10 +55,37 @@ if (isset($_POST['submit'])) {
             $sql_update->bindParam(':district', $district);
             $sql_update->bindParam(':province', $province);
             $sql_update->bindParam(':postal_code', $postal_code);
+            $sql_update->bindParam(':address_id', $applicant['Address_ID'], PDO::PARAM_INT);
             $sql_update->execute();
+        } else {
+            // Insert new address
+            $sql_insert = $conn->prepare("INSERT INTO current_address (
+                house_number, village, lane, road, sub_district, district, province, postal_code
+            ) VALUES (
+                :house_number, :village, :lane, :road, :sub_district, :district, :province, :postal_code
+            )");
+
+            $sql_insert->bindParam(':house_number', $house_number);
+            $sql_insert->bindParam(':village', $village);
+            $sql_insert->bindParam(':lane', $lane);
+            $sql_insert->bindParam(':road', $road);
+            $sql_insert->bindParam(':sub_district', $sub_district);
+            $sql_insert->bindParam(':district', $district);
+            $sql_insert->bindParam(':province', $province);
+            $sql_insert->bindParam(':postal_code', $postal_code);
+            $sql_insert->execute();
+
+            // Get the last inserted Address_ID
+            $address_id = $conn->lastInsertId();
+
+            // Update applicant table with new Address_ID
+            $sql_update_applicant = $conn->prepare("UPDATE applicant SET Address_ID = :address_id WHERE User_ID = :user_id");
+            $sql_update_applicant->bindParam(':address_id', $address_id, PDO::PARAM_INT);
+            $sql_update_applicant->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $sql_update_applicant->execute();
         }
 
-        $_SESSION['success'] = "Data has been inserted and updated successfully";
+        $_SESSION['success'] = "Data has been inserted or updated successfully";
         header("Location: ../Education_info.php");
         exit();
     } catch (PDOException $e) {
