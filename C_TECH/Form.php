@@ -1,8 +1,28 @@
 <?php
 session_start();
 require_once("config/db.php");
-?>
 
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+}
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    echo $user_id;
+}
+
+try {
+    $stmt = $conn->prepare("SELECT * FROM applicant WHERE Applicant_ID = ?");
+    $stmt->execute([$user_id]);
+    $userData = $stmt->fetch();
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+
+
+?>
 
 
 

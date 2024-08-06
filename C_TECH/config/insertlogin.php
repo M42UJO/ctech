@@ -14,7 +14,7 @@ if (isset($_POST['login'])) {
 
         if ($userData && $userData['id_card_number'] === $id_card_number) {
             $_SESSION['user_id'] = $userData['Applicant_ID'];
-            header("Location: ../personal_info.php");
+            header("Location: ../index.php");
         } else {
             $_SESSION['error'] = "Invalid username or password";
             header("Location: ../login.php");
