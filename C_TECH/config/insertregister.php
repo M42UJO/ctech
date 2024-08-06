@@ -13,27 +13,27 @@ if (isset($_POST['submit'])) {
     // ตรวจสอบข้อผิดพลาด
     if (empty($email)) {
         $_SESSION['error'] = 'กรุณากรอกอีเมล';
-        header("location: index.php");
+        header("location: ../register.php");
         exit();
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['error'] = 'รูปแบบอีเมลไม่ถูกต้อง';
-        header("location: index.php");
+        header("location: ../register.php");
         exit();
     } else if (empty($password)) {
         $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
-        header("location: index.php");
+        header("location: ../register.php");
         exit();
     } else if (strlen($password) > 20 || strlen($password) < 5) {
         $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 5 ถึง 20 ตัวอักษร';
-        header("location: index.php");
+        header("location: ../register.php");
         exit();
     } else if (empty($c_password)) {
         $_SESSION['error'] = 'กรุณายืนยันรหัสผ่าน';
-        header("location: index.php");
+        header("location: ../register.php");
         exit();
     } else if ($password != $c_password) {
         $_SESSION['error'] = 'รหัสผ่านไม่ตรงกัน';
-        header("location: index.php");
+        header("location: ../register.php");
         exit();
     } else {
         try {
@@ -44,8 +44,8 @@ if (isset($_POST['submit'])) {
             $row = $check_email->fetch(PDO::FETCH_ASSOC);
 
             if ($row && $row['email'] == $email) {
-                $_SESSION['warning'] = "มีอีเมลนี้อยู่ในระบบแล้ว <a href='signin.php'>คลิ๊กที่นี่</a> เพื่อเข้าสู่ระบบ";
-                header("location: index.php");
+                $_SESSION['warning'] = "มีอีเมลนี้อยู่ในระบบแล้ว <a href='login.php'>คลิ๊กที่นี่</a> เพื่อเข้าสู่ระบบ";
+                header("location: ../register.php");
                 exit();
             } else {
                 // สร้างแฮชของรหัสผ่านและเพิ่มข้อมูลผู้ใช้
@@ -55,8 +55,8 @@ if (isset($_POST['submit'])) {
                 $stmt->bindParam(":password", $passwordHash);
                 $stmt->bindParam(":urole", $urole);
                 $stmt->execute();
-                $_SESSION['success'] = "สมัครสมาชิกเรียบร้อยแล้ว! <a href='signin.php' class='alert-link'>คลิ๊กที่นี่</a> เพื่อเข้าสู่ระบบ";
-                header("location: index.php");
+                $_SESSION['success'] = "สมัครสมาชิกเรียบร้อยแล้ว! <a href='login.php' class='alert-link'>คลิ๊กที่นี่</a> เพื่อเข้าสู่ระบบ";
+                header("location: ../register.php");
                 exit();
             }
 

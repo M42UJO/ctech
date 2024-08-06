@@ -47,14 +47,13 @@ require_once("config/db.php");
                 </div>
             <?php endif; ?>
 
-            <div class="form-floating my-2">
-                <input type="text" class="form-control" id="floatingInput" name="username" required>
-                <label for="floatingInput">Username</label>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" name="email" required placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating my-2">
-                <input type="password" class="form-control" id="floatingPassword" name="id_card_number" required maxlength="17" oninput="formatThaiID(this)">
-
-                <label for="floatingPassword">Password</label>
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+                <label for="floatingPassword">password</label>
             </div>
 
             <div class="form-check text-start my-3">

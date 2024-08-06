@@ -3,7 +3,6 @@ session_start();
 require_once("config/db.php");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="th">
 
@@ -20,7 +19,6 @@ require_once("config/db.php");
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
     <?php
     require_once("nav.php");
@@ -29,13 +27,21 @@ require_once("config/db.php");
         <form method="post" action="config/insertregister.php">
             <img src="https://img5.pic.in.th/file/secure-sv1/c-techlogo.png" alt="Your Logo" width="150" height="32"><br><br>
             <h1 class="h3 mb-3 fw-normal">สมัครสมาชิก</h1>
-            
 
             <?php if (isset($_SESSION['error'])) : ?>
                 <div class="alert alert-danger" role="alert">
                     <?php
                     echo $_SESSION['error'];
                     unset($_SESSION['error']);
+                    ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['warning'])) : ?>
+                <div class="alert alert-warning" role="alert">
+                    <?php
+                    echo $_SESSION['warning'];
+                    unset($_SESSION['warning']);
                     ?>
                 </div>
             <?php endif; ?>
@@ -49,10 +55,8 @@ require_once("config/db.php");
                 </div>
             <?php endif; ?>
 
-
-            
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" name="username" required placeholder="name@example.com">
+                <input type="email" class="form-control" id="floatingInput" name="email" required placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating my-2">
@@ -63,9 +67,8 @@ require_once("config/db.php");
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name="c_password" required>
                 <label for="floatingPassword">Confirm Password</label>
             </div>
-            
 
-            <button class="btn btn-warning w-100 py-2 btn-custom" type="submit">ยืนยัน</button>
+            <button class="btn btn-warning w-100 py-2 btn-custom" type="submit" name="submit">ยืนยัน</button>
             <p class="mt-5 mb-3 text-body-secondary">ถ้าคุณมีบัญชีแล้ว <a style="color: orange;" href="login.php">คลิกที่นี่</a> เพื่อเข้าสู่ระบบ</p>
         </form>
 
