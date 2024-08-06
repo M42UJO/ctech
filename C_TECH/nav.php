@@ -30,7 +30,7 @@
                     <a href="http://c-tech.ac.th/branch.php" target="_blank" class="nav-link link-dark">สาขาที่เปิดสอน</a>
                 </li>
                 <li class="nav-item">
-                    <a href="Personal_info.php" class="nav-link link-dark">สมัครเรียน</a>
+                    <a href="form.php" class="nav-link link-dark">สมัครเรียน</a>
                 </li>
                 <li class="nav-item">
                     <a href="Personal_info.php" class="nav-link link-dark">กรอกข้อมูลส่วนตัว</a>
