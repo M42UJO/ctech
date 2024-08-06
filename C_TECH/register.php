@@ -29,7 +29,7 @@ require_once("config/db.php");
         <form method="post" action="config/insertregister.php">
             <img src="https://img5.pic.in.th/file/secure-sv1/c-techlogo.png" alt="Your Logo" width="150" height="32"><br><br>
             <h1 class="h3 mb-3 fw-normal">สมัครสมาชิก</h1>
-            <img src="ktc-lost-thai.jpg" alt="" width="75%" class="mb-3">
+            <img src="imagee/ktc-lost-thai.jpg" alt="" width="75%" class="mb-3">
 
             <?php if (isset($_SESSION['error'])) : ?>
                 <div class="alert alert-danger" role="alert">

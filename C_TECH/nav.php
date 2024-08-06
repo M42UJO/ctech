@@ -34,12 +34,10 @@ if ($isLoggedIn) {
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <!-- โลโก้ของ Navbar -->
-            <a href="../index.php" class="navbar-brand">
+            <a href="index.php" class="navbar-brand">
                 <img src="https://img5.pic.in.th/file/secure-sv1/c-techlogo.png" alt="Your Logo" width="150" height="32">
             </a>
-            <!-- ปุ่ม Toggle สำหรับ Sidebar -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            
             </button>
             <!-- เมนูของ Navbar -->
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -57,7 +55,7 @@ if ($isLoggedIn) {
                         <a href="Personal_info.php" class="nav-link link-dark">กรอกข้อมูลส่วนตัว</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link link-dark">ตรวจสอบสถานะ</a>
+                        <a href="checkstatus.php" class="nav-link link-dark">ตรวจสอบสถานะ</a>
                     </li>
                 </ul>
                 <!-- ส่วนขวาของ Navbar-->
@@ -72,18 +70,18 @@ if ($isLoggedIn) {
                                 <li>
                                     <hr class="dropdown-divider" />
                                 </li>
-                                <li><a class="dropdown-item" href="config/logout.php">Logout</a></li>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
                         </li>
-
                     <?php else : ?>
                         <li class="nav-item">
-                            <a href="login.php" class="nav-link link-dark">Login</a>
+                            <a href="login.php" class="btn btn-primary me-2">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a href="register.php" class="nav-link link-dark">Register</a>
+                            <a href="register.php" class="btn btn-secondary">Register</a>
                         </li>
                     <?php endif; ?>
+
                 </ul>
             </div>
         </div>
