@@ -49,7 +49,7 @@ if ($isLoggedIn) {
                         <a href="http://c-tech.ac.th/branch.php" target="_blank" class="nav-link link-dark">สาขาที่เปิดสอน</a>
                     </li>
                     <li class="nav-item">
-                        <a href="form.php" class="nav-link link-dark">สมัครเรียน</a>
+                        <a href="apply.php" class="nav-link link-dark">สมัครเรียน</a>
                     </li>
                     <li class="nav-item">
                         <a href="Personal_info.php" class="nav-link link-dark">กรอกข้อมูลส่วนตัว</a>
@@ -75,7 +75,7 @@ if ($isLoggedIn) {
                         </li>
                     <?php else : ?>
                         <li class="nav-item">
-                            <a href="login.php" class="btn btn-primary me-2">Login</a>
+                            <a href="login.php" class="btn btn-outline-warning me-2">Login</a>
                         </li>
                         <li class="nav-item">
                             <a href="register.php" class="btn btn-secondary">Register</a>
