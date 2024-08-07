@@ -127,16 +127,16 @@ require_once("config/db.php");
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="สไลด์ 3" class="active" aria-current="true"></button>
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="imagee/b_02.jpg" class="d-block  centered-image" alt="..." style="width: 100%; height: auto;">
+                <div class="carousel-item ">
+                    <img src="imagee/pic_ctech.jpg" class="d-block  centered-image" alt="..." style="width: 100%; height: auto;">
                     
                 </div>
                 <div class="carousel-item">
                     <img src="imagee/241336568_4467050613380080_6555199502821605310_n.jpg" class="d-block  centered-image" alt="..." style="width: 100%; height: 32rem;">
                     
                 </div>
-                <div class="carousel-item ">
-                    <img src="imagee/pic_ctech.jpg" class="d-block  centered-image " alt="..." style="width: 100%; height: 32rem;">
+                <div class="carousel-item active">
+                    <img src="imagee/b_02.jpg" class="d-block  centered-image " alt="..." style="width: 100%; height: 32rem;">
                     
                 </div>
             </div>

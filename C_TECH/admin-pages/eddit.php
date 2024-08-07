@@ -26,7 +26,7 @@ require_once("../config/db.php");
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark navbar-custom">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">Admin C-TECH</a>
+        <a class="navbar-brand ps-3" href="indexadmin.php">Admin C-TECH</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -57,7 +57,7 @@ require_once("../config/db.php");
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="indexadmin.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
@@ -68,7 +68,7 @@ require_once("../config/db.php");
 
                         <div class="sb-sidenav-menu-heading">Addons</div>
 
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
                         </a>
