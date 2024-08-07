@@ -29,63 +29,81 @@ if ($isLoggedIn) {
     <!-- Font Awesome สำหรับไอคอน -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
+<style>
+    .navbar-custom {
+        background-color: orange; /* สีที่คุณต้องการ */
+    }
+    .navbar-custom .nav-link {
+        color: #000000; /* สีข้อความ */
+    }
+    .navbar-custom .nav-link:hover {
+        color: #f0e68c; /* สีข้อความเมื่อ hover */
+    }
+</style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <!-- โลโก้ของ Navbar -->
-            <a href="index.php" class="navbar-brand">
-                <img src="https://img5.pic.in.th/file/secure-sv1/c-techlogo.png" alt="Your Logo" width="150" height="32">
-            </a>
-            
-            </button>
-            <!-- เมนูของ Navbar -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a href="index.php" class="nav-link link-dark">หน้าหลัก</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="http://c-tech.ac.th/branch.php" target="_blank" class="nav-link link-dark">สาขาที่เปิดสอน</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="apply.php" class="nav-link link-dark">สมัครเรียน</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="Personal_info.php" class="nav-link link-dark">กรอกข้อมูลส่วนตัว</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="checkstatus.php" class="nav-link link-dark">ตรวจสอบสถานะ</a>
-                    </li>
-                </ul>
-                <!-- ส่วนขวาของ Navbar-->
-                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                    <?php if ($isLoggedIn) : ?>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user fa-fw"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                <li><a class="dropdown-item" href="config/logout.php">Logout</a></li>
-                            </ul>
-                        </li>
-                    <?php else : ?>
-                        <li class="nav-item">
-                            <a href="login.php" class="btn btn-outline-warning me-2">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="register.php" class="btn btn-secondary">Register</a>
-                        </li>
-                    <?php endif; ?>
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+        <!-- โลโก้ของ Navbar -->
+        <a href="index.php" class="navbar-brand me-5">
+            <img src="https://img5.pic.in.th/file/secure-sv1/c-techlogo.png" alt="Your Logo" width="150" height="32">
+        </a>
 
-                </ul>
-            </div>
+        <!-- ปุ่มสำหรับเปิด/ปิดเมนู -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- เมนูของ Navbar -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item ms-5">
+                    <a href="index.php" class="nav-link link-dark fw-bold">หน้าหลัก</a>
+                </li>
+                <li class="nav-item">
+                    <a href="http://c-tech.ac.th/branch.php" target="_blank" class="nav-link link-dark fw-bold">สาขาที่เปิดสอน</a>
+                </li>
+                <li class="nav-item">
+                    <a href="apply.php" class="nav-link link-dark fw-bold">สมัครเรียน</a>
+                </li>
+                <li class="nav-item">
+                    <a href="Personal_info.php" class="nav-link link-dark fw-bold">กรอกข้อมูลส่วนตัว</a>
+                </li>
+                <li class="nav-item">
+                    <a href="checkstatus.php" class="nav-link link-dark fw-bold">ตรวจสอบสถานะ</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+
+        <!-- ส่วนขวาของ Navbar -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavRight">
+            <ul class="navbar-nav">
+                <?php if ($isLoggedIn) : ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user fa-fw"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item" href="config/logout.php">Logout</a></li>
+                        </ul>
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a href="login.php" class="btn btn-outline-dark me-2 fw-bold">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="register.php" class="btn btn-dark fw-bold">Register</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 
     <!-- Bootstrap JS และ dependencies -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

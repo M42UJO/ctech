@@ -270,7 +270,7 @@ try {
                     </div>
                     <div class="col-md-3">
                         <label for="phone" class="form-label">เบอร์โทร <span class="required">**</span></label>
-                        <input type="tel" id="phone" class="form-control" name="phone_number" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
+                        <input type="tel" id="phone" class="form-control" name="phone_number" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="xxx-xxx-xxxx">
                     </div>
                     <div class="col-md-3">
                         <label for="line-id" class="form-label">LineID</label>
@@ -321,7 +321,7 @@ try {
             }
         }
     </script>
-    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
 </body>
 
 </html>
