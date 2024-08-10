@@ -13,9 +13,25 @@ try {
     $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
     $stmt->execute([$user_id]);
     $userData = $stmt->fetch();
+
     $stmt_view = $conn->prepare("SELECT * FROM current_address WHERE User_ID = ?");
     $stmt_view->execute([$user_id]);
     $Data_view = $stmt_view->fetch();
+
+    if (!$Data_view) {
+        $Data_view = [
+            "house_number" => "",
+            "village" => "",
+            "lane" => "",
+            "road" => "",
+            "sub_district" => "",
+            "district" => "",
+            "province" => "",
+            "postal_code" => "",
+        ];
+    }
+
+
 } catch (PDOException $e) {
     echo "Error: " . htmlspecialchars($e->getMessage());
     exit();
