@@ -13,19 +13,16 @@ try {
     $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
     $stmt->execute([$user_id]);
     $userData = $stmt->fetch();
+
+    $stmt_view = $conn->prepare("SELECT * FROM applicant WHERE User_ID = ?");
+    $stmt_view->execute([$user_id]);
+    $Data_view = $stmt_view->fetch();
+
 } catch (PDOException $e) {
     echo "Error: " . htmlspecialchars($e->getMessage());
     exit();
 }
 ?>
-<?php if (isset($_SESSION['error'])) : ?>
-    <div class="alert alert-danger" role="alert">
-        <?php
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-        ?>
-    </div>
-<?php endif; ?>
 
 
 
@@ -94,7 +91,7 @@ try {
                     <div class="panel-heading">ข้อมูลส่วนตัว</div>
                     <div class="col-md-2">
                         <label for="prefix" class="form-label">คำนำหน้า <span class="required">**</span></label>
-                        <select id="prefix" class="form-select" name="prefix" required>
+                        <select id="prefix" class="form-select" name="prefix" value="<?php echo $Data_view["prefix"];?>" required>
                             <option value="">==เลือก==</option>
                             <option value="Mr">นาย</option>
                             <option value="Mrs">นาง</option>
@@ -103,27 +100,27 @@ try {
                     </div>
                     <div class="col-md-3">
                         <label for="first-name" class="form-label">ชื่อ <span class="required">**</span></label>
-                        <input type="text" id="first-name" class="form-control" placeholder="ชื่อ" name="name" required>
+                        <input type="text" id="first-name" class="form-control" placeholder="ชื่อ" name="name" value="<?php echo $Data_view["name"];?>" required>
                     </div>
                     <div class="col-md-3">
                         <label for="last-name" class="form-label">สกุล <span class="required">**</span></label>
-                        <input type="text" id="last-name" class="form-control" placeholder="สกุล" name="lastname" required>
+                        <input type="text" id="last-name" class="form-control" placeholder="สกุล" name="lastname" value="<?php echo $Data_view["lastname"];?>" required>
                     </div>
                     <div class="col-md-4">
                         <label for="full-name-eng" class="form-label">ชื่อ - สกุล อังกฤษ <span class="required">**</span></label>
-                        <input type="text" id="full-name-eng" class="form-control" placeholder="ชื่อ - สกุล อังกฤษ" name="eng_name" required>
+                        <input type="text" id="full-name-eng" class="form-control" placeholder="ชื่อ - สกุล อังกฤษ" name="eng_name" value="<?php echo $Data_view["eng_name"];?>" required>
                     </div>
                     <div class="col-md-4">
                         <label for="id-number" class="form-label">เลขบัตรประชาชน <span class="required">** ตัวเลขเท่านั้น</span></label>
-                        <input type="text" class="form-control" id="thai-id" maxlength="17"  placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" required >
+                        <input type="text" class="form-control" id="thai-id" maxlength="17"  placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $Data_view["id_card_number"];?>" required >
                     </div>
                     <div class="col-md-2">
                         <label for="nickname" class="form-label">ชื่อเล่น</label>
-                        <input type="text" id="nickname" class="form-control" placeholder="ชื่อเล่น" name="nickname">
+                        <input type="text" id="nickname" class="form-control" placeholder="ชื่อเล่น" name="nickname" value="<?php echo $Data_view["nickname"];?>">
                     </div>
                     <div class="col-md-2">
                         <label for="birth_day" class="form-label">วันเกิด <span class="required">**</span></label>
-                        <select id="birth_day" class="form-select" name="birth_day" required>
+                        <select id="birth_day" class="form-select" name="birth_day" value="<?php echo $Data_view["birth_day"];?>" required>
                             <option value="">==เลือก==</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -161,7 +158,7 @@ try {
                     </div>
                     <div class="col-md-2">
                         <label for="birth-month" class="form-label">เดือนเกิด <span class="required">**</span></label>
-                        <select id="birth-month" class="form-select" name="birth_month" required>
+                        <select id="birth-month" class="form-select" name="birth_month" value="<?php echo $Data_view["birth_month"];?>" required>
                             <option value="">==เลือก==</option>
                             <option value="01">มกราคม</option>
                             <option value="02">กุมภาพันธ์</option>
@@ -180,7 +177,7 @@ try {
                     </div>
                     <div class="col-md-2">
                         <label for="birth-year" class="form-label">ปีเกิด <span class="required">**</span></label>
-                        <select id="birth-year" class="form-select" name="birth_year" required>
+                        <select id="birth-year" class="form-select" name="birth_year" value="<?php echo $Data_view["birth_year"];?>" required>
                             <option value="">==เลือก==</option>
                             <option value="2510">2510</option>
                             <option value="2511">2511</option>
@@ -238,51 +235,51 @@ try {
                     </div>
                     <div class="col-md-2">
                         <label for="group-code" class="form-label">กรุ๊ปเลือด <span class="required">**</span></label>
-                        <input type="text" id="group-code" class="form-control" placeholder="กรุ๊ปเลือด" name="blood_group" required>
+                        <input type="text" id="group-code" class="form-control" placeholder="กรุ๊ปเลือด" name="blood_group" value="<?php echo $Data_view["blood_group"];?>" required>
                     </div>
                     <div class="col-md-2">
                         <label for="height" class="form-label">ส่วนสูง <span class="required">**</span></label>
-                        <input type="number" id="height" class="form-control" min="0" placeholder="ส่วนสูง" name="height" required>
+                        <input type="number" id="height" class="form-control" min="0" placeholder="ส่วนสูง" name="height" value="<?php echo $Data_view["height"];?>" required>
                     </div>
                     <div class="col-md-2">
                         <label for="weight" class="form-label">น้ำหนัก <span class="required">**</span></label>
-                        <input type="number" id="weight" class="form-control" min="0" placeholder="น้ำหนัก" name="weight" required>
+                        <input type="number" id="weight" class="form-control" min="0" placeholder="น้ำหนัก" name="weight" value="<?php echo $Data_view["weight"];?>" required>
                     </div>
                     <div class="col-md-3">
                         <label for="nationality" class="form-label">เชื้อชาติ <span class="required">**</span></label>
-                        <input type="text" id="nationality" class="form-control" placeholder="เชื้อชาติ" name="nationality" required>
+                        <input type="text" id="nationality" class="form-control" placeholder="เชื้อชาติ" name="nationality" value="<?php echo $Data_view["nationality"];?>" required>
                     </div>
                     <div class="col-md-3">
                         <label for="citizenship" class="form-label">สัญชาติ <span class="required">**</span></label>
-                        <input type="text" id="citizenship" class="form-control" placeholder="สัญชาติ" name="citizenship" required>
+                        <input type="text" id="citizenship" class="form-control" placeholder="สัญชาติ" name="citizenship" value="<?php echo $Data_view["citizenship"];?>" required>
                     </div>
                     <div class="col-md-3">
                         <label for="religion" class="form-label">ศาสนา <span class="required">**</span></label>
-                        <input type="text" id="religion" class="form-control" placeholder="ศาสนา" name="religion" required>
+                        <input type="text" id="religion" class="form-control" placeholder="ศาสนา" name="religion" value="<?php echo $Data_view["religion"];?>" required>
                     </div>
                     <div class="col-md-3">
                         <label for="siblings" class="form-label">จำนวนพี่น้อง <span class="required">**</span></label>
-                        <input type="number" id="siblings" class="form-control" min="0" placeholder="จำนวนพี่น้อง" name="siblings_count" required>
+                        <input type="number" id="siblings" class="form-control" min="0" placeholder="จำนวนพี่น้อง" name="siblings_count" value="<?php echo $Data_view["siblings_count"];?>" required>
                     </div>
                     <div class="col-md-3">
                         <label for="current-siblings" class="form-label">จำนวนพี่น้องที่กำลังศึกษาอยู่ <span class="required">**</span></label>
-                        <input type="number" id="current-siblings" class="form-control" min="0" placeholder="จำนวนพี่น้องที่กำลังศึกษาอยู่" name="studying_siblings_count" required>
+                        <input type="number" id="current-siblings" class="form-control" min="0" placeholder="จำนวนพี่น้องที่กำลังศึกษาอยู่" name="studying_siblings_count" value="<?php echo $Data_view["studying_siblings_count"];?>" required>
                     </div>
                     <div class="col-md-3">
                         <label for="phone" class="form-label">เบอร์โทร <span class="required">**</span></label>
-                        <input type="tel" id="phone" class="form-control" name="phone_number" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="xxx-xxx-xxxx">
+                        <input type="tel" id="phone" class="form-control" name="phone_number" value="<?php echo $Data_view["phone_number"];?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="xxx-xxx-xxxx">
                     </div>
                     <div class="col-md-3">
                         <label for="line-id" class="form-label">LineID</label>
-                        <input type="text" id="line-id" class="form-control" placeholder="LineID" name="line_id">
+                        <input type="text" id="line-id" class="form-control" placeholder="LineID" name="line_id" value="<?php echo $Data_view["line_id"];?>">
                     </div>
                     <div class="col-md-3">
                         <label for="facebook" class="form-label">Facebook</label>
-                        <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook">
+                        <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"];?>">
                     </div>
                     <div class="col-md-6">
                         <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" id="imgInput" class="form-control" name="profile_image" accept=".jpg" >
+                        <input type="file" id="imgInput" class="form-control" name="profile_image" value="<?php echo $Data_view["profile_image"];?>" accept=".jpg" >
                         <img id="previewImg" width="50%" alt="">
                     </div>
                     <div class="col-md-2">
@@ -293,7 +290,7 @@ try {
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" name="submit" class="btn btn-warning w-100 py-2 btn-custom" onclick="console.log('Submit button clicked');">ถัดไป
+                        <button type="submit" name="submit" class="btn btn-warning w-100 py-2 btn-custom">ถัดไป
                             <i class="fas fa-arrow-right"></i>
                         </button>
 
