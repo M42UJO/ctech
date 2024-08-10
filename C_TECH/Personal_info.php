@@ -18,6 +18,35 @@ try {
     $stmt_view->execute([$user_id]);
     $Data_view = $stmt_view->fetch();
 
+    // ถ้าไม่มีข้อมูลใน $Data_view ให้ตั้งค่าเริ่มต้น
+    if (!$Data_view) {
+        $Data_view = [
+            "prefix" => "",
+            "name" => "",
+            "lastname" => "",
+            "eng_name" => "",
+            "id_card_number" => "",
+            "nickname" => "",
+            "birth_day" => "",
+            "birth_month" => "",
+            "birth_year" => "",
+            "blood_group" => "",
+            "height" => "",
+            "weight" => "",
+            "nationality" => "",
+            "citizenship" => "",
+            "religion" => "",
+            "siblings_count" => "",
+            "studying_siblings_count" => "",
+            "phone_number" => "",
+            "line_id" => "",
+            "facebook" => "",
+            "profile_image" => ""
+        ];
+    }
+
+    
+
 } catch (PDOException $e) {
     echo "Error: " . htmlspecialchars($e->getMessage());
     exit();
@@ -91,12 +120,13 @@ try {
                     <div class="panel-heading">ข้อมูลส่วนตัว</div>
                     <div class="col-md-2">
                         <label for="prefix" class="form-label">คำนำหน้า <span class="required">**</span></label>
-                        <select id="prefix" class="form-select" name="prefix" value="<?php echo $Data_view["prefix"];?>" required>
+                        <select id="prefix" class="form-select" name="prefix" required>
                             <option value="">==เลือก==</option>
-                            <option value="Mr">นาย</option>
-                            <option value="Mrs">นาง</option>
-                            <option value="Ms">นางสาว</option>
+                            <option value="Mr" <?php echo ($Data_view["prefix"] == "Mr") ? 'selected' : ''; ?>>นาย</option>
+                            <option value="Mrs" <?php echo ($Data_view["prefix"] == "Mrs") ? 'selected' : ''; ?>>นาง</option>
+                            <option value="Ms" <?php echo ($Data_view["prefix"] == "Ms") ? 'selected' : ''; ?>>นางสาว</option>
                         </select>
+
                     </div>
                     <div class="col-md-3">
                         <label for="first-name" class="form-label">ชื่อ <span class="required">**</span></label>
@@ -120,123 +150,73 @@ try {
                     </div>
                     <div class="col-md-2">
                         <label for="birth_day" class="form-label">วันเกิด <span class="required">**</span></label>
-                        <select id="birth_day" class="form-select" name="birth_day" value="<?php echo $Data_view["birth_day"];?>" required>
+                        <select id="birth_day" class="form-select" name="birth_day" required>
                             <option value="">==เลือก==</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                            <option value="31">31</option>
-                            <!-- Options for days -->
+                            <?php
+                            for ($i = 1; $i <= 31; $i++) {
+                                $selected = ($Data_view["birth_day"] == $i) ? 'selected' : '';
+                                echo "<option value=\"$i\" $selected>$i</option>";
+                            }
+                            ?>
                         </select>
+
                     </div>
                     <div class="col-md-2">
                         <label for="birth-month" class="form-label">เดือนเกิด <span class="required">**</span></label>
-                        <select id="birth-month" class="form-select" name="birth_month" value="<?php echo $Data_view["birth_month"];?>" required>
+                        <select id="birth-month" class="form-select" name="birth_month" required>
                             <option value="">==เลือก==</option>
-                            <option value="01">มกราคม</option>
-                            <option value="02">กุมภาพันธ์</option>
-                            <option value="03">มีนาคม</option>
-                            <option value="04">เมษายน</option>
-                            <option value="05">พฤษภาคม</option>
-                            <option value="06">มิถุนายน</option>
-                            <option value="07">กรกฎาคม</option>
-                            <option value="08">สิงหาคม</option>
-                            <option value="09">กันยายน</option>
-                            <option value="10">ตุลาคม</option>
-                            <option value="11">พฤศจิกายน</option>
-                            <option value="12">ธันวาคม</option>
-                            <!-- Options for months -->
+                            <?php
+                            $months = [
+                                "01" => "มกราคม",
+                                "02" => "กุมภาพันธ์",
+                                "03" => "มีนาคม",
+                                "04" => "เมษายน",
+                                "05" => "พฤษภาคม",
+                                "06" => "มิถุนายน",
+                                "07" => "กรกฎาคม",
+                                "08" => "สิงหาคม",
+                                "09" => "กันยายน",
+                                "10" => "ตุลาคม",
+                                "11" => "พฤศจิกายน",
+                                "12" => "ธันวาคม"
+                            ];
+
+                            foreach ($months as $value => $label) {
+                                $selected = ($Data_view["birth_month"] == $value) ? 'selected' : '';
+                                echo "<option value=\"$value\" $selected>$label</option>";
+                            }
+                            ?>
                         </select>
+
                     </div>
                     <div class="col-md-2">
                         <label for="birth-year" class="form-label">ปีเกิด <span class="required">**</span></label>
-                        <select id="birth-year" class="form-select" name="birth_year" value="<?php echo $Data_view["birth_year"];?>" required>
+                        <select id="birth-year" class="form-select" name="birth_year" required>
                             <option value="">==เลือก==</option>
-                            <option value="2510">2510</option>
-                            <option value="2511">2511</option>
-                            <option value="2512">2512</option>
-                            <option value="2513">2513</option>
-                            <option value="2514">2514</option>
-                            <option value="2515">2515</option>
-                            <option value="2516">2516</option>
-                            <option value="2517">2517</option>
-                            <option value="2518">2518</option>
-                            <option value="2519">2519</option>
-                            <option value="2520">2520</option>
-                            <option value="2521">2521</option>
-                            <option value="2522">2522</option>
-                            <option value="2523">2523</option>
-                            <option value="2524">2524</option>
-                            <option value="2525">2525</option>
-                            <option value="2526">2526</option>
-                            <option value="2527">2527</option>
-                            <option value="2528">2528</option>
-                            <option value="2529">2529</option>
-                            <option value="2530">2530</option>
-                            <option value="2531">2531</option>
-                            <option value="2532">2532</option>
-                            <option value="2533">2533</option>
-                            <option value="2534">2534</option>
-                            <option value="2535">2535</option>
-                            <option value="2536">2536</option>
-                            <option value="2537">2537</option>
-                            <option value="2538">2538</option>
-                            <option value="2539">2539</option>
-                            <option value="2540">2540</option>
-                            <option value="2541">2541</option>
-                            <option value="2542">2542</option>
-                            <option value="2543">2543</option>
-                            <option value="2544">2544</option>
-                            <option value="2545">2545</option>
-                            <option value="2546">2546</option>
-                            <option value="2547">2547</option>
-                            <option value="2548">2548</option>
-                            <option value="2549">2549</option>
-                            <option value="2550">2550</option>
-                            <option value="2551">2551</option>
-                            <option value="2552">2552</option>
-                            <option value="2553">2553</option>
-                            <option value="2554">2554</option>
-                            <option value="2555">2555</option>
-                            <option value="2556">2556</option>
-                            <option value="2557">2557</option>
-                            <option value="2558">2558</option>
-                            <option value="2559">2559</option>
-                            <option value="2560">2560</option>
-                            <!-- Options for years -->
+                            <?php
+                            $currentYear = date("Y") + 543; // ปีปัจจุบันในปฏิทินไทย
+                            $startYear = 2510; // ปีเริ่มต้นที่ต้องการแสดง
+                            $endYear = 2560; // ปีสิ้นสุดที่ต้องการแสดง
+
+                            for ($year = $currentYear; $year >= $startYear; $year--) {
+                                $selected = ($Data_view["birth_year"] == $year) ? 'selected' : '';
+                                echo "<option value=\"$year\" $selected>$year</option>";
+                            }
+                            ?>
                         </select>
+
                     </div>
                     <div class="col-md-2">
-                        <label for="group-code" class="form-label">กรุ๊ปเลือด <span class="required">**</span></label>
-                        <input type="text" id="group-code" class="form-control" placeholder="กรุ๊ปเลือด" name="blood_group" value="<?php echo $Data_view["blood_group"];?>" required>
+                        <label for="blood-group" class="form-label">กรุ๊ปเลือด <span class="required">**</span></label>
+                        <select id="blood-group" class="form-select" name="blood_group" required>
+                            <option value="">==เลือก==</option>
+                            <option value="A" <?php echo ($Data_view["blood_group"] == "A") ? 'selected' : ''; ?>>A</option>
+                            <option value="B" <?php echo ($Data_view["blood_group"] == "B") ? 'selected' : ''; ?>>B</option>
+                            <option value="AB" <?php echo ($Data_view["blood_group"] == "AB") ? 'selected' : ''; ?>>AB</option>
+                            <option value="O" <?php echo ($Data_view["blood_group"] == "O") ? 'selected' : ''; ?>>O</option>
+                        </select>
                     </div>
+
                     <div class="col-md-2">
                         <label for="height" class="form-label">ส่วนสูง <span class="required">**</span></label>
                         <input type="number" id="height" class="form-control" min="0" placeholder="ส่วนสูง" name="height" value="<?php echo $Data_view["height"];?>" required>
