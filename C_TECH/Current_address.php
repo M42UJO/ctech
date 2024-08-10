@@ -109,31 +109,31 @@ try {
                     </div>
                     <div class="col-md-1">
                         <label class="form-label">หมู่ <span class="required">**</span></label>
-                        <input class="form-control " type="text " placeholder="หมู่ " name="village" required>
+                        <input class="form-control " type="text " placeholder="หมู่ " name="village" value="<?php echo $Data_view["village"];?>" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ซอย </label>
-                        <input class="form-control " type="text " placeholder="ซอย " name="lane">
+                        <input class="form-control " type="text " placeholder="ซอย " name="lane" value="<?php echo $Data_view["lane"];?>">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ถนน </label>
-                        <input class="form-control " type="text " placeholder="ถนน " name="road">
+                        <input class="form-control " type="text " placeholder="ถนน " name="road" value="<?php echo $Data_view["road"];?>">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ตำบล <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="ตำบล " name="sub_district" required>
+                        <input type="text " class="form-control " placeholder="ตำบล " name="sub_district" value="<?php echo $Data_view["sub_district"];?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">อำเภอ <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="อำเภอ " name="district" required>
+                        <input type="text " class="form-control " placeholder="อำเภอ " name="district" value="<?php echo $Data_view["district"];?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">จังหวัด <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="จังหวัด " name="province" required>
+                        <input type="text " class="form-control " placeholder="จังหวัด " name="province" value="<?php echo $Data_view["province"];?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                        <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="postal_code" maxlength="5 " required>
+                        <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="postal_code" maxlength="5" value="<?php echo $Data_view["postal_code"];?>" required>
                     </div>
                     <div class="col-md-2">
                         <button type="button" class="btn btn-warning w-100 py-2 btn-custom" onclick="window.history.back()">
@@ -143,7 +143,7 @@ try {
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" name="submit" class="btn btn-warning w-100 py-2 btn-custom" onclick="console.log('Submit button clicked');">ถัดไป
+                        <button type="submit" name="submit" class="btn btn-warning w-100 py-2 btn-custom">ถัดไป
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
