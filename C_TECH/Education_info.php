@@ -1,3 +1,54 @@
+<?php
+session_start();
+require_once("config/db.php");
+
+if (!isset($_SESSION['user_login'])) {
+    header('Location: login.php');
+    exit();
+}
+
+$user_id = $_SESSION['user_login'];
+
+try {
+    $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
+    $stmt->execute([$user_id]);
+    $userData = $stmt->fetch();
+
+    $stmt_view = $conn->prepare("SELECT * FROM education_info WHERE User_ID = ?");
+    $stmt_view->execute([$user_id]);
+    $Data_view = $stmt_view->fetch();
+
+    if (!$Data_view) {
+        $Data_view = [
+            "school_name" => "",
+            "school_sub_district" => "",
+            "school_district" => "",
+            "school_province" => "",
+            "school_postal_code" => "",
+            "graduation_year" => "",
+            "grade_result" => "",
+            "class_level" => "",
+            "major" => "",
+            "degree_other" => "",
+            "major_other" => "",
+        ];
+    }
+
+
+} catch (PDOException $e) {
+    echo "Error: " . htmlspecialchars($e->getMessage());
+    exit();
+}
+?>
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,56 +115,57 @@
             <div class="panel-body">
 
 
-                <form id="personal-info-form" class="row g-2 mt-2">
+                <form id="personal-info-form" class="row g-2 mt-2" action="config/insertEducation_info.php" method="post">
                     <div class="panel-heading">ข้อมูลการศึกษา</div>
                     <div class="col-md-8">
                         <label class="form-label">จบจากโรงเรียน <span class="required">**</span></label>
-                        <input class="form-control " type="text " placeholder="จบจากโรงเรียน " name="school_name " required=" ">
+                        <input class="form-control " type="text " placeholder="จบจากโรงเรียน " name="school_name" value="<?php echo $Data_view["school_name"];?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">ตำบล <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="ตำบล " name="school_sub_district " required=" ">
+                        <input type="text " class="form-control " placeholder="ตำบล " name="school_sub_district" value="<?php echo $Data_view["school_sub_district"];?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">อำเภอ <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="อำเภอ " name="school_district " required=" ">
+                        <input type="text " class="form-control " placeholder="อำเภอ " name="school_district" value="<?php echo $Data_view["school_district"];?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">จังหวัด <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="จังหวัด " name="school_province " required=" ">
+                        <input type="text " class="form-control " placeholder="จังหวัด " name="school_province" value="<?php echo $Data_view["school_province"];?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                        <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="school_postal_code " maxlength="5 " required=" ">
+                        <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="school_postal_code" value="<?php echo $Data_view["school_postal_code"];?>" maxlength="5 " required>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">จบเมื่อ พ.ศ. <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="graduation_year " required=" ">
+                        <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="graduation_year" value="<?php echo $Data_view["graduation_year"];?>" required>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">ผลการเรียน <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="ผลการเรียน " name="grade_result " required=" ">
+                        <input type="text " class="form-control " placeholder="ผลการเรียน " name="grade_result" value="<?php echo $Data_view["grade_result"];?>" required>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">ระดับชั้น <span class="required">**</span></label>
-                        <select class="form-control " name="class_level " required=" ">
-                            <option value=" ">==เลือก==</option>
-                            <option value="ม.3 ">ม.3</option>
-                            <option value="ม.6 ">ม.6</option>
-                            <option value="ปวช. ">ปวช.</option>
+                        <select class="form-select" name="class_level" required>
+                            <option value="">==เลือก==</option>
+                            <option value="ม.3" <?php echo ($Data_view["class_level"] == "ม.3") ? 'selected' : ''; ?>>ม.3</option>
+                            <option value="ม.6" <?php echo ($Data_view["class_level"] == "ม.6") ? 'selected' : ''; ?>>ม.6</option>
+                            <option value="ปวช." <?php echo ($Data_view["class_level"] == "ปวช.") ? 'selected' : ''; ?>>ปวช.</option>
                         </select>
+
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">สาขาวิชา </label>
-                        <input type="text " class="form-control " placeholder="สาขาวิชา " name="major ">
+                        <input type="text " class="form-control " placeholder="สาขาวิชา" name="major" value="<?php echo $Data_view["major"];?>">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">วุฒิการศึกษาอื่นๆ </label>
-                        <input type="text " class="form-control " placeholder="วุฒิการศึกษาอื่นๆ " name="degree_other ">
+                        <input type="text " class="form-control " placeholder="วุฒิการศึกษาอื่นๆ" name="degree_other" value="<?php echo $Data_view["degree_other"];?>">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">สาขาวิชา </label>
-                        <input type="text " class="form-control " placeholder="สาขาวิชา " name="major_other ">
+                        <input type="text " class="form-control " placeholder="สาขาวิชา " name="major_other" value="<?php echo $Data_view["major_other"];?>">
                     </div>
                     <div class="col-md-2">
                         <button type="button" class="btn btn-warning w-100 py-2 btn-custom" onclick="window.history.back()">
@@ -123,7 +175,7 @@
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-warning w-100 py-2 btn-custom">ถัดไป
+                        <button type="submit" class="btn btn-warning w-100 py-2 btn-custom" name="submit">ถัดไป
                             <i class="fas fa-arrow-right"></i> 
                         </button>
                     </div>
@@ -141,12 +193,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL " crossorigin="anonymous "></script>
     <script src="script.js"></script>
-    <script>
-        document.getElementById('personal-info-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            window.location.href = 'Father_info.html'; // Redirect to the new page
-        });
-    </script>
+    
 </body>
 
 </html>
