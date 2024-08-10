@@ -48,36 +48,27 @@ if (isset($_POST['submit'])) {
         $applicant = $stmt_check->fetch();
 
         if (!$applicant) {
-            // ถ้ามีที่อยู่แล้ว, ทำการอัปเดตข้อมูลที่มีอยู่
-            $sql_update = $conn->prepare("UPDATE education_info SET
-            school_name = :school_name,
-            school_sub_district = :school_sub_district,
-            school_district = :school_district,
-            school_province = :school_province,
-            school_postal_code = :school_postal_code,
-            graduation_year = :graduation_year,
-            grade_result = :grade_result,
-            class_level = :class_level,
-            major = :major,
-            degree_other = :degree_other,
-            major_other = :major_other
-            WHERE User_ID = :user_id");
+            // ถ้ายังไม่มีที่อยู่ของผู้ใช้, ทำการแทรกข้อมูลใหม่ลงในฐานข้อมูล
+            $sql_insert = $conn->prepare("INSERT INTO education_info (
+                school_name, school_sub_district, school_district, school_province, school_postal_code, graduation_year, grade_result, class_level, major, degree_other, major_other, User_ID
+            ) VALUES (
+                :school_name, :school_sub_district, :school_district, :school_province, :school_postal_code, :graduation_year, :grade_result, :class_level, :major, :degree_other, :major_other, :user_id
+            )");
 
             // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_update->bindParam(':school_name', $school_name);
-            $sql_update->bindParam(':school_sub_district', $school_sub_district);
-            $sql_update->bindParam(':school_district', $school_district);
-            $sql_update->bindParam(':school_province', $school_province);
-            $sql_update->bindParam(':school_postal_code', $school_postal_code);
-            $sql_update->bindParam(':graduation_year', $graduation_year);
-            $sql_update->bindParam(':grade_result', $grade_result);
-            $sql_update->bindParam(':class_level', $class_level);
-            $sql_update->bindParam(':major', $major);
-            $sql_update->bindParam(':degree_other', $degree_other);
-            $sql_update->bindParam(':major_other', $major_other);
-            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_update->execute();
-
+            $sql_insert->bindParam(':school_name', $school_name);
+            $sql_insert->bindParam(':school_sub_district', $school_sub_district);
+            $sql_insert->bindParam(':school_district', $school_district);
+            $sql_insert->bindParam(':school_province', $school_province);
+            $sql_insert->bindParam(':school_postal_code', $school_postal_code);
+            $sql_insert->bindParam(':graduation_year', $graduation_year);
+            $sql_insert->bindParam(':grade_result', $grade_result);
+            $sql_insert->bindParam(':class_level', $class_level);
+            $sql_insert->bindParam(':major', $major);
+            $sql_insert->bindParam(':degree_other', $degree_other);
+            $sql_insert->bindParam(':major_other', $major_other);
+            $sql_insert->bindParam(':user_id', $user_id);
+            $sql_insert->execute();
             
         } else {
             // ถ้ามีที่อยู่แล้ว, ทำการอัปเดตข้อมูลที่มีอยู่
@@ -90,8 +81,8 @@ if (isset($_POST['submit'])) {
                 graduation_year = :graduation_year,
                 grade_result = :grade_result,
                 class_level = :class_level,
-                major = :major
-                degree_other = :degree_other
+                major = :major,
+                degree_other = :degree_other,
                 major_other = :major_other
                 WHERE User_ID = :user_id");
 
