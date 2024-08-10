@@ -30,39 +30,17 @@ if (isset($_POST['submit'])) {
 
     try {
         // ตรวจสอบว่ามี Applicant_ID หรือไม่
-        $stmt_check = $conn->prepare("SELECT Address_ID FROM applicant WHERE User_ID = ?");
+        $stmt_check = $conn->prepare("SELECT User_ID FROM current_address WHERE User_ID = ?");
         $stmt_check->execute([$user_id]);
         $applicant = $stmt_check->fetch();
 
-        if ($applicant && $applicant['Address_ID']) {
-            // Update existing address
-            $sql_update = $conn->prepare("UPDATE current_address SET
-                house_number = :house_number,
-                village = :village,
-                lane = :lane,
-                road = :road,
-                sub_district = :sub_district,
-                district = :district,
-                province = :province,
-                postal_code = :postal_code
-                WHERE Address_ID = :address_id");
+        if (!$applicant) {
 
-            $sql_update->bindParam(':house_number', $house_number);
-            $sql_update->bindParam(':village', $village);
-            $sql_update->bindParam(':lane', $lane);
-            $sql_update->bindParam(':road', $road);
-            $sql_update->bindParam(':sub_district', $sub_district);
-            $sql_update->bindParam(':district', $district);
-            $sql_update->bindParam(':province', $province);
-            $sql_update->bindParam(':postal_code', $postal_code);
-            $sql_update->bindParam(':address_id', $applicant['Address_ID'], PDO::PARAM_INT);
-            $sql_update->execute();
-        } else {
             // Insert new address
             $sql_insert = $conn->prepare("INSERT INTO current_address (
-                house_number, village, lane, road, sub_district, district, province, postal_code
+                house_number, village, lane, road, sub_district, district, province, postal_code, User_ID
             ) VALUES (
-                :house_number, :village, :lane, :road, :sub_district, :district, :province, :postal_code
+                :house_number, :village, :lane, :road, :sub_district, :district, :province, :postal_code, :user_id
             )");
 
             $sql_insert->bindParam(':house_number', $house_number);
@@ -73,16 +51,42 @@ if (isset($_POST['submit'])) {
             $sql_insert->bindParam(':district', $district);
             $sql_insert->bindParam(':province', $province);
             $sql_insert->bindParam(':postal_code', $postal_code);
+            $sql_insert->bindParam(':user_id', $user_id);
             $sql_insert->execute();
 
             // Get the last inserted Address_ID
-            $address_id = $conn->lastInsertId();
+           /* $address_id = $conn->lastInsertId();
 
             // Update applicant table with new Address_ID
             $sql_update_applicant = $conn->prepare("UPDATE applicant SET Address_ID = :address_id WHERE User_ID = :user_id");
             $sql_update_applicant->bindParam(':address_id', $address_id, PDO::PARAM_INT);
             $sql_update_applicant->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_update_applicant->execute();
+            $sql_update_applicant->execute();*/
+
+            
+        } else {
+            // Update existing address
+            $sql_update = $conn->prepare("UPDATE current_address SET
+                house_number = :house_number,
+                village = :village,
+                lane = :lane,
+                road = :road,
+                sub_district = :sub_district,
+                district = :district,
+                province = :province,
+                postal_code = :postal_code
+                WHERE User_ID = :user_id");
+
+            $sql_update->bindParam(':house_number', $house_number);
+            $sql_update->bindParam(':village', $village);
+            $sql_update->bindParam(':lane', $lane);
+            $sql_update->bindParam(':road', $road);
+            $sql_update->bindParam(':sub_district', $sub_district);
+            $sql_update->bindParam(':district', $district);
+            $sql_update->bindParam(':province', $province);
+            $sql_update->bindParam(':postal_code', $postal_code);
+            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $sql_update->execute();
         }
 
         $_SESSION['success'] = "Data has been inserted or updated successfully";

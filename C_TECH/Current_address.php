@@ -13,6 +13,9 @@ try {
     $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
     $stmt->execute([$user_id]);
     $userData = $stmt->fetch();
+    $stmt_view = $conn->prepare("SELECT * FROM current_address WHERE User_ID = ?");
+    $stmt_view->execute([$user_id]);
+    $Data_view = $stmt_view->fetch();
 } catch (PDOException $e) {
     echo "Error: " . htmlspecialchars($e->getMessage());
     exit();
@@ -102,35 +105,35 @@ try {
                     <div class="panel-heading">ที่อยู่ปัจจุบัน</div>
                     <div class="col-md-2">
                         <label class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                        <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="house_number " required=" ">
+                        <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="house_number" value="<?php echo $Data_view["house_number"];?>" required>
                     </div>
                     <div class="col-md-1">
                         <label class="form-label">หมู่ <span class="required">**</span></label>
-                        <input class="form-control " type="text " placeholder="หมู่ " name="village " required=" ">
+                        <input class="form-control " type="text " placeholder="หมู่ " name="village" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ซอย </label>
-                        <input class="form-control " type="text " placeholder="ซอย " name="lane ">
+                        <input class="form-control " type="text " placeholder="ซอย " name="lane">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ถนน </label>
-                        <input class="form-control " type="text " placeholder="ถนน " name="road ">
+                        <input class="form-control " type="text " placeholder="ถนน " name="road">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ตำบล <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="ตำบล " name="sub_district " required=" ">
+                        <input type="text " class="form-control " placeholder="ตำบล " name="sub_district" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">อำเภอ <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="อำเภอ " name="district " required=" ">
+                        <input type="text " class="form-control " placeholder="อำเภอ " name="district" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">จังหวัด <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="จังหวัด " name="province " required=" ">
+                        <input type="text " class="form-control " placeholder="จังหวัด " name="province" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                        <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="postal_code " maxlength="5 " required=" ">
+                        <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="postal_code" maxlength="5 " required>
                     </div>
                     <div class="col-md-2">
                         <button type="button" class="btn btn-warning w-100 py-2 btn-custom" onclick="window.history.back()">

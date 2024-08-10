@@ -283,7 +283,7 @@ try {
                     <div class="col-md-6">
                         <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
                         <input type="file" id="imgInput" class="form-control" name="profile_image" accept=".jpg" >
-                        <img id="previewImg" width="50%" alt="" class="img-thumbnail">
+                        <img id="previewImg" width="50%" alt="">
                     </div>
                     <div class="col-md-2">
                         <button type="button" class="btn btn-warning w-100 py-2 btn-custom" onclick="window.history.back()">
