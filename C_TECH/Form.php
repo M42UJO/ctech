@@ -21,8 +21,11 @@ try {
 }
 
 
-
 ?>
+
+
+
+
 
 
 
@@ -50,7 +53,7 @@ try {
 </head>
 
 <body>
-<?php
+    <?php
     require_once("nav.php");
     ?>
 
@@ -58,36 +61,13 @@ try {
 
         <section class="step-wizard">
             <ul class="step-wizard-list">
-                <li class="step-wizard-item">
-                    <span class="progress-count">1</span>
-                    <span class="progress-label">ข้อมูลส่วนตัว</span>
-                </li>
-                <li class="step-wizard-item">
-                    <span class="progress-count">2</span>
-                    <span class="progress-label">ที่อยู่ปัจจุบัน</span>
-                </li>
-                <li class="step-wizard-item ">
-                    <span class="progress-count">3</span>
-                    <span class="progress-label">ข้อมูลการศึกษา</span>
-                </li>
-                <li class="step-wizard-item">
-                    <span class="progress-count">4</span>
-                    <span class="progress-label">ข้อมูลบิดา</span>
-                </li>
-                <li class="step-wizard-item">
-                    <span class="progress-count">5</span>
-                    <span class="progress-label">ข้อมูลมารดา</span>
-                </li>
-                <li class="step-wizard-item">
-                    <span class="progress-count">6</span>
-                    <span class="progress-label">ข้อมูลผู้ปกครอง</span>
-                </li>
+
                 <li class="step-wizard-item current-item">
-                    <span class="progress-count">7</span>
+                    <span class="progress-count">1</span>
                     <span class="progress-label">ต้องการศึกษา</span>
                 </li>
                 <li class="step-wizard-item ">
-                    <span class="progress-count">8</span>
+                    <span class="progress-count">2</span>
                     <span class="progress-label">หลักฐานการสมัคร</span>
                 </li>
             </ul>
@@ -105,34 +85,22 @@ try {
                     <div class="panel-heading">ต้องการศึกษา</div>
                     <label class="form-label">ต้องการศึกษา <span class="required">**</span></label>
                     <div class="col-xs-12 col-md-3 mt-0">
-                        <div class="form-group ">
-                            <font id="part "><select name="part " class="form-control " onchange="dochange( 'level', this.value) " required=" ">
-                                    <option value=" ">coursetype</option>
+                        <select id="CourseType_Name" name="CourseType_Name" class="form-control" required>
+                            
+                        </select>
 
-                                </select>
-                            </font>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-3 mt-0">
-                        <div class="form-group ">
-                            <font id="level "><select name="level " class="form-control ">
-                                    <option value=" ">educationlevel</option>
-                                </select></font>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-3 mt-0">
-                        <div class="form-group ">
-                            <font id="late "><select name="late " class="form-control ">
-                                    <option value=" ">subjecttype</option>
-                                </select></font>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-3 mt-0">
-                        <div class="form-group ">
-                            <font id="subject "><select name="subject " class="form-control ">
-                                    <option value=" ">major</option>
-                                </select></font>
-                        </div>
+                        <select id="Level_Name" name="Level_Name" class="form-control" required>
+                            
+                        </select>
+
+                        <select id="Type_Name" name="Type_Name" class="form-control" required>
+                            
+                        </select>
+
+                        <select id="Major_Name" name="Major_Name" class="form-control" required>
+                            
+                        </select>
+
                     </div>
 
 
@@ -161,15 +129,8 @@ try {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL " crossorigin="anonymous "></script>
     <script src="script.js"></script>
-    <script>
-        document.getElementById('personal-info-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            window.location.href = '#'; // Redirect to the new page
-        });
+    
 
-
-        // 
-    </script>
 
 
 
