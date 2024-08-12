@@ -64,24 +64,28 @@ $major = isset($_GET['major']) ? $_GET['major'] : '';
             <div class="panel-body">
                 <form id="personal-info-form" class="row g-2 mt-2">
                     <div class="panel-heading">ต้องการศึกษา</div>
-                    <label class="form-label">ต้องการศึกษา <span class="required">**</span></label>
-                    <div class="row">
+                    
+                    <div class="row mt-5">
                         <div class="col-lg-3">
+                            <label class="form-label">ประเภทของหลักสูตร <span class="required">**</span></label>
                             <select id="CourseType_Name" name="CourseType_Name" class="form-control" required >
                                 <option value="">เลือกประเภทของหลักสูตร</option>
                             </select>
                         </div>
                         <div class="col-lg-3">
+                            <label class="form-label">ระดับการศึกษา <span class="required">**</span></label>
                             <select id="Level_Name" name="Level_Name" class="form-control" required >
                                 <option value="">เลือกระดับการศึกษา</option>
                             </select>
                         </div>
                         <div class="col-lg-3">
+                            <label class="form-label">ประเภทวิชา <span class="required">**</span></label>
                             <select id="Type_Name" name="Type_Name" class="form-control" required>
                                 <option value="">เลือกประเภทวิชา</option>
                             </select>
                         </div>
                         <div class="col-lg-3">
+                            <label class="form-label">สาขาวิชา <span class="required">**</span></label>
                             <select id="Major_Name" name="Major_Name" class="form-control" required>
                                 <option value="">เลือกสาขาวิชา</option>
                             </select>
@@ -161,7 +165,7 @@ $major = isset($_GET['major']) ? $_GET['major'] : '';
     });
 
     function populateSelect(selectElement, data, valueKey, textKey) {
-        selectElement.innerHTML = '<option value="">เลือกตัวเลือก</option>'; // Clear existing options
+        selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>'; // Clear existing options
         data.forEach(item => {
             const option = document.createElement('option');
             option.value = item[valueKey];
@@ -171,7 +175,7 @@ $major = isset($_GET['major']) ? $_GET['major'] : '';
     }
 
     function clearSelect(selectElement) {
-        selectElement.innerHTML = '<option value="">เลือกตัวเลือก</option>';
+        selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>';
     }
     </script>
 </body>
