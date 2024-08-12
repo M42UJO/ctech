@@ -67,22 +67,30 @@ try {
                 <form id="personal-info-form" class="row g-2 mt-2">
                     <div class="panel-heading">ต้องการศึกษา</div>
                     <label class="form-label">ต้องการศึกษา <span class="required">**</span></label>
-                    <div class="col-xs-12 col-md-3 mt-0">
-                        <select id="CourseType_Name" name="CourseType_Name" class="form-control" required>
-                            <option value="">เลือกประเภทของหลักสูตร</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <select id="CourseType_Name" name="CourseType_Name" class="form-control" required>
+                                <option value="">เลือกประเภทของหลักสูตร</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
 
-                        <select id="Level_Name" name="Level_Name" class="form-control" required>
-                            <option value="">เลือกระดับการศึกษา</option>
-                        </select>
+                            <select id="Level_Name" name="Level_Name" class="form-control" required>
+                                <option value="">เลือกระดับการศึกษา</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
 
-                        <select id="Type_Name" name="Type_Name" class="form-control" required>
-                            <option value="">เลือกประเภทวิชา</option>
-                        </select>
+                            <select id="Type_Name" name="Type_Name" class="form-control col-md-3" required>
+                                <option value="">เลือกประเภทวิชา</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
 
-                        <select id="Major_Name" name="Major_Name" class="form-control" required>
-                            <option value="">เลือกสาขาวิชา</option>
-                        </select>
+                            <select id="Major_Name" name="Major_Name" class="form-control col-md-3" required>
+                                <option value="">เลือกสาขาวิชา</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="col-md-2 mt-5">
@@ -92,7 +100,7 @@ try {
                     </div>
                     <div class="col-md-8 mt-5"></div>
                     <div class="col-md-2 mt-5">
-                        <button type="submit" class="btn btn-warning w-100 py-2 btn-custom">ถัดไป
+                        <button type="submit" name="submit" class="btn btn-warning w-100 py-2 btn-custom">ถัดไป
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
