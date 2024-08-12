@@ -27,24 +27,22 @@ try {
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
+
+$courseType = isset($_GET['courseType']) ? $_GET['courseType'] : '';
+$level = isset($_GET['level']) ? $_GET['level'] : '';
+$subjectType = isset($_GET['subjectType']) ? $_GET['subjectType'] : '';
+$major = isset($_GET['major']) ? $_GET['major'] : '';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C-TECH</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&family=IBM+Plex+Sans+Thai+Looped:wght@100;200;300;400;500;600;700&family=Itim&family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Mitr:wght@200;300;400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Thai:wght@100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <?php require_once("nav.php"); ?>
 
@@ -68,26 +66,23 @@ try {
                     <div class="panel-heading">ต้องการศึกษา</div>
                     <label class="form-label">ต้องการศึกษา <span class="required">**</span></label>
                     <div class="row">
-                        <div class="col-md-3">
-                            <select id="CourseType_Name" name="CourseType_Name" class="form-control" required>
+                        <div class="col-lg-3">
+                            <select id="CourseType_Name" name="CourseType_Name" class="form-control" required >
                                 <option value="">เลือกประเภทของหลักสูตร</option>
                             </select>
                         </div>
-                        <div class="col-md-3">
-
-                            <select id="Level_Name" name="Level_Name" class="form-control" required>
+                        <div class="col-lg-3">
+                            <select id="Level_Name" name="Level_Name" class="form-control" required >
                                 <option value="">เลือกระดับการศึกษา</option>
                             </select>
                         </div>
-                        <div class="col-md-3">
-
-                            <select id="Type_Name" name="Type_Name" class="form-control col-md-3" required>
+                        <div class="col-lg-3">
+                            <select id="Type_Name" name="Type_Name" class="form-control" required>
                                 <option value="">เลือกประเภทวิชา</option>
                             </select>
                         </div>
-                        <div class="col-md-3">
-
-                            <select id="Major_Name" name="Major_Name" class="form-control col-md-3" required>
+                        <div class="col-lg-3">
+                            <select id="Major_Name" name="Major_Name" class="form-control" required>
                                 <option value="">เลือกสาขาวิชา</option>
                             </select>
                         </div>
@@ -111,61 +106,73 @@ try {
 
     <?php require_once("footer.php"); ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
     <script>
-        // ส่งข้อมูลจาก PHP ไปยัง JavaScript
-        const courseTypes = <?php echo json_encode($courseTypes); ?>;
+    document.addEventListener('DOMContentLoaded', function() {
+        const courseTypeSelect = document.getElementById('CourseType_Name');
+        const levelSelect = document.getElementById('Level_Name');
+        const subjectTypeSelect = document.getElementById('Type_Name');
+        const majorSelect = document.getElementById('Major_Name');
+
         const levels = <?php echo json_encode($levels); ?>;
         const subjectTypes = <?php echo json_encode($subjectTypes); ?>;
         const majors = <?php echo json_encode($majors); ?>;
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const courseTypeSelect = document.getElementById('CourseType_Name');
-            const levelSelect = document.getElementById('Level_Name');
-            const subjectTypeSelect = document.getElementById('Type_Name');
-            const majorSelect = document.getElementById('Major_Name');
-
-            function populateSelect(selectElement, data, valueKey, textKey) {
-                selectElement.innerHTML = '<option value="">เลือกตัวเลือก</option>'; // Clear existing options
-                data.forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item[valueKey];
-                    option.textContent = item[textKey];
-                    selectElement.appendChild(option);
-                });
-            }
-
-            function clearSelect(selectElement) {
-                selectElement.innerHTML = '<option value="">เลือกตัวเลือก</option>';
-            }
-
-            // เตรียม dropdowns
-            populateSelect(courseTypeSelect, courseTypes, 'CourseType_ID', 'CourseType_Name');
-
-            courseTypeSelect.addEventListener('change', function() {
-                const selectedCourseType = this.value;
-                const filteredLevels = levels.filter(level => level.CourseType_ID == selectedCourseType);
-                populateSelect(levelSelect, filteredLevels, 'Level_ID', 'Level_Name');
-                clearSelect(subjectTypeSelect);
-                clearSelect(majorSelect);
-            });
-
-            levelSelect.addEventListener('change', function() {
-                const selectedLevel = this.value;
-                const filteredSubjectTypes = subjectTypes.filter(subjectType => subjectType.Level_ID == selectedLevel);
-                populateSelect(subjectTypeSelect, filteredSubjectTypes, 'Type_ID', 'Type_Name');
-                clearSelect(majorSelect);
-            });
-
-            subjectTypeSelect.addEventListener('change', function() {
-                const selectedSubjectType = this.value;
-                const filteredMajors = majors.filter(major => major.Type_ID == selectedSubjectType);
-                populateSelect(majorSelect, filteredMajors, 'Major_ID', 'Major_Name');
-            });
+        // Populate initial dropdowns
+        populateSelect(courseTypeSelect, <?php echo json_encode($courseTypes); ?>, 'CourseType_ID', 'CourseType_Name');
+        
+        // Event handler for changing courseType
+        courseTypeSelect.addEventListener('change', function() {
+            const selectedCourseType = this.value;
+            const filteredLevels = levels.filter(level => level.CourseType_ID == selectedCourseType);
+            populateSelect(levelSelect, filteredLevels, 'Level_ID', 'Level_Name');
+            clearSelect(subjectTypeSelect);
+            clearSelect(majorSelect);
         });
+
+        // Event handler for changing level
+        levelSelect.addEventListener('change', function() {
+            const selectedLevel = this.value;
+            const filteredSubjectTypes = subjectTypes.filter(type => type.Level_ID == selectedLevel);
+            populateSelect(subjectTypeSelect, filteredSubjectTypes, 'Type_ID', 'Type_Name');
+            clearSelect(majorSelect);
+        });
+
+        // Event handler for changing subjectType
+        subjectTypeSelect.addEventListener('change', function() {
+            const selectedSubjectType = this.value;
+            const filteredMajors = majors.filter(major => major.Type_ID == selectedSubjectType);
+            populateSelect(majorSelect, filteredMajors, 'Major_ID', 'Major_Name');
+        });
+
+        // Set initial values
+        courseTypeSelect.value = '<?php echo $courseType; ?>';
+        const initialLevels = levels.filter(level => level.CourseType_ID == courseTypeSelect.value);
+        populateSelect(levelSelect, initialLevels, 'Level_ID', 'Level_Name');
+        levelSelect.value = '<?php echo $level; ?>';
+        const initialSubjectTypes = subjectTypes.filter(type => type.Level_ID == levelSelect.value);
+        populateSelect(subjectTypeSelect, initialSubjectTypes, 'Type_ID', 'Type_Name');
+        subjectTypeSelect.value = '<?php echo $subjectType; ?>';
+        const initialMajors = majors.filter(major => major.Type_ID == subjectTypeSelect.value);
+        populateSelect(majorSelect, initialMajors, 'Major_ID', 'Major_Name');
+        majorSelect.value = '<?php echo $major; ?>';
+    });
+
+    function populateSelect(selectElement, data, valueKey, textKey) {
+        selectElement.innerHTML = '<option value="">เลือกตัวเลือก</option>'; // Clear existing options
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item[valueKey];
+            option.textContent = item[textKey];
+            selectElement.appendChild(option);
+        });
+    }
+
+    function clearSelect(selectElement) {
+        selectElement.innerHTML = '<option value="">เลือกตัวเลือก</option>';
+    }
     </script>
 </body>
-
 </html>

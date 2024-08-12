@@ -94,52 +94,45 @@ try {
 
             <div class="row">
                 <h1 class="h1-center mb-5"> หลักสูตร ภาคปกติ</h1>
+                <!-- หลักสูตร ภาคปกติ -->
                 <div class="col-lg-6">
-
                     <h2 class="fw-normal mt-5">เข้าศึกษาต่อ ปวช. หลักสูตร ภาคปกติ</h2>
                     <p>คุณวุฒิผู้สมัคร <br> - คุณวุฒิ ม.3 เข้าศึกษาต่อ ปวช. หลักสูตร ภาคปกติ<br> - คุณวุฒิ กศน. มัธยมศึกษาตอนต้น เข้าศึกษาต่อ ปวช.หลักสูตร ภาคปกติ</p>
-                    <p><a class="btn btn-secondary" href="#">คุณวุฒิ ม.3 และ กศน. มัธยมศึกษาตอนต้น</a></p>
+                    <p><a class="btn btn-secondary" href="Form.php?courseType=1&level=1&subjectType=&major=">คุณวุฒิ ม.3 และ กศน. มัธยมศึกษาตอนต้น</a></p>
                 </div>
                 <div class="col-lg-6">
-
                     <h2 class="fw-normal mt-5">เข้าศึกษาต่อ ปวส. หลักสูตร ภาคปกติ</h2>
                     <p>คุณวุฒิผู้สมัคร <br> - คุณวุฒิ ม.6 เข้าศึกษาต่อ ปวส. หลักสูตร ภาคปกติ<br> - คุณวุฒิ ปวช. เข้าศึกษาต่อ ปวส. หลักสูตร ภาคปกติ<br> - คุณวุฒิ กศน. มัธยมศึกษาตอนปลาย เข้าศึกษาต่อ ปวส. หลักสูตร ภาคปกติ</p>
-                    <p><a class="btn btn-secondary" href="#">คุณวุฒิ ม.6, ปวช. และ กศน. มัธยมศึกษาตอนปลาย</a></p>
+                    <p><a class="btn btn-secondary" href="Form.php?courseType=1&level=4&subjectType=&major=">คุณวุฒิ ม.6, ปวช. และ กศน. มัธยมศึกษาตอนปลาย</a></p>
                 </div>
-            </div>
+                <hr class="featurette-divider">
 
-            <hr class="featurette-divider">
-            <div class="row">
-                <h1 class="h1-center mb-5"> หลักสูตร ภาคสมทบ</h1>
+                <!-- หลักสูตร ภาคสมทบ -->
                 <div class="col-lg-6">
-
                     <h2 class="fw-normal mt-5">เข้าศึกษาต่อ ปวช. หลักสูตร ภาคสมทบ</h2>
                     <p>คุณวุฒิผู้สมัคร <br> - คุณวุฒิ ม.3 เข้าศึกษาต่อ ปวช. หลักสูตร ภาคสมทบ<br> - คุณวุฒิ กศน. มัธยมศึกษาตอนต้น เข้าศึกษาต่อ ปวช. หลักสูตร ภาคสมทบ</p>
-                    <p><a class="btn btn-secondary" href="#">คุณวุฒิ ม.3 และ กศน. มัธยมศึกษาตอนต้น</a></p>
+                    <p><a class="btn btn-secondary" href="Form.php?courseType=2&level=2&subjectType=&major=">คุณวุฒิ ม.3 และ กศน. มัธยมศึกษาตอนต้น</a></p>
                 </div>
                 <div class="col-lg-6">
-
                     <h2 class="fw-normal mt-5">เข้าศึกษาต่อ ปวส. หลักสูตร ภาคสมทบ</h2>
                     <p>คุณวุฒิผู้สมัคร <br> - คุณวุฒิ ม.6 เข้าศึกษาต่อ ปวส. หลักสูตร ภาคสมทบ<br> - คุณวุฒิ ปวช. เข้าศึกษาต่อ ปวส. หลักสูตร ภาคสมทบ<br> - คุณวุฒิ กศน. มัธยมศึกษาตอนปลาย เข้าศึกษาต่อ ปวส. หลักสูตร ภาคสมทบ</p>
-                    <p><a class="btn btn-secondary" href="#">คุณวุฒิ ม.6, ปวช. และ กศน. มัธยมศึกษาตอนปลาย</a></p>
+                    <p><a class="btn btn-secondary" href="Form.php?courseType=2&level=5&subjectType=&major=">คุณวุฒิ ม.6, ปวช. และ กศน. มัธยมศึกษาตอนปลาย</a></p>
                 </div>
-            </div>
+                <hr class="featurette-divider">
 
-            <hr class="featurette-divider">
-            <div class="row">
-                <h1 class="h1-center mb-5"> หลักสูตร ภาคทวิภาคี</h1>
+                <!-- หลักสูตร ภาคทวิภาคี -->
                 <div class="col-lg-6">
-
                     <h2 class="fw-normal mt-5">เข้าศึกษาต่อ ปวช. ภาคทวิภาคี</h2>
                     <p>คุณวุฒิผู้สมัคร <br> - คุณวุฒิ ม.3 เข้าศึกษาต่อ ปวช. ภาคทวิภาคี<br> - คุณวุฒิ กศน. มัธยมศึกษาตอนต้น เข้าศึกษาต่อ ปวช. ภาคทวิภาคี</p>
-                    <p><a class="btn btn-secondary" href="#">คุณวุฒิ ม.3 และ กศน. มัธยมศึกษาตอนต้น</a></p>
+                    <p><a class="btn btn-secondary" href="Form.php?courseType=3&level=3&subjectType=&major=">คุณวุฒิ ม.3 และ กศน. มัธยมศึกษาตอนต้น</a></p>
                 </div>
                 <div class="col-lg-6">
-
                     <h2 class="fw-normal mt-5">เข้าศึกษาต่อ ปวส. ภาคทวิภาคี</h2>
                     <p>คุณวุฒิผู้สมัคร <br> - คุณวุฒิ ม.6 เข้าศึกษาต่อ ปวส. ภาคทวิภาคี<br> - คุณวุฒิ ปวช. เข้าศึกษาต่อ ปวส. ภาคทวิภาคี<br> - คุณวุฒิ กศน. มัธยมศึกษาตอนปลาย เข้าศึกษาต่อ ปวส. ภาคทวิภาคี</p>
-                    <p><a class="btn btn-secondary" href="#">คุณวุฒิ ม.6, ปวช. และ กศน. มัธยมศึกษาตอนปลาย</a></p>
+                    <p><a class="btn btn-secondary" href="Form.php?courseType=3&level=6&subjectType=&major=">คุณวุฒิ ม.6, ปวช. และ กศน. มัธยมศึกษาตอนปลาย</a></p>
                 </div>
+                <hr class="featurette-divider">
+
             </div>
 
 
