@@ -29,6 +29,52 @@ require_once("../config/db.php");
 
 
     <!-- login -->
+    <main class="form-signin mt-5 col-md-12">
+        <form action="config/insertlogin.php" method="post">
+            <img src="https://img5.pic.in.th/file/secure-sv1/c-techlogo.png" alt="Your Logo" width="150" height="32"><br><br>
+
+
+            <h2 class="h3 mb-3 fw-normal">Admin</h2>
+            <h2 class="h3 mb-3 fw-normal">กรุณาเข้าสู่ระบบ</h2>
+            <?php if(isset($_SESSION['error'])) { ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php 
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                    ?>
+                </div>
+            <?php } ?>
+            <?php if(isset($_SESSION['success'])) { ?>
+                <div class="alert alert-success" role="alert">
+                    <?php 
+                        echo $_SESSION['success'];
+                        unset($_SESSION['success']);
+                    ?>
+                </div>
+            <?php } ?>
+            <?php if(isset($_SESSION['warning'])) { ?>
+                <div class="alert alert-warning" role="alert">
+                    <?php 
+                        echo $_SESSION['warning'];
+                        unset($_SESSION['warning']);
+                    ?>
+                </div>
+            <?php } ?>
+
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" name="email" required placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating my-2">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+                <label for="floatingPassword">password</label>
+            </div>
+
+            <button class="btn btn-warning w-100  btn-custom" name="login" type="submit">เข้าสู่ระบบ</button>
+            
+
+        </form>
+    </main>
 
 
 

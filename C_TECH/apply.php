@@ -3,22 +3,7 @@ session_start();
 require_once("config/db.php");
 
 
-if (!isset($_SESSION['user_login'])) {
-    header('Location: login.php');
-}
 
-if (isset($_SESSION['user_login'])) {
-    $user_id = $_SESSION['user_login'];
-    // echo $user_id;
-}
-
-try {
-    $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
-    $stmt->execute([$user_id]);
-    $userData = $stmt->fetch();
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
 
 
 

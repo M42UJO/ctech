@@ -106,9 +106,9 @@ require_once("../config/db.php");
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $stmt = $conn->query("SELECT a.User_ID, a.name, a.lastname, u.email, a.id_card_number 
-                                    FROM applicant a
-                                    JOIN user u ON a.User_ID = u.User_ID");
+                                    $stmt = $conn->query("SELECT a.User_ID, u.name, u.lastname, a.email, u.id_card_number 
+                                    FROM user a
+                                    JOIN applicant u ON u.User_ID = a.User_ID");
              
                                     $stmt->execute();
                                     $applicants = $stmt->fetchAll();

@@ -34,6 +34,16 @@ $subjectType = isset($_GET['subjectType']) ? $_GET['subjectType'] : '';
 $major = isset($_GET['major']) ? $_GET['major'] : '';
 ?>
 
+<?php
+// ตรวจสอบว่า guardian_name มีข้อมูลหรือไม่
+$stmtGuardian = $conn->prepare("SELECT guardian_name FROM parent_info WHERE User_ID = :user_id");
+$stmtGuardian->bindParam(':user_id', $user_id);
+$stmtGuardian->execute();
+$guardian = $stmtGuardian->fetch(PDO::FETCH_ASSOC);
+
+$guardianMissing = empty($guardian['guardian_name']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +52,9 @@ $major = isset($_GET['major']) ? $_GET['major'] : '';
     <title>C-TECH</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+
 </head>
 <body>
     <?php require_once("nav.php"); ?>
@@ -62,7 +75,7 @@ $major = isset($_GET['major']) ? $_GET['major'] : '';
 
         <div class="panel panel-default">
             <div class="panel-body">
-                <form id="personal-info-form" class="row g-2 mt-2">
+                <form id="personal-info-form" class="row g-2 mt-2" action="config/insertForm.php" method="post">
                     <div class="panel-heading">ต้องการศึกษา</div>
                     
                     <div class="row mt-5">
@@ -177,6 +190,21 @@ $major = isset($_GET['major']) ? $_GET['major'] : '';
     function clearSelect(selectElement) {
         selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>';
     }
+    document.addEventListener('DOMContentLoaded', function() {
+    <?php if ($guardianMissing): ?>
+        Swal.fire({
+            icon: 'warning',
+            title: 'ข้อมูลไม่ครบถ้วน',
+            text: 'กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วน จึงสมัครได้',
+            confirmButtonText: 'ตกลง',
+            willClose: () => {
+                window.location.href = 'Personal_info.php';
+            }
+        });
+    <?php endif; ?>
+    });
+
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
