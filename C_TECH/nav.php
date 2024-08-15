@@ -1,5 +1,4 @@
 <?php
-
 require_once("config/db.php");
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินอยู่หรือไม่
@@ -28,18 +27,18 @@ if ($isLoggedIn) {
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome สำหรับไอคอน -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .navbar-custom {
+            background-color: orange; /* สีที่คุณต้องการ */
+        }
+        .navbar-custom .nav-link {
+            color: #000000; /* สีข้อความ */
+        }
+        .navbar-custom .nav-link:hover {
+            color: #f0e68c; /* สีข้อความเมื่อ hover */
+        }
+    </style>
 </head>
-<style>
-    .navbar-custom {
-        background-color: orange; /* สีที่คุณต้องการ */
-    }
-    .navbar-custom .nav-link {
-        color: #000000; /* สีข้อความ */
-    }
-    .navbar-custom .nav-link:hover {
-        color: #f0e68c; /* สีข้อความเมื่อ hover */
-    }
-</style>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-custom">
@@ -66,12 +65,14 @@ if ($isLoggedIn) {
                 <li class="nav-item">
                     <a href="apply.php" class="nav-link link-dark fw-bold">สมัครเรียน</a>
                 </li>
-                <li class="nav-item">
-                    <a href="Personal_info.php" class="nav-link link-dark fw-bold">กรอกข้อมูลส่วนตัว</a>
-                </li>
-                <li class="nav-item">
-                    <a href="checkstatus.php" class="nav-link link-dark fw-bold">ตรวจสอบสถานะ</a>
-                </li>
+                <?php if ($isLoggedIn) : ?>
+                    <li class="nav-item">
+                        <a href="Personal_info.php" class="nav-link link-dark fw-bold">กรอกข้อมูลส่วนตัว</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="checkstatus.php" class="nav-link link-dark fw-bold">ตรวจสอบสถานะ</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
 
@@ -85,9 +86,7 @@ if ($isLoggedIn) {
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#!">Settings</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
+                            <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="config/logout.php">Logout</a></li>
                         </ul>
                     </li>
@@ -104,11 +103,10 @@ if ($isLoggedIn) {
     </div>
 </nav>
 
-
-    <!-- Bootstrap JS และ dependencies -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS และ dependencies -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

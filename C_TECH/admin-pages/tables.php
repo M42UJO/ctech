@@ -121,10 +121,10 @@ require_once("../config/db.php");
                                         foreach ($users as $user) {
                                     ?>
                                             <tr>
-                                                <th scope="row"><?php echo $user['Applicant_ID']; ?></th>
+                                                <th scope="row"><?php echo $user['User_ID']; ?></th>
                                                 <td><?php echo $user['name']; ?></td>
                                                 <td><?php echo $user['lastname']; ?></td>
-                                                <td><?php echo $user['username']; ?></td>
+                                                <td><?php echo $user['email']; ?></td>
                                                 <td><?php echo $user['id_card_number']; ?></td>
                                                 
                                             </tr>

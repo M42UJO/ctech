@@ -3,23 +3,8 @@ session_start();
 require_once("../config/db.php");
 
 
-if (isset($_GET['delete'])) {
-    $delete_id = $_GET['delete'];
-    $deletestmt = $conn->query("DELETE FROM applicant WHERE Applicant_ID = $delete_id");
-    $deletestmt->execute();
-
-    if ($deletestmt) {
-        echo "<script>alert('Data has been deleted successfully');</script>";
-        $_SESSION['success'] = "Data has been deleted succesfully";
-        header("refresh:1; url=index.php");
-    }
-    
-}
-
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,10 +29,7 @@ if (isset($_GET['delete'])) {
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <!-- <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div> -->
+            
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -76,7 +58,7 @@ if (isset($_GET['delete'])) {
                         </a>
                         <a class="nav-link" href="edituser.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
-                            Editusers
+                            Edit Users
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Addons</div>
@@ -93,21 +75,23 @@ if (isset($_GET['delete'])) {
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-
+                    <!-- Display logged in user's name -->
+                    
                 </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                <h1 class="">Editusers</h1>
+                    <h1 class="">Edit Users</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Editusers</li>
+                        <li class="breadcrumb-item active">Edit Users</li>
                     </ol>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             Applicant
+                        </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
@@ -115,32 +99,35 @@ if (isset($_GET['delete'])) {
                                         <th>No.</th>
                                         <th>Name</th>
                                         <th>Lastname</th>
-                                        <th>Username</th>
-                                        <th>Id_card_number</th>
+                                        <th>Email</th>
+                                        <th>Id Card Number</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                     <?php
-                                    $stmt = $conn->query("SELECT * FROM applicant");
+                                    $stmt = $conn->query("SELECT a.User_ID, a.name, a.lastname, u.email, a.id_card_number 
+                                    FROM applicant a
+                                    JOIN user u ON a.User_ID = u.User_ID");
+             
                                     $stmt->execute();
-                                    $applicant = $stmt->fetchAll();
+                                    $applicants = $stmt->fetchAll();
 
-                                    if (!$applicant) {
-                                        echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                    if (!$applicants) {
+                                        echo "<tr><td colspan='6' class='text-center'>No data available</td></tr>";
                                     } else {
-                                        foreach ($applicant as $user) {
+                                        foreach ($applicants as $applicant) {
                                     ?>
                                             <tr>
-                                                <th scope="row"><?php echo $user['Applicant_ID']; ?></th>
-                                                <td><?php echo $user['name']; ?></td>
-                                                <td><?php echo $user['lastname']; ?></td>
-                                                <td><?php echo $user['username']; ?></td>
-                                                <td><?php echo $user['id_card_number']; ?></td>
+                                                <th scope="row"><?php echo htmlspecialchars($applicant['User_ID']); ?></th>
+                                                <td><?php echo htmlspecialchars($applicant['name']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['lastname']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['email']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['id_card_number']); ?></td>
                                                 <td>
-                                                    <a href="edit.php?Applicant_ID=<?php echo $user['Applicant_ID']; ?>" class="btn btn-warning">Edit</a>
-                                                    <a onclick="return confirm('Are you sure you want to delete?');" href="?delete=<?php echo $user['Applicant_ID']; ?>" class="btn btn-danger">Delete</a>
+                                                    <a href="" class="btn btn-warning">Edit</a>
+                                                    <a onclick="return confirm('Are you sure you want to delete?');" href="delete.php?user_id=<?php echo htmlspecialchars($applicant['User_ID']); ?>" class="btn btn-danger">Delete</a>
+
                                                 </td>
                                             </tr>
                                     <?php }
@@ -165,6 +152,3 @@ if (isset($_GET['delete'])) {
 </body>
 
 </html>
-
-
-
