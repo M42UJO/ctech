@@ -52,17 +52,13 @@ if (isset($_SESSION['user_login'])) {
         </section>
 
 
-
-
-
-
-
         <div class="panel panel-default">
 
             <div class="panel-body">
 
 
-                <form id="personal-info-form" class="row g-2 mt-2">
+            <form id="personal-info-form" class="row g-2 mt-2" action="config/insertEvidence.php" method="post" enctype="multipart/form-data">
+
                     <div class="panel-heading">หลักฐานที่ใช้ในการสมัคร</div>
                     <label id="announce" class="">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา<br> Chanapolkhan Technological College, Nakhon Ratchasima</label>
                     <label id="announce" class="">กรุณาชำระค่าแรกเข้า จำนวน <span class="highlight">2,000</span> บาท หลังจากกรอกข้อมูลครบถ้วน</label>
@@ -71,19 +67,19 @@ if (isset($_SESSION['user_login'])) {
 
                     <div class="col-md-3">
                         <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="transcript" accept=".jpg" required>
+                        <input type="file" class="form-control" name="transcript" accept=".jpg,.jpeg,.png" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="house_registration" accept=".jpg" required>
+                        <input type="file" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="id_card" accept=".jpg" required>
+                        <input type="file" class="form-control" name="id_card" accept=".jpg,.jpeg,.png" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="slip2000" accept=".jpg" required>
+                        <input type="file" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png" required>
                     </div>
 
                     <div class="col-md-2 mt-5">
@@ -93,7 +89,7 @@ if (isset($_SESSION['user_login'])) {
                     </div>
                     <div class="col-md-8 mt-5"></div>
                     <div class="col-md-2 mt-5">
-                        <button type="submit" class="btn btn-warning w-100 py-2 btn-custom">ยืนยัน
+                        <button type="submit" name="submit" class="btn btn-warning w-100 py-2 btn-custom">ยืนยัน
                             <i class="fas fa-check"></i> 
                         </button>
 
