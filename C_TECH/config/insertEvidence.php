@@ -22,8 +22,10 @@ $file_paths = [];
 $uploadOk = 1;
 
 foreach ($files as $file) {
-    $target_file = $target_dir . basename($_FILES[$file]["name"]);
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    $file_name = basename($_FILES[$file]["name"]);
+    $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+    $unique_file_name = uniqid() . '.' . $file_extension;  // สร้างชื่อไฟล์ที่ไม่ซ้ำ
+    $target_file = $target_dir . $unique_file_name;
 
     // ตรวจสอบว่าไฟล์เป็นรูปภาพจริงหรือไม่
     if (isset($_POST["submit"])) {
@@ -49,7 +51,7 @@ foreach ($files as $file) {
     }
 
     // อนุญาตเฉพาะไฟล์ที่เป็น JPG, JPEG, PNG
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+    if ($file_extension != "jpg" && $file_extension != "png" && $file_extension != "jpeg") {
         echo "ไฟล์ $file ต้องเป็น JPG, JPEG หรือ PNG เท่านั้น.";
         $uploadOk = 0;
     }
@@ -59,7 +61,7 @@ foreach ($files as $file) {
         echo "ไม่สามารถอัปโหลดไฟล์ $file ได้.";
     } else {
         if (move_uploaded_file($_FILES[$file]["tmp_name"], $target_file)) {
-            $file_paths[$file] = htmlspecialchars(basename($_FILES[$file]["name"]));
+            $file_paths[$file] = htmlspecialchars($unique_file_name);
         } else {
             echo "เกิดข้อผิดพลาดในการอัปโหลดไฟล์ $file.";
         }
@@ -92,6 +94,7 @@ if (!empty($file_paths)) {
     // ทำการ execute คำสั่ง
     if ($stmt->execute()) {
         echo "ข้อมูลได้ถูกอัปเดตเรียบร้อยแล้ว.";
+        header('Location: ../Evidence.php');
     } else {
         echo "เกิดข้อผิดพลาดในการอัปเดตข้อมูล.";
     }
