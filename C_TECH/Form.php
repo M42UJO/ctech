@@ -46,6 +46,7 @@ $guardianMissing = empty($guardian['guardian_name']);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,6 +57,7 @@ $guardianMissing = empty($guardian['guardian_name']);
 
 
 </head>
+
 <body>
     <?php require_once("nav.php"); ?>
 
@@ -77,17 +79,17 @@ $guardianMissing = empty($guardian['guardian_name']);
             <div class="panel-body">
                 <form id="personal-info-form" class="row g-2 mt-2" action="config/insertForm.php" method="post">
                     <div class="panel-heading">ต้องการศึกษา</div>
-                    
+
                     <div class="row mt-5">
                         <div class="col-lg-3">
                             <label class="form-label">ประเภทของหลักสูตร <span class="required">**</span></label>
-                            <select id="CourseType_Name" name="CourseType_Name" class="form-control" required >
+                            <select id="CourseType_Name" name="CourseType_Name" class="form-control" required>
                                 <option value="">เลือกประเภทของหลักสูตร</option>
                             </select>
                         </div>
                         <div class="col-lg-3">
                             <label class="form-label">ระดับการศึกษา <span class="required">**</span></label>
-                            <select id="Level_Name" name="Level_Name" class="form-control" required >
+                            <select id="Level_Name" name="Level_Name" class="form-control" required>
                                 <option value="">เลือกระดับการศึกษา</option>
                             </select>
                         </div>
@@ -117,6 +119,7 @@ $guardianMissing = empty($guardian['guardian_name']);
                         </button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -127,84 +130,84 @@ $guardianMissing = empty($guardian['guardian_name']);
     <script src="script.js"></script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const courseTypeSelect = document.getElementById('CourseType_Name');
-        const levelSelect = document.getElementById('Level_Name');
-        const subjectTypeSelect = document.getElementById('Type_Name');
-        const majorSelect = document.getElementById('Major_Name');
+        document.addEventListener('DOMContentLoaded', function() {
+            const courseTypeSelect = document.getElementById('CourseType_Name');
+            const levelSelect = document.getElementById('Level_Name');
+            const subjectTypeSelect = document.getElementById('Type_Name');
+            const majorSelect = document.getElementById('Major_Name');
 
-        const levels = <?php echo json_encode($levels); ?>;
-        const subjectTypes = <?php echo json_encode($subjectTypes); ?>;
-        const majors = <?php echo json_encode($majors); ?>;
+            const levels = <?php echo json_encode($levels); ?>;
+            const subjectTypes = <?php echo json_encode($subjectTypes); ?>;
+            const majors = <?php echo json_encode($majors); ?>;
 
-        // Populate initial dropdowns
-        populateSelect(courseTypeSelect, <?php echo json_encode($courseTypes); ?>, 'CourseType_ID', 'CourseType_Name');
-        
-        // Event handler for changing courseType
-        courseTypeSelect.addEventListener('change', function() {
-            const selectedCourseType = this.value;
-            const filteredLevels = levels.filter(level => level.CourseType_ID == selectedCourseType);
-            populateSelect(levelSelect, filteredLevels, 'Level_ID', 'Level_Name');
-            clearSelect(subjectTypeSelect);
-            clearSelect(majorSelect);
+            // Populate initial dropdowns
+            populateSelect(courseTypeSelect, <?php echo json_encode($courseTypes); ?>, 'CourseType_ID', 'CourseType_Name');
+
+            // Event handler for changing courseType
+            courseTypeSelect.addEventListener('change', function() {
+                const selectedCourseType = this.value;
+                const filteredLevels = levels.filter(level => level.CourseType_ID == selectedCourseType);
+                populateSelect(levelSelect, filteredLevels, 'Level_ID', 'Level_Name');
+                clearSelect(subjectTypeSelect);
+                clearSelect(majorSelect);
+            });
+
+            // Event handler for changing level
+            levelSelect.addEventListener('change', function() {
+                const selectedLevel = this.value;
+                const filteredSubjectTypes = subjectTypes.filter(type => type.Level_ID == selectedLevel);
+                populateSelect(subjectTypeSelect, filteredSubjectTypes, 'Type_ID', 'Type_Name');
+                clearSelect(majorSelect);
+            });
+
+            // Event handler for changing subjectType
+            subjectTypeSelect.addEventListener('change', function() {
+                const selectedSubjectType = this.value;
+                const filteredMajors = majors.filter(major => major.Type_ID == selectedSubjectType);
+                populateSelect(majorSelect, filteredMajors, 'Major_ID', 'Major_Name');
+            });
+
+            // Set initial values
+            courseTypeSelect.value = '<?php echo $courseType; ?>';
+            const initialLevels = levels.filter(level => level.CourseType_ID == courseTypeSelect.value);
+            populateSelect(levelSelect, initialLevels, 'Level_ID', 'Level_Name');
+            levelSelect.value = '<?php echo $level; ?>';
+            const initialSubjectTypes = subjectTypes.filter(type => type.Level_ID == levelSelect.value);
+            populateSelect(subjectTypeSelect, initialSubjectTypes, 'Type_ID', 'Type_Name');
+            subjectTypeSelect.value = '<?php echo $subjectType; ?>';
+            const initialMajors = majors.filter(major => major.Type_ID == subjectTypeSelect.value);
+            populateSelect(majorSelect, initialMajors, 'Major_ID', 'Major_Name');
+            majorSelect.value = '<?php echo $major; ?>';
         });
 
-        // Event handler for changing level
-        levelSelect.addEventListener('change', function() {
-            const selectedLevel = this.value;
-            const filteredSubjectTypes = subjectTypes.filter(type => type.Level_ID == selectedLevel);
-            populateSelect(subjectTypeSelect, filteredSubjectTypes, 'Type_ID', 'Type_Name');
-            clearSelect(majorSelect);
+        function populateSelect(selectElement, data, valueKey, textKey) {
+            selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>'; // Clear existing options
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[valueKey];
+                option.textContent = item[textKey];
+                selectElement.appendChild(option);
+            });
+        }
+
+        function clearSelect(selectElement) {
+            selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>';
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if ($guardianMissing): ?>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'ข้อมูลไม่ครบถ้วน',
+                    text: 'กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วน จึงสมัครได้',
+                    confirmButtonText: 'ตกลง',
+                    willClose: () => {
+                        window.location.href = 'Personal_info.php';
+                    }
+                });
+            <?php endif; ?>
         });
-
-        // Event handler for changing subjectType
-        subjectTypeSelect.addEventListener('change', function() {
-            const selectedSubjectType = this.value;
-            const filteredMajors = majors.filter(major => major.Type_ID == selectedSubjectType);
-            populateSelect(majorSelect, filteredMajors, 'Major_ID', 'Major_Name');
-        });
-
-        // Set initial values
-        courseTypeSelect.value = '<?php echo $courseType; ?>';
-        const initialLevels = levels.filter(level => level.CourseType_ID == courseTypeSelect.value);
-        populateSelect(levelSelect, initialLevels, 'Level_ID', 'Level_Name');
-        levelSelect.value = '<?php echo $level; ?>';
-        const initialSubjectTypes = subjectTypes.filter(type => type.Level_ID == levelSelect.value);
-        populateSelect(subjectTypeSelect, initialSubjectTypes, 'Type_ID', 'Type_Name');
-        subjectTypeSelect.value = '<?php echo $subjectType; ?>';
-        const initialMajors = majors.filter(major => major.Type_ID == subjectTypeSelect.value);
-        populateSelect(majorSelect, initialMajors, 'Major_ID', 'Major_Name');
-        majorSelect.value = '<?php echo $major; ?>';
-    });
-
-    function populateSelect(selectElement, data, valueKey, textKey) {
-        selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>'; // Clear existing options
-        data.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item[valueKey];
-            option.textContent = item[textKey];
-            selectElement.appendChild(option);
-        });
-    }
-
-    function clearSelect(selectElement) {
-        selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>';
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-    <?php if ($guardianMissing): ?>
-        Swal.fire({
-            icon: 'warning',
-            title: 'ข้อมูลไม่ครบถ้วน',
-            text: 'กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วน จึงสมัครได้',
-            confirmButtonText: 'ตกลง',
-            willClose: () => {
-                window.location.href = 'Personal_info.php';
-            }
-        });
-    <?php endif; ?>
-    });
-
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>

@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $level = $_POST['Level_Name'];
     $subjectType = $_POST['Type_Name'];
     $major = $_POST['Major_Name'];
+
     // ตรวจสอบข้อมูลที่ส่งมาว่ามีค่าหรือไม่
     $transcript = isset($_POST['transcript']) ? $_POST['transcript'] : null;
     $id_card = isset($_POST['id_card']) ? $_POST['id_card'] : null;
@@ -20,6 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $slip2000 = isset($_POST['slip2000']) ? $_POST['slip2000'] : null;
     $date = date('Y-m-d'); // วันที่ปัจจุบัน
     $status = 'pending'; // หรือสถานะอื่น ๆ ที่ต้องการ
+
+    // Debug: ตรวจสอบข้อมูลที่รับเข้ามา
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+    exit;
 
     try {
         $stmt = $conn->prepare("INSERT INTO form (transcript, id_card, house_registration, slip2000, date, status, Major_ID, User_ID) 
