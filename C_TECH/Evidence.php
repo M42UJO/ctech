@@ -1,3 +1,16 @@
+<?php
+session_start();
+require_once("config/db.php");
+
+if (!isset($_SESSION['user_login'])) {
+    header('Location: login.php');
+    exit;
+}
+
+if (isset($_SESSION['user_login'])) {
+    $user_id = $_SESSION['user_login'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,29 +38,14 @@
 
         <section class="step-wizard">
             <ul class="step-wizard-list">
+                
                 <li class="step-wizard-item">
                     <span class="progress-count">1</span>
-                    <span class="progress-label">ข้อมูลส่วนตัว</span>
-                </li>
-                <li class="step-wizard-item">
-                    <span class="progress-count">2</span>
-                    <span class="progress-label">ที่อยู่ปัจจุบัน</span>
-                </li>
-                <li class="step-wizard-item ">
-                    <span class="progress-count">3</span>
-                    <span class="progress-label">ข้อมูลการศึกษา</span>
-                </li>
-                <li class="step-wizard-item ">
-                    <span class="progress-count">4</span>
-                    <span class="progress-label">ข้อมูลบิดา</span>
-                </li>
-                <li class="step-wizard-item">
-                    <span class="progress-count">5</span>
                     <span class="progress-label">ข้อมูลมารดา</span>
                 </li>
-                <li class="step-wizard-item">
-                    <span class="progress-count">6</span>
-                    <span class="progress-label">ข้อมูลผู้ปกครอง</span>
+                <li class="step-wizard-item current-item">
+                    <span class="progress-count ">2</span>
+                    <span class="progress-label ">ข้อมูลผู้ปกครอง</span>
                 </li>
                 
             </ul>
@@ -73,19 +71,19 @@
 
                     <div class="col-md-3">
                         <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="Profile_image" accept=".jpg" required>
+                        <input type="file" class="form-control" name="transcript" accept=".jpg" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="Profile_image" accept=".jpg" required>
+                        <input type="file" class="form-control" name="house_registration" accept=".jpg" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="Profile_image" accept=".jpg" required>
+                        <input type="file" class="form-control" name="id_card" accept=".jpg" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="Profile_image" accept=".jpg" required>
+                        <input type="file" class="form-control" name="slip2000" accept=".jpg" required>
                     </div>
 
                     <div class="col-md-2 mt-5">
@@ -113,11 +111,16 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL " crossorigin="anonymous "></script>
         <script src="script.js"></script>
         <script>
-            document.getElementById('personal-info-form').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
-                window.location.href = 'Mother_info.html'; // Redirect to the new page
-            });
-        </script>
+        let imgInput = document.getElementById('imgInput');
+        let previewImg = document.getElementById('previewImg');
+
+            imgInput.onchange = evt => {
+            const [file] = imgInput.files;
+            if (file) {
+                previewImg.src = URL.createObjectURL(file);
+            }
+        }
+    </script>
 </body>
 
 </html>
