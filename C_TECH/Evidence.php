@@ -59,20 +59,24 @@ if (isset($_SESSION['user_login'])) {
                     <label id="announce" class="mb-5">โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์<br>เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span> </label>
 
                     <div class="col-md-3">
-                        <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="transcript" accept=".jpg,.jpeg,.png" required>
+                        <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                        <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png" >
+                        <img id="previewImg1"  width="50%" alt="">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png" required>
+                        <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                        <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png" >
+                        <img id="previewImg2"  width="50%" alt="">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="id_card" accept=".jpg,.jpeg,.png" required>
+                        <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                        <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png" >
+                        <img id="previewImg3"  width="50%" alt="">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png" required>
+                        <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                        <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png" >
+                        <img id="previewImg4"  width="50%" alt="">
                     </div>
 
                     <div class="col-md-2 mt-5">
@@ -141,6 +145,37 @@ if (isset($_SESSION['user_login'])) {
             });
         });
     });
+
+
+    imgInput1.onchange = evt => {
+    const [file1] = imgInput1.files;
+    if (file1) {
+        previewImg1.src = URL.createObjectURL(file1);
+    }
+};
+
+imgInput2.onchange = evt => {
+    const [file2] = imgInput2.files;
+    if (file2) {
+        previewImg2.src = URL.createObjectURL(file2);
+    }
+};
+
+imgInput3.onchange = evt => {
+    const [file3] = imgInput3.files;
+    if (file3) {
+        previewImg3.src = URL.createObjectURL(file3);
+    }
+};
+
+imgInput4.onchange = evt => {
+    const [file4] = imgInput4.files;
+    if (file4) {
+        previewImg4.src = URL.createObjectURL(file4);
+    }
+};
+
+    
     </script>
 </body>
 </html>
