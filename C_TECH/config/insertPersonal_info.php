@@ -49,8 +49,7 @@ if (isset($_POST['submit'])) {
     $phone_number = htmlspecialchars($_POST['phone_number']);
     $line_id = htmlspecialchars($_POST['line_id']);
     $facebook = htmlspecialchars($_POST['facebook']);
-    $profile_image = htmlspecialchars($_POST['profile_image']); // รับค่า profile_image
-
+    
     try {
         // ตรวจสอบว่ามีที่อยู่ของผู้ใช้ในฐานข้อมูลหรือไม่
         $stmt_check = $conn->prepare("SELECT User_ID FROM applicant WHERE User_ID = ?");
@@ -62,98 +61,147 @@ if (isset($_POST['submit'])) {
             $sql_insert = $conn->prepare("INSERT INTO applicant (
                 prefix, name, lastname, eng_name, id_card_number, nickname, birth_day, birth_month, birth_year, 
                 blood_group, height, weight, nationality, citizenship, religion, siblings_count, studying_siblings_count, 
-                phone_number, line_id, facebook, profile_image, User_ID
+                phone_number, line_id, facebook, User_ID
             ) VALUES (
                 :prefix, :name, :lastname, :eng_name, :id_card_number, :nickname, :birth_day, :birth_month, :birth_year, 
                 :blood_group, :height, :weight, :nationality, :citizenship, :religion, :siblings_count, :studying_siblings_count, 
-                :phone_number, :line_id, :facebook, :profile_image, :user_id
+                :phone_number, :line_id, :facebook, :user_id
             )");
             
             // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_insert->bindParam(':prefix', $prefix);
-            $sql_insert->bindParam(':name', $name);
-            $sql_insert->bindParam(':lastname', $lastname);
-            $sql_insert->bindParam(':eng_name', $eng_name);
-            $sql_insert->bindParam(':id_card_number', $id_card_number);
-            $sql_insert->bindParam(':nickname', $nickname);
-            $sql_insert->bindParam(':birth_day', $birth_day);
-            $sql_insert->bindParam(':birth_month', $birth_month);
-            $sql_insert->bindParam(':birth_year', $birth_year);
-            $sql_insert->bindParam(':blood_group', $blood_group);
-            $sql_insert->bindParam(':height', $height);
-            $sql_insert->bindParam(':weight', $weight);
-            $sql_insert->bindParam(':nationality', $nationality);
-            $sql_insert->bindParam(':citizenship', $citizenship);
-            $sql_insert->bindParam(':religion', $religion);
-            $sql_insert->bindParam(':siblings_count', $siblings_count);
-            $sql_insert->bindParam(':studying_siblings_count', $studying_siblings_count);
-            $sql_insert->bindParam(':phone_number', $phone_number);
-            $sql_insert->bindParam(':line_id', $line_id);
-            $sql_insert->bindParam(':facebook', $facebook);
-            $sql_insert->bindParam(':profile_image', $profile_image);
-            $sql_insert->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_insert->execute();
+            $sql_insert->execute([
+                ':prefix' => $prefix,
+                ':name' => $name,
+                ':lastname' => $lastname,
+                ':eng_name' => $eng_name,
+                ':id_card_number' => $id_card_number,
+                ':nickname' => $nickname,
+                ':birth_day' => $birth_day,
+                ':birth_month' => $birth_month,
+                ':birth_year' => $birth_year,
+                ':blood_group' => $blood_group,
+                ':height' => $height,
+                ':weight' => $weight,
+                ':nationality' => $nationality,
+                ':citizenship' => $citizenship,
+                ':religion' => $religion,
+                ':siblings_count' => $siblings_count,
+                ':studying_siblings_count' => $studying_siblings_count,
+                ':phone_number' => $phone_number,
+                ':line_id' => $line_id,
+                ':facebook' => $facebook,
+                ':user_id' => $user_id
+            ]);
         } else {
             // ถ้ามีที่อยู่แล้ว, ทำการอัปเดตข้อมูลที่มีอยู่
             $sql_update = $conn->prepare("UPDATE applicant SET
-            prefix = :prefix,
-            name = :name,
-            lastname = :lastname,
-            eng_name = :eng_name,
-            id_card_number = :id_card_number,
-            nickname = :nickname,
-            birth_day = :birth_day,
-            birth_month = :birth_month,
-            birth_year = :birth_year,
-            blood_group = :blood_group,
-            height = :height,
-            weight = :weight,
-            nationality = :nationality,
-            citizenship = :citizenship,
-            religion = :religion,
-            siblings_count = :siblings_count,
-            studying_siblings_count = :studying_siblings_count,
-            phone_number = :phone_number,
-            line_id = :line_id,
-            facebook = :facebook,
-            profile_image = :profile_image
-            WHERE User_ID = :user_id");
+                prefix = :prefix,
+                name = :name,
+                lastname = :lastname,
+                eng_name = :eng_name,
+                id_card_number = :id_card_number,
+                nickname = :nickname,
+                birth_day = :birth_day,
+                birth_month = :birth_month,
+                birth_year = :birth_year,
+                blood_group = :blood_group,
+                height = :height,
+                weight = :weight,
+                nationality = :nationality,
+                citizenship = :citizenship,
+                religion = :religion,
+                siblings_count = :siblings_count,
+                studying_siblings_count = :studying_siblings_count,
+                phone_number = :phone_number,
+                line_id = :line_id,
+                facebook = :facebook
+                WHERE User_ID = :user_id");
 
             // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_update->bindParam(':prefix', $prefix);
-            $sql_update->bindParam(':name', $name);
-            $sql_update->bindParam(':lastname', $lastname);
-            $sql_update->bindParam(':eng_name', $eng_name);
-            $sql_update->bindParam(':id_card_number', $id_card_number);
-            $sql_update->bindParam(':nickname', $nickname);
-            $sql_update->bindParam(':birth_day', $birth_day);
-            $sql_update->bindParam(':birth_month', $birth_month);
-            $sql_update->bindParam(':birth_year', $birth_year);
-            $sql_update->bindParam(':blood_group', $blood_group);
-            $sql_update->bindParam(':height', $height);
-            $sql_update->bindParam(':weight', $weight);
-            $sql_update->bindParam(':nationality', $nationality);
-            $sql_update->bindParam(':citizenship', $citizenship);
-            $sql_update->bindParam(':religion', $religion);
-            $sql_update->bindParam(':siblings_count', $siblings_count);
-            $sql_update->bindParam(':studying_siblings_count', $studying_siblings_count);
-            $sql_update->bindParam(':phone_number', $phone_number);
-            $sql_update->bindParam(':line_id', $line_id);
-            $sql_update->bindParam(':facebook', $facebook);
-            $sql_update->bindParam(':profile_image', $profile_image);
-            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_update->execute();
+            $sql_update->execute([
+                ':prefix' => $prefix,
+                ':name' => $name,
+                ':lastname' => $lastname,
+                ':eng_name' => $eng_name,
+                ':id_card_number' => $id_card_number,
+                ':nickname' => $nickname,
+                ':birth_day' => $birth_day,
+                ':birth_month' => $birth_month,
+                ':birth_year' => $birth_year,
+                ':blood_group' => $blood_group,
+                ':height' => $height,
+                ':weight' => $weight,
+                ':nationality' => $nationality,
+                ':citizenship' => $citizenship,
+                ':religion' => $religion,
+                ':siblings_count' => $siblings_count,
+                ':studying_siblings_count' => $studying_siblings_count,
+                ':phone_number' => $phone_number,
+                ':line_id' => $line_id,
+                ':facebook' => $facebook,
+                ':user_id' => $user_id
+            ]);
         }
 
-        // กำหนดข้อความสำเร็จในเซสชันและเปลี่ยนเส้นทางไปยังหน้าข้อมูลการศึกษา
-        $_SESSION['success'] = "Data has been inserted or updated successfully";
+        // ตั้งค่าตำแหน่งเก็บไฟล์
+        $target_dir = "uploads/";
+        $file_paths = [];
+        $uploadOk = 1;
+
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == 0) {
+            $profile_image = $_FILES['profile_image'];
+            $allow = array('jpg', 'jpeg', 'png');
+            $file_extension = strtolower(pathinfo($profile_image['name'], PATHINFO_EXTENSION));
+            $fileNew = uniqid() . "." . $file_extension;  // สร้างชื่อไฟล์ที่ไม่ซ้ำ
+            $filePath = $target_dir . $fileNew;
+
+            if (in_array($file_extension, $allow)) {
+                if ($profile_image['size'] > 0 && $profile_image['error'] == 0) {
+                    if (move_uploaded_file($profile_image['tmp_name'], $filePath)) {
+                        $file_paths['profile_image'] = htmlspecialchars($fileNew);
+                    } else {
+                        echo "เกิดข้อผิดพลาดในการอัปโหลดไฟล์ profile_image.";
+                        $uploadOk = 0;
+                    }
+                }
+            } else {
+                echo "ไฟล์ต้องเป็น JPG, JPEG หรือ PNG เท่านั้น.";
+                $uploadOk = 0;
+            }
+        }
+
+        // บันทึกข้อมูลไฟล์ลงในฐานข้อมูลถ้ามีการอัปโหลดไฟล์สำเร็จ
+        if ($uploadOk == 1 && !empty($file_paths)) {
+            try {
+                $sql = "UPDATE applicant 
+                        SET profile_image = :profile_image 
+                        WHERE User_ID = :user_id";
+                $stmt = $conn->prepare($sql);
+
+                $stmt->execute([
+                    ':profile_image' => $file_paths['profile_image'] ?? null,
+                    ':user_id' => $user_id
+                ]);
+
+                echo "ข้อมูลและไฟล์ได้ถูกอัปเดตเรียบร้อยแล้ว.";
+            } catch (PDOException $e) {
+                echo "Database Error: " . htmlspecialchars($e->getMessage());
+            }
+        } else {
+            echo "ไฟล์ไม่ได้ถูกอัปโหลด.";
+        }
+
+        // ตั้งข้อความสำเร็จในเซสชันและเปลี่ยนเส้นทางไปยังหน้าที่ต้องการ
+        $_SESSION['success'] = "Data and files have been inserted or updated successfully";
         header("Location: ../Current_address.php");
         exit();
     } catch (PDOException $e) {
-        // กำหนดข้อความข้อผิดพลาดในเซสชันและเปลี่ยนเส้นทางกลับไปที่หน้าที่อยู่ปัจจุบัน
+        // ตั้งข้อความข้อผิดพลาดในเซสชันและเปลี่ยนเส้นทางกลับไปที่หน้าที่อยู่ปัจจุบัน
         $_SESSION['error'] = "Database Error: " . $e->getMessage();
         header("Location: ../Personal_info.php");
         exit();
     }
 }
+
+$conn = null; // ปิดการเชื่อมต่อฐานข้อมูล
 ?>

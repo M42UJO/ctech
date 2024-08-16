@@ -116,7 +116,7 @@ try {
 
             <div class="panel-body">
 
-                <form id="personal-info-form" class="row g-3 mt-2" action="config/insertPersonal_info.php" method="post">
+                <form id="personal-info-form" class="row g-3 mt-2" action="config/insertPersonal_info.php" method="post" enctype="multipart/form-data">
                     <div class="panel-heading">ข้อมูลส่วนตัว</div>
                     <div class="col-md-2">
                         <label for="prefix" class="form-label">คำนำหน้า <span class="required">**</span></label>
@@ -256,11 +256,13 @@ try {
                     <div class="col-md-3">
                         <label for="facebook" class="form-label">Facebook</label>
                         <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"];?>">
+                        <input type="text" hidden  class="form-control"  name="User_ID" value="<?php echo $Data_view["User_ID"];?>">
+                        <input type="hidden"  class="form-control"  name="profile_image2" value="<?php echo $Data_view["profile_image"];?>">
                     </div>
                     <div class="col-md-6">
                         <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
-                        <input type="file" id="imgInput" class="form-control" name="profile_image" value="<?php echo $Data_view["profile_image"];?>" accept=".jpg" >
-                        <img id="previewImg" width="50%" alt="">
+                        <input type="file" id="imgInput" class="form-control" name="profile_image" accept=".jpg" >
+                        <img id="previewImg" src="config/uploads/<?php echo $Data_view["profile_image"];?>" width="50%" alt="">
                     </div>
                     <div class="col-md-2">
                         <button type="button" class="btn btn-warning w-100 py-2 btn-custom" onclick="window.history.back()">
