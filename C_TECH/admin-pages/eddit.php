@@ -85,6 +85,9 @@ require_once("../config/db.php");
             </nav>
         </div>
         <div id="layoutSidenav_content">
+
+            <!-- mainnnnnnnnnnnnnnnnnnnnnnnnn -->
+
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="">Edit data</h1>
@@ -95,585 +98,523 @@ require_once("../config/db.php");
 
                         <div class="panel-body">
 
-                            <form id="personal-info-form" class="row g-3 mt-2" action="#" method="get">
+                            <form id="personal-info-form" class="row g-3 mt-2" action="eddit.php" method="post" enctype="multipart/form-data">
+                           
+                                <?php
+                                    if (isset($_GET['user_id'])) {
+                                            $User_ID = $_GET['user_id'];
+                                            $stmt = $conn->query("SELECT * FROM applicant WHERE user_id = $User_ID");
+                                            $stmt->execute();
+                                            $data = $stmt->fetch();
+                                    }
+                                ?>
+
+
                                 <div class="panel-heading">ข้อมูลส่วนตัว</div>
                                 <div class="col-md-2">
                                     <label for="prefix" class="form-label">คำนำหน้า <span class="required">**</span></label>
-                                    <select id="prefix" class="form-select" required>
+                                    <select id="prefix" class="form-select" name="prefix" required>
                                         <option value="">==เลือก==</option>
-                                        <option value="Mr">นาย</option>
-                                        <option value="Mrs">นาง</option>
-                                        <option value="Ms">นางสาว</option>
+                                        <option value="Mr" <?php echo ($data["prefix"] == "Mr") ? 'selected' : ''; ?>>นาย</option>
+                                        <option value="Mrs" <?php echo ($data["prefix"] == "Mrs") ? 'selected' : ''; ?>>นาง</option>
+                                        <option value="Ms" <?php echo ($data["prefix"] == "Ms") ? 'selected' : ''; ?>>นางสาว</option>
                                     </select>
+
                                 </div>
                                 <div class="col-md-3">
                                     <label for="first-name" class="form-label">ชื่อ <span class="required">**</span></label>
-                                    <input type="text" id="first-name" class="form-control" placeholder="ชื่อ" name="name" required>
+                                    <input type="text" id="first-name" class="form-control" placeholder="ชื่อ" name="name" value="<?php echo $data["name"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="last-name" class="form-label">สกุล <span class="required">**</span></label>
-                                    <input type="text" id="last-name" class="form-control" placeholder="สกุล" name="lastname" required>
+                                    <input type="text" id="last-name" class="form-control" placeholder="สกุล" name="lastname" value="<?php echo $data["lastname"]; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="full-name-eng" class="form-label">ชื่อ - สกุล อังกฤษ <span class="required">**</span></label>
-                                    <input type="text" id="full-name-eng" class="form-control" placeholder="ชื่อ - สกุล อังกฤษ" name="eng_name" required>
+                                    <input type="text" id="full-name-eng" class="form-control" placeholder="ชื่อ - สกุล อังกฤษ" name="eng_name" value="<?php echo $data["eng_name"]; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="id-number" class="form-label">เลขบัตรประชาชน <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                    <input type="text" class="form-control" id="thai-id" maxlength="17" oninput="formatThaiID(this)" placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" required>
+                                    <input type="text" class="form-control" id="thai-id" maxlength="17" placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $data["id_card_number"]; ?>" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="nickname" class="form-label">ชื่อเล่น</label>
-                                    <input type="text" id="nickname" class="form-control" placeholder="ชื่อเล่น" name="nickname">
+                                    <input type="text" id="nickname" class="form-control" placeholder="ชื่อเล่น" name="nickname" value="<?php echo $data["nickname"]; ?>">
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="birth-day" class="form-label">วันเกิด <span class="required">**</span></label>
-                                    <select id="birth-day" class="form-select" name="birth-date" required>
+                                    <label for="birth_day" class="form-label">วันเกิด <span class="required">**</span></label>
+                                    <select id="birth_day" class="form-select" name="birth_day" required>
                                         <option value="">==เลือก==</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                        <!-- Options for days -->
+                                        <?php
+                                        for ($i = 1; $i <= 31; $i++) {
+                                            $selected = ($data["birth_day"] == $i) ? 'selected' : '';
+                                            echo "<option value=\"$i\" $selected>$i</option>";
+                                        }
+                                        ?>
                                     </select>
+
                                 </div>
                                 <div class="col-md-2">
                                     <label for="birth-month" class="form-label">เดือนเกิด <span class="required">**</span></label>
-                                    <select id="birth-month" class="form-select" name="birth-date" required>
+                                    <select id="birth-month" class="form-select" name="birth_month" required>
                                         <option value="">==เลือก==</option>
-                                        <option value="01">มกราคม</option>
-                                        <option value="02">กุมภาพันธ์</option>
-                                        <option value="03">มีนาคม</option>
-                                        <option value="04">เมษายน</option>
-                                        <option value="05">พฤษภาคม</option>
-                                        <option value="06">มิถุนายน</option>
-                                        <option value="07">กรกฎาคม</option>
-                                        <option value="08">สิงหาคม</option>
-                                        <option value="09">กันยายน</option>
-                                        <option value="10">ตุลาคม</option>
-                                        <option value="11">พฤศจิกายน</option>
-                                        <option value="12">ธันวาคม</option>
-                                        <!-- Options for months -->
+                                        <?php
+                                        $months = [
+                                            "01" => "มกราคม",
+                                            "02" => "กุมภาพันธ์",
+                                            "03" => "มีนาคม",
+                                            "04" => "เมษายน",
+                                            "05" => "พฤษภาคม",
+                                            "06" => "มิถุนายน",
+                                            "07" => "กรกฎาคม",
+                                            "08" => "สิงหาคม",
+                                            "09" => "กันยายน",
+                                            "10" => "ตุลาคม",
+                                            "11" => "พฤศจิกายน",
+                                            "12" => "ธันวาคม"
+                                        ];
+
+                                        foreach ($months as $value => $label) {
+                                            $selected = ($data["birth_month"] == $value) ? 'selected' : '';
+                                            echo "<option value=\"$value\" $selected>$label</option>";
+                                        }
+                                        ?>
                                     </select>
+
                                 </div>
                                 <div class="col-md-2">
                                     <label for="birth-year" class="form-label">ปีเกิด <span class="required">**</span></label>
-                                    <select id="birth-year" class="form-select" name="birth-date" required>
+                                    <select id="birth-year" class="form-select" name="birth_year" required>
                                         <option value="">==เลือก==</option>
-                                        <option value="2510">2510</option>
-                                        <option value="2511">2511</option>
-                                        <option value="2512">2512</option>
-                                        <option value="2513">2513</option>
-                                        <option value="2514">2514</option>
-                                        <option value="2515">2515</option>
-                                        <option value="2516">2516</option>
-                                        <option value="2517">2517</option>
-                                        <option value="2518">2518</option>
-                                        <option value="2519">2519</option>
-                                        <option value="2520">2520</option>
-                                        <option value="2521">2521</option>
-                                        <option value="2522">2522</option>
-                                        <option value="2523">2523</option>
-                                        <option value="2524">2524</option>
-                                        <option value="2525">2525</option>
-                                        <option value="2526">2526</option>
-                                        <option value="2527">2527</option>
-                                        <option value="2528">2528</option>
-                                        <option value="2529">2529</option>
-                                        <option value="2530">2530</option>
-                                        <option value="2531">2531</option>
-                                        <option value="2532">2532</option>
-                                        <option value="2533">2533</option>
-                                        <option value="2534">2534</option>
-                                        <option value="2535">2535</option>
-                                        <option value="2536">2536</option>
-                                        <option value="2537">2537</option>
-                                        <option value="2538">2538</option>
-                                        <option value="2539">2539</option>
-                                        <option value="2540">2540</option>
-                                        <option value="2541">2541</option>
-                                        <option value="2542">2542</option>
-                                        <option value="2543">2543</option>
-                                        <option value="2544">2544</option>
-                                        <option value="2545">2545</option>
-                                        <option value="2546">2546</option>
-                                        <option value="2547">2547</option>
-                                        <option value="2548">2548</option>
-                                        <option value="2549">2549</option>
-                                        <option value="2550">2550</option>
-                                        <option value="2551">2551</option>
-                                        <option value="2552">2552</option>
-                                        <option value="2553">2553</option>
-                                        <option value="2554">2554</option>
-                                        <option value="2555">2555</option>
-                                        <option value="2556">2556</option>
-                                        <option value="2557">2557</option>
-                                        <option value="2558">2558</option>
-                                        <option value="2559">2559</option>
-                                        <option value="2560">2560</option>
-                                        <!-- Options for years -->
+                                        <?php
+                                        $currentYear = date("Y") + 543; // ปีปัจจุบันในปฏิทินไทย
+                                        $startYear = 2510; // ปีเริ่มต้นที่ต้องการแสดง
+                                        $endYear = 2560; // ปีสิ้นสุดที่ต้องการแสดง
+
+                                        for ($year = $currentYear; $year >= $startYear; $year--) {
+                                            $selected = ($data["birth_year"] == $year) ? 'selected' : '';
+                                            echo "<option value=\"$year\" $selected>$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="blood-group" class="form-label">กรุ๊ปเลือด <span class="required">**</span></label>
+                                    <select id="blood-group" class="form-select" name="blood_group" required>
+                                        <option value="">==เลือก==</option>
+                                        <option value="A" <?php echo ($data["blood_group"] == "A") ? 'selected' : ''; ?>>A</option>
+                                        <option value="B" <?php echo ($data["blood_group"] == "B") ? 'selected' : ''; ?>>B</option>
+                                        <option value="AB" <?php echo ($data["blood_group"] == "AB") ? 'selected' : ''; ?>>AB</option>
+                                        <option value="O" <?php echo ($data["blood_group"] == "O") ? 'selected' : ''; ?>>O</option>
                                     </select>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="group-code" class="form-label">กรุ๊ปเลือด <span class="required">**</span></label>
-                                    <input type="text" id="group-code" class="form-control" placeholder="กรุ๊ปเลือด" name="blood_group" required>
-                                </div>
+
                                 <div class="col-md-2">
                                     <label for="height" class="form-label">ส่วนสูง <span class="required">**</span></label>
-                                    <input type="number" id="height" class="form-control" min="0" placeholder="ส่วนสูง" name="height" required>
+                                    <input type="number" id="height" class="form-control" min="0" placeholder="ส่วนสูง" name="height" value="<?php echo $data["height"]; ?>" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="weight" class="form-label">น้ำหนัก <span class="required">**</span></label>
-                                    <input type="number" id="weight" class="form-control" min="0" placeholder="น้ำหนัก" name="weight" required>
+                                    <input type="number" id="weight" class="form-control" min="0" placeholder="น้ำหนัก" name="weight" value="<?php echo $data["weight"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="nationality" class="form-label">เชื้อชาติ <span class="required">**</span></label>
-                                    <input type="text" id="nationality" class="form-control" placeholder="เชื้อชาติ" name="nationality" required>
+                                    <input type="text" id="nationality" class="form-control" placeholder="เชื้อชาติ" name="nationality" value="<?php echo $data["nationality"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="citizenship" class="form-label">สัญชาติ <span class="required">**</span></label>
-                                    <input type="text" id="citizenship" class="form-control" placeholder="สัญชาติ" name="citizenship" required>
+                                    <input type="text" id="citizenship" class="form-control" placeholder="สัญชาติ" name="citizenship" value="<?php echo $data["citizenship"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="religion" class="form-label">ศาสนา <span class="required">**</span></label>
-                                    <input type="text" id="religion" class="form-control" placeholder="ศาสนา" name="religion" required>
+                                    <input type="text" id="religion" class="form-control" placeholder="ศาสนา" name="religion" value="<?php echo $data["religion"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="siblings" class="form-label">จำนวนพี่น้อง <span class="required">**</span></label>
-                                    <input type="number" id="siblings" class="form-control" min="0" placeholder="จำนวนพี่น้อง" name="siblings_count" required>
+                                    <input type="number" id="siblings" class="form-control" min="0" placeholder="จำนวนพี่น้อง" name="siblings_count" value="<?php echo $data["siblings_count"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="current-siblings" class="form-label">จำนวนพี่น้องที่กำลังศึกษาอยู่ <span class="required">**</span></label>
-                                    <input type="number" id="current-siblings" class="form-control" min="0" placeholder="จำนวนพี่น้องที่กำลังศึกษาอยู่" name="studying_siblings_count" required>
+                                    <input type="number" id="current-siblings" class="form-control" min="0" placeholder="จำนวนพี่น้องที่กำลังศึกษาอยู่" name="studying_siblings_count" value="<?php echo $data["studying_siblings_count"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="phone" class="form-label">เบอร์โทร <span class="required">**</span></label>
-                                    <input type="tel" id="phone" class="form-control" name="phone_number" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
+                                    <input type="tel" id="phone" class="form-control" name="phone_number" value="<?php echo $data["phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="xxx-xxx-xxxx">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="line-id" class="form-label">LineID</label>
-                                    <input type="text" id="line-id" class="form-control" placeholder="LineID" name="line_id">
+                                    <input type="text" id="line-id" class="form-control" placeholder="LineID" name="line_id" value="<?php echo $data["line_id"]; ?>">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="facebook" class="form-label">Facebook</label>
-                                    <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook">
+                                    <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $data["facebook"]; ?>">
+                                    <input type="text" hidden class="form-control" name="User_ID" value="<?php echo $data["User_ID"]; ?>">
+                                    <input type="hidden" class="form-control" name="profile_image2" value="<?php echo $data["profile_image"]; ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
-                                    <input type="file" id="photo" class="form-control" name="Profile_image" accept=".jpg" required>
+                                    <input type="file" id="imgInput" class="form-control" name="profile_image" accept=".jpg,.jpeg,.png">
+                                    <img id="previewImg" src="config/uploads/<?php echo $data["profile_image"]; ?>" width="50%" alt="">
                                 </div>
+
+
+
+
+                                <div class="panel-heading mt-5">ที่อยู่ปัจจุบัน</div>
+                                <div class="col-md-2">
+                                    <label class="form-label">บ้านเลขที่ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="house_number" value="<?php echo $Data_view["house_number"]; ?>" required>
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label">หมู่ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="หมู่ " name="village" value="<?php echo $Data_view["village"]; ?>" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">ซอย </label>
+                                    <input class="form-control " type="text " placeholder="ซอย " name="lane" value="<?php echo $Data_view["lane"]; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">ถนน </label>
+                                    <input class="form-control " type="text " placeholder="ถนน " name="road" value="<?php echo $Data_view["road"]; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">ตำบล <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="sub_district" value="<?php echo $Data_view["sub_district"]; ?>" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">อำเภอ <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="district" value="<?php echo $Data_view["district"]; ?>" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">จังหวัด <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="province" value="<?php echo $Data_view["province"]; ?>" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="postal_code" maxlength="5" value="<?php echo $Data_view["postal_code"]; ?>" required>
+                                </div>
+
+
+
+
+
+
+
+                                <div class="panel-heading mt-5">ข้อมูลการศึกษา</div>
+                                <div class="col-md-8">
+                                    <label class="form-label">จบจากโรงเรียน <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="จบจากโรงเรียน " name="school_name" value="<?php echo $Data_view["school_name"]; ?>" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">ตำบล <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="school_sub_district" value="<?php echo $Data_view["school_sub_district"]; ?>" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">อำเภอ <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="school_district" value="<?php echo $Data_view["school_district"]; ?>" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">จังหวัด <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="school_province" value="<?php echo $Data_view["school_province"]; ?>" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="school_postal_code" value="<?php echo $Data_view["school_postal_code"]; ?>" maxlength="5 " required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">จบเมื่อ พ.ศ. <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="graduation_year" value="<?php echo $Data_view["graduation_year"]; ?>" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">ผลการเรียน <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="ผลการเรียน " name="grade_result" value="<?php echo $Data_view["grade_result"]; ?>" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">ระดับชั้น <span class="required">**</span></label>
+                                    <select class="form-select" name="class_level" required>
+                                        <option value="">==เลือก==</option>
+                                        <option value="ม.3" <?php echo ($Data_view["class_level"] == "ม.3") ? 'selected' : ''; ?>>ม.3</option>
+                                        <option value="ม.6" <?php echo ($Data_view["class_level"] == "ม.6") ? 'selected' : ''; ?>>ม.6</option>
+                                        <option value="ปวช." <?php echo ($Data_view["class_level"] == "ปวช.") ? 'selected' : ''; ?>>ปวช.</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">สาขาวิชา </label>
+                                    <input type="text " class="form-control " placeholder="สาขาวิชา" name="major" value="<?php echo $Data_view["major"]; ?>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">วุฒิการศึกษาอื่นๆ </label>
+                                    <input type="text " class="form-control " placeholder="วุฒิการศึกษาอื่นๆ" name="degree_other" value="<?php echo $Data_view["degree_other"]; ?>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">สาขาวิชา </label>
+                                    <input type="text " class="form-control " placeholder="สาขาวิชา " name="major_other" value="<?php echo $Data_view["major_other"]; ?>">
+                                </div>
+
+
+
+
+
+
+
+                                <div class="panel-heading mt-5">ข้อมูลบิดา</div>
+                                <div class="col-md-4">
+                                    <label class="form-label">บิดาชื่อ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="บิดาชื่อ" name="father_name" value="<?php echo $Data_view["father_name"]; ?>" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">สถานะ <span class="required">**</span></label>
+                                    <select class="form-control" name="father_status" required>
+                                        <option value="">==เลือก==</option>
+                                        <option value="มีชีวิต" <?php echo ($Data_view["father_status"] == "มีชีวิต") ? 'selected' : ''; ?>>มีชีวิต</option>
+                                        <option value="เสียชีวิต" <?php echo ($Data_view["father_status"] == "เสียชีวิต") ? 'selected' : ''; ?>>เสียชีวิต</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">อาชีพ <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="อาชีพ " name="father_occupation" value="<?php echo $Data_view["father_occupation"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">รายได้/เดือน <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="รายได้/เดือน " name="father_income" value="<?php echo $Data_view["father_income"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">บ้านเลขที่ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="father_house_number" value="<?php echo $Data_view["father_house_number"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="form-label">หมู่ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="หมู่ " name="father_village" value="<?php echo $Data_view["father_village"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">ซอย </label>
+                                    <input class="form-control " type="text " placeholder="ซอย " name="father_lane" value="<?php echo $Data_view["father_lane"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">ถนน </label>
+                                    <input class="form-control " type="text " placeholder="ถนน " name="father_road" value="<?php echo $Data_view["father_road"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">ตำบล <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="father_sub_district" value="<?php echo $Data_view["father_sub_district"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">อำเภอ <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="father_district" value="<?php echo $Data_view["father_district"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">จังหวัด <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="father_province" value="<?php echo $Data_view["father_province"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="father_postal_code" value="<?php echo $Data_view["father_postal_code"]; ?>" maxlength="5 " required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="phone" class="form-label">เบอร์โทรบิดา<span class="required">**</span></label>
+                                    <input type="tel" id="phone" class="form-control" name="father_phone_number" value="<?php echo $Data_view["father_phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
+                                </div>
+
+
+
+
+
+
+
+                                <div class="panel-heading mt-5">ข้อมูลมารดา</div>
+                                <div class="col-md-4">
+                                    <label for="prefix" class="form-label">มารดาชื่อ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="มารดาชื่อ " name="mother_name" value="<?php echo $Data_view["mother_name"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="first-name" class="form-label">สถานะ <span class="required">**</span></label>
+                                    <select class="form-control" name="mother_status" required>
+                                        <option value="">==เลือก==</option>
+                                        <option value="มีชีวิต" <?php echo ($Data_view["mother_status"] == "มีชีวิต") ? 'selected' : ''; ?>>มีชีวิต</option>
+                                        <option value="เสียชีวิต" <?php echo ($Data_view["mother_status"] == "เสียชีวิต") ? 'selected' : ''; ?>>เสียชีวิต</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="last-name" class="form-label">อาชีพ <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="อาชีพ " name="mother_occupation" value="<?php echo $Data_view["mother_occupation"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="full-name-eng" class="form-label">รายได้/เดือน <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="รายได้/เดือน " name="mother_income" value="<?php echo $Data_view["mother_income"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="prefix" class="form-label">บ้านเลขที่ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="mother_house_number" value="<?php echo $Data_view["mother_house_number"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="prefix" class="form-label">หมู่ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="หมู่ " name="mother_village" value="<?php echo $Data_view["mother_village"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="prefix" class="form-label">ซอย </label>
+                                    <input class="form-control " type="text " placeholder="ซอย " name="mother_lane" value="<?php echo $Data_view["mother_lane"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="prefix" class="form-label">ถนน </label>
+                                    <input class="form-control " type="text " placeholder="ถนน " name="mother_road" value="<?php echo $Data_view["mother_road"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="first-name" class="form-label">ตำบล <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="mother_sub_district" value="<?php echo $Data_view["mother_sub_district"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="last-name" class="form-label">อำเภอ <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="mother_district" value="<?php echo $Data_view["mother_district"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="full-name-eng" class="form-label">จังหวัด <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="mother_province" value="<?php echo $Data_view["mother_province"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="id-number" class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="mother_postal_code" value="<?php echo $Data_view["mother_postal_code"]; ?>" maxlength="5 " required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="phone" class="form-label">เบอร์โทรมารดา<span class="required">**</span></label>
+                                    <input type="tel" id="phone" class="form-control" name="mother_phone_number" value="<?php echo $Data_view["mother_phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
+                                </div>
+
+
+
+
+
+
+
+                                <div class="panel-heading mt-5">ข้อมูลผู้ปกครอง</div>
+                                <div class="col-md-8">
+                                    <label for="prefix" class="form-label">ผู้ปกครอง<span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="ชื่อผู้ปกครอง " name="guardian_name" value="<?php echo $Data_view["guardian_name"]; ?>" required=" ">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="last-name" class="form-label">ความสัมพันธ์ <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="ความสัมพันธ์ " name="guardian_relationship" value="<?php echo $Data_view["guardian_relationship"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="prefix" class="form-label">บ้านเลขที่ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="guardian_house_number" value="<?php echo $Data_view["guardian_house_number"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="prefix" class="form-label">หมู่ <span class="required">**</span></label>
+                                    <input class="form-control " type="text " placeholder="หมู่ " name="guardian_village" value="<?php echo $Data_view["guardian_village"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="prefix" class="form-label">ซอย </label>
+                                    <input class="form-control " type="text " placeholder="ซอย " name="guardian_lane" value="<?php echo $Data_view["guardian_lane"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="prefix" class="form-label">ถนน </label>
+                                    <input class="form-control " type="text " placeholder="ถนน " name="guardian_road" value="<?php echo $Data_view["guardian_road"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="first-name" class="form-label">ตำบล <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="guardian_sub_district" value="<?php echo $Data_view["guardian_sub_district"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="last-name" class="form-label">อำเภอ <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="guardian_district" value="<?php echo $Data_view["guardian_district"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="full-name-eng" class="form-label">จังหวัด <span class="required">**</span></label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="guardian_province" value="<?php echo $Data_view["guardian_province"]; ?>" required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="id-number" class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="guardian_postal_code" value="<?php echo $Data_view["guardian_postal_code"]; ?>" maxlength="5 " required=" ">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="phone" class="form-label">เบอร์โทรผู้ปกครอง<span class="required">**</span></label>
+                                    <input type="tel" id="phone" class="form-control" name="guardian_phone_number" value="<?php echo $Data_view["guardian_phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
+                                </div>
+
+
+
+
+
+                                <div class="panel-heading mt-5">ต้องการศึกษา</div>
+
+                                <div class="row mt-5">
+                                    <div class="col-lg-3">
+                                        <label class="form-label">ประเภทของหลักสูตร <span class="required">**</span></label>
+                                        <select id="CourseType_Name" name="CourseType_Name" class="form-control" required>
+                                            <option value="">เลือกประเภทของหลักสูตร</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label class="form-label">ระดับการศึกษา <span class="required">**</span></label>
+                                        <select id="Level_Name" name="Level_Name" class="form-control" required>
+                                            <option value="">เลือกระดับการศึกษา</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label class="form-label">ประเภทวิชา <span class="required">**</span></label>
+                                        <select id="Type_Name" name="Type_Name" class="form-control" required>
+                                            <option value="">เลือกประเภทวิชา</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label class="form-label">สาขาวิชา <span class="required">**</span></label>
+                                        <select id="Major_Name" name="Major_Name" class="form-control" required>
+                                            <option value="">เลือกสาขาวิชา</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                                <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
+                                <label id="announce" class="">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา<br> Chanapolkhan Technological College, Nakhon Ratchasima</label>
+                                <label id="announce" class="">กรุณาชำระค่าแรกเข้า จำนวน <span class="highlight">2,000</span> บาท หลังจากกรอกข้อมูลครบถ้วน</label>
+                                <label id="announce" class="">ยอดเงินนี้จะถูกนำไปเป็นส่วนลดค่าเทอมของนักศึกษา</label>
+                                <label id="announce" class="mb-5">โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์<br>เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span> </label>
+
+                                <div class="col-md-3">
+                                    <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
+                                    <img id="previewImg1" width="50%" alt="">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
+                                    <img id="previewImg2" width="50%" alt="">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
+                                    <img id="previewImg3" width="50%" alt="">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
+                                    <img id="previewImg4" width="50%" alt="">
+                                </div>
+                                <div>
+                                    <button href="eddit.php" class="btn btn-primary" name="update">update</button>
+                                </div>
+
 
                             </form>
-                            <div class="panel panel-default mb-5">
-
-                                <div class="panel-body">
-
-
-                                    <form id="personal-info-form" class="row g-2 mt-2">
-                                        <div class="panel-heading">ที่อยู่ปัจจุบัน</div>
-                                        <div class="col-md-2">
-                                            <label class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                                            <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="house_number " required=" ">
-                                        </div>
-                                        <div class="col-md-1">
-                                            <label class="form-label">หมู่ <span class="required">**</span></label>
-                                            <input class="form-control " type="text " placeholder="หมู่ " name="village " required=" ">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">ซอย </label>
-                                            <input class="form-control " type="text " placeholder="ซอย " name="lane ">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">ถนน </label>
-                                            <input class="form-control " type="text " placeholder="ถนน " name="road ">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="form-label">ตำบล <span class="required">**</span></label>
-                                            <input type="text " class="form-control " placeholder="ตำบล " name="sub_district " required=" ">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label">อำเภอ <span class="required">**</span></label>
-                                            <input type="text " class="form-control " placeholder="อำเภอ " name="district " required=" ">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label">จังหวัด <span class="required">**</span></label>
-                                            <input type="text " class="form-control " placeholder="จังหวัด " name="province " required=" ">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                            <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="postal_code " maxlength="5 " required=" ">
-                                        </div>
-
-                                    </form>
-                                    <div class="panel panel-default mb-5">
-
-                                        <div class="panel-body">
-
-
-                                            <form id="personal-info-form" class="row g-2 mt-2">
-                                                <div class="panel-heading">ข้อมูลการศึกษา</div>
-                                                <div class="col-md-8">
-                                                    <label class="form-label">จบจากโรงเรียน <span class="required">**</span></label>
-                                                    <input class="form-control " type="text " placeholder="จบจากโรงเรียน " name="school_name " required=" ">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">ตำบล <span class="required">**</span></label>
-                                                    <input type="text " class="form-control " placeholder="ตำบล " name="school_sub_district " required=" ">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">อำเภอ <span class="required">**</span></label>
-                                                    <input type="text " class="form-control " placeholder="อำเภอ " name="school_district " required=" ">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">จังหวัด <span class="required">**</span></label>
-                                                    <input type="text " class="form-control " placeholder="จังหวัด " name="school_province " required=" ">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="school_postal_code " maxlength="5 " required=" ">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="form-label">จบเมื่อ พ.ศ. <span class="required">**</span></label>
-                                                    <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="graduation_year " required=" ">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="form-label">ผลการเรียน <span class="required">**</span></label>
-                                                    <input type="text " class="form-control " placeholder="ผลการเรียน " name="grade_result " required=" ">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="form-label">ระดับชั้น <span class="required">**</span></label>
-                                                    <select class="form-control " name="class_level " required=" ">
-                                                        <option value=" ">==เลือก==</option>
-                                                        <option value="ม.3 ">ม.3</option>
-                                                        <option value="ม.6 ">ม.6</option>
-                                                        <option value="ปวช. ">ปวช.</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label">สาขาวิชา </label>
-                                                    <input type="text " class="form-control " placeholder="สาขาวิชา " name="major ">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label">วุฒิการศึกษาอื่นๆ </label>
-                                                    <input type="text " class="form-control " placeholder="วุฒิการศึกษาอื่นๆ " name="degree_other ">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label">สาขาวิชา </label>
-                                                    <input type="text " class="form-control " placeholder="สาขาวิชา " name="major_other ">
-                                                </div>
-
-
-                                            </form>
-                                            <div class="panel panel-default mb-5">
-
-                                                <div class="panel-body">
-
-
-                                                    <form id="personal-info-form" class="row g-2 mt-2">
-                                                        <div class="panel-heading">ข้อมูลบิดา</div>
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">บิดาชื่อ <span class="required">**</span></label>
-                                                            <input class="form-control " type="text " placeholder="โรงเรียน " name="father_name " required=" ">
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <label class="form-label">สถานะ <span class="required">**</span></label>
-                                                            <select class="form-control " name="father_status " required=" ">
-                                                                <option value=" ">==เลือก==</option>
-                                                                <option value="มีชีวิต ">มีชีวิต</option>
-                                                                <option value="เสียชีวิต ">เสียชีวิต</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label class="form-label">อาชีพ <span class="required">**</span></label>
-                                                            <input type="text " class="form-control " placeholder="อาชีพ " name="father_occupation " required=" ">
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label class="form-label">รายได้/เดือน <span class="required">**</span></label>
-                                                            <input type="text " class="form-control " placeholder="รายได้/เดือน " name="father_income " required=" ">
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <label class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                                                            <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="father_address " required=" ">
-                                                        </div>
-                                                        <div class="col-md-1">
-                                                            <label class="form-label">หมู่ <span class="required">**</span></label>
-                                                            <input class="form-control " type="text " placeholder="หมู่ " name="father_address " required=" ">
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label class="form-label">ซอย </label>
-                                                            <input class="form-control " type="text " placeholder="ซอย " name="father_address " required=" ">
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label class="form-label">ถนน </label>
-                                                            <input class="form-control " type="text " placeholder="ถนน " name="father_address " required=" ">
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label class="form-label">ตำบล <span class="required">**</span></label>
-                                                            <input type="text " class="form-control " placeholder="ตำบล " name="father_address " required=" ">
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label class="form-label">อำเภอ <span class="required">**</span></label>
-                                                            <input type="text " class="form-control " placeholder="อำเภอ " name="father_address " required=" ">
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label class="form-label">จังหวัด <span class="required">**</span></label>
-                                                            <input type="text " class="form-control " placeholder="จังหวัด " name="father_address " required=" ">
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                                            <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="father_address " maxlength="5 " required=" ">
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <label for="phone" class="form-label">เบอร์โทรบิดา<span class="required">**</span></label>
-                                                            <input type="tel" id="phone" class="form-control" name="father_phone_number" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
-                                                        </div>
-
-
-                                                    </form>
-                                                    <div class="panel panel-default">
-
-                                                        <div class="panel-body">
-
-
-                                                            <form id="personal-info-form" class="row g-2 mt-2">
-                                                                <div class="panel-heading">ข้อมูลมารดา</div>
-                                                                <div class="col-md-4">
-                                                                    <label for="prefix" class="form-label">มารดาชื่อ <span class="required">**</span></label>
-                                                                    <input class="form-control " type="text " placeholder="มารดาชื่อ " name="mother_name " required=" ">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <label for="first-name" class="form-label">สถานะ <span class="required">**</span></label>
-                                                                    <select class="form-control " name="mother_status " required=" ">
-                                                                        <option value="">==เลือก==</option>
-                                                                        <option value="มีชีวิต ">มีชีวิต</option>
-                                                                        <option value="เสียชีวิต ">เสียชีวิต</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="last-name" class="form-label">อาชีพ <span class="required">**</span></label>
-                                                                    <input type="text " class="form-control " placeholder="อาชีพ " name="mother_occupation " required=" ">
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="full-name-eng" class="form-label">รายได้/เดือน <span class="required">**</span></label>
-                                                                    <input type="text " class="form-control " placeholder="รายได้/เดือน " name="mother_income " required=" ">
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <label for="prefix" class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                                                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="mother_address " required=" ">
-                                                                </div>
-                                                                <div class="col-md-1">
-                                                                    <label for="prefix" class="form-label">หมู่ <span class="required">**</span></label>
-                                                                    <input class="form-control " type="text " placeholder="หมู่ " name="mother_address " required=" ">
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="prefix" class="form-label">ซอย </label>
-                                                                    <input class="form-control " type="text " placeholder="ซอย " name="mother_address " required=" ">
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="prefix" class="form-label">ถนน </label>
-                                                                    <input class="form-control " type="text " placeholder="ถนน " name="mother_address " required=" ">
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="first-name" class="form-label">ตำบล <span class="required">**</span></label>
-                                                                    <input type="text " class="form-control " placeholder="ตำบล " name="mother_address " required=" ">
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="last-name" class="form-label">อำเภอ <span class="required">**</span></label>
-                                                                    <input type="text " class="form-control " placeholder="อำเภอ " name="mother_address " required=" ">
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="full-name-eng" class="form-label">จังหวัด <span class="required">**</span></label>
-                                                                    <input type="text " class="form-control " placeholder="จังหวัด " name="mother_address " required=" ">
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="id-number" class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="mother_address " maxlength="5 " required=" ">
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label for="phone" class="form-label">เบอร์โทรมารดา<span class="required">**</span></label>
-                                                                    <input type="tel" id="phone" class="form-control" name="mother_phone_number" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
-                                                                </div>
-
-
-                                                            </form>
-                                                            <div class="panel panel-default">
-
-                                                                <div class="panel-body">
-
-
-                                                                    <form id="personal-info-form" class="row g-2 mt-2">
-                                                                        <div class="panel-heading">ข้อมูลผู้ปกครองที่ไม่ใช่ บิดา-มารดา</div>
-                                                                        <div class="col-md-8">
-                                                                            <label for="prefix" class="form-label">ผู้ปกครองที่ไม่ใช่ บิดา-มารดา <span class="required">**</span></label>
-                                                                            <input class="form-control " type="text " placeholder="ข้อมูลผู้ปกครองที่ไม่ใช่ บิดา-มารดา " name="guardian_name " required=" ">
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                            <label for="last-name" class="form-label">ความสัมพันธ์ <span class="required">**</span></label>
-                                                                            <input type="text " class="form-control " placeholder="ความสัมพันธ์ " name="guardian_relationship " required=" ">
-                                                                        </div>
-                                                                        <div class="col-md-2">
-                                                                            <label for="prefix" class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                                                                            <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="guardian_address " required=" ">
-                                                                        </div>
-                                                                        <div class="col-md-1">
-                                                                            <label for="prefix" class="form-label">หมู่ <span class="required">**</span></label>
-                                                                            <input class="form-control " type="text " placeholder="หมู่ " name="guardian_address " required=" ">
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                            <label for="prefix" class="form-label">ซอย </label>
-                                                                            <input class="form-control " type="text " placeholder="ซอย " name="guardian_address " required=" ">
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                            <label for="prefix" class="form-label">ถนน </label>
-                                                                            <input class="form-control " type="text " placeholder="ถนน " name="guardian_address " required=" ">
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                            <label for="first-name" class="form-label">ตำบล <span class="required">**</span></label>
-                                                                            <input type="text " class="form-control " placeholder="ตำบล " name="guardian_address " required=" ">
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                            <label for="last-name" class="form-label">อำเภอ <span class="required">**</span></label>
-                                                                            <input type="text " class="form-control " placeholder="อำเภอ " name="guardian_address " required=" ">
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                            <label for="full-name-eng" class="form-label">จังหวัด <span class="required">**</span></label>
-                                                                            <input type="text " class="form-control " placeholder="จังหวัด " name="guardian_address " required=" ">
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                            <label for="id-number" class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                                                            <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="guardian_address " maxlength="5 " required=" ">
-                                                                        </div>
-                                                                        <div class="col-md-3">
-                                                                            <label for="phone" class="form-label">เบอร์โทรผู้ปกครอง<span class="required">**</span></label>
-                                                                            <input type="tel" id="phone" class="form-control" name="guardian_phone_number" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
-                                                                        </div>
-
-
-                                                                    </form>
-                                                                    <div class="panel panel-default">
-                                                                        <div class="panel-body">
-                                                                            <form id="personal-info-form" class="row g-2 mt-2">
-                                                                                <div class="panel-heading">ต้องการศึกษา</div>
-                                                                                <label class="form-label">ต้องการศึกษา <span class="required">**</span></label>
-                                                                                <div class="col-xs-12 col-md-3 mt-0">
-                                                                                    <div class="form-group ">
-                                                                                        <font id="part "><select name="part " class="form-control " onchange="dochange( 'level', this.value) " required=" ">
-                                                                                                <option value=" ">coursetype</option>
-
-                                                                                            </select>
-                                                                                        </font>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xs-12 col-md-3 mt-0">
-                                                                                    <div class="form-group ">
-                                                                                        <font id="level "><select name="level " class="form-control ">
-                                                                                                <option value=" ">educationlevel</option>
-                                                                                            </select></font>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xs-12 col-md-3 mt-0">
-                                                                                    <div class="form-group ">
-                                                                                        <font id="late "><select name="late " class="form-control ">
-                                                                                                <option value=" ">subjecttype</option>
-                                                                                            </select></font>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xs-12 col-md-3 mt-0">
-                                                                                    <div class="form-group ">
-                                                                                        <font id="subject "><select name="subject " class="form-control ">
-                                                                                                <option value=" ">major</option>
-                                                                                            </select></font>
-                                                                                    </div>
-                                                                                </div>
-
-
-
-
-                                                                            </form>
-                                                                            <div class="panel panel-default">
-
-                                                                                <div class="panel-body">
-
-
-                                                                                    <form id="personal-info-form" class="row g-2 mt-2">
-                                                                                        <div class="panel-heading">หลักฐานที่ใช้ในการสมัคร</div>
-                                                                                        
-                                                                                        <div class="col-md-3">
-                                                                                            <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg เท่านั้น</span></label>
-                                                                                            <input type="file" class="form-control" name="Profile_image" accept=".jpg" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg เท่านั้น</span></label>
-                                                                                            <input type="file" class="form-control" name="Profile_image" accept=".jpg" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg เท่านั้น</span></label>
-                                                                                            <input type="file" class="form-control" name="Profile_image" accept=".jpg" required>
-                                                                                        </div>
-                                                                                        <div class="col-md-3">
-                                                                                            <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg เท่านั้น</span></label>
-                                                                                            <input type="file" class="form-control" name="Profile_image" accept=".jpg" required>
-                                                                                        </div>
-
-
-
-                                                                                    </form>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
 
                         </div>
                     </div>
-
-
-            </main>
-
+                </div>
         </div>
+
+        </main>
+
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
@@ -682,6 +623,87 @@ require_once("../config/db.php");
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const courseTypeSelect = document.getElementById('CourseType_Name');
+            const levelSelect = document.getElementById('Level_Name');
+            const subjectTypeSelect = document.getElementById('Type_Name');
+            const majorSelect = document.getElementById('Major_Name');
+
+            const levels = <?php echo json_encode($levels); ?>;
+            const subjectTypes = <?php echo json_encode($subjectTypes); ?>;
+            const majors = <?php echo json_encode($majors); ?>;
+
+            // Populate initial dropdowns
+            populateSelect(courseTypeSelect, <?php echo json_encode($courseTypes); ?>, 'CourseType_ID', 'CourseType_Name');
+
+            // Event handler for changing courseType
+            courseTypeSelect.addEventListener('change', function() {
+                const selectedCourseType = this.value;
+                const filteredLevels = levels.filter(level => level.CourseType_ID == selectedCourseType);
+                populateSelect(levelSelect, filteredLevels, 'Level_ID', 'Level_Name');
+                clearSelect(subjectTypeSelect);
+                clearSelect(majorSelect);
+            });
+
+            // Event handler for changing level
+            levelSelect.addEventListener('change', function() {
+                const selectedLevel = this.value;
+                const filteredSubjectTypes = subjectTypes.filter(type => type.Level_ID == selectedLevel);
+                populateSelect(subjectTypeSelect, filteredSubjectTypes, 'Type_ID', 'Type_Name');
+                clearSelect(majorSelect);
+            });
+
+            // Event handler for changing subjectType
+            subjectTypeSelect.addEventListener('change', function() {
+                const selectedSubjectType = this.value;
+                const filteredMajors = majors.filter(major => major.Type_ID == selectedSubjectType);
+                populateSelect(majorSelect, filteredMajors, 'Major_ID', 'Major_Name');
+            });
+
+            // Set initial values
+            courseTypeSelect.value = '<?php echo $courseType; ?>';
+            const initialLevels = levels.filter(level => level.CourseType_ID == courseTypeSelect.value);
+            populateSelect(levelSelect, initialLevels, 'Level_ID', 'Level_Name');
+            levelSelect.value = '<?php echo $level; ?>';
+            const initialSubjectTypes = subjectTypes.filter(type => type.Level_ID == levelSelect.value);
+            populateSelect(subjectTypeSelect, initialSubjectTypes, 'Type_ID', 'Type_Name');
+            subjectTypeSelect.value = '<?php echo $subjectType; ?>';
+            const initialMajors = majors.filter(major => major.Type_ID == subjectTypeSelect.value);
+            populateSelect(majorSelect, initialMajors, 'Major_ID', 'Major_Name');
+            majorSelect.value = '<?php echo $major; ?>';
+        });
+
+        function populateSelect(selectElement, data, valueKey, textKey) {
+            selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>'; // Clear existing options
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[valueKey];
+                option.textContent = item[textKey];
+                selectElement.appendChild(option);
+            });
+        }
+
+        function clearSelect(selectElement) {
+            selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>';
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if ($guardianMissing): ?>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'ข้อมูลไม่ครบถ้วน',
+                    text: 'กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วน จึงสมัครได้',
+                    confirmButtonText: 'ตกลง',
+                    willClose: () => {
+                        window.location.href = 'Personal_info.php';
+                    }
+                });
+            <?php endif; ?>
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
