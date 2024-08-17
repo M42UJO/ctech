@@ -99,15 +99,45 @@ require_once("../config/db.php");
                         <div class="panel-body">
 
                             <form id="personal-info-form" class="row g-3 mt-2" action="eddit.php" method="post" enctype="multipart/form-data">
-                           
+
                                 <?php
-                                    if (isset($_GET['user_id'])) {
-                                            $User_ID = $_GET['user_id'];
-                                            $stmt = $conn->query("SELECT * FROM applicant WHERE user_id = $User_ID");
-                                            $stmt->execute();
-                                            $data = $stmt->fetch();
-                                    }
+                                if (isset($_GET['user_id'])) {
+                                    $User_ID = $_GET['user_id'];
+
+                                    // ปรับปรุง SQL Query เพื่อดึงข้อมูลจากหลายตาราง
+                                    $stmt = $conn->prepare("
+                                        SELECT 
+                                            u.*, 
+                                            p.*, 
+                                            f.*, 
+                                            e.*, 
+                                            c.*, 
+                                            a.*
+                                        FROM 
+                                            user u
+                                        LEFT JOIN 
+                                            parent_info p ON u.User_ID = p.User_ID
+                                        LEFT JOIN 
+                                            form f ON u.User_ID = f.User_ID
+                                        LEFT JOIN 
+                                            education_info e ON u.User_ID = e.User_ID
+                                        LEFT JOIN 
+                                            current_address c ON u.User_ID = c.User_ID
+                                        LEFT JOIN 
+                                            applicant a ON u.User_ID = a.User_ID
+                                        WHERE 
+                                            u.User_ID = :user_id
+                                    ");
+
+                                    // ใช้ prepare เพื่อความปลอดภัยจาก SQL Injection และ bind ค่า
+                                    $stmt->bindParam(':user_id', $User_ID, PDO::PARAM_INT);
+                                    $stmt->execute();
+
+                                    // ดึงข้อมูลทั้งหมดจากตารางที่เกี่ยวข้อง
+                                    $Data_view = $stmt->fetch(PDO::FETCH_ASSOC);
+                                }
                                 ?>
+
 
 
                                 <div class="panel-heading">ข้อมูลส่วนตัว</div>
@@ -115,31 +145,31 @@ require_once("../config/db.php");
                                     <label for="prefix" class="form-label">คำนำหน้า <span class="required">**</span></label>
                                     <select id="prefix" class="form-select" name="prefix" required>
                                         <option value="">==เลือก==</option>
-                                        <option value="Mr" <?php echo ($data["prefix"] == "Mr") ? 'selected' : ''; ?>>นาย</option>
-                                        <option value="Mrs" <?php echo ($data["prefix"] == "Mrs") ? 'selected' : ''; ?>>นาง</option>
-                                        <option value="Ms" <?php echo ($data["prefix"] == "Ms") ? 'selected' : ''; ?>>นางสาว</option>
+                                        <option value="Mr" <?php echo ($Data_view["prefix"] == "Mr") ? 'selected' : ''; ?>>นาย</option>
+                                        <option value="Mrs" <?php echo ($Data_view["prefix"] == "Mrs") ? 'selected' : ''; ?>>นาง</option>
+                                        <option value="Ms" <?php echo ($Data_view["prefix"] == "Ms") ? 'selected' : ''; ?>>นางสาว</option>
                                     </select>
 
                                 </div>
                                 <div class="col-md-3">
                                     <label for="first-name" class="form-label">ชื่อ <span class="required">**</span></label>
-                                    <input type="text" id="first-name" class="form-control" placeholder="ชื่อ" name="name" value="<?php echo $data["name"]; ?>" required>
+                                    <input type="text" id="first-name" class="form-control" placeholder="ชื่อ" name="name" value="<?php echo $Data_view["name"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="last-name" class="form-label">สกุล <span class="required">**</span></label>
-                                    <input type="text" id="last-name" class="form-control" placeholder="สกุล" name="lastname" value="<?php echo $data["lastname"]; ?>" required>
+                                    <input type="text" id="last-name" class="form-control" placeholder="สกุล" name="lastname" value="<?php echo $Data_view["lastname"]; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="full-name-eng" class="form-label">ชื่อ - สกุล อังกฤษ <span class="required">**</span></label>
-                                    <input type="text" id="full-name-eng" class="form-control" placeholder="ชื่อ - สกุล อังกฤษ" name="eng_name" value="<?php echo $data["eng_name"]; ?>" required>
+                                    <input type="text" id="full-name-eng" class="form-control" placeholder="ชื่อ - สกุล อังกฤษ" name="eng_name" value="<?php echo $Data_view["eng_name"]; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="id-number" class="form-label">เลขบัตรประชาชน <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                    <input type="text" class="form-control" id="thai-id" maxlength="17" placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $data["id_card_number"]; ?>" required>
+                                    <input type="text" class="form-control" id="thai-id" maxlength="17" placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $Data_view["id_card_number"]; ?>" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="nickname" class="form-label">ชื่อเล่น</label>
-                                    <input type="text" id="nickname" class="form-control" placeholder="ชื่อเล่น" name="nickname" value="<?php echo $data["nickname"]; ?>">
+                                    <input type="text" id="nickname" class="form-control" placeholder="ชื่อเล่น" name="nickname" value="<?php echo $Data_view["nickname"]; ?>">
                                 </div>
                                 <div class="col-md-2">
                                     <label for="birth_day" class="form-label">วันเกิด <span class="required">**</span></label>
@@ -147,7 +177,7 @@ require_once("../config/db.php");
                                         <option value="">==เลือก==</option>
                                         <?php
                                         for ($i = 1; $i <= 31; $i++) {
-                                            $selected = ($data["birth_day"] == $i) ? 'selected' : '';
+                                            $selected = ($Data_view["birth_day"] == $i) ? 'selected' : '';
                                             echo "<option value=\"$i\" $selected>$i</option>";
                                         }
                                         ?>
@@ -175,7 +205,7 @@ require_once("../config/db.php");
                                         ];
 
                                         foreach ($months as $value => $label) {
-                                            $selected = ($data["birth_month"] == $value) ? 'selected' : '';
+                                            $selected = ($Data_view["birth_month"] == $value) ? 'selected' : '';
                                             echo "<option value=\"$value\" $selected>$label</option>";
                                         }
                                         ?>
@@ -192,7 +222,7 @@ require_once("../config/db.php");
                                         $endYear = 2560; // ปีสิ้นสุดที่ต้องการแสดง
 
                                         for ($year = $currentYear; $year >= $startYear; $year--) {
-                                            $selected = ($data["birth_year"] == $year) ? 'selected' : '';
+                                            $selected = ($Data_view["birth_year"] == $year) ? 'selected' : '';
                                             echo "<option value=\"$year\" $selected>$year</option>";
                                         }
                                         ?>
@@ -203,59 +233,59 @@ require_once("../config/db.php");
                                     <label for="blood-group" class="form-label">กรุ๊ปเลือด <span class="required">**</span></label>
                                     <select id="blood-group" class="form-select" name="blood_group" required>
                                         <option value="">==เลือก==</option>
-                                        <option value="A" <?php echo ($data["blood_group"] == "A") ? 'selected' : ''; ?>>A</option>
-                                        <option value="B" <?php echo ($data["blood_group"] == "B") ? 'selected' : ''; ?>>B</option>
-                                        <option value="AB" <?php echo ($data["blood_group"] == "AB") ? 'selected' : ''; ?>>AB</option>
-                                        <option value="O" <?php echo ($data["blood_group"] == "O") ? 'selected' : ''; ?>>O</option>
+                                        <option value="A" <?php echo ($Data_view["blood_group"] == "A") ? 'selected' : ''; ?>>A</option>
+                                        <option value="B" <?php echo ($Data_view["blood_group"] == "B") ? 'selected' : ''; ?>>B</option>
+                                        <option value="AB" <?php echo ($Data_view["blood_group"] == "AB") ? 'selected' : ''; ?>>AB</option>
+                                        <option value="O" <?php echo ($Data_view["blood_group"] == "O") ? 'selected' : ''; ?>>O</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-2">
                                     <label for="height" class="form-label">ส่วนสูง <span class="required">**</span></label>
-                                    <input type="number" id="height" class="form-control" min="0" placeholder="ส่วนสูง" name="height" value="<?php echo $data["height"]; ?>" required>
+                                    <input type="number" id="height" class="form-control" min="0" placeholder="ส่วนสูง" name="height" value="<?php echo $Data_view["height"]; ?>" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="weight" class="form-label">น้ำหนัก <span class="required">**</span></label>
-                                    <input type="number" id="weight" class="form-control" min="0" placeholder="น้ำหนัก" name="weight" value="<?php echo $data["weight"]; ?>" required>
+                                    <input type="number" id="weight" class="form-control" min="0" placeholder="น้ำหนัก" name="weight" value="<?php echo $Data_view["weight"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="nationality" class="form-label">เชื้อชาติ <span class="required">**</span></label>
-                                    <input type="text" id="nationality" class="form-control" placeholder="เชื้อชาติ" name="nationality" value="<?php echo $data["nationality"]; ?>" required>
+                                    <input type="text" id="nationality" class="form-control" placeholder="เชื้อชาติ" name="nationality" value="<?php echo $Data_view["nationality"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="citizenship" class="form-label">สัญชาติ <span class="required">**</span></label>
-                                    <input type="text" id="citizenship" class="form-control" placeholder="สัญชาติ" name="citizenship" value="<?php echo $data["citizenship"]; ?>" required>
+                                    <input type="text" id="citizenship" class="form-control" placeholder="สัญชาติ" name="citizenship" value="<?php echo $Data_view["citizenship"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="religion" class="form-label">ศาสนา <span class="required">**</span></label>
-                                    <input type="text" id="religion" class="form-control" placeholder="ศาสนา" name="religion" value="<?php echo $data["religion"]; ?>" required>
+                                    <input type="text" id="religion" class="form-control" placeholder="ศาสนา" name="religion" value="<?php echo $Data_view["religion"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="siblings" class="form-label">จำนวนพี่น้อง <span class="required">**</span></label>
-                                    <input type="number" id="siblings" class="form-control" min="0" placeholder="จำนวนพี่น้อง" name="siblings_count" value="<?php echo $data["siblings_count"]; ?>" required>
+                                    <input type="number" id="siblings" class="form-control" min="0" placeholder="จำนวนพี่น้อง" name="siblings_count" value="<?php echo $Data_view["siblings_count"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="current-siblings" class="form-label">จำนวนพี่น้องที่กำลังศึกษาอยู่ <span class="required">**</span></label>
-                                    <input type="number" id="current-siblings" class="form-control" min="0" placeholder="จำนวนพี่น้องที่กำลังศึกษาอยู่" name="studying_siblings_count" value="<?php echo $data["studying_siblings_count"]; ?>" required>
+                                    <input type="number" id="current-siblings" class="form-control" min="0" placeholder="จำนวนพี่น้องที่กำลังศึกษาอยู่" name="studying_siblings_count" value="<?php echo $Data_view["studying_siblings_count"]; ?>" required>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="phone" class="form-label">เบอร์โทร <span class="required">**</span></label>
-                                    <input type="tel" id="phone" class="form-control" name="phone_number" value="<?php echo $data["phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="xxx-xxx-xxxx">
+                                    <input type="tel" id="phone" class="form-control" name="phone_number" value="<?php echo $Data_view["phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="xxx-xxx-xxxx">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="line-id" class="form-label">LineID</label>
-                                    <input type="text" id="line-id" class="form-control" placeholder="LineID" name="line_id" value="<?php echo $data["line_id"]; ?>">
+                                    <input type="text" id="line-id" class="form-control" placeholder="LineID" name="line_id" value="<?php echo $Data_view["line_id"]; ?>">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="facebook" class="form-label">Facebook</label>
-                                    <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $data["facebook"]; ?>">
-                                    <input type="text" hidden class="form-control" name="User_ID" value="<?php echo $data["User_ID"]; ?>">
-                                    <input type="hidden" class="form-control" name="profile_image2" value="<?php echo $data["profile_image"]; ?>">
+                                    <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"]; ?>">
+                                    <input type="text" hidden class="form-control" name="User_ID" value="<?php echo $Data_view["User_ID"]; ?>">
+                                    <input type="hidden" class="form-control" name="profile_image2" value="<?php echo $Data_view["profile_image"]; ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
                                     <input type="file" id="imgInput" class="form-control" name="profile_image" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg" src="config/uploads/<?php echo $data["profile_image"]; ?>" width="50%" alt="">
+                                    <img id="previewImg" src="../config/uploads/<?php echo $Data_view["profile_image"]; ?>" width="50%" alt="">
                                 </div>
 
 
@@ -601,7 +631,8 @@ require_once("../config/db.php");
                                     <img id="previewImg4" width="50%" alt="">
                                 </div>
                                 <div>
-                                    <button href="eddit.php" class="btn btn-primary" name="update">update</button>
+                                    <a href="edituser.php" class="btn btn-secondary"> Back</a>
+                                    <button type="submit" class="btn btn-primary" name="update">update</button>
                                 </div>
 
 
@@ -626,6 +657,17 @@ require_once("../config/db.php");
     <script src="script.js"></script>
 
     <script>
+        let imgInput = document.getElementById('imgInput');
+        let previewImg = document.getElementById('previewImg');
+
+        imgInput.onchange = evt => {
+            const [file] = imgInput.files;
+            if (file) {
+                previewImg.src = URL.createObjectURL(file);
+            }
+        }
+
+
         document.addEventListener('DOMContentLoaded', function() {
             const courseTypeSelect = document.getElementById('CourseType_Name');
             const levelSelect = document.getElementById('Level_Name');
@@ -702,7 +744,38 @@ require_once("../config/db.php");
                 });
             <?php endif; ?>
         });
+
+        imgInput1.onchange = evt => {
+            const [file1] = imgInput1.files;
+            if (file1) {
+                previewImg1.src = URL.createObjectURL(file1);
+            }
+        };
+
+        imgInput2.onchange = evt => {
+            const [file2] = imgInput2.files;
+            if (file2) {
+                previewImg2.src = URL.createObjectURL(file2);
+            }
+        };
+
+        imgInput3.onchange = evt => {
+            const [file3] = imgInput3.files;
+            if (file3) {
+                previewImg3.src = URL.createObjectURL(file3);
+            }
+        };
+
+        imgInput4.onchange = evt => {
+            const [file4] = imgInput4.files;
+            if (file4) {
+                previewImg4.src = URL.createObjectURL(file4);
+            }
+        };
+
+        
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
