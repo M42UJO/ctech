@@ -198,12 +198,12 @@ if (isset($_POST['update'])) {
         // Commit transaction if all queries were successful
         $conn->commit();
         echo "<script>alert('Data updated successfully');</script>";
-        echo "<script>window.location.href = 'my_profile.php';</script>";
+        echo "<script>window.location.href = '../eddit.php';</script>";
     } catch (Exception $e) {
         // Rollback transaction in case of error
         $conn->rollBack();
         echo "<script>alert('Error updating data: " . $e->getMessage() . "');</script>";
-        echo "<script>window.location.href = 'my_profile.php';</script>";
+        echo "<script>window.location.href = '../eddit.php';</script>";
     }
 }
 ?>
@@ -225,6 +225,9 @@ if (isset($_POST['update'])) {
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style.css">
+    <link href="path/to/lightbox.css" rel="stylesheet" />
+<script src="path/to/lightbox-plus-jquery.js"></script>
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -495,7 +498,10 @@ if (isset($_POST['update'])) {
                                 <div class="col-md-6">
                                     <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
                                     <input type="file" id="imgInput" class="form-control" name="profile_image" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg" src="../config/uploads/<?php echo $Data_view["profile_image"]; ?>" width="50%" alt="">
+                                    <a href="../config/uploads/<?php echo $Data_view["profile_image"]; ?>" data-lightbox="image-1" data-title="My caption">
+                                        <img id="previewImg" src="../config/uploads/<?php echo $Data_view["profile_image"]; ?>" width="50%" alt="">
+                                    </a>
+
                                     <input type="hidden" class="form-control" name="profile_image2" value="<?php echo $Data_view["profile_image"]; ?>">
                                 </div>
 
@@ -807,30 +813,42 @@ if (isset($_POST['update'])) {
 
                                 <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
 
-                                <div class="col-md-3 mt-5">
-                                    <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
-                                    <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg1" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
-                                    <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
-                                </div>
-                                <div class="col-md-3 mt-5">
-                                    <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
-                                    <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg2" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
-                                    <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
-                                </div>
-                                <div class="col-md-3 mt-5">
-                                    <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
-                                    <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg3" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
-                                    <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
-                                </div>
-                                <div class="col-md-3 mt-5">
-                                    <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
-                                    <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
-                                    <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
-                                </div>
+                                    <div class="col-md-3 mt-5">
+                                        <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                        <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
+                                        <a href="../config/uploads/<?php echo $Data_view["transcript"]; ?>" data-lightbox="documents" data-title="สำเนาใบรบ.">
+                                            <img id="previewImg1" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
+                                        </a>
+                                        <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
+                                    </div>
+
+                                    <div class="col-md-3 mt-5">
+                                        <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                        <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
+                                        <a href="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" data-lightbox="documents" data-title="สำเนาทะเบียนบ้าน">
+                                            <img id="previewImg2" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
+                                        </a>
+                                        <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
+                                    </div>
+
+                                    <div class="col-md-3 mt-5">
+                                        <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                        <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
+                                        <a href="../config/uploads/<?php echo $Data_view["id_card"]; ?>" data-lightbox="documents" data-title="สำเนาบัตรประชาชน">
+                                            <img id="previewImg3" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
+                                        </a>
+                                        <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
+                                    </div>
+
+                                    <div class="col-md-3 mt-5">
+                                        <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                        <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
+                                        <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
+                                            <img id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
+                                        </a>
+                                        <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
+                                    </div>
+
                                 <div>
                                     <a href="edituser.php" class="btn btn-secondary"> Back</a>
                                     <button type="submit" class="btn btn-primary" name="update">update</button>
