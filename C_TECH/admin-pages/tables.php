@@ -65,7 +65,7 @@ require_once("../config/db.php");
                             Editusers
                         </a>
 
-                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        
 
                         <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

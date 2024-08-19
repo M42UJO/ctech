@@ -3,6 +3,11 @@ session_start();
 require_once("../config/db.php");
 
 
+
+
+
+
+
 ?>
 
 
@@ -66,7 +71,7 @@ require_once("../config/db.php");
                             Editusers
                         </a>
 
-                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        
 
                         <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -613,22 +618,22 @@ require_once("../config/db.php");
                                 <div class="col-md-3">
                                     <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg1" width="50%" alt="">
+                                    <img id="previewImg1" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg2" width="50%" alt="">
+                                    <img id="previewImg2" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg3" width="50%" alt="">
+                                    <img id="previewImg3" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
-                                    <img id="previewImg4" width="50%" alt="">
+                                    <img id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
                                 </div>
                                 <div>
                                     <a href="edituser.php" class="btn btn-secondary"> Back</a>
@@ -665,85 +670,7 @@ require_once("../config/db.php");
             if (file) {
                 previewImg.src = URL.createObjectURL(file);
             }
-        }
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const courseTypeSelect = document.getElementById('CourseType_Name');
-            const levelSelect = document.getElementById('Level_Name');
-            const subjectTypeSelect = document.getElementById('Type_Name');
-            const majorSelect = document.getElementById('Major_Name');
-
-            const levels = <?php echo json_encode($levels); ?>;
-            const subjectTypes = <?php echo json_encode($subjectTypes); ?>;
-            const majors = <?php echo json_encode($majors); ?>;
-
-            // Populate initial dropdowns
-            populateSelect(courseTypeSelect, <?php echo json_encode($courseTypes); ?>, 'CourseType_ID', 'CourseType_Name');
-
-            // Event handler for changing courseType
-            courseTypeSelect.addEventListener('change', function() {
-                const selectedCourseType = this.value;
-                const filteredLevels = levels.filter(level => level.CourseType_ID == selectedCourseType);
-                populateSelect(levelSelect, filteredLevels, 'Level_ID', 'Level_Name');
-                clearSelect(subjectTypeSelect);
-                clearSelect(majorSelect);
-            });
-
-            // Event handler for changing level
-            levelSelect.addEventListener('change', function() {
-                const selectedLevel = this.value;
-                const filteredSubjectTypes = subjectTypes.filter(type => type.Level_ID == selectedLevel);
-                populateSelect(subjectTypeSelect, filteredSubjectTypes, 'Type_ID', 'Type_Name');
-                clearSelect(majorSelect);
-            });
-
-            // Event handler for changing subjectType
-            subjectTypeSelect.addEventListener('change', function() {
-                const selectedSubjectType = this.value;
-                const filteredMajors = majors.filter(major => major.Type_ID == selectedSubjectType);
-                populateSelect(majorSelect, filteredMajors, 'Major_ID', 'Major_Name');
-            });
-
-            // Set initial values
-            courseTypeSelect.value = '<?php echo $courseType; ?>';
-            const initialLevels = levels.filter(level => level.CourseType_ID == courseTypeSelect.value);
-            populateSelect(levelSelect, initialLevels, 'Level_ID', 'Level_Name');
-            levelSelect.value = '<?php echo $level; ?>';
-            const initialSubjectTypes = subjectTypes.filter(type => type.Level_ID == levelSelect.value);
-            populateSelect(subjectTypeSelect, initialSubjectTypes, 'Type_ID', 'Type_Name');
-            subjectTypeSelect.value = '<?php echo $subjectType; ?>';
-            const initialMajors = majors.filter(major => major.Type_ID == subjectTypeSelect.value);
-            populateSelect(majorSelect, initialMajors, 'Major_ID', 'Major_Name');
-            majorSelect.value = '<?php echo $major; ?>';
-        });
-
-        function populateSelect(selectElement, data, valueKey, textKey) {
-            selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>'; // Clear existing options
-            data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item[valueKey];
-                option.textContent = item[textKey];
-                selectElement.appendChild(option);
-            });
-        }
-
-        function clearSelect(selectElement) {
-            selectElement.innerHTML = '<option value="">= เลือกตัวเลือก =</option>';
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            <?php if ($guardianMissing): ?>
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'ข้อมูลไม่ครบถ้วน',
-                    text: 'กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วน จึงสมัครได้',
-                    confirmButtonText: 'ตกลง',
-                    willClose: () => {
-                        window.location.href = 'Personal_info.php';
-                    }
-                });
-            <?php endif; ?>
-        });
+        }       
 
         imgInput1.onchange = evt => {
             const [file1] = imgInput1.files;
