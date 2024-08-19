@@ -36,10 +36,7 @@ require_once("../config/db.php");
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <!-- <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div> -->
+            
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -577,60 +574,46 @@ require_once("../config/db.php");
                                 <div class="panel-heading mt-5">ต้องการศึกษา</div>
 
                                 <div class="row mt-5">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3">                                       
                                         <label class="form-label">ประเภทของหลักสูตร <span class="required">**</span></label>
-                                        <select id="CourseType_Name" name="CourseType_Name" class="form-control" required>
-                                            <option value="">เลือกประเภทของหลักสูตร</option>
-                                        </select>
+                                        <input type="text" class="form-control" name="CourseType_Name" id="CourseType_Name" value="<?php echo $Data_view["CourseType_Name"]; ?>">                                        
                                     </div>
+
                                     <div class="col-lg-3">
                                         <label class="form-label">ระดับการศึกษา <span class="required">**</span></label>
-                                        <select id="Level_Name" name="Level_Name" class="form-control" required>
-                                            <option value="">เลือกระดับการศึกษา</option>
-                                        </select>
+                                        <input type="text" class="form-control" name="Level_Name" id="Level_Name" value="<?php echo $Data_view["Level_Name"]; ?>">                                     
                                     </div>
+
                                     <div class="col-lg-3">
                                         <label class="form-label">ประเภทวิชา <span class="required">**</span></label>
-                                        <select id="Type_Name" name="Type_Name" class="form-control" required>
-                                            <option value="">เลือกประเภทวิชา</option>
-                                        </select>
+                                        <input type="text" class="form-control" name="Type_Name" id="Type_Name" value="<?php echo $Data_view["Type_Name"]; ?>">                                      
                                     </div>
+
                                     <div class="col-lg-3">
                                         <label class="form-label">สาขาวิชา <span class="required">**</span></label>
-                                        <select id="Major_Name" name="Major_Name" class="form-control" required>
-                                            <option value="">เลือกสาขาวิชา</option>
-                                        </select>
+                                        <input type="text" class="form-control" name="Major_Name" id="Major_Name" value="<?php echo $Data_view["Major_Name"]; ?>">                       
                                     </div>
                                 </div>
 
 
-
-
-
-
-
                                 <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
-                                <label id="announce" class="">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา<br> Chanapolkhan Technological College, Nakhon Ratchasima</label>
-                                <label id="announce" class="">กรุณาชำระค่าแรกเข้า จำนวน <span class="highlight">2,000</span> บาท หลังจากกรอกข้อมูลครบถ้วน</label>
-                                <label id="announce" class="">ยอดเงินนี้จะถูกนำไปเป็นส่วนลดค่าเทอมของนักศึกษา</label>
-                                <label id="announce" class="mb-5">โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์<br>เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span> </label>
-
-                                <div class="col-md-3">
+                                
+                                <div class="col-md-3 mt-5">
                                     <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
                                     <img id="previewImg1" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-5">
                                     <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
                                     <img id="previewImg2" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-5">
                                     <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
                                     <img id="previewImg3" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-5">
                                     <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
                                     <img id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
