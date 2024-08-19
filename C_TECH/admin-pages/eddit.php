@@ -2,13 +2,212 @@
 session_start();
 require_once("../config/db.php");
 
+if (isset($_POST['update'])) {
+    try {
+        // Start a transaction
+        $conn->beginTransaction();
 
+        // Applicant Table Update
+        $applicant_query = "UPDATE applicant SET 
+            prefix = :prefix,
+            name = :name,
+            lastname = :lastname,
+            eng_name = :eng_name,
+            id_card_number = :id_card_number,
+            nickname = :nickname,
+            birth_day = :birth_day,
+            birth_month = :birth_month,
+            birth_year = :birth_year,
+            blood_group = :blood_group,
+            height = :height,
+            weight = :weight,
+            nationality = :nationality,
+            citizenship = :citizenship,
+            religion = :religion,
+            siblings_count = :siblings_count,
+            studying_siblings_count = :studying_siblings_count,
+            phone_number = :phone_number,
+            line_id = :line_id,
+            facebook = :facebook
+            WHERE User_ID = :user_id";
 
+        $applicant_stmt = $conn->prepare($applicant_query);
+        $applicant_stmt->execute([
+            ':prefix' => htmlspecialchars($_POST['prefix']),
+            ':name' => htmlspecialchars($_POST['name']),
+            ':lastname' => htmlspecialchars($_POST['lastname']),
+            ':eng_name' => htmlspecialchars($_POST['eng_name']),
+            ':id_card_number' => htmlspecialchars($_POST['id_card_number']),
+            ':nickname' => htmlspecialchars($_POST['nickname']),
+            ':birth_day' => htmlspecialchars($_POST['birth_day']),
+            ':birth_month' => htmlspecialchars($_POST['birth_month']),
+            ':birth_year' => htmlspecialchars($_POST['birth_year']),
+            ':blood_group' => htmlspecialchars($_POST['blood_group']),
+            ':height' => htmlspecialchars($_POST['height']),
+            ':weight' => htmlspecialchars($_POST['weight']),
+            ':nationality' => htmlspecialchars($_POST['nationality']),
+            ':citizenship' => htmlspecialchars($_POST['citizenship']),
+            ':religion' => htmlspecialchars($_POST['religion']),
+            ':siblings_count' => htmlspecialchars($_POST['siblings_count']),
+            ':studying_siblings_count' => htmlspecialchars($_POST['studying_siblings_count']),
+            ':phone_number' => htmlspecialchars($_POST['phone_number']),
+            ':line_id' => htmlspecialchars($_POST['line_id']),
+            ':facebook' => htmlspecialchars($_POST['facebook']),
+            ':user_id' => $_SESSION['user_id']
+        ]);
 
+        // Current Address Table Update
+        $current_address_query = "UPDATE current_address SET 
+            house_number = :house_number,
+            village = :village,
+            lane = :lane,
+            road = :road,
+            sub_district = :sub_district,
+            district = :district,
+            province = :province,
+            postal_code = :postal_code
+            WHERE User_ID = :user_id";
 
+        $current_address_stmt = $conn->prepare($current_address_query);
+        $current_address_stmt->execute([
+            ':house_number' => htmlspecialchars($_POST['house_number']),
+            ':village' => htmlspecialchars($_POST['village']),
+            ':lane' => htmlspecialchars($_POST['lane']),
+            ':road' => htmlspecialchars($_POST['road']),
+            ':sub_district' => htmlspecialchars($_POST['sub_district']),
+            ':district' => htmlspecialchars($_POST['district']),
+            ':province' => htmlspecialchars($_POST['province']),
+            ':postal_code' => htmlspecialchars($_POST['postal_code']),
+            ':user_id' => $_SESSION['user_id']
+        ]);
 
+        // Education Info Table Update
+        $education_info_query = "UPDATE education_info SET 
+            school_name = :school_name,
+            school_sub_district = :school_sub_district,
+            school_district = :school_district,
+            school_province = :school_province,
+            school_postal_code = :school_postal_code,
+            graduation_year = :graduation_year,
+            grade_result = :grade_result,
+            class_level = :class_level,
+            major = :major,
+            degree_other = :degree_other,
+            major_other = :major_other
+            WHERE User_ID = :user_id";
 
+        $education_info_stmt = $conn->prepare($education_info_query);
+        $education_info_stmt->execute([
+            ':school_name' => htmlspecialchars($_POST['school_name']),
+            ':school_sub_district' => htmlspecialchars($_POST['school_sub_district']),
+            ':school_district' => htmlspecialchars($_POST['school_district']),
+            ':school_province' => htmlspecialchars($_POST['school_province']),
+            ':school_postal_code' => htmlspecialchars($_POST['school_postal_code']),
+            ':graduation_year' => htmlspecialchars($_POST['graduation_year']),
+            ':grade_result' => htmlspecialchars($_POST['grade_result']),
+            ':class_level' => htmlspecialchars($_POST['class_level']),
+            ':major' => htmlspecialchars($_POST['major']),
+            ':degree_other' => htmlspecialchars($_POST['degree_other']),
+            ':major_other' => htmlspecialchars($_POST['major_other']),
+            ':user_id' => $_SESSION['user_id']
+        ]);
+
+        // Parent Info (Father, Mother, Guardian) Table Updates
+        $parent_info_query = "UPDATE parent_info SET 
+            father_name = :father_name,
+            father_status = :father_status,
+            father_occupation = :father_occupation,
+            father_income = :father_income,
+            father_house_number = :father_house_number,
+            father_village = :father_village,
+            father_lane = :father_lane,
+            father_road = :father_road,
+            father_sub_district = :father_sub_district,
+            father_district = :father_district,
+            father_province = :father_province,
+            father_postal_code = :father_postal_code,
+            father_phone_number = :father_phone_number,
+            mother_name = :mother_name,
+            mother_status = :mother_status,
+            mother_occupation = :mother_occupation,
+            mother_income = :mother_income,
+            mother_house_number = :mother_house_number,
+            mother_village = :mother_village,
+            mother_lane = :mother_lane,
+            mother_road = :mother_road,
+            mother_sub_district = :mother_sub_district,
+            mother_district = :mother_district,
+            mother_province = :mother_province,
+            mother_postal_code = :mother_postal_code,
+            mother_phone_number = :mother_phone_number,
+            guardian_name = :guardian_name,
+            guardian_relationship = :guardian_relationship,
+            guardian_house_number = :guardian_house_number,
+            guardian_village = :guardian_village,
+            guardian_lane = :guardian_lane,
+            guardian_road = :guardian_road,
+            guardian_sub_district = :guardian_sub_district,
+            guardian_district = :guardian_district,
+            guardian_province = :guardian_province,
+            guardian_postal_code = :guardian_postal_code,
+            guardian_phone_number = :guardian_phone_number
+            WHERE User_ID = :user_id";
+
+        $parent_info_stmt = $conn->prepare($parent_info_query);
+        $parent_info_stmt->execute([
+            ':father_name' => htmlspecialchars($_POST['father_name']),
+            ':father_status' => htmlspecialchars($_POST['father_status']),
+            ':father_occupation' => htmlspecialchars($_POST['father_occupation']),
+            ':father_income' => htmlspecialchars($_POST['father_income']),
+            ':father_house_number' => htmlspecialchars($_POST['father_house_number']),
+            ':father_village' => htmlspecialchars($_POST['father_village']),
+            ':father_lane' => htmlspecialchars($_POST['father_lane']),
+            ':father_road' => htmlspecialchars($_POST['father_road']),
+            ':father_sub_district' => htmlspecialchars($_POST['father_sub_district']),
+            ':father_district' => htmlspecialchars($_POST['father_district']),
+            ':father_province' => htmlspecialchars($_POST['father_province']),
+            ':father_postal_code' => htmlspecialchars($_POST['father_postal_code']),
+            ':father_phone_number' => htmlspecialchars($_POST['father_phone_number']),
+            ':mother_name' => htmlspecialchars($_POST['mother_name']),
+            ':mother_status' => htmlspecialchars($_POST['mother_status']),
+            ':mother_occupation' => htmlspecialchars($_POST['mother_occupation']),
+            ':mother_income' => htmlspecialchars($_POST['mother_income']),
+            ':mother_house_number' => htmlspecialchars($_POST['mother_house_number']),
+            ':mother_village' => htmlspecialchars($_POST['mother_village']),
+            ':mother_lane' => htmlspecialchars($_POST['mother_lane']),
+            ':mother_road' => htmlspecialchars($_POST['mother_road']),
+            ':mother_sub_district' => htmlspecialchars($_POST['mother_sub_district']),
+            ':mother_district' => htmlspecialchars($_POST['mother_district']),
+            ':mother_province' => htmlspecialchars($_POST['mother_province']),
+            ':mother_postal_code' => htmlspecialchars($_POST['mother_postal_code']),
+            ':mother_phone_number' => htmlspecialchars($_POST['mother_phone_number']),
+            ':guardian_name' => htmlspecialchars($_POST['guardian_name']),
+            ':guardian_relationship' => htmlspecialchars($_POST['guardian_relationship']),
+            ':guardian_house_number' => htmlspecialchars($_POST['guardian_house_number']),
+            ':guardian_village' => htmlspecialchars($_POST['guardian_village']),
+            ':guardian_lane' => htmlspecialchars($_POST['guardian_lane']),
+            ':guardian_road' => htmlspecialchars($_POST['guardian_road']),
+            ':guardian_sub_district' => htmlspecialchars($_POST['guardian_sub_district']),
+            ':guardian_district' => htmlspecialchars($_POST['guardian_district']),
+            ':guardian_province' => htmlspecialchars($_POST['guardian_province']),
+            ':guardian_postal_code' => htmlspecialchars($_POST['guardian_postal_code']),
+            ':guardian_phone_number' => htmlspecialchars($_POST['guardian_phone_number']),
+            ':user_id' => $_SESSION['user_id']
+        ]);
+
+        // Commit transaction if all queries were successful
+        $conn->commit();
+        echo "<script>alert('Data updated successfully');</script>";
+        echo "<script>window.location.href = 'my_profile.php';</script>";
+    } catch (Exception $e) {
+        // Rollback transaction in case of error
+        $conn->rollBack();
+        echo "<script>alert('Error updating data: " . $e->getMessage() . "');</script>";
+        echo "<script>window.location.href = 'my_profile.php';</script>";
+    }
+}
 ?>
+
 
 
 
@@ -36,7 +235,7 @@ require_once("../config/db.php");
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            
+
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -68,7 +267,7 @@ require_once("../config/db.php");
                             Editusers
                         </a>
 
-                        
+
 
                         <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -106,39 +305,48 @@ require_once("../config/db.php");
                                 if (isset($_GET['user_id'])) {
                                     $User_ID = $_GET['user_id'];
 
-                                    // ปรับปรุง SQL Query เพื่อดึงข้อมูลจากหลายตาราง
-                                    $stmt = $conn->prepare("
-                                        SELECT 
-                                            u.*, 
-                                            p.*, 
-                                            f.*, 
-                                            e.*, 
-                                            c.*, 
-                                            a.*
-                                        FROM 
-                                            user u
-                                        LEFT JOIN 
-                                            parent_info p ON u.User_ID = p.User_ID
-                                        LEFT JOIN 
-                                            form f ON u.User_ID = f.User_ID
-                                        LEFT JOIN 
-                                            education_info e ON u.User_ID = e.User_ID
-                                        LEFT JOIN 
-                                            current_address c ON u.User_ID = c.User_ID
-                                        LEFT JOIN 
-                                            applicant a ON u.User_ID = a.User_ID
-                                        WHERE 
-                                            u.User_ID = :user_id
-                                    ");
+                                    $stmt = $conn->prepare("SELECT 
+                                                                u.*, 
+                                                                p.*, 
+                                                                f.*, 
+                                                                e.*, 
+                                                                c.*, 
+                                                                a.*,
+                                                                major.Major_Name,
+                                                                subjecttype.Type_Name,
+                                                                educationlevel.Level_Name,
+                                                                coursetype.CourseType_Name
+                                                            FROM 
+                                                                user u
+                                                            LEFT JOIN 
+                                                                parent_info p ON u.User_ID = p.User_ID
+                                                            LEFT JOIN 
+                                                                form f ON u.User_ID = f.User_ID
+                                                            LEFT JOIN 
+                                                                education_info e ON u.User_ID = e.User_ID
+                                                            LEFT JOIN 
+                                                                current_address c ON u.User_ID = c.User_ID
+                                                            LEFT JOIN 
+                                                                applicant a ON u.User_ID = a.User_ID
+                                                            LEFT JOIN 
+                                                                major ON f.Major_ID = major.Major_ID
+                                                            LEFT JOIN 
+                                                                subjecttype ON major.Type_ID = subjecttype.Type_ID
+                                                            LEFT JOIN 
+                                                                educationlevel ON subjecttype.Level_ID = educationlevel.Level_ID
+                                                            LEFT JOIN 
+                                                                coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
+                                                            WHERE 
+                                                                u.User_ID = :user_id
+                                                        ");
 
-                                    // ใช้ prepare เพื่อความปลอดภัยจาก SQL Injection และ bind ค่า
                                     $stmt->bindParam(':user_id', $User_ID, PDO::PARAM_INT);
                                     $stmt->execute();
 
-                                    // ดึงข้อมูลทั้งหมดจากตารางที่เกี่ยวข้อง
                                     $Data_view = $stmt->fetch(PDO::FETCH_ASSOC);
                                 }
                                 ?>
+
 
 
 
@@ -282,12 +490,13 @@ require_once("../config/db.php");
                                     <label for="facebook" class="form-label">Facebook</label>
                                     <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"]; ?>">
                                     <input type="text" hidden class="form-control" name="User_ID" value="<?php echo $Data_view["User_ID"]; ?>">
-                                    <input type="hidden" class="form-control" name="profile_image2" value="<?php echo $Data_view["profile_image"]; ?>">
+                                    
                                 </div>
                                 <div class="col-md-6">
                                     <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
                                     <input type="file" id="imgInput" class="form-control" name="profile_image" accept=".jpg,.jpeg,.png">
                                     <img id="previewImg" src="../config/uploads/<?php echo $Data_view["profile_image"]; ?>" width="50%" alt="">
+                                    <input type="hidden" class="form-control" name="profile_image2" value="<?php echo $Data_view["profile_image"]; ?>">
                                 </div>
 
 
@@ -574,49 +783,53 @@ require_once("../config/db.php");
                                 <div class="panel-heading mt-5">ต้องการศึกษา</div>
 
                                 <div class="row mt-5">
-                                    <div class="col-lg-3">                                       
+                                    <div class="col-lg-3">
                                         <label class="form-label">ประเภทของหลักสูตร <span class="required">**</span></label>
-                                        <input type="text" class="form-control" name="CourseType_Name" id="CourseType_Name" value="<?php echo $Data_view["CourseType_Name"]; ?>">                                        
+                                        <input type="text" class="form-control" name="CourseType_Name" id="CourseType_Name" value="<?php echo $Data_view["CourseType_Name"]; ?>" readonly>
                                     </div>
 
                                     <div class="col-lg-3">
                                         <label class="form-label">ระดับการศึกษา <span class="required">**</span></label>
-                                        <input type="text" class="form-control" name="Level_Name" id="Level_Name" value="<?php echo $Data_view["Level_Name"]; ?>">                                     
+                                        <input type="text" class="form-control" name="Level_Name" id="Level_Name" value="<?php echo $Data_view["Level_Name"]; ?>" readonly>
                                     </div>
 
                                     <div class="col-lg-3">
                                         <label class="form-label">ประเภทวิชา <span class="required">**</span></label>
-                                        <input type="text" class="form-control" name="Type_Name" id="Type_Name" value="<?php echo $Data_view["Type_Name"]; ?>">                                      
+                                        <input type="text" class="form-control" name="Type_Name" id="Type_Name" value="<?php echo $Data_view["Type_Name"]; ?>" readonly>
                                     </div>
 
                                     <div class="col-lg-3">
                                         <label class="form-label">สาขาวิชา <span class="required">**</span></label>
-                                        <input type="text" class="form-control" name="Major_Name" id="Major_Name" value="<?php echo $Data_view["Major_Name"]; ?>">                       
+                                        <input type="text" class="form-control" name="Major_Name" id="Major_Name" value="<?php echo $Data_view["Major_Name"]; ?>" readonly>
                                     </div>
                                 </div>
 
 
                                 <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
-                                
+
                                 <div class="col-md-3 mt-5">
                                     <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
                                     <img id="previewImg1" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
+                                    <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
                                 </div>
                                 <div class="col-md-3 mt-5">
                                     <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
                                     <img id="previewImg2" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
+                                    <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
                                 </div>
                                 <div class="col-md-3 mt-5">
                                     <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
                                     <img id="previewImg3" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
+                                    <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
                                 </div>
                                 <div class="col-md-3 mt-5">
                                     <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                                     <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
                                     <img id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
+                                    <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
                                 </div>
                                 <div>
                                     <a href="edituser.php" class="btn btn-secondary"> Back</a>
@@ -653,7 +866,7 @@ require_once("../config/db.php");
             if (file) {
                 previewImg.src = URL.createObjectURL(file);
             }
-        }       
+        }
 
         imgInput1.onchange = evt => {
             const [file1] = imgInput1.files;
@@ -682,8 +895,6 @@ require_once("../config/db.php");
                 previewImg4.src = URL.createObjectURL(file4);
             }
         };
-
-        
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
