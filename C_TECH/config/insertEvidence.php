@@ -21,6 +21,7 @@ $target_dir = "uploads/";
     $id_card2 = htmlspecialchars($_POST['id_card2']);
     $slip2000 = $_FILES['slip2000'];
     $slip20002 = htmlspecialchars($_POST['slip20002']);
+    $date = date('Y-m-d');
     $user_id = $_SESSION['user_login'];
 
 
@@ -97,32 +98,28 @@ $target_dir = "uploads/";
             $fileNews = $slip20002;
         }
 
-        try { $sql_update = $conn->prepare("UPDATE form 
-            SET transcript = :transcript, 
-                id_card = :id_card, 
-                house_registration = :house_registration, 
-                slip2000 = :slip2000,
-                date = :date 
-                 
-            WHERE User_ID = :user_id");
-
-            // ผูกค่าพารามิเตอร์กับตัวแปร
+        try {
+            $sql_update = $conn->prepare("UPDATE form 
+                SET transcript = :transcript, 
+                    id_card = :id_card, 
+                    house_registration = :house_registration, 
+                    slip2000 = :slip2000,
+                    date = :date 
+                WHERE User_ID = :user_id");
+        
+            // Bind parameters
             $sql_update->bindParam(':transcript', $fileNewt);
             $sql_update->bindParam(':id_card', $fileNewi);
             $sql_update->bindParam(':house_registration', $fileNewh);
             $sql_update->bindParam(':slip2000', $fileNews);      
             $sql_update->bindParam(':date', $date);      
             $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        
             $sql_update->execute();
-            
-
-            $_SESSION['success'] = "Data has been inserted or updated successfully";
-            header("Location: edituser.php");
-            exit();
+        
+            echo "ข้อมูลได้ถูกอัปเดตเรียบร้อยแล้ว";
         } catch (PDOException $e) {
-            // กำหนดข้อความข้อผิดพลาดในเซสชันและเปลี่ยนเส้นทางกลับไปที่หน้าที่อยู่ปัจจุบัน
-            $_SESSION['error'] = "Database Error: " . $e->getMessage();
-            //  header("Location: eddit.php");
-            exit();
+            echo "ข้อผิดพลาดในการอัปเดต: " . $e->getMessage();
         }
+        
 ?>

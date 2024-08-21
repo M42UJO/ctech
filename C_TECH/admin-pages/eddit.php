@@ -437,7 +437,7 @@ try {
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style.css">
     <link href="path/to/lightbox.css" rel="stylesheet" />
-<script src="path/to/lightbox-plus-jquery.js"></script>
+    <script src="path/to/lightbox-plus-jquery.js"></script>
 
 </head>
 
