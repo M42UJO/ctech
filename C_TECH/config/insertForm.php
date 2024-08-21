@@ -32,24 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($existingForm) {
             // ถ้ามีข้อมูลอยู่แล้ว ทำการ update
             $stmt = $conn->prepare("UPDATE form 
-                                    SET transcript = :transcript, 
-                                        id_card = :id_card, 
-                                        house_registration = :house_registration, 
-                                        slip2000 = :slip2000, 
+                                    SET  
                                         date = :date, 
                                         status = :status, 
                                         Major_ID = :major_id 
                                     WHERE User_ID = :user_id");
         } else {
             // ถ้าไม่มีข้อมูล ทำการ insert
-            $stmt = $conn->prepare("INSERT INTO form (transcript, id_card, house_registration, slip2000, date, status, Major_ID, User_ID) 
-                                    VALUES (:transcript, :id_card, :house_registration, :slip2000, :date, :status, :major_id, :user_id)");
+            $stmt = $conn->prepare("INSERT INTO form (date, status, Major_ID, User_ID) 
+                                    VALUES (:date, :status, :major_id, :user_id)");
         }
 
-        $stmt->bindParam(':transcript', $transcript);
-        $stmt->bindParam(':id_card', $id_card);
-        $stmt->bindParam(':house_registration', $house_registration);
-        $stmt->bindParam(':slip2000', $slip2000);
+        
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':major_id', $major);

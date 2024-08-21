@@ -10,8 +10,15 @@ if (!isset($_SESSION['user_login'])) {
 if (isset($_SESSION['user_login'])) {
     $user_id = $_SESSION['user_login'];
 }
+                    $stmt_view = $conn->prepare("SELECT * FROM form WHERE User_ID = ?");
+                    $stmt_view->execute([$user_id]);
+                    $Data_view = $stmt_view->fetch();
+
+                    
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,11 +62,7 @@ if (isset($_SESSION['user_login'])) {
         <div class="panel panel-default">
             <div class="panel-body">
                 <form id="personal-info-form" class="row g-2 mt-2" action="config/insertEvidence.php" method="post" enctype="multipart/form-data">
-                    <?php
-                    $stmt_view = $conn->prepare("SELECT * FROM form WHERE User_ID = ?");
-                    $stmt_view->execute([$user_id]);
-                    $Data_view = $stmt_view->fetch();
-                    ?>
+                    
                     <div class="panel-heading">หลักฐานที่ใช้ในการสมัคร</div>
                     <label id="announce" class="">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา<br> Chanapolkhan Technological College, Nakhon Ratchasima</label>
                     <label id="announce" class="">กรุณาชำระค่าแรกเข้า จำนวน <span class="highlight">2,000</span> บาท หลังจากกรอกข้อมูลครบถ้วน</label>
