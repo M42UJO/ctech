@@ -3,210 +3,421 @@ session_start();
 require_once("../config/db.php");
 
 if (isset($_POST['update'])) {
-    try {
-        // Start a transaction
-        $conn->beginTransaction();
+    $prefix = htmlspecialchars($_POST['prefix']);
+    $name = htmlspecialchars($_POST['name']);
+    $lastname = htmlspecialchars($_POST['lastname']);
+    $eng_name = htmlspecialchars($_POST['eng_name']);
+    $id_card_number = htmlspecialchars($_POST['id_card_number']);
+    $nickname = htmlspecialchars($_POST['nickname']);
+    $birth_day = htmlspecialchars($_POST['birth_day']);
+    $birth_month = htmlspecialchars($_POST['birth_month']);
+    $birth_year = htmlspecialchars($_POST['birth_year']);
+    $blood_group = htmlspecialchars($_POST['blood_group']);
+    $height = htmlspecialchars($_POST['height']);
+    $weight = htmlspecialchars($_POST['weight']);
+    $nationality = htmlspecialchars($_POST['nationality']);
+    $citizenship = htmlspecialchars($_POST['citizenship']);
+    $religion = htmlspecialchars($_POST['religion']);
+    $siblings_count = htmlspecialchars($_POST['siblings_count']);
+    $studying_siblings_count = htmlspecialchars($_POST['studying_siblings_count']);
+    $phone_number = htmlspecialchars($_POST['phone_number']);
+    $line_id = htmlspecialchars($_POST['line_id']);
+    $facebook = htmlspecialchars($_POST['facebook']);
+    $house_number = htmlspecialchars($_POST['house_number']);
+    $village = htmlspecialchars($_POST['village']);
+    $lane = htmlspecialchars($_POST['lane']);
+    $road = htmlspecialchars($_POST['road']);
+    $sub_district = htmlspecialchars($_POST['sub_district']);
+    $district = htmlspecialchars($_POST['district']);
+    $province = htmlspecialchars($_POST['province']);
+    $postal_code = htmlspecialchars($_POST['postal_code']);
+    $school_name = htmlspecialchars($_POST['school_name']);
+    $school_sub_district = htmlspecialchars($_POST['school_sub_district']);
+    $school_district = htmlspecialchars($_POST['school_district']);
+    $school_province = htmlspecialchars($_POST['school_province']);
+    $school_postal_code = htmlspecialchars($_POST['school_postal_code']);
+    $graduation_year = htmlspecialchars($_POST['graduation_year']);
+    $grade_result = htmlspecialchars($_POST['grade_result']);
+    $class_level = htmlspecialchars($_POST['class_level']);
+    $major = htmlspecialchars($_POST['major']);
+    $degree_other = htmlspecialchars($_POST['degree_other']);
+    $major_other = htmlspecialchars($_POST['major_other']);
+    $father_name = htmlspecialchars($_POST['father_name']);
+    $father_status = htmlspecialchars($_POST['father_status']);
+    $father_occupation = htmlspecialchars($_POST['father_occupation']);
+    $father_income = htmlspecialchars($_POST['father_income']);
+    $father_house_number = htmlspecialchars($_POST['father_house_number']);
+    $father_village = htmlspecialchars($_POST['father_village']);
+    $father_lane = htmlspecialchars($_POST['father_lane']);
+    $father_road = htmlspecialchars($_POST['father_road']);
+    $father_sub_district = htmlspecialchars($_POST['father_sub_district']);
+    $father_district = htmlspecialchars($_POST['father_district']);
+    $father_province = htmlspecialchars($_POST['father_province']);
+    $father_postal_code = htmlspecialchars($_POST['father_postal_code']);
+    $father_phone_number = htmlspecialchars($_POST['father_phone_number']);
+    $mother_name = htmlspecialchars($_POST['mother_name']);
+    $mother_status = htmlspecialchars($_POST['mother_status']);
+    $mother_occupation = htmlspecialchars($_POST['mother_occupation']);
+    $mother_income = htmlspecialchars($_POST['mother_income']);
+    $mother_house_number = htmlspecialchars($_POST['mother_house_number']);
+    $mother_village = htmlspecialchars($_POST['mother_village']);
+    $mother_lane = htmlspecialchars($_POST['mother_lane']);
+    $mother_road = htmlspecialchars($_POST['mother_road']);
+    $mother_sub_district = htmlspecialchars($_POST['mother_sub_district']);
+    $mother_district = htmlspecialchars($_POST['mother_district']);
+    $mother_province = htmlspecialchars($_POST['mother_province']);
+    $mother_postal_code = htmlspecialchars($_POST['mother_postal_code']);
+    $mother_phone_number = htmlspecialchars($_POST['mother_phone_number']);
+    $guardian_name = htmlspecialchars($_POST['guardian_name']);
+    $guardian_relationship = htmlspecialchars($_POST['guardian_relationship']);
+    $guardian_house_number = htmlspecialchars($_POST['guardian_house_number']);
+    $guardian_village = htmlspecialchars($_POST['guardian_village']);
+    $guardian_lane = htmlspecialchars($_POST['guardian_lane']);
+    $guardian_road = htmlspecialchars($_POST['guardian_road']);
+    $guardian_sub_district = htmlspecialchars($_POST['guardian_sub_district']);
+    $guardian_district = htmlspecialchars($_POST['guardian_district']);
+    $guardian_province = htmlspecialchars($_POST['guardian_province']);
+    $guardian_postal_code = htmlspecialchars($_POST['guardian_postal_code']);
+    $guardian_phone_number = htmlspecialchars($_POST['guardian_phone_number']);
+    $profile_image = $_FILES['profile_image'];
+    $profile_image2 = htmlspecialchars($_POST['profile_image2']);
+    $transcript = $_FILES['transcript'];
+    $transcript2 = htmlspecialchars($_POST['transcript2']);
+    $house_registration = $_FILES['house_registration'];
+    $house_registration2 = htmlspecialchars($_POST['house_registration2']);
+    $id_card = $_FILES['id_card'];
+    $id_card2 = htmlspecialchars($_POST['id_card2']);
+    $slip2000 = $_FILES['slip2000'];
+    $slip20002 = htmlspecialchars($_POST['slip20002']);
+    $user_id = htmlspecialchars($_POST['User_ID']);
 
-        // Applicant Table Update
-        $applicant_query = "UPDATE applicant SET 
-            prefix = :prefix,
-            name = :name,
-            lastname = :lastname,
-            eng_name = :eng_name,
-            id_card_number = :id_card_number,
-            nickname = :nickname,
-            birth_day = :birth_day,
-            birth_month = :birth_month,
-            birth_year = :birth_year,
-            blood_group = :blood_group,
-            height = :height,
-            weight = :weight,
-            nationality = :nationality,
-            citizenship = :citizenship,
-            religion = :religion,
-            siblings_count = :siblings_count,
-            studying_siblings_count = :studying_siblings_count,
-            phone_number = :phone_number,
-            line_id = :line_id,
-            facebook = :facebook
-            WHERE User_ID = :user_id";
 
-        $applicant_stmt = $conn->prepare($applicant_query);
-        $applicant_stmt->execute([
-            ':prefix' => htmlspecialchars($_POST['prefix']),
-            ':name' => htmlspecialchars($_POST['name']),
-            ':lastname' => htmlspecialchars($_POST['lastname']),
-            ':eng_name' => htmlspecialchars($_POST['eng_name']),
-            ':id_card_number' => htmlspecialchars($_POST['id_card_number']),
-            ':nickname' => htmlspecialchars($_POST['nickname']),
-            ':birth_day' => htmlspecialchars($_POST['birth_day']),
-            ':birth_month' => htmlspecialchars($_POST['birth_month']),
-            ':birth_year' => htmlspecialchars($_POST['birth_year']),
-            ':blood_group' => htmlspecialchars($_POST['blood_group']),
-            ':height' => htmlspecialchars($_POST['height']),
-            ':weight' => htmlspecialchars($_POST['weight']),
-            ':nationality' => htmlspecialchars($_POST['nationality']),
-            ':citizenship' => htmlspecialchars($_POST['citizenship']),
-            ':religion' => htmlspecialchars($_POST['religion']),
-            ':siblings_count' => htmlspecialchars($_POST['siblings_count']),
-            ':studying_siblings_count' => htmlspecialchars($_POST['studying_siblings_count']),
-            ':phone_number' => htmlspecialchars($_POST['phone_number']),
-            ':line_id' => htmlspecialchars($_POST['line_id']),
-            ':facebook' => htmlspecialchars($_POST['facebook']),
-            ':user_id' => $_SESSION['user_id']
-        ]);
+    $uploadp = $_FILES['profile_image']['name'];
+    $target_dir = "../config/uploads/";
 
-        // Current Address Table Update
-        $current_address_query = "UPDATE current_address SET 
-            house_number = :house_number,
-            village = :village,
-            lane = :lane,
-            road = :road,
-            sub_district = :sub_district,
-            district = :district,
-            province = :province,
-            postal_code = :postal_code
-            WHERE User_ID = :user_id";
+        if ($uploadp != '') {
+            $allow = array('jpg', 'jpeg', 'png');
+            $extension = explode('.', $profile_image['name']);
+            $fileActExt = strtolower(end($extension));
+            $fileNewp = rand() . "." . $fileActExt;  // rand function create the rand number 
+            $filePath = $target_dir .$fileNewp;
 
-        $current_address_stmt = $conn->prepare($current_address_query);
-        $current_address_stmt->execute([
-            ':house_number' => htmlspecialchars($_POST['house_number']),
-            ':village' => htmlspecialchars($_POST['village']),
-            ':lane' => htmlspecialchars($_POST['lane']),
-            ':road' => htmlspecialchars($_POST['road']),
-            ':sub_district' => htmlspecialchars($_POST['sub_district']),
-            ':district' => htmlspecialchars($_POST['district']),
-            ':province' => htmlspecialchars($_POST['province']),
-            ':postal_code' => htmlspecialchars($_POST['postal_code']),
-            ':user_id' => $_SESSION['user_id']
-        ]);
+            if (in_array($fileActExt, $allow)) {
+                if ($profile_image['size'] > 0 && $profile_image['error'] == 0) {
+                   move_uploaded_file($profile_image['tmp_name'], $filePath);
+                }
+            }
 
-        // Education Info Table Update
-        $education_info_query = "UPDATE education_info SET 
-            school_name = :school_name,
-            school_sub_district = :school_sub_district,
-            school_district = :school_district,
-            school_province = :school_province,
-            school_postal_code = :school_postal_code,
-            graduation_year = :graduation_year,
-            grade_result = :grade_result,
-            class_level = :class_level,
-            major = :major,
-            degree_other = :degree_other,
-            major_other = :major_other
-            WHERE User_ID = :user_id";
+        } else {
+            $fileNewp = $profile_image2;
+        }
+    $uploadt = $_FILES['transcript']['name'];
 
-        $education_info_stmt = $conn->prepare($education_info_query);
-        $education_info_stmt->execute([
-            ':school_name' => htmlspecialchars($_POST['school_name']),
-            ':school_sub_district' => htmlspecialchars($_POST['school_sub_district']),
-            ':school_district' => htmlspecialchars($_POST['school_district']),
-            ':school_province' => htmlspecialchars($_POST['school_province']),
-            ':school_postal_code' => htmlspecialchars($_POST['school_postal_code']),
-            ':graduation_year' => htmlspecialchars($_POST['graduation_year']),
-            ':grade_result' => htmlspecialchars($_POST['grade_result']),
-            ':class_level' => htmlspecialchars($_POST['class_level']),
-            ':major' => htmlspecialchars($_POST['major']),
-            ':degree_other' => htmlspecialchars($_POST['degree_other']),
-            ':major_other' => htmlspecialchars($_POST['major_other']),
-            ':user_id' => $_SESSION['user_id']
-        ]);
+        if ($uploadt != '') {
+            $allow = array('jpg', 'jpeg', 'png');
+            $extension = explode('.', $transcript['name']);
+            $fileActExt = strtolower(end($extension));
+            $fileNewt = rand() . "." . $fileActExt;  // rand function create the rand number 
+            $filePath = $target_dir .$fileNewt;
 
-        // Parent Info (Father, Mother, Guardian) Table Updates
-        $parent_info_query = "UPDATE parent_info SET 
-            father_name = :father_name,
-            father_status = :father_status,
-            father_occupation = :father_occupation,
-            father_income = :father_income,
-            father_house_number = :father_house_number,
-            father_village = :father_village,
-            father_lane = :father_lane,
-            father_road = :father_road,
-            father_sub_district = :father_sub_district,
-            father_district = :father_district,
-            father_province = :father_province,
-            father_postal_code = :father_postal_code,
-            father_phone_number = :father_phone_number,
-            mother_name = :mother_name,
-            mother_status = :mother_status,
-            mother_occupation = :mother_occupation,
-            mother_income = :mother_income,
-            mother_house_number = :mother_house_number,
-            mother_village = :mother_village,
-            mother_lane = :mother_lane,
-            mother_road = :mother_road,
-            mother_sub_district = :mother_sub_district,
-            mother_district = :mother_district,
-            mother_province = :mother_province,
-            mother_postal_code = :mother_postal_code,
-            mother_phone_number = :mother_phone_number,
-            guardian_name = :guardian_name,
-            guardian_relationship = :guardian_relationship,
-            guardian_house_number = :guardian_house_number,
-            guardian_village = :guardian_village,
-            guardian_lane = :guardian_lane,
-            guardian_road = :guardian_road,
-            guardian_sub_district = :guardian_sub_district,
-            guardian_district = :guardian_district,
-            guardian_province = :guardian_province,
-            guardian_postal_code = :guardian_postal_code,
-            guardian_phone_number = :guardian_phone_number
-            WHERE User_ID = :user_id";
+            if (in_array($fileActExt, $allow)) {
+                if ($transcript['size'] > 0 && $transcript['error'] == 0) {
+                   move_uploaded_file($transcript['tmp_name'], $filePath);
+                }
+            }
 
-        $parent_info_stmt = $conn->prepare($parent_info_query);
-        $parent_info_stmt->execute([
-            ':father_name' => htmlspecialchars($_POST['father_name']),
-            ':father_status' => htmlspecialchars($_POST['father_status']),
-            ':father_occupation' => htmlspecialchars($_POST['father_occupation']),
-            ':father_income' => htmlspecialchars($_POST['father_income']),
-            ':father_house_number' => htmlspecialchars($_POST['father_house_number']),
-            ':father_village' => htmlspecialchars($_POST['father_village']),
-            ':father_lane' => htmlspecialchars($_POST['father_lane']),
-            ':father_road' => htmlspecialchars($_POST['father_road']),
-            ':father_sub_district' => htmlspecialchars($_POST['father_sub_district']),
-            ':father_district' => htmlspecialchars($_POST['father_district']),
-            ':father_province' => htmlspecialchars($_POST['father_province']),
-            ':father_postal_code' => htmlspecialchars($_POST['father_postal_code']),
-            ':father_phone_number' => htmlspecialchars($_POST['father_phone_number']),
-            ':mother_name' => htmlspecialchars($_POST['mother_name']),
-            ':mother_status' => htmlspecialchars($_POST['mother_status']),
-            ':mother_occupation' => htmlspecialchars($_POST['mother_occupation']),
-            ':mother_income' => htmlspecialchars($_POST['mother_income']),
-            ':mother_house_number' => htmlspecialchars($_POST['mother_house_number']),
-            ':mother_village' => htmlspecialchars($_POST['mother_village']),
-            ':mother_lane' => htmlspecialchars($_POST['mother_lane']),
-            ':mother_road' => htmlspecialchars($_POST['mother_road']),
-            ':mother_sub_district' => htmlspecialchars($_POST['mother_sub_district']),
-            ':mother_district' => htmlspecialchars($_POST['mother_district']),
-            ':mother_province' => htmlspecialchars($_POST['mother_province']),
-            ':mother_postal_code' => htmlspecialchars($_POST['mother_postal_code']),
-            ':mother_phone_number' => htmlspecialchars($_POST['mother_phone_number']),
-            ':guardian_name' => htmlspecialchars($_POST['guardian_name']),
-            ':guardian_relationship' => htmlspecialchars($_POST['guardian_relationship']),
-            ':guardian_house_number' => htmlspecialchars($_POST['guardian_house_number']),
-            ':guardian_village' => htmlspecialchars($_POST['guardian_village']),
-            ':guardian_lane' => htmlspecialchars($_POST['guardian_lane']),
-            ':guardian_road' => htmlspecialchars($_POST['guardian_road']),
-            ':guardian_sub_district' => htmlspecialchars($_POST['guardian_sub_district']),
-            ':guardian_district' => htmlspecialchars($_POST['guardian_district']),
-            ':guardian_province' => htmlspecialchars($_POST['guardian_province']),
-            ':guardian_postal_code' => htmlspecialchars($_POST['guardian_postal_code']),
-            ':guardian_phone_number' => htmlspecialchars($_POST['guardian_phone_number']),
-            ':user_id' => $_SESSION['user_id']
-        ]);
+        } else {
+            $fileNewt = $transcript2;
+        }
+    $uploadh = $_FILES['house_registration']['name'];
 
-        // Commit transaction if all queries were successful
-        $conn->commit();
-        echo "<script>alert('Data updated successfully');</script>";
-        echo "<script>window.location.href = '../eddit.php';</script>";
-    } catch (Exception $e) {
-        // Rollback transaction in case of error
-        $conn->rollBack();
-        echo "<script>alert('Error updating data: " . $e->getMessage() . "');</script>";
-        echo "<script>window.location.href = '../eddit.php';</script>";
-    }
+        if ($uploadh != '') {
+            $allow = array('jpg', 'jpeg', 'png');
+            $extension = explode('.', $house_registration['name']);
+            $fileActExt = strtolower(end($extension));
+            $fileNewh = rand() . "." . $fileActExt;  // rand function create the rand number 
+            $filePath = $target_dir .$fileNewh;
+
+            if (in_array($fileActExt, $allow)) {
+                if ($house_registration['size'] > 0 && $house_registration['error'] == 0) {
+                   move_uploaded_file($house_registration['tmp_name'], $filePath);
+                }
+            }
+
+        } else {
+            $fileNewh = $house_registration2;
+        }
+    $uploadi = $_FILES['id_card']['name'];
+
+        if ($uploadi != '') {
+            $allow = array('jpg', 'jpeg', 'png');
+            $extension = explode('.', $id_card['name']);
+            $fileActExt = strtolower(end($extension));
+            $fileNewi = rand() . "." . $fileActExt;  // rand function create the rand number 
+            $filePath = $target_dir .$fileNewi;
+
+            if (in_array($fileActExt, $allow)) {
+                if ($id_card['size'] > 0 && $id_card['error'] == 0) {
+                   move_uploaded_file($id_card['tmp_name'], $filePath);
+                }
+            }
+
+        } else {
+            $fileNewi = $id_card2;
+        }
+    $uploads = $_FILES['slip2000']['name'];
+
+        if ($uploads != '') {
+            $allow = array('jpg', 'jpeg', 'png');
+            $extension = explode('.', $slip2000['name']);
+            $fileActExt = strtolower(end($extension));
+            $fileNews = rand() . "." . $fileActExt;  // rand function create the rand number 
+            $filePath = $target_dir .$fileNews;
+
+            if (in_array($fileActExt, $allow)) {
+                if ($slip2000['size'] > 0 && $slip2000['error'] == 0) {
+                   move_uploaded_file($slip2000['tmp_name'], $filePath);
+                }
+            }
+
+        } else {
+            $fileNews = $slip20002;
+        }
+
+    
+
+
+try {
+
+            $sql_update = $conn->prepare("UPDATE applicant SET
+                prefix = :prefix,
+                name = :name,
+                lastname = :lastname,
+                eng_name = :eng_name,
+                id_card_number = :id_card_number,
+                nickname = :nickname,
+                birth_day = :birth_day,
+                birth_month = :birth_month,
+                birth_year = :birth_year,
+                blood_group = :blood_group,
+                height = :height,
+                weight = :weight,
+                nationality = :nationality,
+                citizenship = :citizenship,
+                religion = :religion,
+                siblings_count = :siblings_count,
+                studying_siblings_count = :studying_siblings_count,
+                phone_number = :phone_number,
+                line_id = :line_id,
+                facebook = :facebook,
+                profile_image = :profile_image
+                WHERE User_ID = :user_id");
+
+            // ผูกค่าพารามิเตอร์กับตัวแปร
+            $sql_update->execute([
+                ':prefix' => $prefix,
+                ':name' => $name,
+                ':lastname' => $lastname,
+                ':eng_name' => $eng_name,
+                ':id_card_number' => $id_card_number,
+                ':nickname' => $nickname,
+                ':birth_day' => $birth_day,
+                ':birth_month' => $birth_month,
+                ':birth_year' => $birth_year,
+                ':blood_group' => $blood_group,
+                ':height' => $height,
+                ':weight' => $weight,
+                ':nationality' => $nationality,
+                ':citizenship' => $citizenship,
+                ':religion' => $religion,
+                ':siblings_count' => $siblings_count,
+                ':studying_siblings_count' => $studying_siblings_count,
+                ':phone_number' => $phone_number,
+                ':line_id' => $line_id,
+                ':facebook' => $facebook,
+                ':profile_image' => $fileNewp,
+                ':user_id' => $user_id
+            ]);
+
+            $sql_update = $conn->prepare("UPDATE current_address SET
+                house_number = :house_number,
+                village = :village,
+                lane = :lane,
+                road = :road,
+                sub_district = :sub_district,
+                district = :district,
+                province = :province,
+                postal_code = :postal_code
+                WHERE User_ID = :user_id");
+
+            // ผูกค่าพารามิเตอร์กับตัวแปร
+            $sql_update->bindParam(':house_number', $house_number);
+            $sql_update->bindParam(':village', $village);
+            $sql_update->bindParam(':lane', $lane);
+            $sql_update->bindParam(':road', $road);
+            $sql_update->bindParam(':sub_district', $sub_district);
+            $sql_update->bindParam(':district', $district);
+            $sql_update->bindParam(':province', $province);
+            $sql_update->bindParam(':postal_code', $postal_code);
+            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $sql_update->execute();
+
+            $sql_update = $conn->prepare("UPDATE education_info SET
+                school_name = :school_name,
+                school_sub_district = :school_sub_district,
+                school_district = :school_district,
+                school_province = :school_province,
+                school_postal_code = :school_postal_code,
+                graduation_year = :graduation_year,
+                grade_result = :grade_result,
+                class_level = :class_level,
+                major = :major,
+                degree_other = :degree_other,
+                major_other = :major_other
+                WHERE User_ID = :user_id");
+
+            // ผูกค่าพารามิเตอร์กับตัวแปร
+            $sql_update->bindParam(':school_name', $school_name);
+            $sql_update->bindParam(':school_sub_district', $school_sub_district);
+            $sql_update->bindParam(':school_district', $school_district);
+            $sql_update->bindParam(':school_province', $school_province);
+            $sql_update->bindParam(':school_postal_code', $school_postal_code);
+            $sql_update->bindParam(':graduation_year', $graduation_year);
+            $sql_update->bindParam(':grade_result', $grade_result);
+            $sql_update->bindParam(':class_level', $class_level);
+            $sql_update->bindParam(':major', $major);
+            $sql_update->bindParam(':degree_other', $degree_other);
+            $sql_update->bindParam(':major_other', $major_other);
+            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $sql_update->execute();
+
+            $sql_update = $conn->prepare("UPDATE parent_info SET
+                father_name = :father_name,
+                father_status = :father_status,
+                father_occupation = :father_occupation,
+                father_income = :father_income,
+                father_house_number = :father_house_number,
+                father_village = :father_village,
+                father_lane = :father_lane,
+                father_road = :father_road,
+                father_sub_district = :father_sub_district,
+                father_district = :father_district,
+                father_province = :father_province,
+                father_postal_code = :father_postal_code,
+                father_phone_number = :father_phone_number
+                WHERE User_ID = :user_id");
+
+            // ผูกค่าพารามิเตอร์กับตัวแปร
+            $sql_update->bindParam(':father_name', $father_name);
+            $sql_update->bindParam(':father_status', $father_status);
+            $sql_update->bindParam(':father_occupation', $father_occupation);
+            $sql_update->bindParam(':father_income', $father_income);
+            $sql_update->bindParam(':father_house_number', $father_house_number);
+            $sql_update->bindParam(':father_village', $father_village);
+            $sql_update->bindParam(':father_lane', $father_lane);
+            $sql_update->bindParam(':father_road', $father_road);
+            $sql_update->bindParam(':father_sub_district', $father_sub_district);
+            $sql_update->bindParam(':father_district', $father_district);
+            $sql_update->bindParam(':father_province', $father_province);
+            $sql_update->bindParam(':father_postal_code', $father_postal_code);
+            $sql_update->bindParam(':father_phone_number', $father_phone_number);
+            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $sql_update->execute();;
+
+            $sql_update = $conn->prepare("UPDATE parent_info SET
+                mother_name = :mother_name,
+                mother_status = :mother_status,
+                mother_occupation = :mother_occupation,
+                mother_income = :mother_income,
+                mother_house_number = :mother_house_number,
+                mother_village = :mother_village,
+                mother_lane = :mother_lane,
+                mother_road = :mother_road,
+                mother_sub_district = :mother_sub_district,
+                mother_district = :mother_district,
+                mother_province = :mother_province,
+                mother_postal_code = :mother_postal_code,
+                mother_phone_number = :mother_phone_number
+                WHERE User_ID = :user_id");
+
+            // ผูกค่าพารามิเตอร์กับตัวแปร
+            $sql_update->bindParam(':mother_name', $mother_name);
+            $sql_update->bindParam(':mother_status', $mother_status);
+            $sql_update->bindParam(':mother_occupation', $mother_occupation);
+            $sql_update->bindParam(':mother_income', $mother_income);
+            $sql_update->bindParam(':mother_house_number', $mother_house_number);
+            $sql_update->bindParam(':mother_village', $mother_village);
+            $sql_update->bindParam(':mother_lane', $mother_lane);
+            $sql_update->bindParam(':mother_road', $mother_road);
+            $sql_update->bindParam(':mother_sub_district', $mother_sub_district);
+            $sql_update->bindParam(':mother_district', $mother_district);
+            $sql_update->bindParam(':mother_province', $mother_province);
+            $sql_update->bindParam(':mother_postal_code', $mother_postal_code);
+            $sql_update->bindParam(':mother_phone_number', $mother_phone_number);
+            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $sql_update->execute();
+
+            $sql_update = $conn->prepare("UPDATE parent_info SET
+                guardian_name = :guardian_name,
+                guardian_relationship = :guardian_relationship,
+                guardian_house_number = :guardian_house_number,
+                guardian_village = :guardian_village,
+                guardian_lane = :guardian_lane,
+                guardian_road = :guardian_road,
+                guardian_sub_district = :guardian_sub_district,
+                guardian_district = :guardian_district,
+                guardian_province = :guardian_province,
+                guardian_postal_code = :guardian_postal_code,
+                guardian_phone_number = :guardian_phone_number
+                WHERE User_ID = :user_id");
+
+            // ผูกค่าพารามิเตอร์กับตัวแปร
+            $sql_update->bindParam(':guardian_name', $guardian_name);
+            $sql_update->bindParam(':guardian_relationship', $guardian_relationship);
+            $sql_update->bindParam(':guardian_house_number', $guardian_house_number);
+            $sql_update->bindParam(':guardian_village', $guardian_village);
+            $sql_update->bindParam(':guardian_lane', $guardian_lane);
+            $sql_update->bindParam(':guardian_road', $guardian_road);
+            $sql_update->bindParam(':guardian_sub_district', $guardian_sub_district);
+            $sql_update->bindParam(':guardian_district', $guardian_district);
+            $sql_update->bindParam(':guardian_province', $guardian_province);
+            $sql_update->bindParam(':guardian_postal_code', $guardian_postal_code);
+            $sql_update->bindParam(':guardian_phone_number', $guardian_phone_number);
+            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $sql_update->execute();
+
+
+            $sql_update = $conn->prepare("UPDATE form 
+            SET transcript = :transcript, 
+                id_card = :id_card, 
+                house_registration = :house_registration, 
+                slip2000 = :slip2000
+                 
+            WHERE User_ID = :user_id");
+
+            // ผูกค่าพารามิเตอร์กับตัวแปร
+            $sql_update->bindParam(':transcript', $fileNewt);
+            $sql_update->bindParam(':id_card', $fileNewi);
+            $sql_update->bindParam(':house_registration', $fileNewh);
+            $sql_update->bindParam(':slip2000', $fileNews);      
+            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $sql_update->execute();
+            
+
+            $_SESSION['success'] = "Data has been inserted or updated successfully";
+            header("Location: edituser.php");
+            exit();
+        } catch (PDOException $e) {
+            // กำหนดข้อความข้อผิดพลาดในเซสชันและเปลี่ยนเส้นทางกลับไปที่หน้าที่อยู่ปัจจุบัน
+            $_SESSION['error'] = "Database Error: " . $e->getMessage();
+            //  header("Location: eddit.php");
+            exit();
+        }
+        
 }
 ?>
+
+
 
 
 
@@ -492,7 +703,8 @@ if (isset($_POST['update'])) {
                                 <div class="col-md-3">
                                     <label for="facebook" class="form-label">Facebook</label>
                                     <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"]; ?>">
-                                    <input type="text" hidden class="form-control" name="User_ID" value="<?php echo $Data_view["User_ID"]; ?>">
+                                    <input type="hidden" class="form-control" name="User_ID" value="<?php echo htmlspecialchars($Data_view["User_ID"]); ?>">
+
                                     
                                 </div>
                                 <div class="col-md-6">

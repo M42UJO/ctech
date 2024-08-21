@@ -8,99 +8,121 @@ if (!isset($_SESSION['user_login'])) {
     exit;
 }
 
+
 // ตั้งค่าตำแหน่งเก็บไฟล์
 $target_dir = "uploads/";
 
-$files = [
-    'transcript',
-    'house_registration',
-    'id_card',
-    'slip2000'
-];
 
-$file_paths = [];
-$uploadOk = 1;
+    $transcript = $_FILES['transcript'];
+    $transcript2 = htmlspecialchars($_POST['transcript2']);
+    $house_registration = $_FILES['house_registration'];
+    $house_registration2 = htmlspecialchars($_POST['house_registration2']);
+    $id_card = $_FILES['id_card'];
+    $id_card2 = htmlspecialchars($_POST['id_card2']);
+    $slip2000 = $_FILES['slip2000'];
+    $slip20002 = htmlspecialchars($_POST['slip20002']);
+    $user_id = $_SESSION['user_login'];
 
-foreach ($files as $file) {
-    $file_name = basename($_FILES[$file]["name"]);
-    $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-    $unique_file_name = uniqid() . '.' . $file_extension;  // สร้างชื่อไฟล์ที่ไม่ซ้ำ
-    $target_file = $target_dir . $unique_file_name;
 
-    // ตรวจสอบว่าไฟล์เป็นรูปภาพจริงหรือไม่
-    if (isset($_POST["submit"])) {
-        $check = getimagesize($_FILES[$file]["tmp_name"]);
-        if ($check !== false) {
-            $uploadOk = 1;
+    $uploadt = $_FILES['transcript']['name'];
+
+        if ($uploadt != '') {
+            $allow = array('jpg', 'jpeg', 'png');
+            $extension = explode('.', $transcript['name']);
+            $fileActExt = strtolower(end($extension));
+            $fileNewt = rand() . "." . $fileActExt;  // rand function create the rand number 
+            $filePath = $target_dir .$fileNewt;
+
+            if (in_array($fileActExt, $allow)) {
+                if ($transcript['size'] > 0 && $transcript['error'] == 0) {
+                   move_uploaded_file($transcript['tmp_name'], $filePath);
+                }
+            }
+
         } else {
-            echo "ไฟล์ $file ไม่ใช่รูปภาพ.";
-            $uploadOk = 0;
+            $fileNewt = $transcript2;
         }
-    }
+    $uploadh = $_FILES['house_registration']['name'];
 
-    // ตรวจสอบว่าไฟล์มีอยู่แล้วหรือไม่
-    if (file_exists($target_file)) {
-        echo "ไฟล์ $file มีอยู่แล้ว.";
-        $uploadOk = 0;
-    }
+        if ($uploadh != '') {
+            $allow = array('jpg', 'jpeg', 'png');
+            $extension = explode('.', $house_registration['name']);
+            $fileActExt = strtolower(end($extension));
+            $fileNewh = rand() . "." . $fileActExt;  // rand function create the rand number 
+            $filePath = $target_dir .$fileNewh;
 
-    // ตรวจสอบขนาดไฟล์
-    if ($_FILES[$file]["size"] > 500000) {
-        echo "ไฟล์ $file ใหญ่เกินไป.";
-        $uploadOk = 0;
-    }
+            if (in_array($fileActExt, $allow)) {
+                if ($house_registration['size'] > 0 && $house_registration['error'] == 0) {
+                   move_uploaded_file($house_registration['tmp_name'], $filePath);
+                }
+            }
 
-    // อนุญาตเฉพาะไฟล์ที่เป็น JPG, JPEG, PNG
-    if ($file_extension != "jpg" && $file_extension != "png" && $file_extension != "jpeg") {
-        echo "ไฟล์ $file ต้องเป็น JPG, JPEG หรือ PNG เท่านั้น.";
-        $uploadOk = 0;
-    }
-
-    // ตรวจสอบว่า $uploadOk ถูกตั้งค่าเป็น 0 หรือไม่
-    if ($uploadOk == 0) {
-        echo "ไม่สามารถอัปโหลดไฟล์ $file ได้.";
-    } else {
-        if (move_uploaded_file($_FILES[$file]["tmp_name"], $target_file)) {
-            $file_paths[$file] = htmlspecialchars($unique_file_name);
         } else {
-            echo "เกิดข้อผิดพลาดในการอัปโหลดไฟล์ $file.";
+            $fileNewh = $house_registration2;
         }
-    }
-}
+    $uploadi = $_FILES['id_card']['name'];
 
-// บันทึกข้อมูลลงในฐานข้อมูล
-if (!empty($file_paths)) {
-    $user_id = $_SESSION['user_login'];  // ใช้ user_id จากเซสชั่น
-    $date = date('Y-m-d');  // วันที่ปัจจุบัน
+        if ($uploadi != '') {
+            $allow = array('jpg', 'jpeg', 'png');
+            $extension = explode('.', $id_card['name']);
+            $fileActExt = strtolower(end($extension));
+            $fileNewi = rand() . "." . $fileActExt;  // rand function create the rand number 
+            $filePath = $target_dir .$fileNewi;
 
-    // เตรียมคำสั่ง SQL สำหรับ PDO
-    $sql = "UPDATE form 
+            if (in_array($fileActExt, $allow)) {
+                if ($id_card['size'] > 0 && $id_card['error'] == 0) {
+                   move_uploaded_file($id_card['tmp_name'], $filePath);
+                }
+            }
+
+        } else {
+            $fileNewi = $id_card2;
+        }
+    $uploads = $_FILES['slip2000']['name'];
+
+        if ($uploads != '') {
+            $allow = array('jpg', 'jpeg', 'png');
+            $extension = explode('.', $slip2000['name']);
+            $fileActExt = strtolower(end($extension));
+            $fileNews = rand() . "." . $fileActExt;  // rand function create the rand number 
+            $filePath = $target_dir .$fileNews;
+
+            if (in_array($fileActExt, $allow)) {
+                if ($slip2000['size'] > 0 && $slip2000['error'] == 0) {
+                   move_uploaded_file($slip2000['tmp_name'], $filePath);
+                }
+            }
+
+        } else {
+            $fileNews = $slip20002;
+        }
+
+        try { $sql_update = $conn->prepare("UPDATE form 
             SET transcript = :transcript, 
                 id_card = :id_card, 
                 house_registration = :house_registration, 
-                slip2000 = :slip2000, 
+                slip2000 = :slip2000,
                 date = :date 
-            WHERE User_ID = :user_id";
-    $stmt = $conn->prepare($sql);
+                 
+            WHERE User_ID = :user_id");
 
-    // ผูกค่ากับพารามิเตอร์
-    $stmt->bindValue(':transcript', $file_paths['transcript'] ?? null, PDO::PARAM_STR);
-    $stmt->bindValue(':id_card', $file_paths['id_card'] ?? null, PDO::PARAM_STR);
-    $stmt->bindValue(':house_registration', $file_paths['house_registration'] ?? null, PDO::PARAM_STR);
-    $stmt->bindValue(':slip2000', $file_paths['slip2000'] ?? null, PDO::PARAM_STR);
-    $stmt->bindValue(':date', $date, PDO::PARAM_STR);
-    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+            // ผูกค่าพารามิเตอร์กับตัวแปร
+            $sql_update->bindParam(':transcript', $fileNewt);
+            $sql_update->bindParam(':id_card', $fileNewi);
+            $sql_update->bindParam(':house_registration', $fileNewh);
+            $sql_update->bindParam(':slip2000', $fileNews);      
+            $sql_update->bindParam(':date', $date);      
+            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $sql_update->execute();
+            
 
-    // ทำการ execute คำสั่ง
-    if ($stmt->execute()) {
-        echo "ข้อมูลได้ถูกอัปเดตเรียบร้อยแล้ว.";
-        header('Location: ../Evidence.php');
-    } else {
-        echo "เกิดข้อผิดพลาดในการอัปเดตข้อมูล.";
-    }
-
-    $stmt->closeCursor(); // ปิด cursor
-}
-
-$conn = null; // ปิดการเชื่อมต่อฐานข้อมูล
+            $_SESSION['success'] = "Data has been inserted or updated successfully";
+            header("Location: edituser.php");
+            exit();
+        } catch (PDOException $e) {
+            // กำหนดข้อความข้อผิดพลาดในเซสชันและเปลี่ยนเส้นทางกลับไปที่หน้าที่อยู่ปัจจุบัน
+            $_SESSION['error'] = "Database Error: " . $e->getMessage();
+            //  header("Location: eddit.php");
+            exit();
+        }
 ?>
