@@ -3,6 +3,10 @@ session_start();
 require_once("../config/db.php");
 
 
+
+
+
+
 ?>
 
 
@@ -86,16 +90,15 @@ require_once("../config/db.php");
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Tables</h1>
+                    <h1 class="">Edit Users</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Tables</li>
+                        <li class="breadcrumb-item active">Edit Users</li>
                     </ol>
-                    
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             Applicant
+                        </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
@@ -103,51 +106,92 @@ require_once("../config/db.php");
                                         <th>No.</th>
                                         <th>Name</th>
                                         <th>Lastname</th>
-                                        <th>Username</th>
-                                        <th>Id_card_number</th>
-                                        
+                                        <th>Email</th>
+                                        <th>Id Card Number</th>
+                                        <th>coursetype</th>
+                                        <th>educationlevel</th>
+                                        <th>subjecttype</th>
+                                        <th>major</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
-                                    <?php
-                                    $stmt = $conn->query("SELECT * FROM applicant");
-                                    $stmt->execute();
-                                    $users = $stmt->fetchAll();
+                                <?php
+                                    // เตรียมคำสั่ง SQL
+                                    $stmt = $conn->prepare("
+                                                            SELECT 
+                                                                u.*, 
+                                                                p.*, 
+                                                                f.*, 
+                                                                e.*, 
+                                                                c.*, 
+                                                                a.*,
+                                                                major.Major_Name,
+                                                                subjecttype.Type_Name,
+                                                                educationlevel.Level_Name,
+                                                                coursetype.CourseType_Name
+                                                            FROM 
+                                                                user u
+                                                            LEFT JOIN 
+                                                                parent_info p ON u.User_ID = p.User_ID
+                                                            LEFT JOIN 
+                                                                form f ON u.User_ID = f.User_ID
+                                                            LEFT JOIN 
+                                                                education_info e ON u.User_ID = e.User_ID
+                                                            LEFT JOIN 
+                                                                current_address c ON u.User_ID = c.User_ID
+                                                            LEFT JOIN 
+                                                                applicant a ON u.User_ID = a.User_ID
+                                                            LEFT JOIN 
+                                                                major ON f.Major_ID = major.Major_ID
+                                                            LEFT JOIN 
+                                                                subjecttype ON major.Type_ID = subjecttype.Type_ID
+                                                            LEFT JOIN 
+                                                                educationlevel ON subjecttype.Level_ID = educationlevel.Level_ID
+                                                            LEFT JOIN 
+                                                                coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
+                                                        ");
 
-                                    if (!$users) {
-                                        echo "<p><td colspan='6' class='text-center'>No data available</td></p>";
+                                   
+
+                                    // ประมวลผลคำสั่ง
+                                    $stmt->execute();
+
+                                    // ดึงข้อมูลทั้งหมด
+                                    $applicants = $stmt->fetchAll();
+
+                                    if (!$applicants) {
+                                        echo "<tr><td colspan='6' class='text-center'>No data available</td></tr>";
                                     } else {
-                                        foreach ($users as $user) {
+                                        foreach ($applicants as $applicant) {
                                     ?>
                                             <tr>
-                                                <th scope="row"><?php echo $user['User_ID']; ?></th>
-                                                <td><?php echo $user['name']; ?></td>
-                                                <td><?php echo $user['lastname']; ?></td>
-                                                <td><?php echo $user['email']; ?></td>
-                                                <td><?php echo $user['id_card_number']; ?></td>
-                                                
+                                                <th scope="row"><?php echo htmlspecialchars($applicant['User_ID']); ?></th>
+                                                <td><?php echo htmlspecialchars($applicant['name']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['lastname']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['email']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['id_card_number']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['CourseType_Name']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['Level_Name']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['Type_Name']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['Major_Name']); ?></td>
+                                                <td>
+                                                    <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-success">View</a>
+                                                </td>
                                             </tr>
-                                    <?php }
-                                    } ?>
+                                    <?php 
+                                        }
+                                    } 
+                                    ?>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                </div>
+
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a> &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
