@@ -90,9 +90,9 @@ require_once("../config/db.php");
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="">Edit Users</h1>
+                    <h1 class="">Users Data Tables</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Edit Users</li>
+                        <li class="breadcrumb-item active">ตารางข้อมูล ผู้สมัคร</li>
                     </ol>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
@@ -176,7 +176,9 @@ require_once("../config/db.php");
                                                 <td><?php echo htmlspecialchars($applicant['Type_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Major_Name']); ?></td>
                                                 <td>
-                                                    <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-success">View</a>
+                                                    <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary" ><i class="fa-solid fa-eye"></i></a>
+                                                    <a href="" class="btn btn-danger" style="width: 43px;"><i class="fa-solid fa-xmark"></i></a>
+                                                    <a href="" class="btn btn-success" style="width: 43px;"><i class="fa-solid fa-check"></i></a>
                                                 </td>
                                             </tr>
                                     <?php 

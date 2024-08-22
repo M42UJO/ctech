@@ -93,9 +93,9 @@ require_once("../config/db.php");
 
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="">Edit data</h1>
+                    <h1 class="">User Data</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Edit data</li>
+                        <li class="breadcrumb-item active">ข้อมูลผู้สมัคร</li>
                     </ol>
                     <div class="panel panel-default mb-5">
 
@@ -154,7 +154,7 @@ require_once("../config/db.php");
 
                                 <div class="panel-heading">ข้อมูลส่วนตัว</div>
                                 <div class="col-md-2">
-                                    <label for="prefix" class="form-label">คำนำหน้า <span class="required">**</span></label>
+                                    <label for="prefix" class="form-label">คำนำหน้า </label>
                                     <select id="prefix" class="form-select" name="prefix" required>
                                         <option value="">==เลือก==</option>
                                         <option value="Mr" <?php echo ($Data_view["prefix"] == "Mr") ? 'selected' : ''; ?>>นาย</option>
@@ -164,27 +164,27 @@ require_once("../config/db.php");
 
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="first-name" class="form-label">ชื่อ <span class="required">**</span></label>
-                                    <input type="text" id="first-name" class="form-control" placeholder="ชื่อ" name="name" value="<?php echo $Data_view["name"]; ?>" required>
+                                    <label for="first-name" class="form-label">ชื่อ </label>
+                                    <input type="text" id="first-name" class="form-control" placeholder="ชื่อ" name="name" value="<?php echo $Data_view["name"]; ?>" readonly required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="last-name" class="form-label">สกุล <span class="required">**</span></label>
-                                    <input type="text" id="last-name" class="form-control" placeholder="สกุล" name="lastname" value="<?php echo $Data_view["lastname"]; ?>" required>
+                                    <label for="last-name" class="form-label">สกุล </label>
+                                    <input type="text" id="last-name" class="form-control" placeholder="สกุล" name="lastname" value="<?php echo $Data_view["lastname"]; ?>" readonly required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="full-name-eng" class="form-label">ชื่อ - สกุล อังกฤษ <span class="required">**</span></label>
-                                    <input type="text" id="full-name-eng" class="form-control" placeholder="ชื่อ - สกุล อังกฤษ" name="eng_name" value="<?php echo $Data_view["eng_name"]; ?>" required>
+                                    <label for="full-name-eng" class="form-label">ชื่อ - สกุล อังกฤษ </label>
+                                    <input type="text" id="full-name-eng" class="form-control" placeholder="ชื่อ - สกุล อังกฤษ" name="eng_name" value="<?php echo $Data_view["eng_name"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="id-number" class="form-label">เลขบัตรประชาชน <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                    <input type="text" class="form-control" id="thai-id" maxlength="17" placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $Data_view["id_card_number"]; ?>" required>
+                                    <label for="id-number" class="form-label">เลขบัตรประชาชน </label>
+                                    <input type="text" class="form-control" id="thai-id" maxlength="17" placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $Data_view["id_card_number"]; ?>" readonly required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="nickname" class="form-label">ชื่อเล่น</label>
-                                    <input type="text" id="nickname" class="form-control" placeholder="ชื่อเล่น" name="nickname" value="<?php echo $Data_view["nickname"]; ?>">
+                                    <input type="text" id="nickname" class="form-control" placeholder="ชื่อเล่น" name="nickname" value="<?php echo $Data_view["nickname"]; ?>" readonly>
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="birth_day" class="form-label">วันเกิด <span class="required">**</span></label>
+                                    <label for="birth_day" class="form-label">วันเกิด </label>
                                     <select id="birth_day" class="form-select" name="birth_day" required>
                                         <option value="">==เลือก==</option>
                                         <?php
@@ -197,7 +197,7 @@ require_once("../config/db.php");
 
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="birth-month" class="form-label">เดือนเกิด <span class="required">**</span></label>
+                                    <label for="birth-month" class="form-label">เดือนเกิด </label>
                                     <select id="birth-month" class="form-select" name="birth_month" required>
                                         <option value="">==เลือก==</option>
                                         <?php
@@ -225,7 +225,7 @@ require_once("../config/db.php");
 
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="birth-year" class="form-label">ปีเกิด <span class="required">**</span></label>
+                                    <label for="birth-year" class="form-label">ปีเกิด </label>
                                     <select id="birth-year" class="form-select" name="birth_year" required>
                                         <option value="">==เลือก==</option>
                                         <?php
@@ -242,7 +242,7 @@ require_once("../config/db.php");
 
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="blood-group" class="form-label">กรุ๊ปเลือด <span class="required">**</span></label>
+                                    <label for="blood-group" class="form-label">กรุ๊ปเลือด </label>
                                     <select id="blood-group" class="form-select" name="blood_group" required>
                                         <option value="">==เลือก==</option>
                                         <option value="A" <?php echo ($Data_view["blood_group"] == "A") ? 'selected' : ''; ?>>A</option>
@@ -253,53 +253,53 @@ require_once("../config/db.php");
                                 </div>
 
                                 <div class="col-md-2">
-                                    <label for="height" class="form-label">ส่วนสูง <span class="required">**</span></label>
-                                    <input type="number" id="height" class="form-control" min="0" placeholder="ส่วนสูง" name="height" value="<?php echo $Data_view["height"]; ?>" required>
+                                    <label for="height" class="form-label">ส่วนสูง </label>
+                                    <input type="number" id="height" class="form-control" min="0" placeholder="ส่วนสูง" name="height" value="<?php echo $Data_view["height"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="weight" class="form-label">น้ำหนัก <span class="required">**</span></label>
-                                    <input type="number" id="weight" class="form-control" min="0" placeholder="น้ำหนัก" name="weight" value="<?php echo $Data_view["weight"]; ?>" required>
+                                    <label for="weight" class="form-label">น้ำหนัก </label>
+                                    <input type="number" id="weight" class="form-control" min="0" placeholder="น้ำหนัก" name="weight" value="<?php echo $Data_view["weight"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="nationality" class="form-label">เชื้อชาติ <span class="required">**</span></label>
-                                    <input type="text" id="nationality" class="form-control" placeholder="เชื้อชาติ" name="nationality" value="<?php echo $Data_view["nationality"]; ?>" required>
+                                    <label for="nationality" class="form-label">เชื้อชาติ </label>
+                                    <input type="text" id="nationality" class="form-control" placeholder="เชื้อชาติ" name="nationality" value="<?php echo $Data_view["nationality"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="citizenship" class="form-label">สัญชาติ <span class="required">**</span></label>
-                                    <input type="text" id="citizenship" class="form-control" placeholder="สัญชาติ" name="citizenship" value="<?php echo $Data_view["citizenship"]; ?>" required>
+                                    <label for="citizenship" class="form-label">สัญชาติ </label>
+                                    <input type="text" id="citizenship" class="form-control" placeholder="สัญชาติ" name="citizenship" value="<?php echo $Data_view["citizenship"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="religion" class="form-label">ศาสนา <span class="required">**</span></label>
-                                    <input type="text" id="religion" class="form-control" placeholder="ศาสนา" name="religion" value="<?php echo $Data_view["religion"]; ?>" required>
+                                    <label for="religion" class="form-label">ศาสนา </label>
+                                    <input type="text" id="religion" class="form-control" placeholder="ศาสนา" name="religion" value="<?php echo $Data_view["religion"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="siblings" class="form-label">จำนวนพี่น้อง <span class="required">**</span></label>
-                                    <input type="number" id="siblings" class="form-control" min="0" placeholder="จำนวนพี่น้อง" name="siblings_count" value="<?php echo $Data_view["siblings_count"]; ?>" required>
+                                    <label for="siblings" class="form-label">จำนวนพี่น้อง </label>
+                                    <input type="number" id="siblings" class="form-control" min="0" placeholder="จำนวนพี่น้อง" name="siblings_count" value="<?php echo $Data_view["siblings_count"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="current-siblings" class="form-label">จำนวนพี่น้องที่กำลังศึกษาอยู่ <span class="required">**</span></label>
-                                    <input type="number" id="current-siblings" class="form-control" min="0" placeholder="จำนวนพี่น้องที่กำลังศึกษาอยู่" name="studying_siblings_count" value="<?php echo $Data_view["studying_siblings_count"]; ?>" required>
+                                    <label for="current-siblings" class="form-label">จำนวนพี่น้องที่กำลังศึกษาอยู่ </label>
+                                    <input type="number" id="current-siblings" class="form-control" min="0" placeholder="จำนวนพี่น้องที่กำลังศึกษาอยู่" name="studying_siblings_count" value="<?php echo $Data_view["studying_siblings_count"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="phone" class="form-label">เบอร์โทร <span class="required">**</span></label>
-                                    <input type="tel" id="phone" class="form-control" name="phone_number" value="<?php echo $Data_view["phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="xxx-xxx-xxxx">
+                                    <label for="phone" class="form-label">เบอร์โทร </label>
+                                    <input type="tel" id="phone" class="form-control" name="phone_number" value="<?php echo $Data_view["phone_number"]; ?>"readonly required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="xxx-xxx-xxxx">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="line-id" class="form-label">LineID</label>
-                                    <input type="text" id="line-id" class="form-control" placeholder="LineID" name="line_id" value="<?php echo $Data_view["line_id"]; ?>">
+                                    <input type="text" id="line-id" class="form-control" placeholder="LineID" name="line_id" value="<?php echo $Data_view["line_id"]; ?>"readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="facebook" class="form-label">Facebook</label>
-                                    <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"]; ?>">
+                                    <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"]; ?>"readonly>
                                     <input type="hidden" class="form-control" name="User_ID" value="<?php echo htmlspecialchars($Data_view["User_ID"]); ?>">
 
 
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
+                                    <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง </label>
                                     <input type="file" id="imgInput" class="form-control" name="profile_image" accept=".jpg,.jpeg,.png">
                                     <a href="../config/uploads/<?php echo $Data_view["profile_image"]; ?>" data-lightbox="image-1" data-title="My caption">
-                                        <img id="previewImg" src="../config/uploads/<?php echo $Data_view["profile_image"]; ?>" width="50%" alt="">
+                                        <img class="img-thumbnail" id="previewImg" src="../config/uploads/<?php echo $Data_view["profile_image"]; ?>" width="50%" alt="">
                                     </a>
 
                                     <input type="hidden" class="form-control" name="profile_image2" value="<?php echo $Data_view["profile_image"]; ?>">
@@ -310,36 +310,36 @@ require_once("../config/db.php");
 
                                 <div class="panel-heading mt-5">ที่อยู่ปัจจุบัน</div>
                                 <div class="col-md-2">
-                                    <label class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="house_number" value="<?php echo $Data_view["house_number"]; ?>" required>
+                                    <label class="form-label">บ้านเลขที่ </label>
+                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="house_number" value="<?php echo $Data_view["house_number"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-1">
-                                    <label class="form-label">หมู่ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="หมู่ " name="village" value="<?php echo $Data_view["village"]; ?>" required>
+                                    <label class="form-label">หมู่ </label>
+                                    <input class="form-control " type="text " placeholder="หมู่ " name="village" value="<?php echo $Data_view["village"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">ซอย </label>
-                                    <input class="form-control " type="text " placeholder="ซอย " name="lane" value="<?php echo $Data_view["lane"]; ?>">
+                                    <input class="form-control " type="text " placeholder="ซอย " name="lane" value="<?php echo $Data_view["lane"]; ?>"readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">ถนน </label>
-                                    <input class="form-control " type="text " placeholder="ถนน " name="road" value="<?php echo $Data_view["road"]; ?>">
+                                    <input class="form-control " type="text " placeholder="ถนน " name="road" value="<?php echo $Data_view["road"]; ?>"readonly>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">ตำบล <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="ตำบล " name="sub_district" value="<?php echo $Data_view["sub_district"]; ?>" required>
+                                    <label class="form-label">ตำบล </label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="sub_district" value="<?php echo $Data_view["sub_district"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">อำเภอ <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="อำเภอ " name="district" value="<?php echo $Data_view["district"]; ?>" required>
+                                    <label class="form-label">อำเภอ </label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="district" value="<?php echo $Data_view["district"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">จังหวัด <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="จังหวัด " name="province" value="<?php echo $Data_view["province"]; ?>" required>
+                                    <label class="form-label">จังหวัด </label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="province" value="<?php echo $Data_view["province"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="postal_code" maxlength="5" value="<?php echo $Data_view["postal_code"]; ?>" required>
+                                    <label class="form-label">รหัสไปรษณีย์ </label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="postal_code" maxlength="5" value="<?php echo $Data_view["postal_code"]; ?>"readonly required>
                                 </div>
 
 
@@ -350,35 +350,35 @@ require_once("../config/db.php");
 
                                 <div class="panel-heading mt-5">ข้อมูลการศึกษา</div>
                                 <div class="col-md-8">
-                                    <label class="form-label">จบจากโรงเรียน <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="จบจากโรงเรียน " name="school_name" value="<?php echo $Data_view["school_name"]; ?>" required>
+                                    <label class="form-label">จบจากโรงเรียน </label>
+                                    <input class="form-control " type="text " placeholder="จบจากโรงเรียน " name="school_name" value="<?php echo $Data_view["school_name"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">ตำบล <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="ตำบล " name="school_sub_district" value="<?php echo $Data_view["school_sub_district"]; ?>" required>
+                                    <label class="form-label">ตำบล </label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="school_sub_district" value="<?php echo $Data_view["school_sub_district"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">อำเภอ <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="อำเภอ " name="school_district" value="<?php echo $Data_view["school_district"]; ?>" required>
+                                    <label class="form-label">อำเภอ </label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="school_district" value="<?php echo $Data_view["school_district"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">จังหวัด <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="จังหวัด " name="school_province" value="<?php echo $Data_view["school_province"]; ?>" required>
+                                    <label class="form-label">จังหวัด </label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="school_province" value="<?php echo $Data_view["school_province"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="school_postal_code" value="<?php echo $Data_view["school_postal_code"]; ?>" maxlength="5 " required>
+                                    <label class="form-label">รหัสไปรษณีย์ </label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="school_postal_code" value="<?php echo $Data_view["school_postal_code"]; ?>" maxlength="5 "readonly required>
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">จบเมื่อ พ.ศ. <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="graduation_year" value="<?php echo $Data_view["graduation_year"]; ?>" required>
+                                    <label class="form-label">จบเมื่อ พ.ศ. </label>
+                                    <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="graduation_year" value="<?php echo $Data_view["graduation_year"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">ผลการเรียน <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="ผลการเรียน " name="grade_result" value="<?php echo $Data_view["grade_result"]; ?>" required>
+                                    <label class="form-label">ผลการเรียน </label>
+                                    <input type="text " class="form-control " placeholder="ผลการเรียน " name="grade_result" value="<?php echo $Data_view["grade_result"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">ระดับชั้น <span class="required">**</span></label>
+                                    <label class="form-label">ระดับชั้น </label>
                                     <select class="form-select" name="class_level" required>
                                         <option value="">==เลือก==</option>
                                         <option value="ม.3" <?php echo ($Data_view["class_level"] == "ม.3") ? 'selected' : ''; ?>>ม.3</option>
@@ -389,15 +389,15 @@ require_once("../config/db.php");
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">สาขาวิชา </label>
-                                    <input type="text " class="form-control " placeholder="สาขาวิชา" name="major" value="<?php echo $Data_view["major"]; ?>">
+                                    <input type="text " class="form-control " placeholder="สาขาวิชา" name="major" value="<?php echo $Data_view["major"]; ?>"readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">วุฒิการศึกษาอื่นๆ </label>
-                                    <input type="text " class="form-control " placeholder="วุฒิการศึกษาอื่นๆ" name="degree_other" value="<?php echo $Data_view["degree_other"]; ?>">
+                                    <input type="text " class="form-control " placeholder="วุฒิการศึกษาอื่นๆ" name="degree_other" value="<?php echo $Data_view["degree_other"]; ?>"readonly>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">สาขาวิชา </label>
-                                    <input type="text " class="form-control " placeholder="สาขาวิชา " name="major_other" value="<?php echo $Data_view["major_other"]; ?>">
+                                    <input type="text " class="form-control " placeholder="สาขาวิชา " name="major_other" value="<?php echo $Data_view["major_other"]; ?>"readonly>
                                 </div>
 
 
@@ -408,11 +408,11 @@ require_once("../config/db.php");
 
                                 <div class="panel-heading mt-5">ข้อมูลบิดา</div>
                                 <div class="col-md-4">
-                                    <label class="form-label">บิดาชื่อ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="บิดาชื่อ" name="father_name" value="<?php echo $Data_view["father_name"]; ?>" required>
+                                    <label class="form-label">บิดาชื่อ </label>
+                                    <input class="form-control " type="text " placeholder="บิดาชื่อ" name="father_name" value="<?php echo $Data_view["father_name"]; ?>"readonly required>
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">สถานะ <span class="required">**</span></label>
+                                    <label class="form-label">สถานะ </label>
                                     <select class="form-control" name="father_status" required>
                                         <option value="">==เลือก==</option>
                                         <option value="มีชีวิต" <?php echo ($Data_view["father_status"] == "มีชีวิต") ? 'selected' : ''; ?>>มีชีวิต</option>
@@ -421,48 +421,48 @@ require_once("../config/db.php");
 
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">อาชีพ <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="อาชีพ " name="father_occupation" value="<?php echo $Data_view["father_occupation"]; ?>" required=" ">
+                                    <label class="form-label">อาชีพ </label>
+                                    <input type="text " class="form-control " placeholder="อาชีพ " name="father_occupation" value="<?php echo $Data_view["father_occupation"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">รายได้/เดือน <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="รายได้/เดือน " name="father_income" value="<?php echo $Data_view["father_income"]; ?>" required=" ">
+                                    <label class="form-label">รายได้/เดือน </label>
+                                    <input type="text " class="form-control " placeholder="รายได้/เดือน " name="father_income" value="<?php echo $Data_view["father_income"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="father_house_number" value="<?php echo $Data_view["father_house_number"]; ?>" required=" ">
+                                    <label class="form-label">บ้านเลขที่ </label>
+                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="father_house_number" value="<?php echo $Data_view["father_house_number"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-1">
-                                    <label class="form-label">หมู่ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="หมู่ " name="father_village" value="<?php echo $Data_view["father_village"]; ?>" required=" ">
+                                    <label class="form-label">หมู่ </label>
+                                    <input class="form-control " type="text " placeholder="หมู่ " name="father_village" value="<?php echo $Data_view["father_village"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">ซอย </label>
-                                    <input class="form-control " type="text " placeholder="ซอย " name="father_lane" value="<?php echo $Data_view["father_lane"]; ?>" required=" ">
+                                    <input class="form-control " type="text " placeholder="ซอย " name="father_lane" value="<?php echo $Data_view["father_lane"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">ถนน </label>
-                                    <input class="form-control " type="text " placeholder="ถนน " name="father_road" value="<?php echo $Data_view["father_road"]; ?>" required=" ">
+                                    <input class="form-control " type="text " placeholder="ถนน " name="father_road" value="<?php echo $Data_view["father_road"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">ตำบล <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="ตำบล " name="father_sub_district" value="<?php echo $Data_view["father_sub_district"]; ?>" required=" ">
+                                    <label class="form-label">ตำบล </label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="father_sub_district" value="<?php echo $Data_view["father_sub_district"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">อำเภอ <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="อำเภอ " name="father_district" value="<?php echo $Data_view["father_district"]; ?>" required=" ">
+                                    <label class="form-label">อำเภอ </label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="father_district" value="<?php echo $Data_view["father_district"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">จังหวัด <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="จังหวัด " name="father_province" value="<?php echo $Data_view["father_province"]; ?>" required=" ">
+                                    <label class="form-label">จังหวัด </label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="father_province" value="<?php echo $Data_view["father_province"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="father_postal_code" value="<?php echo $Data_view["father_postal_code"]; ?>" maxlength="5 " required=" ">
+                                    <label class="form-label">รหัสไปรษณีย์ </label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="father_postal_code" value="<?php echo $Data_view["father_postal_code"]; ?>"readonly maxlength="5 " required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="phone" class="form-label">เบอร์โทรบิดา<span class="required">**</span></label>
-                                    <input type="tel" id="phone" class="form-control" name="father_phone_number" value="<?php echo $Data_view["father_phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
+                                    <label for="phone" class="form-label">เบอร์โทรบิดา</label>
+                                    <input type="tel" id="phone" class="form-control" name="father_phone_number" value="<?php echo $Data_view["father_phone_number"]; ?>"readonly required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
                                 </div>
 
 
@@ -473,11 +473,11 @@ require_once("../config/db.php");
 
                                 <div class="panel-heading mt-5">ข้อมูลมารดา</div>
                                 <div class="col-md-4">
-                                    <label for="prefix" class="form-label">มารดาชื่อ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="มารดาชื่อ " name="mother_name" value="<?php echo $Data_view["mother_name"]; ?>" required=" ">
+                                    <label for="prefix" class="form-label">มารดาชื่อ </label>
+                                    <input class="form-control " type="text " placeholder="มารดาชื่อ " name="mother_name" value="<?php echo $Data_view["mother_name"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="first-name" class="form-label">สถานะ <span class="required">**</span></label>
+                                    <label for="first-name" class="form-label">สถานะ </label>
                                     <select class="form-control" name="mother_status" required>
                                         <option value="">==เลือก==</option>
                                         <option value="มีชีวิต" <?php echo ($Data_view["mother_status"] == "มีชีวิต") ? 'selected' : ''; ?>>มีชีวิต</option>
@@ -485,48 +485,48 @@ require_once("../config/db.php");
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="last-name" class="form-label">อาชีพ <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="อาชีพ " name="mother_occupation" value="<?php echo $Data_view["mother_occupation"]; ?>" required=" ">
+                                    <label for="last-name" class="form-label">อาชีพ </label>
+                                    <input type="text " class="form-control " placeholder="อาชีพ " name="mother_occupation" value="<?php echo $Data_view["mother_occupation"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="full-name-eng" class="form-label">รายได้/เดือน <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="รายได้/เดือน " name="mother_income" value="<?php echo $Data_view["mother_income"]; ?>" required=" ">
+                                    <label for="full-name-eng" class="form-label">รายได้/เดือน </label>
+                                    <input type="text " class="form-control " placeholder="รายได้/เดือน " name="mother_income" value="<?php echo $Data_view["mother_income"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="prefix" class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="mother_house_number" value="<?php echo $Data_view["mother_house_number"]; ?>" required=" ">
+                                    <label for="prefix" class="form-label">บ้านเลขที่ </label>
+                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="mother_house_number" value="<?php echo $Data_view["mother_house_number"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-1">
-                                    <label for="prefix" class="form-label">หมู่ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="หมู่ " name="mother_village" value="<?php echo $Data_view["mother_village"]; ?>" required=" ">
+                                    <label for="prefix" class="form-label">หมู่ </label>
+                                    <input class="form-control " type="text " placeholder="หมู่ " name="mother_village" value="<?php echo $Data_view["mother_village"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="prefix" class="form-label">ซอย </label>
-                                    <input class="form-control " type="text " placeholder="ซอย " name="mother_lane" value="<?php echo $Data_view["mother_lane"]; ?>" required=" ">
+                                    <input class="form-control " type="text " placeholder="ซอย " name="mother_lane" value="<?php echo $Data_view["mother_lane"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="prefix" class="form-label">ถนน </label>
-                                    <input class="form-control " type="text " placeholder="ถนน " name="mother_road" value="<?php echo $Data_view["mother_road"]; ?>" required=" ">
+                                    <input class="form-control " type="text " placeholder="ถนน " name="mother_road" value="<?php echo $Data_view["mother_road"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="first-name" class="form-label">ตำบล <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="ตำบล " name="mother_sub_district" value="<?php echo $Data_view["mother_sub_district"]; ?>" required=" ">
+                                    <label for="first-name" class="form-label">ตำบล </label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="mother_sub_district" value="<?php echo $Data_view["mother_sub_district"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="last-name" class="form-label">อำเภอ <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="อำเภอ " name="mother_district" value="<?php echo $Data_view["mother_district"]; ?>" required=" ">
+                                    <label for="last-name" class="form-label">อำเภอ </label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="mother_district" value="<?php echo $Data_view["mother_district"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="full-name-eng" class="form-label">จังหวัด <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="จังหวัด " name="mother_province" value="<?php echo $Data_view["mother_province"]; ?>" required=" ">
+                                    <label for="full-name-eng" class="form-label">จังหวัด </label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="mother_province" value="<?php echo $Data_view["mother_province"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="id-number" class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="mother_postal_code" value="<?php echo $Data_view["mother_postal_code"]; ?>" maxlength="5 " required=" ">
+                                    <label for="id-number" class="form-label">รหัสไปรษณีย์ </label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="mother_postal_code" value="<?php echo $Data_view["mother_postal_code"]; ?>" maxlength="5 "readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="phone" class="form-label">เบอร์โทรมารดา<span class="required">**</span></label>
-                                    <input type="tel" id="phone" class="form-control" name="mother_phone_number" value="<?php echo $Data_view["mother_phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
+                                    <label for="phone" class="form-label">เบอร์โทรมารดา</label>
+                                    <input type="tel" id="phone" class="form-control" name="mother_phone_number" value="<?php echo $Data_view["mother_phone_number"]; ?>"readonly required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
                                 </div>
 
 
@@ -537,49 +537,49 @@ require_once("../config/db.php");
 
                                 <div class="panel-heading mt-5">ข้อมูลผู้ปกครอง</div>
                                 <div class="col-md-8">
-                                    <label for="prefix" class="form-label">ผู้ปกครอง<span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="ชื่อผู้ปกครอง " name="guardian_name" value="<?php echo $Data_view["guardian_name"]; ?>" required=" ">
+                                    <label for="prefix" class="form-label">ผู้ปกครอง</label>
+                                    <input class="form-control " type="text " placeholder="ชื่อผู้ปกครอง " name="guardian_name" value="<?php echo $Data_view["guardian_name"]; ?>"readonly required=" ">
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="last-name" class="form-label">ความสัมพันธ์ <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="ความสัมพันธ์ " name="guardian_relationship" value="<?php echo $Data_view["guardian_relationship"]; ?>" required=" ">
+                                    <label for="last-name" class="form-label">ความสัมพันธ์ </label>
+                                    <input type="text " class="form-control " placeholder="ความสัมพันธ์ " name="guardian_relationship" value="<?php echo $Data_view["guardian_relationship"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="prefix" class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="guardian_house_number" value="<?php echo $Data_view["guardian_house_number"]; ?>" required=" ">
+                                    <label for="prefix" class="form-label">บ้านเลขที่ </label>
+                                    <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="guardian_house_number" value="<?php echo $Data_view["guardian_house_number"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-1">
-                                    <label for="prefix" class="form-label">หมู่ <span class="required">**</span></label>
-                                    <input class="form-control " type="text " placeholder="หมู่ " name="guardian_village" value="<?php echo $Data_view["guardian_village"]; ?>" required=" ">
+                                    <label for="prefix" class="form-label">หมู่ </label>
+                                    <input class="form-control " type="text " placeholder="หมู่ " name="guardian_village" value="<?php echo $Data_view["guardian_village"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="prefix" class="form-label">ซอย </label>
-                                    <input class="form-control " type="text " placeholder="ซอย " name="guardian_lane" value="<?php echo $Data_view["guardian_lane"]; ?>" required=" ">
+                                    <input class="form-control " type="text " placeholder="ซอย " name="guardian_lane" value="<?php echo $Data_view["guardian_lane"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="prefix" class="form-label">ถนน </label>
-                                    <input class="form-control " type="text " placeholder="ถนน " name="guardian_road" value="<?php echo $Data_view["guardian_road"]; ?>" required=" ">
+                                    <input class="form-control " type="text " placeholder="ถนน " name="guardian_road" value="<?php echo $Data_view["guardian_road"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="first-name" class="form-label">ตำบล <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="ตำบล " name="guardian_sub_district" value="<?php echo $Data_view["guardian_sub_district"]; ?>" required=" ">
+                                    <label for="first-name" class="form-label">ตำบล </label>
+                                    <input type="text " class="form-control " placeholder="ตำบล " name="guardian_sub_district" value="<?php echo $Data_view["guardian_sub_district"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="last-name" class="form-label">อำเภอ <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="อำเภอ " name="guardian_district" value="<?php echo $Data_view["guardian_district"]; ?>" required=" ">
+                                    <label for="last-name" class="form-label">อำเภอ </label>
+                                    <input type="text " class="form-control " placeholder="อำเภอ " name="guardian_district" value="<?php echo $Data_view["guardian_district"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="full-name-eng" class="form-label">จังหวัด <span class="required">**</span></label>
-                                    <input type="text " class="form-control " placeholder="จังหวัด " name="guardian_province" value="<?php echo $Data_view["guardian_province"]; ?>" required=" ">
+                                    <label for="full-name-eng" class="form-label">จังหวัด </label>
+                                    <input type="text " class="form-control " placeholder="จังหวัด " name="guardian_province" value="<?php echo $Data_view["guardian_province"]; ?>"readonly required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="id-number" class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="guardian_postal_code" value="<?php echo $Data_view["guardian_postal_code"]; ?>" maxlength="5 " required=" ">
+                                    <label for="id-number" class="form-label">รหัสไปรษณีย์ </label>
+                                    <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="guardian_postal_code" value="<?php echo $Data_view["guardian_postal_code"]; ?>"readonly maxlength="5 " required=" ">
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="phone" class="form-label">เบอร์โทรผู้ปกครอง<span class="required">**</span></label>
-                                    <input type="tel" id="phone" class="form-control" name="guardian_phone_number" value="<?php echo $Data_view["guardian_phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
+                                    <label for="phone" class="form-label">เบอร์โทรผู้ปกครอง</label>
+                                    <input type="tel" id="phone" class="form-control" name="guardian_phone_number" value="<?php echo $Data_view["guardian_phone_number"]; ?>"readonly required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
                                 </div>
 
 
@@ -590,23 +590,23 @@ require_once("../config/db.php");
 
                                 <div class="row mt-5">
                                     <div class="col-lg-3">
-                                        <label class="form-label">ประเภทของหลักสูตร <span class="required">**</span></label>
-                                        <input type="text" class="form-control" name="CourseType_Name" id="CourseType_Name" value="<?php echo $Data_view["CourseType_Name"]; ?>" readonly>
+                                        <label class="form-label">ประเภทของหลักสูตร </label>
+                                        <input type="text" class="form-control" name="CourseType_Name" id="CourseType_Name" value="<?php echo $Data_view["CourseType_Name"]; ?>"readonly readonly>
                                     </div>
 
                                     <div class="col-lg-3">
-                                        <label class="form-label">ระดับการศึกษา <span class="required">**</span></label>
-                                        <input type="text" class="form-control" name="Level_Name" id="Level_Name" value="<?php echo $Data_view["Level_Name"]; ?>" readonly>
+                                        <label class="form-label">ระดับการศึกษา </label>
+                                        <input type="text" class="form-control" name="Level_Name" id="Level_Name" value="<?php echo $Data_view["Level_Name"]; ?>"readonly readonly>
                                     </div>
 
                                     <div class="col-lg-3">
-                                        <label class="form-label">ประเภทวิชา <span class="required">**</span></label>
-                                        <input type="text" class="form-control" name="Type_Name" id="Type_Name" value="<?php echo $Data_view["Type_Name"]; ?>" readonly>
+                                        <label class="form-label">ประเภทวิชา </label>
+                                        <input type="text" class="form-control" name="Type_Name" id="Type_Name" value="<?php echo $Data_view["Type_Name"]; ?>"readonly readonly>
                                     </div>
 
                                     <div class="col-lg-3">
-                                        <label class="form-label">สาขาวิชา <span class="required">**</span></label>
-                                        <input type="text" class="form-control" name="Major_Name" id="Major_Name" value="<?php echo $Data_view["Major_Name"]; ?>" readonly>
+                                        <label class="form-label">สาขาวิชา </label>
+                                        <input type="text" class="form-control" name="Major_Name" id="Major_Name" value="<?php echo $Data_view["Major_Name"]; ?>"readonly readonly>
                                     </div>
                                 </div>
 
@@ -614,42 +614,42 @@ require_once("../config/db.php");
                                 <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
 
                                 <div class="col-md-3 mt-5">
-                                    <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <label class="form-label">สำเนาใบรบ. </label>
                                     <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
                                     <a href="../config/uploads/<?php echo $Data_view["transcript"]; ?>" data-lightbox="documents" data-title="สำเนาใบรบ.">
-                                        <img id="previewImg1" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
+                                        <img class="img-thumbnail" id="previewImg1" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
                                     </a>
                                     <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
                                 </div>
 
                                 <div class="col-md-3 mt-5">
-                                    <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <label class="form-label">สำเนาทะเบียนบ้าน </label>
                                     <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
                                     <a href="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" data-lightbox="documents" data-title="สำเนาทะเบียนบ้าน">
-                                        <img id="previewImg2" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
+                                        <img class="img-thumbnail" id="previewImg2" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
                                     </a>
                                     <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
                                 </div>
 
                                 <div class="col-md-3 mt-5">
-                                    <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <label class="form-label">สำเนาบัตรประชาชน </label>
                                     <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
                                     <a href="../config/uploads/<?php echo $Data_view["id_card"]; ?>" data-lightbox="documents" data-title="สำเนาบัตรประชาชน">
-                                        <img id="previewImg3" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
+                                        <img class="img-thumbnail" id="previewImg3" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
                                     </a>
                                     <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
                                 </div>
 
                                 <div class="col-md-3 mt-5">
-                                    <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <label class="form-label">หลักฐานการชำระ </label>
                                     <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
                                     <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
-                                        <img id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
+                                        <img class="img-thumbnail" id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
                                     </a>
                                     <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
                                 </div>
                                 <div class="col-md-2 mt-5">
-                                    <a href="tables.php" class="btn btn-secondary w-100"> Back</a>
+                                    <a href="tables.php" class="btn btn-secondary w-100"><i class="fa-solid fa-angle-left"></i> Back</a>
 
                                 </div>
                                 <div class="col-md-1 mt-5">
@@ -661,7 +661,8 @@ require_once("../config/db.php");
                                     <input type="text" class="form-control">
                                 </div>
                                 <div class="col-md-2 mt-5">
-                                    <button type="submit" class="btn btn-success w-100" name="approve">approve</button>
+                                    <button type="submit" class="btn btn-danger " name="not_approve">Not approve <i class="fa-solid fa-xmark"></i></button>
+                                    <button type="submit" class="btn btn-success " name="approve">Approve <i class="fa-solid fa-check"></i></button>
                                 </div>
 
 
