@@ -664,10 +664,6 @@ require_once("../config/db.php");
                                     <button type="submit" class="btn btn-danger " name="not_approve">Not approve <i class="fa-solid fa-xmark"></i></button>
                                     <button type="submit" class="btn btn-success " name="approve">Approve <i class="fa-solid fa-check"></i></button>
                                 </div>
-
-
-
-
                             </form>
 
                         </div>

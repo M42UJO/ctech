@@ -73,7 +73,37 @@ try {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&family=IBM+Plex+Sans+Thai+Looped:wght@100;200;300;400;500;600;700&family=Itim&family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Mitr:wght@200;300;400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Thai:wght@100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="button.css">
 </head>
+<style>
+    .btn {
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+}
+
+
+
+
+.btn:hover {
+    background-position: right center;
+    
+}
+
+.btn-1 {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+
+</style>
+
 
 <body>
 <?php
@@ -260,20 +290,20 @@ try {
                         <input type="hidden"  class="form-control"  name="profile_image2" value="<?php echo $Data_view["profile_image"];?>">
                     </div>
                     <div class="col-md-6">
-                        <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
+                        <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** </span></label>
                         <input type="file" id="imgInput" class="form-control" name="profile_image" accept=".jpg,.jpeg,.png" >
                         <img id="previewImg" src="config/uploads/<?php echo $Data_view["profile_image"];?>" width="50%" alt="">
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-warning w-100 py-2 btn-custom" onclick="window.history.back()">
-                            <i class="fas fa-arrow-left"></i> ย้อนกลับ
-                        </button>
+                        <a href="index.php" type="button" class="btn  w-100 py-2 btn-1">
+                        <i class="fa-solid fa-angles-left"></i> ย้อนกลับ
+                        </a>
                     </div>
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" name="submit" class="btn btn-warning w-100 py-2 btn-custom">ถัดไป
-                            <i class="fas fa-arrow-right"></i>
+                        <button type="submit" name="submit" class="btn  w-100 py-2 btn-1">ถัดไป
+                        <i class="fa-solid fa-angles-right"></i>
                         </button>
 
                     </div>

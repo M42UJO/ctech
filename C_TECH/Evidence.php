@@ -38,6 +38,31 @@ if (isset($_SESSION['user_login'])) {
     <link href="path/to/lightbox.css" rel="stylesheet" />
 <script src="path/to/lightbox-plus-jquery.js"></script>
 </head>
+<style>
+    .btn {
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-position: right center;
+    
+}
+
+.btn-1 {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+
+</style>
 
 <body>
     <?php
@@ -106,13 +131,13 @@ if (isset($_SESSION['user_login'])) {
                     </div>
 
                     <div class="col-md-2 mt-5">
-                        <button type="button" class="btn btn-warning w-100 py-2 btn-custom" onclick="window.history.back()">
+                        <a href="Form.php" type="button" class="btn  w-100 py-2 btn-1" >
                             <i class="fas fa-arrow-left"></i> ย้อนกลับ
-                        </button>
+                        </a>
                     </div>
                     <div class="col-md-8 mt-5"></div>
                     <div class="col-md-2 mt-5">
-                        <button type="submit" name="submit" class="btn btn-warning w-100 py-2 btn-custom">ยืนยัน
+                        <button type="submit" name="submit" class="btn  w-100 py-2 btn-1">ยืนยัน
                             <i class="fas fa-check"></i>
                         </button>
                     </div>
