@@ -293,7 +293,7 @@ require_once("../config/db.php");
                                     <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"]; ?>">
                                     <input type="hidden" class="form-control" name="User_ID" value="<?php echo htmlspecialchars($Data_view["User_ID"]); ?>">
 
-                                    
+
                                 </div>
                                 <div class="col-md-6">
                                     <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง <span class="required">** .jpg เท่านั้น</span></label>
@@ -613,58 +613,58 @@ require_once("../config/db.php");
 
                                 <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
 
-                                    <div class="col-md-3 mt-5">
-                                        <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
-                                        <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
-                                        <a href="../config/uploads/<?php echo $Data_view["transcript"]; ?>" data-lightbox="documents" data-title="สำเนาใบรบ.">
-                                            <img id="previewImg1" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
-                                        </a>
-                                        <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
-                                    </div>
+                                <div class="col-md-3 mt-5">
+                                    <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["transcript"]; ?>" data-lightbox="documents" data-title="สำเนาใบรบ.">
+                                        <img id="previewImg1" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
+                                </div>
 
-                                    <div class="col-md-3 mt-5">
-                                        <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
-                                        <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
-                                        <a href="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" data-lightbox="documents" data-title="สำเนาทะเบียนบ้าน">
-                                            <img id="previewImg2" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
-                                        </a>
-                                        <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
-                                    </div>
+                                <div class="col-md-3 mt-5">
+                                    <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" data-lightbox="documents" data-title="สำเนาทะเบียนบ้าน">
+                                        <img id="previewImg2" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
+                                </div>
 
-                                    <div class="col-md-3 mt-5">
-                                        <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
-                                        <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
-                                        <a href="../config/uploads/<?php echo $Data_view["id_card"]; ?>" data-lightbox="documents" data-title="สำเนาบัตรประชาชน">
-                                            <img id="previewImg3" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
-                                        </a>
-                                        <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
-                                    </div>
+                                <div class="col-md-3 mt-5">
+                                    <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["id_card"]; ?>" data-lightbox="documents" data-title="สำเนาบัตรประชาชน">
+                                        <img id="previewImg3" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
+                                </div>
 
-                                    <div class="col-md-3 mt-5">
-                                        <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
-                                        <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
-                                        <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
-                                            <img id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
-                                        </a>
-                                        <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
-                                    </div>
-                                    <div class="col-md-2 mt-5">
+                                <div class="col-md-3 mt-5">
+                                    <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                                    <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
+                                        <img id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
+                                </div>
+                                <div class="col-md-2 mt-5">
                                     <a href="tables.php" class="btn btn-secondary w-100"> Back</a>
 
-                                    </div>
-                                    <div class="col-md-1 mt-5">
+                                </div>
+                                <div class="col-md-1 mt-5">
                                     <p class="text-end fs-4">Comment</p>
-                                        
-                                    </div>
-                                    <div class="col-md-7 mt-5">
-                                        
-                                        <input type="text" class="form-control">
-                                    </div>
-                                    <div class="col-md-2 mt-5">
-                                    <button type="submit" class="btn btn-success w-100" name="approve">approve</button>
-                                    </div>
 
-                                
+                                </div>
+                                <div class="col-md-7 mt-5">
+
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="col-md-2 mt-5">
+                                    <button type="submit" class="btn btn-success w-100" name="approve">approve</button>
+                                </div>
+
+
 
 
                             </form>
