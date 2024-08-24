@@ -2,8 +2,34 @@
 session_start();
 require_once("../config/db.php");
 
+$approve = 'approve';
+$not_approve = 'not_approve';
 
 
+if (isset($_GET['approve'])) {
+    $user_id = $_GET['approve'];
+
+    $sql_update = $conn->prepare("UPDATE form SET               
+            status = :status
+            WHERE User_ID = :user_id");
+
+    // ผูกค่าพารามิเตอร์กับตัวแปร
+    $sql_update->bindParam(':status', $approve);
+    $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sql_update->execute();
+}
+if (isset($_GET['not_approve'])) {
+    $user_id = $_GET['not_approve'];
+
+    $sql_update = $conn->prepare("UPDATE form SET               
+            status = :status
+            WHERE User_ID = :user_id");
+
+    // ผูกค่าพารามิเตอร์กับตัวแปร
+    $sql_update->bindParam(':status', $not_approve);
+    $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sql_update->execute();
+}
 
 
 
@@ -24,6 +50,8 @@ require_once("../config/db.php");
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -69,7 +97,7 @@ require_once("../config/db.php");
                             Editusers
                         </a>
 
-                        
+
 
                         <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -116,7 +144,7 @@ require_once("../config/db.php");
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
+                                    <?php
                                     // เตรียมคำสั่ง SQL
                                     $stmt = $conn->prepare("
                                                             SELECT 
@@ -152,7 +180,7 @@ require_once("../config/db.php");
                                                                 coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
                                                         ");
 
-                                   
+
 
                                     // ประมวลผลคำสั่ง
                                     $stmt->execute();
@@ -176,14 +204,14 @@ require_once("../config/db.php");
                                                 <td><?php echo htmlspecialchars($applicant['Type_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Major_Name']); ?></td>
                                                 <td>
-                                                    <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary" ><i class="fa-solid fa-eye"></i></a>
-                                                    <a href="" class="btn btn-danger" style="width: 43px;"><i class="fa-solid fa-xmark"></i></a>
-                                                    <a href="" class="btn btn-success" style="width: 43px;"><i class="fa-solid fa-check"></i></a>
+                                                    <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
+                                                    <a onclick="confirmNotApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-danger" style="width: 43px;"><i class="fa-solid fa-xmark"></i></a>
+                                                    <a onclick="confirmApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-success" style="width: 43px;"><i class="fa-solid fa-check"></i></a>
                                                 </td>
                                             </tr>
-                                    <?php 
+                                    <?php
                                         }
-                                    } 
+                                    }
                                     ?>
 
                                 </tbody>
@@ -200,6 +228,41 @@ require_once("../config/db.php");
     <script src="js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+    <script>
+  function confirmNotApprove(userId) {
+    Swal.fire({
+      title: 'คุณแน่ใจหรือไม่?',
+      text: "คุณต้องการไม่อนุมัติใบสมัครนี้หรือไม่?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'ใช่, ไม่อนุมัติ',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "?not_approve=" + userId;
+      }
+    });
+  }
+
+  function confirmApprove(userId) {
+    Swal.fire({
+      title: 'คุณแน่ใจหรือไม่?',
+      text: "คุณต้องการอนุมัติใบสมัครนี้หรือไม่?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ใช่, อนุมัติ',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "?approve=" + userId;
+      }
+    });
+  }
+</script>
 </body>
 
 </html>

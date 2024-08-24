@@ -2,8 +2,41 @@
 session_start();
 require_once("../config/db.php");
 
+    $comment = htmlspecialchars($_POST['comment']);
+    $approve = 'approve';
+    $not_approve = 'not_approve';
+    $user_id = htmlspecialchars($_POST['User_ID']);
 
+    if (isset($_POST['approve'])) {
+        $sql_update = $conn->prepare("UPDATE form SET
+                    comment = :comment,
+                    status = :status
+                    WHERE User_ID = :user_id");
+
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':comment', $comment);
+        $sql_update->bindParam(':status', $approve);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();
+
+        header("location: ./tables.php");
+    }
+    if (isset($_POST['not_approve'])) {
+        $sql_update = $conn->prepare("UPDATE form SET
+                    comment = :comment,
+                    status = :status
+                    WHERE User_ID = :user_id");
+
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':comment', $comment);
+        $sql_update->bindParam(':status', $not_approve);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();
+
+        header("location: ./tables.php");
+    }
 ?>
+
 
 
 
@@ -26,8 +59,23 @@ require_once("../config/db.php");
     <link rel="stylesheet" href="../style.css">
     <link href="path/to/lightbox.css" rel="stylesheet" />
     <script src="path/to/lightbox-plus-jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </head>
+<style>
+    
+
+.btn:hover {
+    background-position: right center;
+    
+}
+
+.btn-1 {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+
+</style>
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark navbar-custom">
@@ -101,7 +149,7 @@ require_once("../config/db.php");
 
                         <div class="panel-body">
 
-                            <form id="personal-info-form" class="row g-3 mt-2" action="eddit.php" method="post" enctype="multipart/form-data">
+                            <form id="personal-info-form" class="row g-3 mt-2" action="view.php" method="post">
 
                                 <?php
                                 if (isset($_GET['user_id'])) {
@@ -649,8 +697,9 @@ require_once("../config/db.php");
                                     <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
                                 </div>
                                 <div class="col-md-2 mt-5">
-                                    <a href="tables.php" class="btn btn-secondary w-100"><i class="fa-solid fa-angle-left"></i> Back</a>
-
+                                    <a href="./tables.php" type="button" class="btn  w-100 py-2 btn-1">
+                                    <i class="fa-solid fa-angles-left"></i> ย้อนกลับ
+                                    </a>
                                 </div>
                                 <div class="col-md-1 mt-5">
                                     <p class="text-end fs-4">Comment</p>
@@ -658,11 +707,11 @@ require_once("../config/db.php");
                                 </div>
                                 <div class="col-md-7 mt-5">
 
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="comment">
                                 </div>
                                 <div class="col-md-2 mt-5">
-                                    <button type="submit" class="btn btn-danger " name="not_approve">Not approve <i class="fa-solid fa-xmark"></i></button>
-                                    <button type="submit" class="btn btn-success " name="approve">Approve <i class="fa-solid fa-check"></i></button>
+                                    <button type="button" class="btn btn-danger" onclick="confirmNotApprove()">Not approve <i class="fa-solid fa-xmark"></i></button>
+                                    <button type="button" class="btn btn-success" onclick="confirmApprove()">Approve <i class="fa-solid fa-check"></i></button>
                                 </div>
                             </form>
 
@@ -722,6 +771,52 @@ require_once("../config/db.php");
                 previewImg4.src = URL.createObjectURL(file4);
             }
         };
+
+        function confirmNotApprove() {
+    Swal.fire({
+      title: 'คุณแน่ใจหรือไม่?',
+      text: "คุณต้องการไม่อนุมัติใบสมัครนี้หรือไม่?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'ใช่, ไม่อนุมัติ',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let form = document.getElementById('personal-info-form');
+        let input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'not_approve';
+        input.value = 'not_approve';
+        form.appendChild(input);
+        form.submit(); // ส่งฟอร์ม
+      }
+    });
+  }
+
+  function confirmApprove() {
+    Swal.fire({
+      title: 'คุณแน่ใจหรือไม่?',
+      text: "คุณต้องการอนุมัติใบสมัครนี้หรือไม่?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ใช่, อนุมัติ',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let form = document.getElementById('personal-info-form');
+        let input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'approve';
+        input.value = 'approve';
+        form.appendChild(input);
+        form.submit(); // ส่งฟอร์ม
+      }
+    });
+  }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -90,9 +90,6 @@ try {
     border-radius: 10px;
 }
 
-
-
-
 .btn:hover {
     background-position: right center;
     
