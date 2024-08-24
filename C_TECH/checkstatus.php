@@ -51,7 +51,34 @@ try {
     require_once("nav.php");
     ?>
 
-    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mt-5">
+                <embed src="imagee/register2018.pdf" width="100%" height="920px" type="application/pdf">
+            </div>
+            <div class="col-md-6 my-auto">
+
+                <div class="panel panel-default ">
+
+                    <div class="panel-body">
+
+                        
+
+                            <div class="alert alert-warning" role="alert">
+                                <div class="panel-heading">สถานะการสมัคร</div>
+                                <h4 class="alert-heading mt-3">สถานะการสมัคร</h4>
+                                <p>ข้อความจากแอดมินที่จะแสดงที่นี่ เช่น "การสมัครของคุณอยู่ระหว่างการตรวจสอบ" หรือ "คุณได้รับการอนุมัติแล้ว" เป็นต้น</p>
+                            </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        </div>
 
 
 
@@ -71,14 +98,16 @@ try {
 
 
 
-    <?php
-    require_once("footer.php");
-    ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 
-    <!-- <script src="script.js"></script> -->
+        <?php
+        require_once("footer.php");
+        ?>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+        <!-- <script src="script.js"></script> -->
 </body>
 
 </html>
