@@ -62,19 +62,7 @@ try {
 
 </head>
 <style>
-    .btn {
-    flex: 1 1 auto;
-    margin: 10px;
-    padding: 30px;
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
-    text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-    box-shadow: 0 0 20px #eee;
-    border-radius: 10px;
-}
+
 
 .btn:hover {
     background-position: right center;

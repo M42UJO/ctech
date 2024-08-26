@@ -60,6 +60,16 @@ require_once("config/db.php");
         text-align: center;
 
     }
+.btn:hover {
+    background-position: right center;
+    
+}
+
+.btn-1 {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+
+
 </style>
 
 <body>

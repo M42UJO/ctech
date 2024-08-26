@@ -339,7 +339,7 @@ require_once("../config/db.php");
                                 <div class="col-md-3">
                                     <label for="facebook" class="form-label">Facebook</label>
                                     <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"]; ?>"readonly>
-                                    <input type="hidden" class="form-control" name="User_ID" value="<?php echo htmlspecialchars($Data_view["User_ID"]); ?>">
+                                    <input type="hidden" class="form-control" name="User_ID" value="<?php echo ($Data_view["User_ID"]); ?>">
 
 
                                 </div>
