@@ -169,7 +169,7 @@ try {
                     </div>
                     <div class="col-md-4">
                         <label for="id-number" class="form-label">เลขบัตรประชาชน <span class="required">** ตัวเลขเท่านั้น</span></label>
-                        <input type="text" class="form-control" id="thai-id" maxlength="17"  placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $Data_view["id_card_number"];?>" required >
+                        <input type="text" class="form-control" id="thai-id" maxlength="13"  placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $Data_view["id_card_number"];?>" required >
                     </div>
                     <div class="col-md-2">
                         <label for="nickname" class="form-label">ชื่อเล่น</label>
@@ -283,7 +283,7 @@ try {
                     <div class="col-md-3">
                         <label for="facebook" class="form-label">Facebook</label>
                         <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"];?>">
-                        <input type="text" hidden  class="form-control"  name="User_ID" value="<?php echo $Data_view["User_ID"];?>">
+                        <input type="hidden" class="form-control" name="User_ID" value="<?php echo $userData['User_ID']; ?>">
                         <input type="hidden"  class="form-control"  name="profile_image2" value="<?php echo $Data_view["profile_image"];?>">
                     </div>
                     <div class="col-md-6">
