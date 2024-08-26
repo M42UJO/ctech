@@ -123,8 +123,8 @@ require_once("../config/db.php");
                                                 <td><?php echo htmlspecialchars($applicant['email']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['id_card_number']); ?></td>
                                                 <td>
-                                                    <a  href="eddit.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-warning">Edit <i class="fa-solid fa-pen-to-square"></i></a>
-                                                    <a onclick="return confirm('Are you sure you want to delete?');" href="delete.php?user_id=<?php echo htmlspecialchars($applicant['User_ID']); ?>" class="btn btn-danger">Delete <i class="fa-solid fa-trash-can"></i></a>
+                                                    <a  href="eddit.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-warning">แก้ไข <i class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a onclick="return confirm('Are you sure you want to delete?');" href="delete.php?user_id=<?php echo htmlspecialchars($applicant['User_ID']); ?>" class="btn btn-danger">ลบ <i class="fa-solid fa-trash-can"></i></a>
 
                                                 </td>
                                             </tr>
