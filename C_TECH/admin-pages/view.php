@@ -5,9 +5,10 @@ require_once("../config/db.php");
     $comment = htmlspecialchars($_POST['comment']);
     $approve = 'approve';
     $not_approve = 'not_approve';
-    $user_id = htmlspecialchars($_POST['User_ID']);
+    
 
     if (isset($_POST['approve'])) {
+        $user_id = $_POST['User_ID'];
         $sql_update = $conn->prepare("UPDATE form SET
                     comment = :comment,
                     status = :status
@@ -22,6 +23,7 @@ require_once("../config/db.php");
         header("location: ./tables.php");
     }
     if (isset($_POST['not_approve'])) {
+        $user_id = $_POST['User_ID'];
         $sql_update = $conn->prepare("UPDATE form SET
                     comment = :comment,
                     status = :status
@@ -339,7 +341,7 @@ require_once("../config/db.php");
                                 <div class="col-md-3">
                                     <label for="facebook" class="form-label">Facebook</label>
                                     <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"]; ?>"readonly>
-                                    <input type="hidden" class="form-control" name="User_ID" value="<?php echo ($Data_view["User_ID"]); ?>">
+                                    <input type="hidden" class="form-control" name="User_ID" value="<?php echo $Data_view["User_ID"]; ?>">
 
 
                                 </div>
@@ -710,8 +712,8 @@ require_once("../config/db.php");
                                     <input type="text" class="form-control" name="comment">
                                 </div>
                                 <div class="col-md-2 mt-5">
-                                    <button type="button" class="btn btn-danger" onclick="confirmNotApprove()">Not approve <i class="fa-solid fa-xmark"></i></button>
-                                    <button type="button" class="btn btn-success" onclick="confirmApprove()">Approve <i class="fa-solid fa-check"></i></button>
+                                    <button type="button" class="btn btn-danger" onclick="confirmNotApprove()">ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></button>
+                                    <button type="button" class="btn btn-success" onclick="confirmApprove()">อนุมัติ <i class="fa-solid fa-check"></i></button>
                                 </div>
                             </form>
 

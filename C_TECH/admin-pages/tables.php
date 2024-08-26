@@ -205,8 +205,8 @@ if (isset($_GET['not_approve'])) {
                                                 <td><?php echo htmlspecialchars($applicant['Major_Name']); ?></td>
                                                 <td>
                                                     <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
-                                                    <a onclick="confirmNotApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-danger" style="width: 43px;"><i class="fa-solid fa-xmark"></i></a>
-                                                    <a onclick="confirmApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-success" style="width: 43px;"><i class="fa-solid fa-check"></i></a>
+                                                    <a onclick="confirmNotApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-danger" >ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></a>
+                                                    <a onclick="confirmApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-success" >อนุมัติ <i class="fa-solid fa-check"></i></a>
                                                 </td>
                                             </tr>
                                     <?php
