@@ -80,12 +80,59 @@ try {
     padding: 15px; /* ระยะห่างภายใน */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสำหรับกรอบ */
 }
+.title-section {
+            background-image: url('./imagee/pic_ctech.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+        .title-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Adjust overlay opacity */
+            z-index: 1;
+        }
+        .title-content {
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+        }
+        .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+        }
+        .breadcrumb-item.active {
+            color: orange;
+        }
 
 
 </style>
 
 <body>
     <?php require_once("nav.php"); ?>
+
+    <div class="title-section">
+        <div class="title-content">
+            <h1>ตรวจสอบสถานะการสมัครเรียน</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">C-TECH</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
 
     <div class="container">
         <div class="row">

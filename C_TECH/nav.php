@@ -63,6 +63,9 @@ if ($isLoggedIn) {
                     <a href="http://c-tech.ac.th/branch.php" target="_blank" class="nav-link link-dark fw-bold">สาขาที่เปิดสอน</a>
                 </li>
                 <li class="nav-item">
+                    <a href="process.php"  class="nav-link link-dark fw-bold">ขั้นตอนการสมัครเรียน</a>
+                </li>
+                <li class="nav-item">
                     <a href="apply.php" class="nav-link link-dark fw-bold">สมัครเรียน</a>
                 </li>
                 <?php if ($isLoggedIn) : ?>
