@@ -154,39 +154,39 @@ if (isset($_GET['not_approve'])) {
                                     // เตรียมคำสั่ง SQL
                                     $stmt = $conn->prepare("
                                                             SELECT 
-                                                                u.*, 
-                                                                p.*, 
-                                                                f.*, 
-                                                                e.*, 
-                                                                c.*, 
-                                                                a.*,
-                                                                major.Major_Name,
-                                                                subjecttype.Type_Name,
-                                                                educationlevel.Level_Name,
-                                                                coursetype.CourseType_Name
-                                                            FROM 
-                                                                user u
-                                                            LEFT JOIN 
-                                                                parent_info p ON u.User_ID = p.User_ID
-                                                            LEFT JOIN 
-                                                                form f ON u.User_ID = f.User_ID
-                                                            LEFT JOIN 
-                                                                education_info e ON u.User_ID = e.User_ID
-                                                            LEFT JOIN 
-                                                                current_address c ON u.User_ID = c.User_ID
-                                                            LEFT JOIN 
-                                                                applicant a ON u.User_ID = a.User_ID
-                                                            LEFT JOIN 
-                                                                major ON f.Major_ID = major.Major_ID
-                                                            LEFT JOIN 
-                                                                subjecttype ON major.Type_ID = subjecttype.Type_ID
-                                                            LEFT JOIN 
-                                                                educationlevel ON subjecttype.Level_ID = educationlevel.Level_ID
-                                                            LEFT JOIN 
-                                                                coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
+                                                                    u.*, 
+                                                                    p.*, 
+                                                                    f.*, 
+                                                                    e.*, 
+                                                                    c.*, 
+                                                                    a.*,
+                                                                    major.Major_Name,
+                                                                    subjecttype.Type_Name,
+                                                                    educationlevel.Level_Name,
+                                                                    coursetype.CourseType_Name
+                                                                FROM 
+                                                                    user u
+                                                                LEFT JOIN 
+                                                                    parent_info p ON u.User_ID = p.User_ID
+                                                                LEFT JOIN 
+                                                                    form f ON u.User_ID = f.User_ID
+                                                                LEFT JOIN 
+                                                                    education_info e ON u.User_ID = e.User_ID
+                                                                LEFT JOIN 
+                                                                    current_address c ON u.User_ID = c.User_ID
+                                                                LEFT JOIN 
+                                                                    applicant a ON u.User_ID = a.User_ID
+                                                                LEFT JOIN 
+                                                                    major ON f.Major_ID = major.Major_ID
+                                                                LEFT JOIN 
+                                                                    subjecttype ON major.Type_ID = subjecttype.Type_ID
+                                                                LEFT JOIN 
+                                                                    educationlevel ON subjecttype.Level_ID = educationlevel.Level_ID
+                                                                LEFT JOIN 
+                                                                    coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
                                                                 WHERE 
-                                                                    f.status = 'pending' OR f.status = 'not_approve' OR f.status = 'approve'
-                                                        ");
+                                                                    f.status = 'pending' OR f.status = 'not_approve'
+                                                            ");
 
 
 
@@ -215,8 +215,8 @@ if (isset($_GET['not_approve'])) {
                                                 <td><?php echo htmlspecialchars($applicant['status']); ?></td>
                                                 <td>
                                                     <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
-                                                    <a onclick="confirmNotApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-danger" >ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></a>
-                                                    <a onclick="confirmApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-success" >อนุมัติ <i class="fa-solid fa-check"></i></a>
+                                                    <a onclick="confirmNotApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-danger">ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></a>
+                                                    <a onclick="confirmApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-success">อนุมัติ <i class="fa-solid fa-check"></i></a>
                                                 </td>
                                             </tr>
                                     <?php
@@ -225,12 +225,12 @@ if (isset($_GET['not_approve'])) {
                                     ?>
 
                                 </tbody>
-                                
+
                             </table>
                         </div>
                     </div>
                 </div>
-                
+
 
             </main>
 
@@ -241,40 +241,40 @@ if (isset($_GET['not_approve'])) {
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
     <script>
-  function confirmNotApprove(userId) {
-    Swal.fire({
-      title: 'คุณแน่ใจหรือไม่?',
-      text: "คุณต้องการไม่อนุมัติใบสมัครนี้หรือไม่?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'ใช่, ไม่อนุมัติ',
-      cancelButtonText: 'ยกเลิก'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = "?not_approve=" + userId;
-      }
-    });
-  }
+        function confirmNotApprove(userId) {
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณต้องการไม่อนุมัติใบสมัครนี้หรือไม่?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'ใช่, ไม่อนุมัติ',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "?not_approve=" + userId;
+                }
+            });
+        }
 
-  function confirmApprove(userId) {
-    Swal.fire({
-      title: 'คุณแน่ใจหรือไม่?',
-      text: "คุณต้องการอนุมัติใบสมัครนี้หรือไม่?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'ใช่, อนุมัติ',
-      cancelButtonText: 'ยกเลิก'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = "?approve=" + userId;
-      }
-    });
-  }
-</script>
+        function confirmApprove(userId) {
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณต้องการอนุมัติใบสมัครนี้หรือไม่?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ใช่, อนุมัติ',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "?approve=" + userId;
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
