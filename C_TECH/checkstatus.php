@@ -2,33 +2,41 @@
 session_start();
 require_once("config/db.php");
 
-
 if (!isset($_SESSION['user_login'])) {
     header('Location: login.php');
+    exit();
 }
 
-if (isset($_SESSION['user_login'])) {
-    $user_id = $_SESSION['user_login'];
-    // echo $user_id;
-}
+$user_id = $_SESSION['user_login'];
 
 try {
     $stmt = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
     $stmt->execute([$user_id]);
     $userData = $stmt->fetch();
+
+    // ดึงข้อมูลสถานะและความคิดเห็นจากตาราง form
+    $stmtForm = $conn->prepare("SELECT status, comment FROM form WHERE user_id = ?");
+    $stmtForm->execute([$user_id]);
+    $formData = $stmtForm->fetch();
+
+    $status = $formData['status'];
+    $comment = $formData['comment'];
+
+    // กำหนดข้อความตามสถานะและคลาส CSS
+    if ($status == 'pending' || $status == 'update') {
+        $message = "การสมัครของคุณอยู่ระหว่างการตรวจสอบ ทีมงานกำลังตรวจสอบเอกสารที่คุณได้ส่งมา หากต้องการข้อมูลเพิ่มเติมหรือมีข้อสงสัยใด ๆ กรุณาติดต่อเรา";
+        $statusClass = 'status-pending';
+    } elseif ($status == 'approve') {
+        $message = "คุณได้รับการอนุมัติแล้ว ขอแสดงความยินดี! การสมัครของคุณได้รับการอนุมัติเรียบร้อยแล้ว กรุณาตรวจสอบรายละเอียดเพิ่มเติมในระบบหรือติดต่อเรา หากมีข้อสงสัย";
+        $statusClass = 'status-approve';
+    } else {
+        $message = "ข้อมูลยังไม่ครบถ้วน ข้อมูลการสมัครของคุณยังไม่สมบูรณ์ กรุณาตรวจสอบเอกสารและข้อมูลที่ส่งมาแล้วอัพเดตให้ครบถ้วนเพื่อให้เราสามารถดำเนินการตรวจสอบได้";
+        $statusClass = 'status-incomplete';
+    }
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-
-
-
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,69 +53,68 @@ try {
     <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&family=IBM+Plex+Sans+Thai+Looped:wght@100;200;300;400;500;600;700&family=Itim&family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Mitr:wght@200;300;400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Thai:wght@100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    .status-pending {
+    background-color: #fff3cd; /* สีพื้นหลังเหลืองอ่อน */
+    color: #856404; /* สีข้อความเหลืองเข้ม */
+    border: 1px solid #ffeeba; /* สีกรอบเหลืองอ่อน */
+    border-radius: 5px; /* มุมกรอบมน */
+    padding: 15px; /* ระยะห่างภายใน */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสำหรับกรอบ */
+}
+
+.status-approve {
+    background-color: #d4edda; /* สีพื้นหลังเขียวอ่อน */
+    color: #155724; /* สีข้อความเขียวเข้ม */
+    border: 1px solid #c3e6cb; /* สีกรอบเขียวอ่อน */
+    border-radius: 5px; /* มุมกรอบมน */
+    padding: 15px; /* ระยะห่างภายใน */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสำหรับกรอบ */
+}
+
+.status-incomplete {
+    background-color: #f8d7da; /* สีพื้นหลังแดงอ่อน */
+    color: #721c24; /* สีข้อความแดงเข้ม */
+    border: 1px solid #f5c6cb; /* สีกรอบแดงอ่อน */
+    border-radius: 5px; /* มุมกรอบมน */
+    padding: 15px; /* ระยะห่างภายใน */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสำหรับกรอบ */
+}
+
+
+</style>
 
 <body>
-    <?php
-    require_once("nav.php");
-    ?>
+    <?php require_once("nav.php"); ?>
 
     <div class="container">
         <div class="row">
             <div class="col-md-6 mt-5">
-                <embed src="imagee/register2018.pdf" width="100%" height="920px" type="application/pdf">
+                <embed src="imagee/register2018.pdf" width="100%" height="900px" type="application/pdf">
             </div>
             <div class="col-md-6 my-auto">
-
-                <div class="panel panel-default ">
-
+                <div class="panel panel-default">
                     <div class="panel-body">
-
-                        
-
-                            <div class="alert alert-warning" role="alert">
-                                <div class="panel-heading">สถานะการสมัคร</div>
-                                <h4 class="alert-heading mt-3">สถานะการสมัคร</h4>
-                                <p>ข้อความจากแอดมินที่จะแสดงที่นี่ เช่น "การสมัครของคุณอยู่ระหว่างการตรวจสอบ" หรือ "คุณได้รับการอนุมัติแล้ว" เป็นต้น</p>
-                            </div>
-
-                        
+                        <div class="alert <?php echo $statusClass; ?>" role="alert">
+                            <div class="panel-heading">สถานะการสมัคร</div>
+                            <h4 class="alert-heading mt-3">สถานะการสมัคร</h4>
+                            <p><?php echo $message; ?></p>
+                            <?php if (!empty($comment)): ?>
+                                <div class="mt-3">
+                                    <strong>ความคิดเห็นจากแอดมิน:</strong>
+                                    <p><?php echo htmlspecialchars($comment); ?></p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-
         </div>
-        </div>
+    </div>
 
+    <?php require_once("footer.php"); ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <?php
-        require_once("footer.php");
-        ?>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-
-        <!-- <script src="script.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>

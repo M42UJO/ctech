@@ -107,15 +107,61 @@ require_once("config/db.php");
             margin-top: 7rem;
         }
     }
+    .title-section {
+            background-image: url('./imagee/pic_ctech.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+        .title-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Adjust overlay opacity */
+            z-index: 1;
+        }
+        .title-content {
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+        }
+        .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+        }
+        .breadcrumb-item.active {
+            color: orange;
+        }
 </style>
 
 <body>
     <?php
     require_once("nav.php");
     ?>
+    
 
 
-    <!-- <h1 id="center" class=" mt-5"> ระบบรับสมัครนักศึกษา</h1> -->
+    <div class="title-section">
+        <div class="title-content">
+            <h1>ระบบรับสมัครนักศึกษา ที่ C-TECH</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">C-TECH</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
 
 
     <main>
