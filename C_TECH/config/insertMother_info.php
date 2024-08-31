@@ -114,6 +114,9 @@ if (isset($_POST['submit'])) {
             $sql_update->bindParam(':mother_phone_number', $mother_phone_number);
             $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
             $sql_update->execute();
+
+            $sql_status_update = $conn->prepare("UPDATE form SET status = 'update' WHERE User_ID = ?");
+            $sql_status_update->execute([$user_id]);
         }
 
         // กำหนดข้อความสำเร็จในเซสชันและเปลี่ยนเส้นทางไปยังหน้าข้อมูลการศึกษา
