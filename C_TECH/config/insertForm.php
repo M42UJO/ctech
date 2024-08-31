@@ -35,15 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     SET  
                                         date = :date, 
                                         status = :status, 
-                                        Major_ID = :major_id 
+                                        Major_ID = :major_id,
+                                        updated_at = NOW() -- เพิ่มการอัปเดตเวลาที่นี่
                                     WHERE User_ID = :user_id");
         } else {
             // ถ้าไม่มีข้อมูล ทำการ insert
-            $stmt = $conn->prepare("INSERT INTO form (date, status, Major_ID, User_ID) 
-                                    VALUES (:date, :status, :major_id, :user_id)");
+            $stmt = $conn->prepare("INSERT INTO form (date, status, Major_ID, User_ID, created_at, updated_at) 
+                                    VALUES (:date, :status, :major_id, :user_id, NOW(), NOW())"); // เพิ่มเวลาที่นี่
         }
 
-        
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':major_id', $major);

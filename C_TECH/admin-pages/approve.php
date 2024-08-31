@@ -185,7 +185,7 @@ if (isset($_GET['not_approve'])) {
                                                                 LEFT JOIN 
                                                                     coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
                                                                 WHERE 
-                                                                    f.status = 'pending' OR f.status = 'not_approve'
+                                                                    f.status = 'pending' OR f.status = 'not_approve' OR f.status = 'update'
                                                             ");
 
 
