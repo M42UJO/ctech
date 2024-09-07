@@ -124,12 +124,13 @@ if (isset($_GET['not_approve'])) {
                 <div class="container-fluid px-4">
                     <h1 class="">Users Data Tables</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">ตารางข้อมูล ผู้สมัคร</li>
+                        <h3><li class="breadcrumb-item active">ตารางข้อมูล ผู้สมัคร</li></h3>
+                        
                     </ol>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Applicant
+                            ตารางข้อมูล ผู้สมัคร ทั้งหมด
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">

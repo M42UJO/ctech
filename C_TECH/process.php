@@ -124,12 +124,19 @@ require_once("config/db.php");
             </nav>
         </div>
     </div>
+    
+    
 
 
     <main>
+        <center><img src="./imagee/ฟ้า ขาว น่ารัก ขั้นตอนการสมัคร เอกสารขนาด a4.png"  alt=""></center>
+    
+    
+
+    
 
 
-        <div class="container marketing mt-5">
+        
 
 
             
