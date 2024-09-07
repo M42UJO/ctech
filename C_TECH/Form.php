@@ -224,8 +224,8 @@ $guardianMissing = empty($guardian['guardian_name']);
             <?php if ($guardianMissing): ?>
                 Swal.fire({
                     icon: 'warning',
-                    title: 'ข้อมูลไม่ครบถ้วน',
-                    text: 'กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วน จึงสมัครได้',
+                    title: 'กรอกข้อมูลส่วนตัวไม่ครบถ้วน',
+                    text: 'กรุณากรอกข้อมูลส่วนตัวให้ครบถ้วน จึงสมัครเรียนได้',
                     confirmButtonText: 'ตกลง',
                     willClose: () => {
                         window.location.href = 'Personal_info.php';

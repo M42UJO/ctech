@@ -172,11 +172,11 @@ try {
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ซอย </label>
-                        <input class="form-control " type="text " placeholder="ซอย " name="father_lane" value="<?php echo $Data_view["father_lane"];?>" required=" ">
+                        <input class="form-control " type="text " placeholder="ซอย " name="father_lane" value="<?php echo $Data_view["father_lane"];?>" >
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ถนน </label>
-                        <input class="form-control " type="text " placeholder="ถนน " name="father_road" value="<?php echo $Data_view["father_road"];?>" required=" ">
+                        <input class="form-control " type="text " placeholder="ถนน " name="father_road" value="<?php echo $Data_view["father_road"];?>" >
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ตำบล <span class="required">**</span></label>

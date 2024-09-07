@@ -167,8 +167,8 @@ try {
                         <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="graduation_year" value="<?php echo $Data_view["graduation_year"];?>" required>
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label">ผลการเรียน <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="ผลการเรียน " name="grade_result" value="<?php echo $Data_view["grade_result"];?>" required>
+                        <label class="form-label">เกรดเฉลี่ยสะสม <span class="required">**</span></label>
+                        <input type="text " class="form-control " placeholder="เกรดเฉลี่ยสะสม " name="grade_result" value="<?php echo $Data_view["grade_result"];?>" required>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">ระดับชั้น <span class="required">**</span></label>

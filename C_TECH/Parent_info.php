@@ -157,11 +157,11 @@ try {
                     </div>
                     <div class="col-md-3">
                         <label for="prefix" class="form-label">ซอย </label>
-                        <input class="form-control " type="text " placeholder="ซอย " name="guardian_lane" value="<?php echo $Data_view["guardian_lane"];?>" required=" ">
+                        <input class="form-control " type="text " placeholder="ซอย " name="guardian_lane" value="<?php echo $Data_view["guardian_lane"];?>" >
                     </div>
                     <div class="col-md-3">
                         <label for="prefix" class="form-label">ถนน </label>
-                        <input class="form-control " type="text " placeholder="ถนน " name="guardian_road" value="<?php echo $Data_view["guardian_road"];?>" required=" ">
+                        <input class="form-control " type="text " placeholder="ถนน " name="guardian_road" value="<?php echo $Data_view["guardian_road"];?>" >
                     </div>
                     <div class="col-md-3">
                         <label for="first-name" class="form-label">ตำบล <span class="required">**</span></label>
