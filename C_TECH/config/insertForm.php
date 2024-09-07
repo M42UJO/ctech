@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_card = isset($_POST['id_card']) ? $_POST['id_card'] : null;
     $house_registration = isset($_POST['house_registration']) ? $_POST['house_registration'] : null;
     $slip2000 = isset($_POST['slip2000']) ? $_POST['slip2000'] : null;
-    $date = date('Y-m-d'); // วันที่ปัจจุบัน
+    
     $status = 'pending'; // หรือสถานะอื่น ๆ ที่ต้องการ
 
     try {
@@ -33,18 +33,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // ถ้ามีข้อมูลอยู่แล้ว ทำการ update
             $stmt = $conn->prepare("UPDATE form 
                                     SET  
-                                        date = :date, 
+                                        
                                         status = :status, 
                                         Major_ID = :major_id,
                                         updated_at = NOW() -- เพิ่มการอัปเดตเวลาที่นี่
                                     WHERE User_ID = :user_id");
         } else {
             // ถ้าไม่มีข้อมูล ทำการ insert
-            $stmt = $conn->prepare("INSERT INTO form (date, status, Major_ID, User_ID, created_at, updated_at) 
-                                    VALUES (:date, :status, :major_id, :user_id, NOW(), NOW())"); // เพิ่มเวลาที่นี่
+            $stmt = $conn->prepare("INSERT INTO form ( status, Major_ID, User_ID, created_at, updated_at) 
+                                    VALUES ( :status, :major_id, :user_id, NOW(), NOW())"); // เพิ่มเวลาที่นี่
         }
 
-        $stmt->bindParam(':date', $date);
+        
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':major_id', $major);
         $stmt->bindParam(':user_id', $user_id);

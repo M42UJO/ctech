@@ -21,7 +21,7 @@ $target_dir = "uploads/";
     $id_card2 = htmlspecialchars($_POST['id_card2']);
     $slip2000 = $_FILES['slip2000'];
     $slip20002 = htmlspecialchars($_POST['slip20002']);
-    $date = date('Y-m-d');
+    
     $user_id = $_SESSION['user_login'];
 
 
@@ -104,7 +104,7 @@ $target_dir = "uploads/";
                     id_card = :id_card, 
                     house_registration = :house_registration, 
                     slip2000 = :slip2000,
-                    date = :date 
+                    updated_at = NOW() -- เพิ่มการอัปเดตเวลาที่นี่
                 WHERE User_ID = :user_id");
         
             // Bind parameters
@@ -112,7 +112,7 @@ $target_dir = "uploads/";
             $sql_update->bindParam(':id_card', $fileNewi);
             $sql_update->bindParam(':house_registration', $fileNewh);
             $sql_update->bindParam(':slip2000', $fileNews);      
-            $sql_update->bindParam(':date', $date);      
+                  
             $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         
             $sql_update->execute();

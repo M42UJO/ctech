@@ -35,11 +35,13 @@ if (isset($_POST['submit'])) {
     $postal_code = htmlspecialchars($_POST['postal_code']);
 
     try {
+        // ตรวจสอบว่ามีที่อยู่ของผู้ใช้ในฐานข้อมูลหรือไม่
         $stmt_check = $conn->prepare("SELECT User_ID FROM current_address WHERE User_ID = ?");
         $stmt_check->execute([$user_id]);
         $applicant = $stmt_check->fetch();
 
         if (!$applicant) {
+            // หากไม่มีข้อมูล ให้ทำการ INSERT ข้อมูลใหม่
             $sql_insert = $conn->prepare("INSERT INTO current_address (
                 house_number, village, lane, road, sub_district, district, province, postal_code, User_ID
             ) VALUES (
@@ -58,6 +60,7 @@ if (isset($_POST['submit'])) {
             $sql_insert->execute();
             
         } else {
+            // หากมีข้อมูลอยู่แล้ว ให้ทำการ UPDATE ข้อมูล
             $sql_update = $conn->prepare("UPDATE current_address SET
                 house_number = :house_number,
                 village = :village,
@@ -85,10 +88,12 @@ if (isset($_POST['submit'])) {
             $sql_status_update->execute([$user_id]);
         }
 
+        // ตั้งค่าข้อความสถานะสำเร็จ
         $_SESSION['success'] = "Data has been inserted or updated successfully";
         header("Location: ../Education_info.php");
         exit();
     } catch (PDOException $e) {
+        // ตั้งค่าข้อความสถานะข้อผิดพลาด
         $_SESSION['error'] = "Database Error: " . $e->getMessage();
         header("Location: ../Current_address.php");
         exit();
