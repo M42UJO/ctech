@@ -56,7 +56,7 @@ require_once("config/db.php");
 
     /* Declare heights because of positioning of img element */
     .carousel-item {
-        height: 32rem;
+        height: 36rem;
     }
 
 
@@ -178,11 +178,11 @@ require_once("config/db.php");
                     
                 </div>
                 <div class="carousel-item">
-                    <img src="imagee/241336568_4467050613380080_6555199502821605310_n.jpg" class="d-block  centered-image" alt="..." style="width: 100%; height: 32rem;">
+                    <img src="imagee/ระบบรับสมัครนักศึกษา C-TECH.jpg" class="d-block  centered-image" alt="..." style="width: 100%; height: auto;">
                     
                 </div>
                 <div class="carousel-item active">
-                    <img src="imagee/b_02.jpg" class="d-block  centered-image " alt="..." style="width: 100%; height: 32rem;">
+                    <img src="imagee/b_02.jpg" class="d-block  centered-image " alt="..." style="width: 100%; height: auto;">
                     
                 </div>
             </div>
