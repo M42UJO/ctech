@@ -135,7 +135,7 @@ if (isset($_GET['not_approve'])) {
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
+                                        <th>ID.</th>
                                         <th>Name</th>
                                         <th>Lastname</th>
                                         
@@ -144,7 +144,7 @@ if (isset($_GET['not_approve'])) {
                                         <th>Educationlevel</th>
                                         <th>Subjecttype</th>
                                         <th>Major</th>
-                                        <th>Date</th>
+                                        <th>Date time</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -211,7 +211,7 @@ if (isset($_GET['not_approve'])) {
                                                 <td><?php echo htmlspecialchars($applicant['Level_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Type_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Major_Name']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['date']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['created_at']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['status']); ?></td>
                                                 <td>
                                                     <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
