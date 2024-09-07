@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once("config/db.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -204,65 +208,66 @@
         }
     </style>
 
-    <main class="container">
-        <div class="progress-vertical-container">
-            <div class="progress-vertical">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h5>เข้าสู่ระบบ</h5>
-                        <p>เริ่มต้นด้วยการเข้าสู่ระบบบัญชีผู้ใช้ของคุณโดยใช้อีเมลและรหัสผ่านที่ลงทะเบียนไว้. หากคุณยังไม่มีบัญชีผู้ใช้, กรุณา<a href="register.php" class="text-orange">ลงทะเบียน</a>เพื่อสร้างบัญชีใหม่ก่อน.</p>
-                        <a href="login.php" class="text-orange">เข้าสู่ระบบ</a>
-                    </div>
+<main class="container">
+    <div class="progress-vertical-container">
+        <div class="progress-vertical">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h5>เข้าสู่ระบบ</h5>
+                    <p>เริ่มต้นด้วยการเข้าสู่ระบบบัญชีผู้ใช้ของคุณโดยใช้อีเมลและรหัสผ่านที่ลงทะเบียนไว้ หากคุณยังไม่มีบัญชีผู้ใช้ กรุณา <a href="register.php" class="text-orange">ลงทะเบียน</a> เพื่อสร้างบัญชีใหม่ก่อน.</p>
+                    <a href="login.php" class="text-orange">เข้าสู่ระบบ</a>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h5>กรอกข้อมูลส่วนตัว</h5>
-                        <p>หลังจากเข้าสู่ระบบ, คุณจะต้องกรอก ข้อมูลส่วนตัว,ที่อยู่ปัจจุบัน,ข้อมูลการศึกษา,ข้อมูลบิดา,ข้อมูลมารดา,ข้อมูลผู้ปกครอง</p>
-                        <a href="Personal_info.php" class="text-orange">กรอกข้อมูลส่วนตัว</a>
-                    </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h5>กรอกข้อมูลส่วนตัว</h5>
+                    <p>หลังจากเข้าสู่ระบบ คุณจะต้องกรอกข้อมูลส่วนตัว เช่น ข้อมูลที่อยู่ปัจจุบัน ข้อมูลการศึกษา ข้อมูลบิดา ข้อมูลมารดา และข้อมูลผู้ปกครอง.</p>
+                    <a href="Personal_info.php" class="text-orange">กรอกข้อมูลส่วนตัว</a>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h5>เลือกหลักสูตร</h5>
-                        <p>เลือกหลักสูตรที่คุณต้องการสมัครจากรายการหลักสูตรที่มีอยู่. คุณสามารถดูรายละเอียดของแต่ละหลักสูตร เช่น ค่าใช้จ่าย, และเนื้อหาหลักสูตร เพื่อช่วยในการตัดสินใจ.</p>
-                        <a href="apply.php" class="text-orange">เลือกหลักสูตร</a>
-                    </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h5>เลือกหลักสูตร</h5>
+                    <p>เลือกหลักสูตรที่คุณต้องการสมัครจากรายการหลักสูตรที่มีอยู่ คุณสามารถดูรายละเอียดของแต่ละหลักสูตร เช่น ค่าใช้จ่าย และเนื้อหาหลักสูตร เพื่อช่วยในการตัดสินใจ.</p>
+                    <a href="apply.php" class="text-orange">เลือกหลักสูตร</a>
                 </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h5>หลักฐานที่ใช้ในการสมัคร</h5>
-                        <p>อัพโหลดเอกสารที่จำเป็นสำหรับการสมัคร เช่น สำเนาบัตรประชาชน, สำเนาใบรบ, สำเนาทะเบียนบ้าน, และหลักฐานการชำระ. ตรวจสอบให้แน่ใจว่าเอกสารทั้งหมดอ่านได้ชัดเจนและครบถ้วน.</p>
-                    </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h5>หลักฐานที่ใช้ในการสมัคร</h5>
+                    <p>อัพโหลดเอกสารที่จำเป็นสำหรับการสมัคร เช่น สำเนาบัตรประชาชน สำเนาใบแสดงผลการเรียน (Transcript) สำเนาทะเบียนบ้าน และหลักฐานการชำระเงิน ตรวจสอบให้แน่ใจว่าเอกสารทั้งหมดอ่านได้ชัดเจนและครบถ้วน.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h5>ตรวจสอบความถูกต้อง</h5>
-                        <p>ตรวจสอบข้อมูลทั้งหมดที่คุณกรอกและเอกสารที่อัพโหลดให้แน่ใจว่าถูกต้องและครบถ้วน. คุณสามารถกลับไปแก้ไขข้อมูลก่อนที่จะส่งใบสมัครได้.</p>
-                    </div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h5>ตรวจสอบความถูกต้อง</h5>
+                    <p>ตรวจสอบข้อมูลทั้งหมดที่คุณกรอกและเอกสารที่อัพโหลดให้แน่ใจว่าถูกต้องและครบถ้วน คุณสามารถกลับไปแก้ไขข้อมูลก่อนที่จะส่งใบสมัครได้.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <h5>ยืนยันการสมัคร</h5>
-                        <p>ทำการยืนยันการสมัครของคุณ. ตรวจสอบให้แน่ใจว่าคุณได้ปฏิบัติตามทุกขั้นตอนและส่งใบสมัครแล้ว. รอการตอบรับจากระบบหรือการติดต่อจากเจ้าหน้าที่เพื่อยืนยันการสมัครของคุณ.</p>
-                    </div>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h5>ยืนยันการสมัคร</h5>
+                    <p>ทำการยืนยันการสมัครของคุณ ตรวจสอบให้แน่ใจว่าคุณได้ปฏิบัติตามทุกขั้นตอนและส่งใบสมัครแล้ว รอการตอบรับจากระบบหรือการติดต่อจากเจ้าหน้าที่เพื่อยืนยันการสมัครของคุณ.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">7</div>
-                    <div class="step-content">
-                        <h5>ตรวจสอบสถานะ</h5>
-                        <p>ตรวจสอบสถานะของใบสมัครของคุณเพื่อดูความคืบหน้าหรือการอัพเดตจากระบบ. คุณจะได้รับข้อมูลเกี่ยวกับสถานะการสมัครของคุณผ่านหน้าเว็บนี้.</p>
-                        <a href="checkstatus.php" class="text-orange">ตรวจสอบสถานะ</a>
-                    </div>
+            </div>
+            <div class="step">
+                <div class="step-number">7</div>
+                <div class="step-content">
+                    <h5>ตรวจสอบสถานะ</h5>
+                    <p>ตรวจสอบสถานะของใบสมัครของคุณเพื่อดูความคืบหน้าหรือการอัพเดตจากระบบ คุณจะได้รับข้อมูลเกี่ยวกับสถานะการสมัครของคุณผ่านหน้าเว็บนี้.</p>
+                    <a href="checkstatus.php" class="text-orange">ตรวจสอบสถานะ</a>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
+
 
 
 
