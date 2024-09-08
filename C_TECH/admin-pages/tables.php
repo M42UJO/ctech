@@ -137,16 +137,16 @@ if (isset($_GET['not_approve'])) {
                                 <thead>
                                     <tr>
                                         <th>ID.</th>
-                                        <th>Name</th>
-                                        <th>Lastname</th>
+                                        <th>ชื่อ</th>
+                                        <th>นามสกุล</th>
                                         
-                                        <th>Id Card Number</th>
-                                        <th>Coursetype</th>
-                                        <th>Educationlevel</th>
-                                        <th>Subjecttype</th>
-                                        <th>Major</th>
-                                        <th>Date time</th>
-                                        <th>Status</th>
+                                        
+                                        <th>ประเภทของหลักสูตร</th>
+                                        <th>ระดับการศึกษา</th>
+                                        <th>ประเภทวิชา </th>
+                                        <th>สาขาวิชา </th>
+                                        <th>วัน/เวลา ที่สมัคร</th>
+                                        <th>สถานะ</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -207,7 +207,7 @@ if (isset($_GET['not_approve'])) {
                                                 <td><?php echo htmlspecialchars($applicant['name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['lastname']); ?></td>
                                                 
-                                                <td><?php echo htmlspecialchars($applicant['id_card_number']); ?></td>
+                                                
                                                 <td><?php echo htmlspecialchars($applicant['CourseType_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Level_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Type_Name']); ?></td>
