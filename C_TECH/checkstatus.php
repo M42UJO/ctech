@@ -19,8 +19,15 @@ try {
     $stmtForm->execute([$user_id]);
     $formData = $stmtForm->fetch();
 
+    // ตรวจสอบว่ามีข้อมูลหรือไม่
+if ($formData) {
     $status = $formData['status'];
     $comment = $formData['comment'];
+} else {
+    $status = null; // หรือกำหนดค่าเริ่มต้นอื่นๆ
+    $comment = null; // หรือกำหนดค่าเริ่มต้นอื่นๆ
+}
+
 
     // กำหนดข้อความตามสถานะและคลาส CSS
     if ($status == 'pending' || $status == 'update') {

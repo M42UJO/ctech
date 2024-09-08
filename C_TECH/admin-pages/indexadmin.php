@@ -133,7 +133,7 @@
                             <div class="card bg-c-blue order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาบัญชี</h5>
-                                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa-solid fa-calculator"></i><span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                             <div class="card bg-c-green order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาคอมพิวเตอร์ธุรกิจ</h5>
-                                    <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa-solid fa-computer"></i><span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                             <div class="card bg-c-yellow order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาเทคโนโลยีสารสนเทศ</h5>
-                                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa-regular fa-keyboard"></i><span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                             <div class="card bg-c-pink order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาเทคโนโลยีธุรกิจดิจิทัล</h5>
-                                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa-solid fa-microchip"></i><span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                             <div class="card bg-c-blue order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาธุรกิจค้าปลีก</h5>
-                                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa-solid fa-truck"></i><span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                             <div class="card bg-c-green order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาการจัดจารโลจิสติกส์</h5>
-                                    <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa-solid fa-plane"></i><span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -192,7 +192,7 @@
                             <div class="card bg-c-yellow order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาการตลาด</h5>
-                                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i> <span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa-solid fa-store"></i> <span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                             <div class="card bg-c-pink order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาช่างยนต์</h5>
-                                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i> <span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa-solid fa-wrench"></i> <span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
                             <div class="card bg-c-blue order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาช่างไฟฟ้ากำลัง</h5>
-                                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i> <span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa-solid fa-plug"></i> <span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -221,7 +221,7 @@
                             <div class="card bg-c-green order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาช่างอิเล็กทรอนิกส์</h5>
-                                    <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa fa-code-fork"></i><span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
                             <div class="card bg-c-yellow order-card">
                                 <div class="card-block">
                                     <h5 class="m-b-20">จำนวนผู้สมัคร สาขาช่างก่อสร้าง</h5>
-                                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span> 486</span></h2>
+                                    <h2 class="text-right"><i class="fa fa-road"></i><span> 486</span></h2>
                                     <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
                                 </div>
                             </div>
