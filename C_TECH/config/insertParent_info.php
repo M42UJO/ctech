@@ -27,7 +27,7 @@ try {
 }
 
 // ตรวจสอบว่าแบบฟอร์มถูกส่งหรือไม่
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit_button'])) {
     // รับค่าจากฟอร์มและทำการป้องกัน XSS โดยการใช้ htmlspecialchars
     $guardian_name = htmlspecialchars($_POST['guardian_name']);
     $guardian_relationship = htmlspecialchars($_POST['guardian_relationship']);
