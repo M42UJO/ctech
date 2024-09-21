@@ -33,6 +33,8 @@ try {
             "guardian_phone_number" => "",
         ];
     }
+
+
 } catch (PDOException $e) {
     echo "Error: " . htmlspecialchars($e->getMessage());
     exit();
@@ -65,31 +67,32 @@ try {
 </head>
 <style>
     .btn {
-        flex: 1 1 auto;
-        margin: 10px;
-        padding: 30px;
-        text-align: center;
-        text-transform: uppercase;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;
-        text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 0 20px #eee;
-        border-radius: 10px;
-    }
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+}
 
-    .btn:hover {
-        background-position: right center;
+.btn:hover {
+    background-position: right center;
+    
+}
 
-    }
+.btn-1 {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
 
-    .btn-1 {
-        background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
-    }
 </style>
 
 <body>
-    <?php
+<?php
     require_once("nav.php");
     ?>
 
@@ -121,7 +124,7 @@ try {
                     <span class="progress-count">6</span>
                     <span class="progress-label">ข้อมูลผู้ปกครอง</span>
                 </li>
-
+                
             </ul>
         </section>
 
@@ -140,59 +143,59 @@ try {
                     <div class="panel-heading">ข้อมูลผู้ปกครอง</div>
                     <div class="col-md-8">
                         <label for="prefix" class="form-label">ผู้ปกครอง<span class="required">**</span></label>
-                        <input class="form-control " type="text " placeholder="ชื่อผู้ปกครอง " name="guardian_name" value="<?php echo $Data_view["guardian_name"]; ?>" required=" ">
+                        <input class="form-control " type="text " placeholder="ชื่อผู้ปกครอง " name="guardian_name" value="<?php echo $Data_view["guardian_name"];?>" required=" ">
                     </div>
 
                     <div class="col-md-4">
                         <label for="last-name" class="form-label">ความสัมพันธ์ <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="ความสัมพันธ์ " name="guardian_relationship" value="<?php echo $Data_view["guardian_relationship"]; ?>" required=" ">
+                        <input type="text " class="form-control " placeholder="ความสัมพันธ์ " name="guardian_relationship" value="<?php echo $Data_view["guardian_relationship"];?>" required=" ">
                     </div>
                     <div class="col-md-2">
                         <label for="prefix" class="form-label">บ้านเลขที่ <span class="required">**</span></label>
-                        <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="guardian_house_number" value="<?php echo $Data_view["guardian_house_number"]; ?>" required=" ">
+                        <input class="form-control " type="text " placeholder="บ้านเลขที่ " name="guardian_house_number" value="<?php echo $Data_view["guardian_house_number"];?>" required=" ">
                     </div>
                     <div class="col-md-1">
                         <label for="prefix" class="form-label">หมู่ <span class="required">**</span></label>
-                        <input class="form-control " type="text " placeholder="หมู่ " name="guardian_village" value="<?php echo $Data_view["guardian_village"]; ?>" required=" ">
+                        <input class="form-control " type="text " placeholder="หมู่ " name="guardian_village" value="<?php echo $Data_view["guardian_village"];?>" required=" ">
                     </div>
                     <div class="col-md-3">
                         <label for="prefix" class="form-label">ซอย </label>
-                        <input class="form-control " type="text " placeholder="ซอย " name="guardian_lane" value="<?php echo $Data_view["guardian_lane"]; ?>">
+                        <input class="form-control " type="text " placeholder="ซอย " name="guardian_lane" value="<?php echo $Data_view["guardian_lane"];?>" >
                     </div>
                     <div class="col-md-3">
                         <label for="prefix" class="form-label">ถนน </label>
-                        <input class="form-control " type="text " placeholder="ถนน " name="guardian_road" value="<?php echo $Data_view["guardian_road"]; ?>">
+                        <input class="form-control " type="text " placeholder="ถนน " name="guardian_road" value="<?php echo $Data_view["guardian_road"];?>" >
                     </div>
                     <div class="col-md-3">
                         <label for="first-name" class="form-label">ตำบล <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="ตำบล " id="district" name="guardian_sub_district" value="<?php echo $Data_view["guardian_sub_district"]; ?>" required=" ">
+                        <input type="text " class="form-control " placeholder="ตำบล " id="district" name="guardian_sub_district" value="<?php echo $Data_view["guardian_sub_district"];?>" required=" ">
                     </div>
                     <div class="col-md-3">
                         <label for="last-name" class="form-label">อำเภอ <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="อำเภอ " id="amphoe" name="guardian_district" value="<?php echo $Data_view["guardian_district"]; ?>" required=" ">
+                        <input type="text " class="form-control " placeholder="อำเภอ " id="amphoe" name="guardian_district" value="<?php echo $Data_view["guardian_district"];?>" required=" ">
                     </div>
                     <div class="col-md-3">
                         <label for="full-name-eng" class="form-label">จังหวัด <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="จังหวัด " id="province" name="guardian_province" value="<?php echo $Data_view["guardian_province"]; ?>" required=" ">
+                        <input type="text " class="form-control " placeholder="จังหวัด " id="province" name="guardian_province" value="<?php echo $Data_view["guardian_province"];?>" required=" ">
                     </div>
                     <div class="col-md-3">
                         <label for="id-number" class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                        <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " id="zipcode" name="guardian_postal_code" value="<?php echo $Data_view["guardian_postal_code"]; ?>" maxlength="5 " required=" ">
+                        <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " id="zipcode" name="guardian_postal_code" value="<?php echo $Data_view["guardian_postal_code"];?>" maxlength="5 " required=" ">
                     </div>
                     <div class="col-md-3">
                         <label for="phone" class="form-label">เบอร์โทรผู้ปกครอง<span class="required">**</span></label>
-                        <input type="tel" id="phone" class="form-control" name="guardian_phone_number" value="<?php echo $Data_view["guardian_phone_number"]; ?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
+                        <input type="tel" id="phone" class="form-control" name="guardian_phone_number" value="<?php echo $Data_view["guardian_phone_number"];?>" required maxlength="12" oninput="formatPhoneNumber(this)" placeholder="0xx-xxx-xxxx">
                     </div>
                     <div class="col-md-2">
                         <a href="./Mother_info.php" type="button" class="btn  w-100 py-2 btn-1">
-                            <i class="fa-solid fa-angles-left"></i> ย้อนกลับ
+                        <i class="fa-solid fa-angles-left"></i> ย้อนกลับ
                         </a>
                     </div>
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" name="submit_button" class="btn  w-100 py-2 btn-1">ถัดไป
-                            <i class="fa-solid fa-angles-right"></i>
+                        <button type="submit" name="submit" class="btn  w-100 py-2 btn-1">ถัดไป
+                        <i class="fa-solid fa-angles-right"></i>
                         </button>
 
                     </div>
@@ -210,7 +213,6 @@ try {
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL " crossorigin="anonymous "></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -222,12 +224,6 @@ try {
             });
         });
     </script>
-
-
-
-
-
-
 </body>
 
 </html>
