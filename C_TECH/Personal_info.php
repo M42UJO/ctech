@@ -149,9 +149,9 @@ try {
                         <label for="prefix" class="form-label">คำนำหน้า <span class="required">**</span></label>
                         <select id="prefix" class="form-select" name="prefix" required>
                             <option value="">==เลือก==</option>
-                            <option value="Mr" <?php echo ($Data_view["prefix"] == "Mr") ? 'selected' : ''; ?>>นาย</option>
-                            <option value="Mrs" <?php echo ($Data_view["prefix"] == "Mrs") ? 'selected' : ''; ?>>นาง</option>
-                            <option value="Ms" <?php echo ($Data_view["prefix"] == "Ms") ? 'selected' : ''; ?>>นางสาว</option>
+                            <option value="นาย" <?php echo ($Data_view["prefix"] == "นาย") ? 'selected' : ''; ?>>นาย</option>
+                            <option value="นาง" <?php echo ($Data_view["prefix"] == "นาง") ? 'selected' : ''; ?>>นาง</option>
+                            <option value="นางสาว" <?php echo ($Data_view["prefix"] == "นางสาว") ? 'selected' : ''; ?>>นางสาว</option>
                         </select>
 
                     </div>
