@@ -53,6 +53,35 @@ if (isset($_GET['not_approve'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
+<style>
+    .status-circle {
+        display: inline-block;
+        width: 12px;
+        /* Diameter of the circle */
+        height: 12px;
+        /* Diameter of the circle */
+        border-radius: 50%;
+        margin-right: 5px;
+        /* Space between circle and text */
+    }
+
+    .status-not-approve {
+        background-color: red;
+    }
+
+    .status-approve {
+        background-color: green;
+    }
+
+    .status-update {
+        background-color: blue;
+        /* You can choose any color */
+    }
+
+    .status-pending {
+        background-color: yellow;
+    }
+</style>
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark navbar-custom">
@@ -125,22 +154,22 @@ if (isset($_GET['not_approve'])) {
                 <div class="container-fluid px-4">
                     <h1 class="">Users Data Tables pending</h1>
                     <ol class="breadcrumb mb-4">
-                        <h3><li class="breadcrumb-item active">ตารางข้อมูล ผู้สมัคร ที่รอการ อนุมัติ</li>
-                        </ol></h3>
+                        <h3>
+                            <li class="breadcrumb-item active">ตารางข้อมูล ผู้สมัคร ที่รอการ อนุมัติ</li>
+                    </ol>
+                    </h3>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                             ตารางข้อมูล ผู้สมัคร ที่รอการ อนุมัติ
+                            ตารางข้อมูล ผู้สมัคร ที่รอการ อนุมัติ
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
                                         <th>ID.</th>
-                                        <th>ชื่อ</th>
-                                        <th>นามสกุล</th>
-                                        
-                                        
+                                        <th>ชื่อ-นามสกุล</th>
+
                                         <th>ประเภทของหลักสูตร</th>
                                         <th>ระดับการศึกษา</th>
                                         <th>ประเภทวิชา </th>
@@ -204,16 +233,36 @@ if (isset($_GET['not_approve'])) {
                                     ?>
                                             <tr>
                                                 <th scope="row"><?php echo htmlspecialchars($applicant['User_ID']); ?></th>
-                                                <td><?php echo htmlspecialchars($applicant['name']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['lastname']); ?></td>
-                                                
-                                                
+                                                <td><?php echo htmlspecialchars($applicant['name'] . ' ' . $applicant['lastname']); ?></td>
+
+
+
                                                 <td><?php echo htmlspecialchars($applicant['CourseType_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Level_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Type_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Major_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['created_at']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['status']); ?></td>
+                                                <td>
+                                                    <?php
+                                                    $statusClass = '';
+                                                    switch ($applicant['status']) {
+                                                        case 'not_approve':
+                                                            $statusClass = 'status-not-approve';
+                                                            break;
+                                                        case 'approve':
+                                                            $statusClass = 'status-approve';
+                                                            break;
+                                                        case 'update':
+                                                            $statusClass = 'status-update';
+                                                            break;
+                                                        case 'pending':
+                                                            $statusClass = 'status-pending';
+                                                            break;
+                                                    }
+                                                    ?>
+                                                    <span class="status-circle <?php echo $statusClass; ?>"></span>
+                                                    <?php echo htmlspecialchars($applicant['status']); ?>
+                                                </td>
                                                 <td>
                                                     <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
                                                     <a onclick="confirmNotApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-danger">ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></a>

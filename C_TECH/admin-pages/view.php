@@ -2,9 +2,13 @@
 session_start();
 require_once("../config/db.php");
 
+
+    if (isset($_POST['comment']) {
+
     $comment = htmlspecialchars($_POST['comment']);
     $approve = 'approve';
     $not_approve = 'not_approve';
+    }
     
 
     if (isset($_POST['approve'])) {

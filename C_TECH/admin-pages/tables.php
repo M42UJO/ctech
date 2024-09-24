@@ -54,6 +54,34 @@ if (isset($_GET['not_approve'])) {
 
 </head>
 
+<style>
+    .status-circle {
+    display: inline-block;
+    width: 12px; /* Diameter of the circle */
+    height: 12px; /* Diameter of the circle */
+    border-radius: 50%;
+    margin-right: 5px; /* Space between circle and text */
+}
+
+.status-not-approve {
+    background-color: red;
+}
+
+.status-approve {
+    background-color: green;
+}
+
+.status-update {
+    background-color: blue; /* You can choose any color */
+}
+
+.status-pending {
+    background-color: yellow;
+}
+
+</style>
+
+
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark navbar-custom">
         <!-- Navbar Brand-->
@@ -137,14 +165,14 @@ if (isset($_GET['not_approve'])) {
                                 <thead>
                                     <tr>
                                         <th>ID.</th>
-                                        <th>ชื่อ</th>
-                                        <th>นามสกุล</th>
+                                        <th>ชื่อ-นามสกุล</th>
+     
                                         
                                         
                                         <th>ประเภทของหลักสูตร</th>
                                         <th>ระดับการศึกษา</th>
-                                        <th>ประเภทวิชา </th>
-                                        <th>สาขาวิชา </th>
+                                        <th>ประเภทวิชา</th>
+                                        <th>สาขาวิชา</th>
                                         <th>วัน/เวลา ที่สมัคร</th>
                                         <th>สถานะ</th>
                                         <th>Action</th>
@@ -204,26 +232,45 @@ if (isset($_GET['not_approve'])) {
                                     ?>
                                             <tr>
                                                 <th scope="row"><?php echo htmlspecialchars($applicant['User_ID']); ?></th>
-                                                <td><?php echo htmlspecialchars($applicant['name']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['lastname']); ?></td>
+                                                <td><?php echo htmlspecialchars($applicant['name'].' '.$applicant['lastname']); ?></td>
                                                 
-                                                
-                                                <td><?php echo htmlspecialchars($applicant['CourseType_Name']); ?></td>
+                                                <td><?php echo htmlspecialchars(string: $applicant['CourseType_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Level_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Type_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['Major_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['updated_at']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['status']); ?></td>
+                                                <td>
+                                                    <?php
+                                                    $statusClass = '';
+                                                    switch ($applicant['status']) {
+                                                        case 'not_approve':
+                                                            $statusClass = 'status-not-approve';
+                                                            break;
+                                                        case 'approve':
+                                                            $statusClass = 'status-approve';
+                                                            break;
+                                                        case 'update':
+                                                            $statusClass = 'status-update';
+                                                            break;
+                                                        case 'pending':
+                                                            $statusClass = 'status-pending';
+                                                            break;
+                                                    }
+                                                    ?>
+                                                    <span class="status-circle <?php echo $statusClass; ?>"></span>
+                                                    <?php echo htmlspecialchars($applicant['status']); ?>
+                                                </td>
                                                 <td>
                                                     <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
-                                                    <a onclick="confirmNotApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-danger" >ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></a>
-                                                    <a onclick="confirmApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-success" >อนุมัติ <i class="fa-solid fa-check"></i></a>
+                                                    <a onclick="confirmNotApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-danger">ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></a>
+                                                    <a onclick="confirmApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-success">อนุมัติ <i class="fa-solid fa-check"></i></a>
                                                 </td>
                                             </tr>
                                     <?php
                                         }
                                     }
                                     ?>
+                                    
 
                                 </tbody>
                                 
