@@ -58,7 +58,7 @@ require_once("../config/db.php");
                         </a>
                         <a class="nav-link" href="edituser.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
-                            Edit Users
+                            แก้ไขผู้ใช้
                         </a>
                         
                         <a class="nav-link" href="charts.php">
@@ -67,11 +67,11 @@ require_once("../config/db.php");
                         </a>
                         <a class="nav-link" href="tables.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
+                            ผู้สมัคร
                         </a>
                         <a class="nav-link" href="approve.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
-                            Approve
+                            อนุมัติ
                         </a>
                     </div>
                 </div>
@@ -98,11 +98,11 @@ require_once("../config/db.php");
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
-                                        <th>Name</th>
-                                        <th>Lastname</th>
-                                        <th>Email</th>
-                                        <th>Id Card Number</th>
+                                        <th>ID.</th>
+                                        <th>ชื่อ</th>
+                                        <th>นามสกุล</th>
+                                        <th>อีเมล์</th>
+                                        <th>บัตรประชาชน</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

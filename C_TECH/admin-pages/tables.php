@@ -94,7 +94,7 @@ if (isset($_GET['not_approve'])) {
                         </a>
                         <a class="nav-link" href="edituser.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
-                            Editusers
+                            แก้ไขผู้ใช้
                         </a>
 
 
@@ -105,11 +105,11 @@ if (isset($_GET['not_approve'])) {
                         </a>
                         <a class="nav-link" href="tables.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
+                            ผู้สมัคร
                         </a>
                         <a class="nav-link" href="approve.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
-                            Approve
+                            อนุมัติ
                         </a>
                     </div>
                 </div>
