@@ -30,7 +30,7 @@ require_once("../config/db.php");
 
     <!-- login -->
     <main class="form-signin mt-5 col-md-12">
-        <form action="config/insertlogin.php" method="post">
+        <form action="../config/insertLoginAdmin.php" method="post">
             <img src="https://img5.pic.in.th/file/secure-sv1/c-techlogo.png" alt="Your Logo" width="150" height="32"><br><br>
 
 
