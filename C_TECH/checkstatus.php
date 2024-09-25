@@ -144,10 +144,7 @@ if ($formData) {
     <div class="container">
         <div class="row">
             <div class="col-md-6 mt-5">
-                <embed src="imagee/register2018.pdf" width="100%" height="900px" type="application/pdf">
-            </div>
-            <div class="col-md-6 my-auto">
-                <div class="panel panel-default">
+            <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="alert <?php echo $statusClass; ?>" role="alert">
                             <div class="panel-heading">สถานะการสมัคร</div>
@@ -155,13 +152,19 @@ if ($formData) {
                             <p><?php echo $message; ?></p>
                             <?php if (!empty($comment)): ?>
                                 <div class="mt-3">
-                                    <strong>ความคิดเห็นจากแอดมิน:</strong>
+                                    <strong>ความคิดเห็นจากเจ้าหน้าที่:</strong>
                                     <p><?php echo htmlspecialchars($comment); ?></p>
                                 </div>
                             <?php endif; ?>
                         </div>
                     </div>
                 </div>
+                <a href="report.php" target="_blank" class="btn btn-outline-dark">ดาวน์โหลด PDF</a>
+            </div>
+            <div class="col-md-6 mt-5">
+            <embed src="imagee/register2018.pdf" width="100%" height="800px" type="application/pdf">
+
+                
             </div>
         </div>
     </div>
