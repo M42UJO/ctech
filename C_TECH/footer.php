@@ -11,16 +11,26 @@
 </head>
 
 <style>
-    .footer_area {
-        
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: orange;
-        padding: 10px;
-        
-        
-    }
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ทำให้ความสูงอย่างน้อยเท่ากับความสูงของหน้าจอ */
+}
+
+.footer_area {
+    margin-top: auto; /* ดัน footer ให้ไปอยู่ล่างสุดของ content */
+    background-color: orange;
+    padding: 10px;
+    width: 100%;
+}
+
+
+
 </style>
 
 <body>

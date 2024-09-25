@@ -169,7 +169,7 @@ try {
                     </div>
                     <div class="col-md-4">
                         <label for="id-number" class="form-label">เลขบัตรประชาชน <span class="required">** ตัวเลขเท่านั้น</span></label>
-                        <input type="text" class="form-control" id="thai-id" maxlength="13"  placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $Data_view["id_card_number"];?>" required >
+                        <input type="text" class="form-control" id="thai-id" maxlength="13"  placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $userData["id_card_number"];?>" required >
                     </div>
                     <div class="col-md-2">
                         <label for="nickname" class="form-label">ชื่อเล่น</label>

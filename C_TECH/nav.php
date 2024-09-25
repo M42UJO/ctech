@@ -54,16 +54,16 @@ if ($isLoggedIn) {
         </button>
 
         <!-- เมนูของ Navbar -->
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item ms-5">
+                <li class="nav-item">
                     <a href="index.php" class="nav-link link-dark fw-bold">หน้าหลัก</a>
                 </li>
                 <li class="nav-item">
                     <a href="http://c-tech.ac.th/branch.php" target="_blank" class="nav-link link-dark fw-bold">สาขาที่เปิดสอน</a>
                 </li>
                 <li class="nav-item">
-                    <a href="process.php"  class="nav-link link-dark fw-bold">ขั้นตอนการสมัครเรียน</a>
+                    <a href="process.php" class="nav-link link-dark fw-bold">ขั้นตอนการสมัครเรียน</a>
                 </li>
                 <li class="nav-item">
                     <a href="apply.php" class="nav-link link-dark fw-bold">สมัครเรียน</a>
@@ -77,10 +77,29 @@ if ($isLoggedIn) {
                     </li>
                 <?php endif; ?>
             </ul>
+
+            <!-- เมนู Login/Logout จะอยู่ในแฮมเบอร์เกอร์ในมือถือ -->
+            <ul class="navbar-nav d-lg-none">
+                <?php if ($isLoggedIn) : ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMobile" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user fa-fw"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMobile">
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="config/logout.php">Logout</a></li>
+                        </ul>
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a href="login.php" class="nav-link link-dark fw-bold">Login</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
         </div>
 
-        <!-- ส่วนขวาของ Navbar -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavRight">
+        <!-- ปุ่ม Login/Logout อยู่ด้านขวาของ navbar ในหน้าจอขนาดใหญ่ -->
+        <div class="d-none d-lg-flex">
             <ul class="navbar-nav">
                 <?php if ($isLoggedIn) : ?>
                     <li class="nav-item dropdown">
@@ -88,7 +107,6 @@ if ($isLoggedIn) {
                             <i class="fas fa-user fa-fw"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Settings</a></li>
                             <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="config/logout.php">Logout</a></li>
                         </ul>
@@ -97,9 +115,6 @@ if ($isLoggedIn) {
                     <li class="nav-item">
                         <a href="login.php" class="btn btn-outline-dark me-2 fw-bold">Login</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="register.php" class="btn btn-dark fw-bold">Register</a>
-                    </li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -107,7 +122,6 @@ if ($isLoggedIn) {
 </nav>
 
 <!-- Bootstrap JS และ dependencies -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 

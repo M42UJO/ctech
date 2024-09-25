@@ -2,6 +2,11 @@
 session_start();
 require_once("../config/db.php");
 
+if (!isset($_SESSION['admin_login'])) {
+    header('Location: admin.php');
+    exit();
+}
+
 // ตรวจสอบว่ามีการส่ง `user_id` มาไหม
 if (isset($_GET['user_id'])) {
     $user_id = $_GET['user_id'];

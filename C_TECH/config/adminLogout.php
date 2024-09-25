@@ -6,6 +6,6 @@ session_unset();
 session_destroy();
 
 // เปลี่ยนเส้นทางไปยังหน้าเข้าสู่ระบบ
-header('Location: ../admin.php');
+header('Location: ../admin-pages/admin.php');
 exit(); // เพิ่ม exit() เพื่อหยุดการทำงานของสคริปต์
 ?>
