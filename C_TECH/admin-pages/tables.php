@@ -170,12 +170,6 @@ if (isset($_GET['not_approve'])) {
                                     <tr>
                                         <th>ID.</th>
                                         <th>ชื่อ-นามสกุล</th>
-     
-                                        
-                                        
-                                        <th>ประเภทของหลักสูตร</th>
-                                        <th>ระดับการศึกษา</th>
-                                        <th>ประเภทวิชา</th>
                                         <th>สาขาวิชา</th>
                                         <th>วัน/เวลา ที่สมัคร</th>
                                         <th>สถานะ</th>
@@ -238,10 +232,7 @@ if (isset($_GET['not_approve'])) {
                                                 <th scope="row"><?php echo htmlspecialchars($applicant['User_ID']); ?></th>
                                                 <td><?php echo htmlspecialchars($applicant['name'].' '.$applicant['lastname']); ?></td>
                                                 
-                                                <td><?php echo htmlspecialchars(string: $applicant['CourseType_Name']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['Level_Name']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['Type_Name']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['Major_Name']); ?></td>
+                                                <td><?php echo htmlspecialchars(string: $applicant['CourseType_Name'].' '.$applicant['Level_Name'].' '.$applicant['Type_Name'].' '.$applicant['Major_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['updated_at']); ?></td>
                                                 <td>
                                                     <?php

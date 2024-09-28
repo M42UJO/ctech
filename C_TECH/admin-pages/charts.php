@@ -7,11 +7,35 @@ if (!isset($_SESSION['admin_login'])) {
     exit();
 }
 
+// ดึงข้อมูลจำนวนผู้สมัครต่อสาขา
+$stmt = $conn->prepare("
+    SELECT major.Major_Name, 
+           COUNT(form.Major_ID) AS applicant_count
+    FROM major
+    LEFT JOIN form ON form.Major_ID = major.Major_ID
+    GROUP BY major.Major_Name
+");
+$stmt->execute();
 
+$chartData = [];
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $chartData[] = [$row['Major_Name'], (int)$row['applicant_count']];
+}
 
+// ดึงข้อมูลจำนวนผู้สมัครต่อปี
+$yearStmt = $conn->prepare("
+    SELECT YEAR(created_at) AS year, COUNT(*) AS applicant_count
+    FROM form
+    GROUP BY YEAR(created_at)
+    ORDER BY year ASC
+");
+$yearStmt->execute();
+
+$yearData = [];
+while ($row = $yearStmt->fetch(PDO::FETCH_ASSOC)) {
+    $yearData[] = [(int)$row['year'], (int)$row['applicant_count']];
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,27 +49,80 @@ if (!isset($_SESSION['admin_login'])) {
     <title>Charts - SB Admin</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        // ข้อมูลสำหรับกราฟสาขา
+        var dataMajor = google.visualization.arrayToDataTable([
+          ['Major', 'Applicants'],
+          <?php
+          foreach ($chartData as $data) {
+              echo "['" . addslashes($data[0]) . "', " . $data[1] . "],";
+          }
+          ?>
+        ]);
+
+        var optionsMajor = {
+          title: 'จำนวนผู้สมัคร ในแต่ละสาขา',
+          pieHole: 0.4, // สำหรับ PieChart แบบ Donut
+          // สามารถเพิ่ม options อื่น ๆ ได้ตามต้องการ
+        };
+
+        var chart1 = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart1.draw(dataMajor, optionsMajor);
+
+        var chart2 = new google.visualization.BarChart(document.getElementById('BarChart'));
+        chart2.draw(dataMajor, optionsMajor);
+
+        var chart3 = new google.visualization.Histogram(document.getElementById('Histogram'));
+        chart3.draw(dataMajor, optionsMajor);
+
+        var chart4 = new google.visualization.ColumnChart(document.getElementById('ColumnChart'));
+        chart4.draw(dataMajor, optionsMajor);
+
+        var chart5 = new google.visualization.LineChart(document.getElementById('LineChart'));
+        chart5.draw(dataMajor, optionsMajor);
+
+        // ข้อมูลสำหรับกราฟปี
+        var dataYear = google.visualization.arrayToDataTable([
+          ['Year', 'Applicants'],
+          <?php
+          foreach ($yearData as $data) {
+              echo "[" . $data[0] . ", " . $data[1] . "],";
+          }
+          ?>
+        ]);
+
+        var optionsYear = {
+          title: 'จำนวนผู้สมัคร ในแต่ละปี',
+          hAxis: { title: 'ปี', minValue: 0 },
+          vAxis: { title: 'จำนวนผู้สมัคร', minValue: 0 },
+          // สามารถเพิ่ม options อื่น ๆ ได้ตามต้องการ
+        };
+
+        var chartYear = new google.visualization.LineChart(document.getElementById('YearChart'));
+        chartYear.draw(dataYear, optionsYear);
+      }
+    </script>
 </head>
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark navbar-custom">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">Admin C-TECH</a>
+        <a class="navbar-brand ps-3" href="indexadmin.php">Admin C-TECH</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <!-- <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div> -->
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
@@ -68,7 +145,6 @@ if (!isset($_SESSION['admin_login'])) {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
                             แก้ไขผู้ใช้
                         </a>
-
                         <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
@@ -85,7 +161,6 @@ if (!isset($_SESSION['admin_login'])) {
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-
                 </div>
             </nav>
         </div>
@@ -94,55 +169,21 @@ if (!isset($_SESSION['admin_login'])) {
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Charts</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="indexadmin.php">Dashboard</a></li>
                         <li class="breadcrumb-item active">Charts</li>
                     </ol>
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            Chart.js is a third party plugin that is used to generate the charts in this template. The charts below have been customized - for further customization options, please visit the official
-                            <a target="_blank" href="https://www.chartjs.org/docs/latest/">Chart.js documentation</a> .
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-chart-area me-1"></i> Area Chart Example
-                        </div>
-                        <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
-                        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-bar me-1"></i> Bar Chart Example
-                                </div>
-                                <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
-                                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-pie me-1"></i> Pie Chart Example
-                                </div>
-                                <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
-                                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                            </div>
-                        </div>
+                    <div class="col-md-12 mx-auto">
+                        <div id="piechart" style="width: 900px; height: 500px;"></div>
+                        <div id="BarChart" style="width: 900px; height: 500px;"></div>
+                        <div id="Histogram" style="width: 900px; height: 500px;"></div>
+                        <div id="ColumnChart" style="width: 900px; height: 500px;"></div>
+                        <div id="LineChart" style="width: 900px; height: 500px;"></div>
+                        <!-- กราฟใหม่สำหรับจำนวนผู้สมัครต่อปี -->
+                        <div id="YearChart" style="width: 900px; height: 500px; margin-top: 50px;"></div>
                     </div>
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a> &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

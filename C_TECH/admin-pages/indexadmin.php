@@ -17,6 +17,36 @@ $stmt = $conn->prepare("
 ");
 $stmt->execute();
 
+$yearStmt = $conn->prepare("
+    SELECT DISTINCT YEAR(created_at) AS year
+    FROM form
+    ORDER BY year DESC;
+");
+$yearStmt->execute();
+$years = $yearStmt->fetchAll(PDO::FETCH_ASSOC);
+
+$selectedYear = isset($_GET['selectYear']) ? $_GET['selectYear'] : null;
+
+$query = "
+    SELECT major.Major_Name, 
+           COALESCE(COUNT(form.Major_ID), 0) AS applicant_count,
+           COALESCE(SUM(CASE WHEN form.status = 'approve' THEN 1 ELSE 0 END), 0) AS approve_count
+    FROM major
+    LEFT JOIN form ON form.Major_ID = major.Major_ID";
+
+if ($selectedYear) {
+    $query .= " WHERE YEAR(form.created_at) = :selectedYear";
+}
+
+$query .= " GROUP BY major.Major_Name";
+
+$stmt = $conn->prepare($query);
+
+if ($selectedYear) {
+    $stmt->bindParam(':selectedYear', $selectedYear, PDO::PARAM_INT);
+}
+
+$stmt->execute();
 
 
 
@@ -151,16 +181,20 @@ $stmt->execute();
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
-                    <div class="col-md-3 mb-4 ms-auto">
-                        <select class="form-select" name="selectYear" id="selectYear">
-                            <option value="2025">2025</option>
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
+                    <div class="col-md-2 mb-4 ms-auto">
+                        <select class="form-select" name="selectYear" id="selectYear" onchange="filterByYear()">
+                            <option value="">==เลือกปีที่แสดง==</option>
+                            <?php foreach ($years as $year) { ?>
+                                <option value="<?php echo htmlspecialchars($year['year']); ?>"
+                                    <?php echo isset($_GET['selectYear']) && $_GET['selectYear'] == $year['year'] ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($year['year']); ?>
+                                </option>
+                            <?php } ?>
                         </select>
                     </div>
 
-                    
+
+
                     <div class="row">
                         <?php
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -252,6 +286,19 @@ $stmt->execute();
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+    <script>
+    function filterByYear() {
+        const year = document.getElementById('selectYear').value;
+        const urlParams = new URLSearchParams(window.location.search);
+        if (year) {
+            urlParams.set('selectYear', year);
+        } else {
+            urlParams.delete('selectYear');
+        }
+        window.location.search = urlParams.toString();
+    }
+</script>
+
 </body>
 
 </html>
