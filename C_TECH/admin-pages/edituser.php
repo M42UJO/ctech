@@ -107,7 +107,7 @@ if (!isset($_SESSION['admin_login'])) {
                                         <th>ID.</th>
                                         <th>ชื่อ</th>
                                         <th>นามสกุล</th>
-                                        <th>อีเมล์</th>
+                                        
                                         <th>บัตรประชาชน</th>
                                         <th>Action</th>
                                     </tr>
@@ -130,7 +130,7 @@ if (!isset($_SESSION['admin_login'])) {
                                                 <th scope="row"><?php echo htmlspecialchars($applicant['User_ID']); ?></th>
                                                 <td><?php echo htmlspecialchars($applicant['name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['lastname']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['email']); ?></td>
+                                                
                                                 <td><?php echo htmlspecialchars($applicant['id_card_number']); ?></td>
                                                 <td>
                                                     <a  href="eddit.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-warning">แก้ไข <i class="fa-solid fa-pen-to-square"></i></a>

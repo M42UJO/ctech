@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once("../config/db.php");
 
@@ -6,6 +6,17 @@ if (!isset($_SESSION['admin_login'])) {
     header('Location: admin.php');
     exit();
 }
+
+$stmt = $conn->prepare("
+    SELECT major.Major_Name, 
+           COALESCE(COUNT(form.Major_ID), 0) AS applicant_count,
+           COALESCE(SUM(CASE WHEN form.status = 'approve' THEN 1 ELSE 0 END), 0) AS approve_count
+    FROM major
+    LEFT JOIN form ON form.Major_ID = major.Major_ID
+    GROUP BY major.Major_Name;
+");
+$stmt->execute();
+
 
 
 
@@ -24,30 +35,30 @@ if (!isset($_SESSION['admin_login'])) {
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    
-    
+
+
 </head>
 <style>
     .order-card {
         color: #fff;
     }
-    
+
     .bg-c-blue {
         background: linear-gradient(45deg, #4099ff, #73b4ff);
     }
-    
+
     .bg-c-green {
         background: linear-gradient(45deg, #2ed8b6, #59e0c5);
     }
-    
+
     .bg-c-yellow {
         background: linear-gradient(45deg, #FFB64D, #ffcb80);
     }
-    
+
     .bg-c-pink {
         background: linear-gradient(45deg, #FF5370, #ff869a);
     }
-    
+
     .card {
         border-radius: 5px;
         -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
@@ -57,19 +68,19 @@ if (!isset($_SESSION['admin_login'])) {
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
     }
-    
+
     .card .card-block {
         padding: 25px;
     }
-    
+
     .order-card i {
         font-size: 26px;
     }
-    
+
     .f-left {
         float: left;
     }
-    
+
     .f-right {
         float: right;
     }
@@ -140,142 +151,99 @@ if (!isset($_SESSION['admin_login'])) {
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
-                    <div class="row">
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-blue order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาบัญชี</h5>
-                                    <h2 class="text-right"><i class="fa-solid fa-calculator"></i><span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-green order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาคอมพิวเตอร์ธุรกิจ</h5>
-                                    <h2 class="text-right"><i class="fa-solid fa-computer"></i><span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-yellow order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาเทคโนโลยีสารสนเทศ</h5>
-                                    <h2 class="text-right"><i class="fa-regular fa-keyboard"></i><span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-pink order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาเทคโนโลยีธุรกิจดิจิทัล</h5>
-                                    <h2 class="text-right"><i class="fa-solid fa-microchip"></i><span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-blue order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาธุรกิจค้าปลีก</h5>
-                                    <h2 class="text-right"><i class="fa-solid fa-truck"></i><span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-green order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาการจัดจารโลจิสติกส์</h5>
-                                    <h2 class="text-right"><i class="fa-solid fa-plane"></i><span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-yellow order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาการตลาด</h5>
-                                    <h2 class="text-right"><i class="fa-solid fa-store"></i> <span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-pink order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาช่างยนต์</h5>
-                                    <h2 class="text-right"><i class="fa-solid fa-wrench"></i> <span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-blue order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาช่างไฟฟ้ากำลัง</h5>
-                                    <h2 class="text-right"><i class="fa-solid fa-plug"></i> <span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-green order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาช่างอิเล็กทรอนิกส์</h5>
-                                    <h2 class="text-right"><i class="fa fa-code-fork"></i><span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-xl-3">
-                            <div class="card bg-c-yellow order-card">
-                                <div class="card-block">
-                                    <h5 class="m-b-20">จำนวนผู้สมัคร สาขาช่างก่อสร้าง</h5>
-                                    <h2 class="text-right"><i class="fa fa-road"></i><span> 486</span></h2>
-                                    <p class="m-b-0">Completed Approve<span class="f-right"> 351</span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                       
+                    <div class="col-md-3 mb-4 ms-auto">
+                        <select class="form-select" name="selectYear" id="selectYear">
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
                     </div>
+
                     
-                    </div>
                     <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-area me-1"></i> Area Chart Example
+                        <?php
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            // Set icon and card color based on Major_Name
+                            $icon = '';
+                            $cardColor = '';
+
+                            switch ($row['Major_Name']) {
+                                case 'การบัญชี':
+                                    $icon = 'fa-calculator';
+                                    $cardColor = 'bg-c-blue';
+                                    break;
+                                case 'คอมพิวเตอร์ธุรกิจ':
+                                    $icon = 'fa-computer';
+                                    $cardColor = 'bg-c-green';
+                                    break;
+                                case 'เทคโนโลยีธุรกิจดิจิทัล':
+                                    $icon = 'fa-microchip';
+                                    $cardColor = 'bg-c-pink';
+                                    break;
+                                case 'เทคโนโลยีสารสนเทศ':
+                                    $icon = 'fa-microchip';
+                                    $cardColor = 'bg-c-pink';
+                                    break;
+                                case 'การจัดการธุรกิจค้าปลีก':
+                                    $icon = 'fa-truck';
+                                    $cardColor = 'bg-c-blue';
+                                    break;
+                                case 'การจัดการโลจิสติกส์':
+                                    $icon = 'fa-plane';
+                                    $cardColor = 'bg-c-green';
+                                    break;
+                                case 'การตลาด':
+                                    $icon = 'fa-store';
+                                    $cardColor = 'bg-c-yellow';
+                                    break;
+                                case 'ช่างเทคนิคยานยนต์':
+                                    $icon = 'fa-wrench';
+                                    $cardColor = 'bg-c-pink';
+                                    break;
+                                case 'ช่างไฟฟ้า':
+                                    $icon = 'fa-plug';
+                                    $cardColor = 'bg-c-blue';
+                                    break;
+                                case 'ช่างไฟฟ้ากำลัง':
+                                    $icon = 'fa-plug';
+                                    $cardColor = 'bg-c-blue';
+                                    break;
+                                case 'ช่างอิเล็กทรอนิกส์':
+                                    $icon = 'fa-code-fork';
+                                    $cardColor = 'bg-c-green';
+                                    break;
+                                case 'ช่างก่อสร้าง':
+                                    $icon = 'fa-road';
+                                    $cardColor = 'bg-c-yellow';
+                                    break;
+                                default:
+                                    $icon = 'fa-question'; // Default case
+                                    $cardColor = 'bg-c-gray'; // Default color
+                                    break;
+                            }
+                        ?>
+                            <div class="col-md-4 col-xl-3">
+                                <div class="card <?php echo $cardColor; ?> order-card">
+                                    <div class="card-block">
+                                        <h5 class="m-b-20">จำนวนผู้สมัคร <?php echo htmlspecialchars($row['Major_Name']); ?></h5>
+                                        <h2 class="text-right"><i class="fa-solid <?php echo $icon; ?>"></i><span> <?php echo htmlspecialchars($row['applicant_count']); ?></span></h2>
+                                        <p class="m-b-0">Completed Approve<span class="f-right"><?php echo htmlspecialchars($row['approve_count']); ?></span></p>
+                                    </div>
                                 </div>
-                                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                             </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-bar me-1"></i> Bar Chart Example
-                                </div>
-                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                            </div>
-                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
 
                 </div>
-            </main>
+
 
         </div>
+        </main>
+
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>

@@ -9,6 +9,10 @@ if (isset($_POST['login'])) {
         $_SESSION['error'] = 'กรุณากรอกเลขบัตรประชาชน';
         header("location: ../login.php");
         exit();
+    } elseif (strlen($id_card_number) != 17) {
+        $_SESSION['error'] = 'กรุณากรอกเลขบัตรประชาชนให้ครบ 13 หลัก';
+        header("location: ../login.php");
+        exit();
     } else {
         try {
             // ตรวจสอบว่ามีเลขบัตรประชาชนในระบบหรือไม่
