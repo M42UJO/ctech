@@ -178,21 +178,30 @@ $stmt->execute();
 
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Dashboard</h1>
+                    <div class="row">
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
-                    <div class="col-md-2 mb-4 ms-auto">
-                        <select class="form-select" name="selectYear" id="selectYear" onchange="filterByYear()">
-                            <option value="">==เลือกปีที่แสดง==</option>
-                            <?php foreach ($years as $year) { ?>
-                                <option value="<?php echo htmlspecialchars($year['year']); ?>"
-                                    <?php echo isset($_GET['selectYear']) && $_GET['selectYear'] == $year['year'] ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($year['year']); ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </div>
-
+                </div>
+                <div class="row d-flex align-items-center">
+                    <form action="./reportAd.php" method="post" class="d-flex">
+                        <div class="col-md-1 mb-4 ms-auto">
+                            <button target="_blank" class="btn btn-outline-danger" name="pdf">รายงาน PDF</button>
+                        </div>
+                    
+                        <div class="col-md-2 mb-4">
+                            <select class="form-select" name="selectYear" id="selectYear" onchange="filterByYear()">
+                                <option value="">==เลือกปีที่แสดง==</option>
+                                <?php foreach ($years as $year) { ?>
+                                    <option value="<?php echo htmlspecialchars($year['year']); ?>"
+                                        <?php echo isset($_GET['selectYear']) && $_GET['selectYear'] == $year['year'] ? 'selected' : ''; ?>>
+                                        <?php echo htmlspecialchars($year['year']); ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </form>
+                </div>
 
 
                     <div class="row">
