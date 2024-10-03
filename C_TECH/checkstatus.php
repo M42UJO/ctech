@@ -20,25 +20,28 @@ try {
     $formData = $stmtForm->fetch();
 
     // ตรวจสอบว่ามีข้อมูลหรือไม่
-if ($formData) {
-    $status = $formData['status'];
-    $comment = $formData['comment'];
-} else {
-    $status = null; // หรือกำหนดค่าเริ่มต้นอื่นๆ
-    $comment = null; // หรือกำหนดค่าเริ่มต้นอื่นๆ
-}
+    if ($formData) {
+        $status = $formData['status'];
+        $comment = $formData['comment'];
+    } else {
+        $status = null; // หรือกำหนดค่าเริ่มต้นอื่นๆ
+        $comment = null; // หรือกำหนดค่าเริ่มต้นอื่นๆ
+    }
 
 
     // กำหนดข้อความตามสถานะและคลาส CSS
     if ($status == 'pending' || $status == 'update') {
         $message = "การสมัครของคุณอยู่ระหว่างการตรวจสอบ ทีมงานกำลังตรวจสอบเอกสารที่คุณได้ส่งมา หากต้องการข้อมูลเพิ่มเติมหรือมีข้อสงสัยใด ๆ กรุณาติดต่อเรา";
         $statusClass = 'status-pending';
+        $panelheading = 'panel-headingW';
     } elseif ($status == 'approve') {
         $message = "คุณได้รับการอนุมัติแล้ว ขอแสดงความยินดี! การสมัครของคุณได้รับการอนุมัติเรียบร้อยแล้ว กรุณาตรวจสอบรายละเอียดเพิ่มเติมในระบบหรือติดต่อเรา หากมีข้อสงสัย";
         $statusClass = 'status-approve';
+        $panelheading = 'panel-headingS';
     } else {
         $message = "ข้อมูลยังไม่ครบถ้วน ข้อมูลการสมัครของคุณยังไม่สมบูรณ์ กรุณาตรวจสอบเอกสารและข้อมูลที่ส่งมาแล้วอัพเดตให้ครบถ้วนเพื่อให้เราสามารถดำเนินการตรวจสอบได้";
         $statusClass = 'status-incomplete';
+        $panelheading = 'panel-headingD';
     }
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
@@ -62,68 +65,130 @@ if ($formData) {
 </head>
 <style>
     .status-pending {
-    background-color: #fff3cd; /* สีพื้นหลังเหลืองอ่อน */
-    color: #856404; /* สีข้อความเหลืองเข้ม */
-    border: 1px solid #ffeeba; /* สีกรอบเหลืองอ่อน */
-    border-radius: 5px; /* มุมกรอบมน */
-    padding: 15px; /* ระยะห่างภายใน */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสำหรับกรอบ */
-}
+        background-color: #fff3cd;
+        /* สีพื้นหลังเหลืองอ่อน */
+        color: #856404;
+        /* สีข้อความเหลืองเข้ม */
+        border: 1px solid #ffeeba;
+        /* สีกรอบเหลืองอ่อน */
+        border-radius: 5px;
+        /* มุมกรอบมน */
+        padding: 15px;
+        /* ระยะห่างภายใน */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* เงาสำหรับกรอบ */
+    }
 
-.status-approve {
-    background-color: #d4edda; /* สีพื้นหลังเขียวอ่อน */
-    color: #155724; /* สีข้อความเขียวเข้ม */
-    border: 1px solid #c3e6cb; /* สีกรอบเขียวอ่อน */
-    border-radius: 5px; /* มุมกรอบมน */
-    padding: 15px; /* ระยะห่างภายใน */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสำหรับกรอบ */
-}
+    .status-approve {
+        background-color: #d4edda;
+        /* สีพื้นหลังเขียวอ่อน */
+        color: #155724;
+        /* สีข้อความเขียวเข้ม */
+        border: 1px solid #c3e6cb;
+        /* สีกรอบเขียวอ่อน */
+        border-radius: 5px;
+        /* มุมกรอบมน */
+        padding: 15px;
+        /* ระยะห่างภายใน */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* เงาสำหรับกรอบ */
+    }
 
-.status-incomplete {
-    background-color: #f8d7da; /* สีพื้นหลังแดงอ่อน */
-    color: #721c24; /* สีข้อความแดงเข้ม */
-    border: 1px solid #f5c6cb; /* สีกรอบแดงอ่อน */
-    border-radius: 5px; /* มุมกรอบมน */
-    padding: 15px; /* ระยะห่างภายใน */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาสำหรับกรอบ */
-}
-.title-section {
-            background-image: url('./imagee/pic_ctech.jpg'); /* Replace with your image path */
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-            position: relative;
-        }
-        .title-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Adjust overlay opacity */
-            z-index: 1;
-        }
-        .title-content {
-            position: relative;
-            z-index: 2;
-        }
-        .breadcrumb {
-            background-color: transparent;
-            padding: 0;
-            margin: 0;
-        }
-        .breadcrumb-item a {
-            color: white;
-            text-decoration: none;
-        }
-        .breadcrumb-item.active {
-            color: orange;
-        }
+    .status-incomplete {
+        background-color: #f8d7da;
+        /* สีพื้นหลังแดงอ่อน */
+        color: #721c24;
+        /* สีข้อความแดงเข้ม */
+        border: 1px solid #f5c6cb;
+        /* สีกรอบแดงอ่อน */
+        border-radius: 5px;
+        /* มุมกรอบมน */
+        padding: 15px;
+        /* ระยะห่างภายใน */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* เงาสำหรับกรอบ */
+    }
 
+    .panel-headingW {
+        font-weight: bold;
+        font-size: 1.1em;
+        background-color: orange;
+        padding: 8px;
+        border-radius: 0.25rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin: 0;
+        color: aliceblue;
+    }
 
+    .panel-headingD {
+        font-weight: bold;
+        font-size: 1.1em;
+        background-color: #721c24;
+        padding: 8px;
+        border-radius: 0.25rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin: 0;
+        color: aliceblue;
+
+    }
+
+    .panel-headingS {
+        font-weight: bold;
+        font-size: 1.1em;
+        background-color: #155724;
+        padding: 8px;
+        border-radius: 0.25rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin: 0;
+        color: aliceblue;
+
+    }
+
+    .title-section {
+        background-image: url('./imagee/pic_ctech.jpg');
+        /* Replace with your image path */
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+        position: relative;
+    }
+
+    .title-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        /* Adjust overlay opacity */
+        z-index: 1;
+    }
+
+    .title-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .breadcrumb {
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+    }
+
+    .breadcrumb-item a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: orange;
+    }
 </style>
 
 <body>
@@ -144,10 +209,10 @@ if ($formData) {
     <div class="container">
         <div class="row">
             <div class="col-md-6 mt-5">
-            <div class="panel panel-default">
+                <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="alert <?php echo $statusClass; ?>" role="alert">
-                            <div class="panel-heading">สถานะการสมัคร</div>
+                            <div class="<?php echo $panelheading; ?>">สถานะการสมัคร</div>
                             <h4 class="alert-heading mt-3">สถานะการสมัคร</h4>
                             <p><?php echo $message; ?></p>
                             <?php if (!empty($comment)): ?>
@@ -156,17 +221,48 @@ if ($formData) {
                                     <p><?php echo htmlspecialchars($comment); ?></p>
                                 </div>
                             <?php endif; ?>
+                            <?php if ($status == 'approve'): ?>
+                                <a href="report.php" target="_blank" class="btn btn-outline-dark">ดาวน์โหลด PDF ใบมอบตัว</a>
+                            <?php endif; ?>
+
                         </div>
                     </div>
                 </div>
-                <a href="report.php" target="_blank" class="btn btn-outline-dark">ดาวน์โหลด PDF</a>
             </div>
             <div class="col-md-6 mt-5">
-            <embed src="imagee/register2018.pdf" width="100%" height="800px" type="application/pdf">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="alert <?php echo $statusClass; ?>" role="alert">
+                            <div class="<?php echo $panelheading; ?>">สถานะการชำระเงิน</div>
+                            <h4 class="alert-heading mt-3">สถานะการชำระเงิน</h4>
+                            <p><?php echo $message; ?></p>
+                            <?php if (!empty($comment)): ?>
+                                <div class="mt-3">
+                                    <strong>ความคิดเห็นจากเจ้าหน้าที่:</strong>
+                                    <p><?php echo htmlspecialchars($comment); ?></p>
+                                </div>
+                            <?php endif; ?>
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <label class="form-label">Bill Payment Pay-In Slip </label>
+                                    <a href="payin.php" target="_blank" class="btn btn-outline-dark">ดาวน์โหลด Pay-In Slip</a>
+                                </div>
 
-                
+                                <div class="col-md-6">
+                                    <label class="form-label">หลักฐานการชำระ(Slip) </label>
+                                    <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         </div>
+    </div>
     </div>
 
     <?php require_once("footer.php"); ?>
