@@ -172,15 +172,15 @@ while ($row = $yearStmt->fetch(PDO::FETCH_ASSOC)) {
                         <li class="breadcrumb-item"><a href="indexadmin.php">Dashboard</a></li>
                         <li class="breadcrumb-item active">Charts</li>
                     </ol>
-                    <div class="col-md-12 mx-auto">
-                        <div id="piechart" style="width: 900px; height: 500px;"></div>
-                        <div id="BarChart" style="width: 900px; height: 500px;"></div>
-                        <div id="Histogram" style="width: 900px; height: 500px;"></div>
-                        <div id="ColumnChart" style="width: 900px; height: 500px;"></div>
-                        <div id="LineChart" style="width: 900px; height: 500px;"></div>
-                        <!-- กราฟใหม่สำหรับจำนวนผู้สมัครต่อปี -->
-                        <div id="YearChart" style="width: 900px; height: 500px; margin-top: 50px;"></div>
+                    <div class="col-md-12 mx-auto text-center">
+                        <div id="piechart" style="width: 1100px; height: 700px; margin: 0 auto;"></div>
+                        <div id="BarChart" style="width: 1100px; height: 700px; margin: 0 auto;"></div>
+                        <div id="Histogram" style="width: 1100px; height: 700px; margin: 0 auto;"></div>
+                        <div id="ColumnChart" style="width: 1100px; height: 700px; margin: 0 auto;"></div>
+                        <div id="LineChart" style="width: 1100px; height: 700px; margin: 0 auto;"></div>
+                        <div id="YearChart" style="width: 1100px; height: 700px; margin: 50px auto 0;"></div>
                     </div>
+
                 </div>
             </main>
 

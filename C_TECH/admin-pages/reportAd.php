@@ -34,25 +34,19 @@ $selectYear = $_POST['selectYear'] ?? date("Y");
 // ตรวจสอบการเตรียมคำสั่ง SQL
 $stmt = $conn->prepare("
 SELECT 
-    a.name, 
-    a.lastname, 
-    u.id_card_number, 
-    f.created_at, 
-    f.status, 
-    f.Major_ID,
-    major.Major_Name
-FROM 
-    user u
-LEFT JOIN 
-    form f ON u.User_ID = f.User_ID
-LEFT JOIN 
-    applicant a ON u.User_ID = a.User_ID
-LEFT JOIN 
-    major ON f.Major_ID = major.Major_ID
+    b.name, 
+    b.lastname, 
+    b.id_card_number, 
+    c.created_at, 
+    c.status, 
+    c.Major_ID,
+    d.Major_Name
+FROM user a, applicant b, form c, major d 
 WHERE 
-    YEAR(f.created_at) = :year
-ORDER BY 
-    f.Major_ID
+    a.User_ID = b.User_ID and a.User_ID = c.User_ID and c.Major_ID = d.Major_ID and 
+    YEAR(c.created_at) = :year
+GROUP BY 
+    d.Major_ID
 ");
 $stmt->bindParam(':year', $selectYear, PDO::PARAM_INT);
 
@@ -61,13 +55,13 @@ $stmt->execute();
 
 // Fetch all the data
 $applicants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$row = $stmt->rowCount();
 
 if (empty($applicants)) {
-    die('ไม่มีข้อมูลผู้สมัคร');
+    die('กรุณาเลือกปีที่แสดง');
 }
 
-$html = '
-<style>
+$html = '<style>
     body {
         font-family: "thsarabun";
     }
@@ -102,23 +96,39 @@ $html = '
         padding: 8px;
         text-align: center;
     }
-</style>
-';
+</style>';
 
 $currentMajor = '';
 $index = 1; // เปลี่ยนเป็น 1 นอกลูป
-
+$i=0;
 foreach ($applicants as $applicant) {
-    // Check if the current major is different from the previous
-    if ($currentMajor != $applicant['Major_Name']) {
-        // Close the previous table if it's not the first major
-        if ($currentMajor != '') {
-            $html .= '</tbody></table>';
-        }
+    $stmt_view = $conn->prepare("
+    SELECT 
+        b.name, 
+        b.lastname, 
+        b.id_card_number, 
+        c.created_at, 
+        c.status, 
+        c.Major_ID,
+        d.Major_Name
+    FROM user a, applicant b, form c, major d 
+    WHERE 
+        a.User_ID = b.User_ID and a.User_ID = c.User_ID and c.Major_ID = d.Major_ID and 
+        YEAR(c.created_at) = :year and c.Major_ID = :majorID
+    ORDER BY 
+        d.Major_ID
+    ");
+    $stmt_view->bindParam(':year', $selectYear, PDO::PARAM_INT);
+    $stmt_view->bindParam(':majorID', $applicant['Major_ID'], PDO::PARAM_INT);
 
-        // Add a new page for the new major
-        $mpdf->AddPage();
-        
+    // Execute the statement
+    $stmt_view->execute();
+
+    // Fetch all the data
+    $user_views = $stmt_view->fetchAll(PDO::FETCH_ASSOC);
+
+    
+
         // Update the current major
         $currentMajor = $applicant['Major_Name'];
 
@@ -147,24 +157,36 @@ foreach ($applicants as $applicant) {
             </thead>
             <tbody>';
         $index = 1; // Reset the index for the new major
-    }
+    //}
 
+    foreach ($user_views as $user_view) {
     // Add each applicant's data to the table
     $html .= '
     <tr>
         <td>' . $index++ . '</td> 
-        <td>' . htmlspecialchars($applicant['name'] . ' ' . $applicant['lastname']) . '</td> 
-        <td>' . htmlspecialchars($applicant['id_card_number']) . '</td> 
-        <td>' . htmlspecialchars($applicant['created_at']) . '</td> 
-        <td>' . htmlspecialchars($applicant['status']) . '</td> 
+        <td>' . htmlspecialchars($user_view['name'] . ' ' . $user_view['lastname']) . '</td> 
+        <td>' . htmlspecialchars($user_view['id_card_number']) . '</td> 
+        <td>' . htmlspecialchars($user_view['created_at']) . '</td> 
+        <td>' . htmlspecialchars($user_view['status']) . '</td> 
     </tr>';
-}
+    }
+    $html .= '</tbody></table>';
 
-// Close the last table after the loop
-if ($currentMajor != '') {
-    $html .= '</tbody></table>'; // ปิดตารางสุดท้าย
+    $i++;
+
+    if($row == $i){}else{
+        $html .= '<div style="page-break-after: always"></div>';
+    }
+    
+    //$mpdf->AddPage();
 }
+// Close the last table after the loop
+/*if ($currentMajor != '') {
+    $html .= '</tbody></table>'; // ปิดตารางสุดท้าย
+}*/
 
 // Generate the PDF with the entire HTML
+//$html = ob_get_contents();
 $mpdf->WriteHTML($html);
 $mpdf->Output();
+?>

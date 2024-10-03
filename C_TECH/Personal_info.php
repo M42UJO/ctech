@@ -168,7 +168,7 @@ try {
                         <input type="text" id="full-name-eng" class="form-control" placeholder="ชื่อ - สกุล อังกฤษ" name="eng_name" value="<?php echo $Data_view["eng_name"];?>" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="id-number" class="form-label">เลขบัตรประชาชน <span class="required">** ตัวเลขเท่านั้น</span></label>
+                        <label for="id-number" class="form-label">เลขบัตรประชาชน <span class="required">** </span></label>
                         <input type="text" class="form-control" id="thai-id" maxlength="13"  placeholder="x-xxxx-xxxxx-xx-x" name="id_card_number" value="<?php echo $userData["id_card_number"];?>" required >
                     </div>
                     <div class="col-md-2">
