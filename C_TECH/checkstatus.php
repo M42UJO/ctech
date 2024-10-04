@@ -226,7 +226,7 @@ try {
                             <?php endif; ?>
 
                         </div>
-                    </div>
+                    </div>  
                 </div>
             </div>
             <div class="col-md-6 mt-5">
@@ -234,6 +234,10 @@ try {
                     <div class="panel-body">
                         <div class="alert <?php echo $statusClass; ?>" role="alert">
                             <div class="<?php echo $panelheading; ?>">สถานะการชำระเงิน</div>
+                            <label id="announce" class="mt-3 mb-3   ">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา <br> Chanapolkhan Technological College, Nakhon Ratchasima <br> กรุณาชำระค่าแรกเข้า จำนวน <span class="highlight">2,000</span> บาท หลังจากกรอกข้อมูลครบถ้วน
+                              <br>  ยอดเงินนี้จะถูกนำไปเป็นส่วนลดค่าเทอมของนักศึกษา
+                              <br>  โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์ เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span> </label>
+
                             <h4 class="alert-heading mt-3">สถานะการชำระเงิน</h4>
                             <p><?php echo $message; ?></p>
                             <?php if (!empty($comment)): ?>

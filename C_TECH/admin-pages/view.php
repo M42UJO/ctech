@@ -125,9 +125,6 @@ if (!isset($_SESSION['admin_login'])) {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
                             แก้ไขผู้ใช้
                         </a>
-
-
-
                         <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
@@ -139,6 +136,10 @@ if (!isset($_SESSION['admin_login'])) {
                         <a class="nav-link" href="approve.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
                             อนุมัติ
+                        </a>
+                        <a class="nav-link" href="slip.php">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
+                            อนุมัติ slip
                         </a>
                     </div>
                 </div>

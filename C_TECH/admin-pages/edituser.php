@@ -79,6 +79,10 @@ if (!isset($_SESSION['admin_login'])) {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
                             อนุมัติ
                         </a>
+                        <a class="nav-link" href="slip.php">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
+                            อนุมัติ slip
+                        </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -91,9 +95,8 @@ if (!isset($_SESSION['admin_login'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="">Edit Users</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Edit Users</li>
+                    <ol class="breadcrumb mb-4 mt-4">
+                       <h3> <li class="breadcrumb-item active">แก้ไขผู้ใช้</li></h3>
                     </ol>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">

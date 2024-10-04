@@ -7,38 +7,49 @@ if (!isset($_SESSION['admin_login'])) {
     exit();
 }
 
-$approve = 'approve';
-$not_approve = 'not_approve';
 
+    
 
-if (isset($_GET['approve'])) {
-    $user_id = $_GET['approve'];
+    $comment = htmlspecialchars($_POST['comment']);
+    $approve = 'approve';
+    $not_approve = 'not_approve';
+    
 
-    $sql_update = $conn->prepare("UPDATE form SET               
-            status = :status
-            WHERE User_ID = :user_id");
+    if (isset($_POST['approve'])) {
+        $user_id = $_POST['User_ID'];
+        $sql_update = $conn->prepare("UPDATE form SET
+                    comment = :comment,
+                    status = :status
+                    WHERE User_ID = :user_id");
 
-    // ผูกค่าพารามิเตอร์กับตัวแปร
-    $sql_update->bindParam(':status', $approve);
-    $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $sql_update->execute();
-}
-if (isset($_GET['not_approve'])) {
-    $user_id = $_GET['not_approve'];
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':comment', $comment);
+        $sql_update->bindParam(':status', $approve);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();
 
-    $sql_update = $conn->prepare("UPDATE form SET               
-            status = :status
-            WHERE User_ID = :user_id");
+        header("location: ./tables.php");
+    }
+    if (isset($_POST['not_approve'])) {
+        $user_id = $_POST['User_ID'];
+        $sql_update = $conn->prepare("UPDATE form SET
+                    comment = :comment,
+                    status = :status
+                    WHERE User_ID = :user_id");
 
-    // ผูกค่าพารามิเตอร์กับตัวแปร
-    $sql_update->bindParam(':status', $not_approve);
-    $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $sql_update->execute();
-}
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':comment', $comment);
+        $sql_update->bindParam(':status', $not_approve);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();
 
-
-
+        header("location: ./tables.php");
+    }
 ?>
+
+
+
+
 
 
 
@@ -51,41 +62,30 @@ if (isset($_GET['not_approve'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Tables - SB Admin</title>
+    <title>Dashboard - SB Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link href="path/to/lightbox.css" rel="stylesheet" />
+    <script src="path/to/lightbox-plus-jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
 </head>
-
 <style>
-    .status-circle {
-    display: inline-block;
-    width: 12px; /* Diameter of the circle */
-    height: 12px; /* Diameter of the circle */
-    border-radius: 50%;
-    margin-right: 5px; /* Space between circle and text */
+    
+
+.btn:hover {
+    background-position: right center;
+    
 }
 
-.status-not-approve {
-    background-color: red;
-}
-
-.status-approve {
-    background-color: green;
-}
-
-.status-update {
-    background-color: blue; /* You can choose any color */
-}
-
-.status-pending {
-    background-color: yellow;
+.btn-1 {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
 }
 
 </style>
-
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark navbar-custom">
@@ -95,10 +95,7 @@ if (isset($_GET['not_approve'])) {
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <!-- <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div> -->
+
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -128,9 +125,6 @@ if (isset($_GET['not_approve'])) {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
                             แก้ไขผู้ใช้
                         </a>
-
-
-
                         <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
@@ -156,34 +150,26 @@ if (isset($_GET['not_approve'])) {
             </nav>
         </div>
         <div id="layoutSidenav_content">
+
+            <!-- mainnnnnnnnnnnnnnnnnnnnnnnnn -->
+
             <main>
                 <div class="container-fluid px-4">
-                    <ol class="breadcrumb mb-4 mt-4">
-                        <h3><li class="breadcrumb-item active">ตารางข้อมูล ผู้สมัคร</li></h3>
-                        
+                    
+                    <ol class="breadcrumb mb-3">
+                        <li class="breadcrumb-item active">ข้อมูล slip</li>
                     </ol>
-                    <div class="card mb-4 mt-3">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            ตารางข้อมูล ผู้สมัคร ทั้งหมด
-                        </div>
-                        <div class="card-body">
-                            <table id="datatablesSimple">
-                                <thead>
-                                    <tr>
-                                        <th>ID.</th>
-                                        <th>ชื่อ-นามสกุล</th>
-                                        <th>สาขาวิชา</th>
-                                        <th>วัน/เวลา ที่สมัคร</th>
-                                        <th>สถานะ</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    // เตรียมคำสั่ง SQL
-                                    $stmt = $conn->prepare("
-                                                            SELECT 
+                    <div class="panel panel-default mb-5">
+
+                        <div class="panel-body">
+
+                            <form id="personal-info-form" class="row g-3 mt-2" action="view.php" method="post">
+
+                            <?php
+                                if (isset($_GET['user_id'])) {
+                                    $User_ID = $_GET['user_id'];
+
+                                    $stmt = $conn->prepare("SELECT 
                                                                 u.*, 
                                                                 p.*, 
                                                                 f.*, 
@@ -214,80 +200,117 @@ if (isset($_GET['not_approve'])) {
                                                                 educationlevel ON subjecttype.Level_ID = educationlevel.Level_ID
                                                             LEFT JOIN 
                                                                 coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
-                                                                WHERE 
-                                                                    f.status = 'pending' OR f.status = 'not_approve' OR f.status = 'approve' OR f.status = 'update'
+                                                            WHERE 
+                                                                u.User_ID = :user_id
                                                         ");
 
-
-
-                                    // ประมวลผลคำสั่ง
+                                    $stmt->bindParam(':user_id', $User_ID, PDO::PARAM_INT);
                                     $stmt->execute();
 
-                                    // ดึงข้อมูลทั้งหมด
-                                    $applicants = $stmt->fetchAll();
+                                    $Data_view = $stmt->fetch(PDO::FETCH_ASSOC);
+                                }
+                                ?>
+                            
 
-                                    if (!$applicants) {
-                                        echo "<tr><td colspan='6' class='text-center'>No data available</td></tr>";
-                                    } else {
-                                        foreach ($applicants as $applicant) {
-                                    ?>
-                                            <tr>
-                                                <th scope="row"><?php echo htmlspecialchars($applicant['User_ID']); ?></th>
-                                                <td><?php echo htmlspecialchars($applicant['name'].' '.$applicant['lastname']); ?></td>
-                                                
-                                                <td><?php echo htmlspecialchars(string: $applicant['CourseType_Name'].' '.$applicant['Level_Name'].' '.$applicant['Type_Name'].' '.$applicant['Major_Name']); ?></td>
-                                                <td><?php echo htmlspecialchars($applicant['updated_at']); ?></td>
-                                                <td>
-                                                    <?php
-                                                    $statusClass = '';
-                                                    switch ($applicant['status']) {
-                                                        case 'not_approve':
-                                                            $statusClass = 'status-not-approve';
-                                                            break;
-                                                        case 'approve':
-                                                            $statusClass = 'status-approve';
-                                                            break;
-                                                        case 'update':
-                                                            $statusClass = 'status-update';
-                                                            break;
-                                                        case 'pending':
-                                                            $statusClass = 'status-pending';
-                                                            break;
-                                                    }
-                                                    ?>
-                                                    <span class="status-circle <?php echo $statusClass; ?>"></span>
-                                                    <?php echo htmlspecialchars($applicant['status']); ?>
-                                                </td>
-                                                <td>
-                                                    <a href="view.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary"><i class="fa-solid fa-eye"></i></a>
-                                                    <a onclick="confirmNotApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-danger">ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></a>
-                                                    <a onclick="confirmApprove('<?php echo htmlspecialchars($applicant['User_ID']); ?>')" class="btn btn-success">อนุมัติ <i class="fa-solid fa-check"></i></a>
-                                                </td>
-                                            </tr>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                    
 
-                                </tbody>
                                 
-                            </table>
+                                <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
+
+                                <div class="col-md-3"></div>
+
+       
+
+                          
+
+                        
+
+                                <div class="col-md-6 mt-5">
+                                    <label class="form-label">หลักฐานการชำระ </label>
+                                    <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
+                                        <img class="img-thumbnail" id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
+                                </div>
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-2 mt-5">
+                                    <a href="./tables.php" type="button" class="btn  w-100 py-2 btn-1">
+                                    <i class="fa-solid fa-angles-left"></i> ย้อนกลับ
+                                    </a>
+                                </div>
+                                <div class="col-md-1 mt-5">
+                                    <p class="text-end fs-4">Comment</p>
+
+                                </div>
+                                <div class="col-md-7 mt-5">
+
+                                    <input type="text" class="form-control" name="comment">
+                                </div>
+                                <div class="col-md-2 mt-5">
+                                    <button type="button" class="btn btn-danger" onclick="confirmNotApprove()">ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></button>
+                                    <button type="button" class="btn btn-success" onclick="confirmApprove()">อนุมัติ <i class="fa-solid fa-check"></i></button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
-                
-
-            </main>
-
         </div>
+
+        </main>
+
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+    <script src="script.js"></script>
+
     <script>
-  function confirmNotApprove(userId) {
+        let imgInput = document.getElementById('imgInput');
+        let previewImg = document.getElementById('previewImg');
+
+        imgInput.onchange = evt => {
+            const [file] = imgInput.files;
+            if (file) {
+                previewImg.src = URL.createObjectURL(file);
+            }
+        }
+
+        imgInput1.onchange = evt => {
+            const [file1] = imgInput1.files;
+            if (file1) {
+                previewImg1.src = URL.createObjectURL(file1);
+            }
+        };
+
+        imgInput2.onchange = evt => {
+            const [file2] = imgInput2.files;
+            if (file2) {
+                previewImg2.src = URL.createObjectURL(file2);
+            }
+        };
+
+        imgInput3.onchange = evt => {
+            const [file3] = imgInput3.files;
+            if (file3) {
+                previewImg3.src = URL.createObjectURL(file3);
+            }
+        };
+
+        imgInput4.onchange = evt => {
+            const [file4] = imgInput4.files;
+            if (file4) {
+                previewImg4.src = URL.createObjectURL(file4);
+            }
+        };
+
+        function confirmNotApprove() {
     Swal.fire({
       title: 'คุณแน่ใจหรือไม่?',
       text: "คุณต้องการไม่อนุมัติใบสมัครนี้หรือไม่?",
@@ -299,12 +322,18 @@ if (isset($_GET['not_approve'])) {
       cancelButtonText: 'ยกเลิก'
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "?not_approve=" + userId;
+        let form = document.getElementById('personal-info-form');
+        let input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'not_approve';
+        input.value = 'not_approve';
+        form.appendChild(input);
+        form.submit(); // ส่งฟอร์ม
       }
     });
   }
 
-  function confirmApprove(userId) {
+  function confirmApprove() {
     Swal.fire({
       title: 'คุณแน่ใจหรือไม่?',
       text: "คุณต้องการอนุมัติใบสมัครนี้หรือไม่?",
@@ -316,11 +345,19 @@ if (isset($_GET['not_approve'])) {
       cancelButtonText: 'ยกเลิก'
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "?approve=" + userId;
+        let form = document.getElementById('personal-info-form');
+        let input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'approve';
+        input.value = 'approve';
+        form.appendChild(input);
+        form.submit(); // ส่งฟอร์ม
       }
     });
   }
-</script>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

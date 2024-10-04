@@ -499,6 +499,10 @@ try {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
                             อนุมัติ
                         </a>
+                        <a class="nav-link" href="slip.php">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
+                            อนุมัติ slip
+                        </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -513,9 +517,8 @@ try {
 
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="">Edit data</h1>
+                    <h1 class="">แก้ไข ข้อมูล</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Edit data</li>
                     </ol>
                     <div class="panel panel-default mb-5">
 

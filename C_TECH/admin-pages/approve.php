@@ -143,6 +143,10 @@ if (isset($_GET['not_approve'])) {
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
                             อนุมัติ
                         </a>
+                        <a class="nav-link" href="slip.php">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
+                            อนุมัติ slip
+                        </a>
 
                     </div>
                 </div>
@@ -155,8 +159,7 @@ if (isset($_GET['not_approve'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="">Users Data Tables pending</h1>
-                    <ol class="breadcrumb mb-4">
+                    <ol class="breadcrumb mb-4 mt-4">
                         <h3>
                             <li class="breadcrumb-item active">ตารางข้อมูล ผู้สมัคร ที่รอการ อนุมัติ</li>
                     </ol>

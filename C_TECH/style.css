@@ -58,17 +58,8 @@
         border: 1px solid #ccc;
         border-radius: 5px;
     }
-    /* .form-signup button {
-        font-size: 16px;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: orange;
-        color: #fff;
-    }
-     */
     
-    #announce {
+    .announce {
         text-align: center;
     }
     

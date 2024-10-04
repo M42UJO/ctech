@@ -166,6 +166,10 @@ $stmt->execute();
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
                             อนุมัติ
                         </a>
+                        <a class="nav-link" href="slip.php">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
+                            อนุมัติ slip
+                        </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
