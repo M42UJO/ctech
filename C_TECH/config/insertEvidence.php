@@ -62,8 +62,7 @@ $house_registration = $_FILES['house_registration'];
 $house_registration2 = htmlspecialchars($_POST['house_registration2']);
 $id_card = $_FILES['id_card'];
 $id_card2 = htmlspecialchars($_POST['id_card2']);
-$slip2000 = $_FILES['slip2000'];
-$slip20002 = htmlspecialchars($_POST['slip20002']);
+
 
 
 
@@ -118,22 +117,7 @@ if ($uploadi != '') {
     $fileNewi = $id_card2;
 }
 
-$uploads = $_FILES['slip2000']['name'];
-if ($uploads != '') {
-    $allow = array('jpg', 'jpeg', 'png');
-    $extension = explode('.', $slip2000['name']);
-    $fileActExt = strtolower(end($extension));
-    $fileNews = rand() . "." . $fileActExt;  // rand function create the rand number 
-    $filePath = $target_dir . $fileNews;
 
-    if (in_array($fileActExt, $allow)) {
-        if ($slip2000['size'] > 0 && $slip2000['error'] == 0) {
-            move_uploaded_file($slip2000['tmp_name'], $filePath);
-        }
-    }
-} else {
-    $fileNews = $slip20002;
-}
 
 // ฟังก์ชันสำหรับส่งการแจ้งเตือนผ่าน Line Notify
 function sendLineNotify($message, $token)
@@ -158,7 +142,6 @@ try {
         SET transcript = :transcript, 
             id_card = :id_card, 
             house_registration = :house_registration, 
-            slip2000 = :slip2000,
             updated_at = NOW()
         WHERE User_ID = :user_id");
 
@@ -166,7 +149,6 @@ try {
     $sql_update->bindParam(':transcript', $fileNewt);
     $sql_update->bindParam(':id_card', $fileNewi);
     $sql_update->bindParam(':house_registration', $fileNewh);
-    $sql_update->bindParam(':slip2000', $fileNews);
     $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
     $sql_update->execute();

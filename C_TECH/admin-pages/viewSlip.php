@@ -187,7 +187,10 @@ if (!isset($_SESSION['admin_login'])) {
                                 
                                 <div class="panel-heading mt-5">หลักฐานการชำระ</div>
 
-                                <div class="col-md-3"></div>
+                                <div class="col-md-3">
+                                <input type="hidden" name="User_ID" value="<?php echo htmlspecialchars($User_ID); ?>">
+
+                                </div>
 
        
 
@@ -206,7 +209,7 @@ if (!isset($_SESSION['admin_login'])) {
                                 <div class="col-md-3"></div>
 
                                 <div class="col-md-2 mt-5">
-                                    <a href="./tables.php" type="button" class="btn  w-100 py-2 btn-1">
+                                    <a href="./slip.php" type="button" class="btn  w-100 py-2 btn-1">
                                     <i class="fa-solid fa-angles-left"></i> ย้อนกลับ
                                     </a>
                                 </div>
@@ -219,8 +222,8 @@ if (!isset($_SESSION['admin_login'])) {
                                     <input type="text" class="form-control" name="comment_slip">
                                 </div>
                                 <div class="col-md-2 mt-5">
-                                    <button type="button" class="btn btn-danger" onclick="confirmNotApprove()">ไม่อนุมัติ slip<i class="fa-solid fa-xmark"></i></button>
-                                    <button type="button" class="btn btn-success" onclick="confirmApprove()">อนุมัติ slip<i class="fa-solid fa-check"></i></button>
+                                    <button type="button" class="btn btn-danger" onclick="confirmNotApprove2()">ไม่อนุมัติ slip<i class="fa-solid fa-xmark"></i></button>
+                                    <button type="button" class="btn btn-success" onclick="confirmApprove2()">อนุมัติ slip<i class="fa-solid fa-check"></i></button>
                                 </div>
                             </form>
 
@@ -255,7 +258,7 @@ if (!isset($_SESSION['admin_login'])) {
             }
         };
 
-        function confirmNotApprove() {
+        function confirmNotApprove2() {
     Swal.fire({
       title: 'คุณแน่ใจหรือไม่?',
       text: "คุณต้องการไม่อนุมัติหลักฐานการชำระ(Slip)นี้หรือไม่?",
@@ -278,7 +281,7 @@ if (!isset($_SESSION['admin_login'])) {
     });
   }
 
-  function confirmApprove() {
+  function confirmApprove2() {
     Swal.fire({
       title: 'คุณแน่ใจหรือไม่?',
       text: "คุณต้องการอนุมัติหลักฐานการชำระ(Slip)นี้หรือไม่?",
