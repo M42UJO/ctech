@@ -156,9 +156,7 @@ if (!isset($_SESSION['admin_login'])) {
             <main>
                 <div class="container-fluid px-4">
                     
-                    <ol class="breadcrumb mb-3">
-                        <li class="breadcrumb-item active">ข้อมูล slip</li>
-                    </ol>
+
                     <div class="panel panel-default mb-5">
 
                         <div class="panel-body">
@@ -170,38 +168,11 @@ if (!isset($_SESSION['admin_login'])) {
                                     $User_ID = $_GET['user_id'];
 
                                     $stmt = $conn->prepare("SELECT 
-                                                                u.*, 
-                                                                p.*, 
-                                                                f.*, 
-                                                                e.*, 
-                                                                c.*, 
-                                                                a.*,
-                                                                major.Major_Name,
-                                                                subjecttype.Type_Name,
-                                                                educationlevel.Level_Name,
-                                                                coursetype.CourseType_Name
+                                                                *  
                                                             FROM 
-                                                                user u
-                                                            LEFT JOIN 
-                                                                parent_info p ON u.User_ID = p.User_ID
-                                                            LEFT JOIN 
-                                                                form f ON u.User_ID = f.User_ID
-                                                            LEFT JOIN 
-                                                                education_info e ON u.User_ID = e.User_ID
-                                                            LEFT JOIN 
-                                                                current_address c ON u.User_ID = c.User_ID
-                                                            LEFT JOIN 
-                                                                applicant a ON u.User_ID = a.User_ID
-                                                            LEFT JOIN 
-                                                                major ON f.Major_ID = major.Major_ID
-                                                            LEFT JOIN 
-                                                                subjecttype ON major.Type_ID = subjecttype.Type_ID
-                                                            LEFT JOIN 
-                                                                educationlevel ON subjecttype.Level_ID = educationlevel.Level_ID
-                                                            LEFT JOIN 
-                                                                coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
+                                                                form
                                                             WHERE 
-                                                                u.User_ID = :user_id
+                                                                User_ID = :user_id
                                                         ");
 
                                     $stmt->bindParam(':user_id', $User_ID, PDO::PARAM_INT);
@@ -214,7 +185,7 @@ if (!isset($_SESSION['admin_login'])) {
 
 
                                 
-                                <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
+                                <div class="panel-heading mt-5">หลักฐานการชำระ</div>
 
                                 <div class="col-md-3"></div>
 
@@ -245,11 +216,11 @@ if (!isset($_SESSION['admin_login'])) {
                                 </div>
                                 <div class="col-md-7 mt-5">
 
-                                    <input type="text" class="form-control" name="comment">
+                                    <input type="text" class="form-control" name="comment_slip">
                                 </div>
                                 <div class="col-md-2 mt-5">
-                                    <button type="button" class="btn btn-danger" onclick="confirmNotApprove()">ไม่อนุมัติ <i class="fa-solid fa-xmark"></i></button>
-                                    <button type="button" class="btn btn-success" onclick="confirmApprove()">อนุมัติ <i class="fa-solid fa-check"></i></button>
+                                    <button type="button" class="btn btn-danger" onclick="confirmNotApprove()">ไม่อนุมัติ slip<i class="fa-solid fa-xmark"></i></button>
+                                    <button type="button" class="btn btn-success" onclick="confirmApprove()">อนุมัติ slip<i class="fa-solid fa-check"></i></button>
                                 </div>
                             </form>
 

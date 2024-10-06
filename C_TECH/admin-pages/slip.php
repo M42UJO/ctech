@@ -15,11 +15,11 @@ if (isset($_GET['approve'])) {
     $user_id = $_GET['approve'];
 
     $sql_update = $conn->prepare("UPDATE form SET               
-            status = :status
+            status_slip = :status_slip
             WHERE User_ID = :user_id");
 
     // ผูกค่าพารามิเตอร์กับตัวแปร
-    $sql_update->bindParam(':status', $approve);
+    $sql_update->bindParam(':status_slip', $approve);
     $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sql_update->execute();
 }
@@ -27,11 +27,11 @@ if (isset($_GET['not_approve'])) {
     $user_id = $_GET['not_approve'];
 
     $sql_update = $conn->prepare("UPDATE form SET               
-            status = :status
+            status_slip = :status_slip
             WHERE User_ID = :user_id");
 
     // ผูกค่าพารามิเตอร์กับตัวแปร
-    $sql_update->bindParam(':status', $not_approve);
+    $sql_update->bindParam(':status_slip', $not_approve);
     $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sql_update->execute();
 }
@@ -186,11 +186,9 @@ if (isset($_GET['not_approve'])) {
                                     // เตรียมคำสั่ง SQL
                                     $stmt = $conn->prepare("
                                                             SELECT 
-                                                                    u.*, 
-                                                                    p.*, 
+                                                                    u.*,                                                                     
                                                                     f.*, 
-                                                                    e.*, 
-                                                                    c.*, 
+                                                                                                                                 
                                                                     a.*,
                                                                     major.Major_Name,
                                                                     subjecttype.Type_Name,
@@ -198,14 +196,10 @@ if (isset($_GET['not_approve'])) {
                                                                     coursetype.CourseType_Name
                                                                 FROM 
                                                                     user u
-                                                                LEFT JOIN 
-                                                                    parent_info p ON u.User_ID = p.User_ID
+                                                   
                                                                 LEFT JOIN 
                                                                     form f ON u.User_ID = f.User_ID
-                                                                LEFT JOIN 
-                                                                    education_info e ON u.User_ID = e.User_ID
-                                                                LEFT JOIN 
-                                                                    current_address c ON u.User_ID = c.User_ID
+                                              
                                                                 LEFT JOIN 
                                                                     applicant a ON u.User_ID = a.User_ID
                                                                 LEFT JOIN 
@@ -216,8 +210,9 @@ if (isset($_GET['not_approve'])) {
                                                                     educationlevel ON subjecttype.Level_ID = educationlevel.Level_ID
                                                                 LEFT JOIN 
                                                                     coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
-                                                                WHERE 
-                                                                    f.status = 'pending' OR f.status = 'update'
+                                                                    WHERE 
+                                                                    f.status_slip = 'pending' OR f.status_slip = 'not_approve' OR f.status_slip = 'approve' OR f.status_slip = 'update'
+                                                                
                                                             ");
 
 
@@ -239,12 +234,12 @@ if (isset($_GET['not_approve'])) {
 
 
 
-                                                <td><?php echo htmlspecialchars(string: $applicant['CourseType_Name'].' '.$applicant['Level_Name'].' '.$applicant['Type_Name'].' '.$applicant['Major_Name']); ?></td>
+                                                <td><?php echo htmlspecialchars(string: $applicant['CourseType_Name'] . ' ' . $applicant['Level_Name'] . ' ' . $applicant['Type_Name'] . ' ' . $applicant['Major_Name']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['created_at']); ?></td>
                                                 <td>
                                                     <?php
                                                     $statusClass = '';
-                                                    switch ($applicant['status']) {
+                                                    switch ($applicant['status_slip']) {
                                                         case 'not_approve':
                                                             $statusClass = 'status-not-approve';
                                                             break;
@@ -260,7 +255,7 @@ if (isset($_GET['not_approve'])) {
                                                     }
                                                     ?>
                                                     <span class="status-circle <?php echo $statusClass; ?>"></span>
-                                                    <?php echo htmlspecialchars($applicant['status']); ?>
+                                                    <?php echo htmlspecialchars($applicant['status_slip']); ?>
                                                 </td>
                                                 <td>
                                                     <a href="viewSlip.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-secondary"><i class="fa-solid fa-wallet"></i></a>
@@ -293,7 +288,7 @@ if (isset($_GET['not_approve'])) {
         function confirmNotApprove(userId) {
             Swal.fire({
                 title: 'คุณแน่ใจหรือไม่?',
-                text: "คุณต้องการไม่อนุมัติใบสมัครนี้หรือไม่?",
+                text: "คุณต้องการไม่อนุมัติ slip นี้หรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -310,7 +305,7 @@ if (isset($_GET['not_approve'])) {
         function confirmApprove(userId) {
             Swal.fire({
                 title: 'คุณแน่ใจหรือไม่?',
-                text: "คุณต้องการอนุมัติใบสมัครนี้หรือไม่?",
+                text: "คุณต้องการอนุมัติ slip นี้หรือไม่?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

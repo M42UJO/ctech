@@ -189,6 +189,30 @@ try {
     .breadcrumb-item.active {
         color: orange;
     }
+
+    .btn {
+    flex: 1 1 auto;
+
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-position: right center;
+    
+}
+
+.btn-1 {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+
+
 </style>
 
 <body>
@@ -232,6 +256,7 @@ try {
             <div class="col-md-6 mt-5">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                    <form action="./config/insertSlip.php" method="post" enctype="multipart/form-data"> 
                         <div class="alert <?php echo $statusClass; ?>" role="alert">
                             <div class="<?php echo $panelheading; ?>">สถานะการชำระเงิน</div>
                             <label id="announce" class="mt-3 mb-3   ">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา <br> Chanapolkhan Technological College, Nakhon Ratchasima <br> กรุณาชำระค่าแรกเข้า จำนวน <span class="highlight">2,000</span> บาท หลังจากกรอกข้อมูลครบถ้วน
@@ -249,13 +274,24 @@ try {
                             <div class="row">
                                 <div class="col-md-6 ">
                                     <label class="form-label">Bill Payment Pay-In Slip </label>
-                                    <a href="payin.php" target="_blank" class="btn btn-outline-dark">ดาวน์โหลด Pay-In Slip</a>
+                                    <a href="payin.php" target="_blank" class="btn btn-outline-dark">ดาวน์โหลด Pay-In Slip <i class="fa-solid fa-download"></i></a>
                                 </div>
+                               
 
                                 <div class="col-md-6">
                                     <label class="form-label">หลักฐานการชำระ(Slip) </label>
                                     <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
+                                        <img id="previewImg4" src="./config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
                                 </div>
+                                <div class="col-md-6 ms-auto">
+                                <button type="submit" name="submit" class="btn w-100  py-2 btn-1">ยืนยัน
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                </div>
+                            </form>
 
                             </div>
 
