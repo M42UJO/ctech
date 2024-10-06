@@ -10,7 +10,7 @@ if (!isset($_SESSION['admin_login'])) {
 
     
 
-    $comment = htmlspecialchars($_POST['comment']);
+    $comment_slip = htmlspecialchars($_POST['comment_slip']);
     $approve = 'approve';
     $not_approve = 'not_approve';
     
@@ -18,32 +18,32 @@ if (!isset($_SESSION['admin_login'])) {
     if (isset($_POST['approve'])) {
         $user_id = $_POST['User_ID'];
         $sql_update = $conn->prepare("UPDATE form SET
-                    comment = :comment,
-                    status = :status
+                    comment_slip = :comment_slip,
+                    status_slip = :status_slip
                     WHERE User_ID = :user_id");
 
         // ผูกค่าพารามิเตอร์กับตัวแปร
-        $sql_update->bindParam(':comment', $comment);
-        $sql_update->bindParam(':status', $approve);
+        $sql_update->bindParam(':comment_slip', $comment_slip);
+        $sql_update->bindParam(':status_slip', $approve);
         $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $sql_update->execute();
 
-        header("location: ./tables.php");
+        header("location: ./slip.php");
     }
     if (isset($_POST['not_approve'])) {
         $user_id = $_POST['User_ID'];
         $sql_update = $conn->prepare("UPDATE form SET
-                    comment = :comment,
-                    status = :status
+                    comment_slip = :comment_slip,
+                    status_slip = :status_slip
                     WHERE User_ID = :user_id");
 
         // ผูกค่าพารามิเตอร์กับตัวแปร
-        $sql_update->bindParam(':comment', $comment);
-        $sql_update->bindParam(':status', $not_approve);
+        $sql_update->bindParam(':comment_slip', $comment_slip);
+        $sql_update->bindParam(':status_slip', $not_approve);
         $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $sql_update->execute();
 
-        header("location: ./tables.php");
+        header("location: ./slip.php");
     }
 ?>
 
@@ -161,7 +161,7 @@ if (!isset($_SESSION['admin_login'])) {
 
                         <div class="panel-body">
 
-                            <form id="personal-info-form" class="row g-3 mt-2" action="view.php" method="post">
+                            <form id="personal-info-form" class="row g-3 mt-2" action="viewSlip.php" method="post">
 
                             <?php
                                 if (isset($_GET['user_id'])) {
@@ -246,33 +246,7 @@ if (!isset($_SESSION['admin_login'])) {
         let imgInput = document.getElementById('imgInput');
         let previewImg = document.getElementById('previewImg');
 
-        imgInput.onchange = evt => {
-            const [file] = imgInput.files;
-            if (file) {
-                previewImg.src = URL.createObjectURL(file);
-            }
-        }
 
-        imgInput1.onchange = evt => {
-            const [file1] = imgInput1.files;
-            if (file1) {
-                previewImg1.src = URL.createObjectURL(file1);
-            }
-        };
-
-        imgInput2.onchange = evt => {
-            const [file2] = imgInput2.files;
-            if (file2) {
-                previewImg2.src = URL.createObjectURL(file2);
-            }
-        };
-
-        imgInput3.onchange = evt => {
-            const [file3] = imgInput3.files;
-            if (file3) {
-                previewImg3.src = URL.createObjectURL(file3);
-            }
-        };
 
         imgInput4.onchange = evt => {
             const [file4] = imgInput4.files;
@@ -284,7 +258,7 @@ if (!isset($_SESSION['admin_login'])) {
         function confirmNotApprove() {
     Swal.fire({
       title: 'คุณแน่ใจหรือไม่?',
-      text: "คุณต้องการไม่อนุมัติใบสมัครนี้หรือไม่?",
+      text: "คุณต้องการไม่อนุมัติหลักฐานการชำระ(Slip)นี้หรือไม่?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -307,7 +281,7 @@ if (!isset($_SESSION['admin_login'])) {
   function confirmApprove() {
     Swal.fire({
       title: 'คุณแน่ใจหรือไม่?',
-      text: "คุณต้องการอนุมัติใบสมัครนี้หรือไม่?",
+      text: "คุณต้องการอนุมัติหลักฐานการชำระ(Slip)นี้หรือไม่?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

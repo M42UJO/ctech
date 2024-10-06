@@ -89,12 +89,12 @@ if (isset($_SESSION['user_login'])) {
                 <form id="personal-info-form" class="row g-2 mt-2" action="config/insertEvidence.php" method="post" enctype="multipart/form-data">
                     
                     <div class="panel-heading">หลักฐานที่ใช้ในการสมัคร</div>
-                    <label id="announce" class="">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา<br> Chanapolkhan Technological College, Nakhon Ratchasima</label>
-                    <label id="announce" class="">กรุณาชำระค่าแรกเข้า จำนวน <span class="highlight">2,000</span> บาท หลังจากกรอกข้อมูลครบถ้วน</label>
-                    <label id="announce" class="">ยอดเงินนี้จะถูกนำไปเป็นส่วนลดค่าเทอมของนักศึกษา</label>
-                    <label id="announce" class="mb-5">โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์<br>เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span> </label>
+                    <!-- <label id="announce" class="announce">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา<br> Chanapolkhan Technological College, Nakhon Ratchasima</label>
+                    <label id="announce" class="announce">กรุณาชำระค่าแรกเข้า จำนวน <span class="highlight">2,000</span> บาท หลังจากกรอกข้อมูลครบถ้วน</label>
+                    <label id="announce" class="announce">ยอดเงินนี้จะถูกนำไปเป็นส่วนลดค่าเทอมของนักศึกษา</label>
+                    <label id="announce" class="announce mb-5">โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์<br>เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span> </label> -->
 
-                    <div class="col-md-3 mt-5">
+                    <div class="col-md-4 mt-5">
                         <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                         <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
                         <a href="../config/uploads/<?php echo $Data_view["transcript"]; ?>" data-lightbox="documents" data-title="สำเนาใบรบ.">
@@ -103,7 +103,7 @@ if (isset($_SESSION['user_login'])) {
                         <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
                     </div>
 
-                    <div class="col-md-3 mt-5">
+                    <div class="col-md-4 mt-5">
                         <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                         <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
                         <a href="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" data-lightbox="documents" data-title="สำเนาทะเบียนบ้าน">
@@ -112,7 +112,7 @@ if (isset($_SESSION['user_login'])) {
                         <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
                     </div>
 
-                    <div class="col-md-3 mt-5">
+                    <div class="col-md-4 mt-5">
                         <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
                         <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
                         <a href="../config/uploads/<?php echo $Data_view["id_card"]; ?>" data-lightbox="documents" data-title="สำเนาบัตรประชาชน">
@@ -121,14 +121,7 @@ if (isset($_SESSION['user_login'])) {
                         <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
                     </div>
 
-                    <div class="col-md-3 mt-5">
-                        <label class="form-label">หลักฐานการชำระ <span class="required">** .jpg .jpeg เท่านั้น</span></label>
-                        <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
-                        <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
-                            <img id="previewImg4" src="./config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
-                        </a>
-                        <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
-                    </div>
+
 
                     <div class="col-md-2 mt-5">
                         <a href="Form.php" type="button" class="btn  w-100 py-2 btn-1" >
@@ -222,12 +215,12 @@ if (isset($_SESSION['user_login'])) {
             }
         };
 
-        imgInput4.onchange = evt => {
-            const [file4] = imgInput4.files;
-            if (file4) {
-                previewImg4.src = URL.createObjectURL(file4);
-            }
-        };
+        // imgInput4.onchange = evt => {
+        //     const [file4] = imgInput4.files;
+        //     if (file4) {
+        //         previewImg4.src = URL.createObjectURL(file4);
+        //     }
+        // };
     </script>
 </body>
 
