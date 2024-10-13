@@ -95,7 +95,7 @@ if (isset($_SESSION['user_login'])) {
                     <label id="announce" class="announce mb-5">โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์<br>เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span> </label> -->
 
                     <div class="col-md-4 mt-5">
-                        <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                        <label class="form-label">สำเนาใบรบ. <span class="required">** .jpg .jpeg .png</span></label>
                         <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
                         <a href="../config/uploads/<?php echo $Data_view["transcript"]; ?>" data-lightbox="documents" data-title="สำเนาใบรบ.">
                             <img id="previewImg1" src="./config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
@@ -104,7 +104,7 @@ if (isset($_SESSION['user_login'])) {
                     </div>
 
                     <div class="col-md-4 mt-5">
-                        <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                        <label class="form-label">สำเนาทะเบียนบ้าน <span class="required">** .jpg .jpeg .png</span></label>
                         <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
                         <a href="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" data-lightbox="documents" data-title="สำเนาทะเบียนบ้าน">
                             <img id="previewImg2" src="./config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
@@ -113,7 +113,7 @@ if (isset($_SESSION['user_login'])) {
                     </div>
 
                     <div class="col-md-4 mt-5">
-                        <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg เท่านั้น</span></label>
+                        <label class="form-label">สำเนาบัตรประชาชน <span class="required">** .jpg .jpeg .png</span></label>
                         <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
                         <a href="../config/uploads/<?php echo $Data_view["id_card"]; ?>" data-lightbox="documents" data-title="สำเนาบัตรประชาชน">
                             <img id="previewImg3" src="./config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
@@ -169,7 +169,7 @@ if (isset($_SESSION['user_login'])) {
                         confirmButtonText: 'ตกลง'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = 'index.php';
+                            window.location.href = 'checkstatus.php';
                         }
                     });
                 } else {

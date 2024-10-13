@@ -3,7 +3,6 @@ session_start();
 require_once("../config/db.php");
 require_once __DIR__ . '/../mPDF/vendor/autoload.php';
 
-// สร้างอ็อบเจกต์ mPDF
 try {
     $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
     $fontDirs = $defaultConfig['fontDir'];
@@ -24,14 +23,12 @@ try {
         'default_font' => 'thsarabun'
     ]);
 } catch (\Mpdf\MpdfException $e) { 
-    // รหัสสำหรับจัดการข้อผิดพลาดในการสร้าง mPDF
     die('เกิดข้อผิดพลาดในการสร้าง PDF: ' . $e->getMessage());
 }
 
 $selectYear = $_POST['selectYear'] ?? date("Y");
 
 
-// ตรวจสอบการเตรียมคำสั่ง SQL
 $stmt = $conn->prepare("
 SELECT 
     b.name, 
@@ -50,10 +47,10 @@ GROUP BY
 ");
 $stmt->bindParam(':year', $selectYear, PDO::PARAM_INT);
 
-// Execute the statement
+
 $stmt->execute();
 
-// Fetch all the data
+
 $applicants = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $row = $stmt->rowCount();
 
@@ -99,7 +96,7 @@ $html = '<style>
 </style>';
 
 $currentMajor = '';
-$index = 1; // เปลี่ยนเป็น 1 นอกลูป
+$index = 1; 
 $i=0;
 foreach ($applicants as $applicant) {
     $stmt_view = $conn->prepare("
@@ -121,18 +118,12 @@ foreach ($applicants as $applicant) {
     $stmt_view->bindParam(':year', $selectYear, PDO::PARAM_INT);
     $stmt_view->bindParam(':majorID', $applicant['Major_ID'], PDO::PARAM_INT);
 
-    // Execute the statement
     $stmt_view->execute();
 
-    // Fetch all the data
     $user_views = $stmt_view->fetchAll(PDO::FETCH_ASSOC);
 
-    
-
-        // Update the current major
         $currentMajor = $applicant['Major_Name'];
 
-        // Add header for the new major
         $html .= '
         <div class="header-container">
             <div>
@@ -156,11 +147,10 @@ foreach ($applicants as $applicant) {
                 </tr>
             </thead>
             <tbody>';
-        $index = 1; // Reset the index for the new major
-    //}
+        $index = 1;
 
     foreach ($user_views as $user_view) {
-    // Add each applicant's data to the table
+
     $html .= '
     <tr>
         <td>' . $index++ . '</td> 
@@ -177,16 +167,9 @@ foreach ($applicants as $applicant) {
     if($row == $i){}else{
         $html .= '<div style="page-break-after: always"></div>';
     }
-    
-    //$mpdf->AddPage();
-}
-// Close the last table after the loop
-/*if ($currentMajor != '') {
-    $html .= '</tbody></table>'; // ปิดตารางสุดท้าย
-}*/
 
-// Generate the PDF with the entire HTML
-//$html = ob_get_contents();
+}
+
 $mpdf->WriteHTML($html);
 $mpdf->Output();
 ?>

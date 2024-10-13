@@ -158,12 +158,26 @@ try {
 
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">อาชีพ <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="อาชีพ " name="father_occupation" value="<?php echo $Data_view["father_occupation"];?>" required=" ">
+                        <label for="father-occupation" class="form-label">อาชีพ <span class="required">**</span></label>
+                        <select class="form-select" name="father_occupation" required>
+                            <option value="" disabled selected>เลือกอาชีพ</option>
+                            <option value="พนักงานบริษัท" <?php echo ($Data_view["father_occupation"] == 'พนักงานบริษัท') ? 'selected' : ''; ?>>พนักงานบริษัท</option>
+                            <option value="ธุรกิจส่วนตัว" <?php echo ($Data_view["father_occupation"] == 'ธุรกิจส่วนตัว') ? 'selected' : ''; ?>>ธุรกิจส่วนตัว</option>
+                            <option value="ลูกจ้าง" <?php echo ($Data_view["father_occupation"] == 'ลูกจ้าง') ? 'selected' : ''; ?>>ลูกจ้าง</option>
+                            <option value="ค้าขาย" <?php echo ($Data_view["father_occupation"] == 'ค้าขาย') ? 'selected' : ''; ?>>ค้าขาย</option>
+                            <option value="อื่นๆ" <?php echo ($Data_view["father_occupation"] == 'อื่นๆ') ? 'selected' : ''; ?>>อื่นๆ</option>
+                        </select>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">รายได้/เดือน <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="รายได้/เดือน " name="father_income" value="<?php echo $Data_view["father_income"];?>" required=" ">
+                        <label for="father-income" class="form-label">รายได้/เดือน <span class="required">**</span></label>
+                        <select class="form-select" name="father_income" required>
+                            <option value="" disabled selected>เลือกจำนวนรายได้</option>
+                            <option value="0-10,000" <?php echo ($Data_view["father_income"] == '0-10,000') ? 'selected' : ''; ?>>ต่ำกว่า 10,000 บาท</option>
+                            <option value="10,000-20,000" <?php echo ($Data_view["father_income"] == '10,000-20,000') ? 'selected' : ''; ?>>10,000-20,000 บาท</option>
+                            <option value="20,001-30,000" <?php echo ($Data_view["father_income"] == '20,001-30,000') ? 'selected' : ''; ?>>20,001-30,000 บาท</option>
+                            <option value="30,001-50,000" <?php echo ($Data_view["father_income"] == '30,001-50,000') ? 'selected' : ''; ?>>30,001-50,000 บาท</option>
+                            <option value="50,001 ขึ้นไป" <?php echo ($Data_view["father_income"] == '50,001 ขึ้นไป') ? 'selected' : ''; ?>>50,001 ขึ้นไป</option>
+                        </select>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">บ้านเลขที่ <span class="required">**</span></label>

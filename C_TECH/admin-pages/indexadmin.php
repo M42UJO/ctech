@@ -188,7 +188,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </ol>
                     </div>
                     <div class="row d-flex align-items-center">
-                        <form action="" method="get" class="d-flex">
+                        <form action="./reportAd.php" method="get" class="d-flex">
 
                             <div class="col-md-1 mb-4 m-2 ms-auto">
                                 <label for="startDate" class="form-label">ตั้งแต่วันที่:</label>
