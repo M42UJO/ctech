@@ -160,13 +160,13 @@ if (isset($_GET['not_approve'])) {
             <main>
                 <div class="container-fluid px-4">
                     <ol class="breadcrumb mb-4 mt-4">
-                        <h3><li class="breadcrumb-item active">ตารางข้อมูล ผู้สมัคร</li></h3>
+                        <h3><li class="breadcrumb-item active">ข้อมูลผู้สมัคร</li></h3>
                         
                     </ol>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            ตารางข้อมูล ผู้สมัคร ทั้งหมด
+                            ข้อมูลผู้สมัคร ทั้งหมด
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">

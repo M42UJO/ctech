@@ -162,13 +162,13 @@ if (isset($_GET['not_approve'])) {
                 <div class="container-fluid px-4">
                     <ol class="breadcrumb mb-4 mt-4">
                         <h3>
-                            <li class="breadcrumb-item active">ตารางข้อมูล ผู้สมัคร ที่รอการ อนุมัติ</li>
+                            <li class="breadcrumb-item active">ผู้สมัครที่รอการ "อนุมัติ"</li>
                     </ol>
                     </h3>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            ตารางข้อมูล ผู้สมัคร ที่รอการ อนุมัติ
+                            ข้อมูล ผู้สมัครที่รอการ "อนุมัติ"
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">

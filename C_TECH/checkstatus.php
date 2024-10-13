@@ -292,6 +292,9 @@ try {
                               <br>  โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์   เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span><br> <span class="required">**หมายเหตุ เมื่อชำระค่าแรกเข้าแล้วทางวิทยาลัยจะไม่คืนเงินทุกกรณี**</span></label>
 
                             <h4 class="alert-heading mt-3">สถานะการชำระเงิน</h4>
+                            <?php if ($status == 'pending' || $status == 'update'): ?>
+                            <span class="required">**ต้องสถานะการสมัครเป็น "อนุมัติ" จึงแนบหลักฐานการชำระได้**</span>
+                            <?php endif; ?>
                             <p><?php echo $message_slip; ?></p>
                             <?php if (!empty($comment_slip)): ?>
                                 <div class="mt-3">
@@ -301,23 +304,28 @@ try {
                             <?php endif; ?>
                             <div class="row">
                                 <div class="col-md-6 ">
+                                <?php if ($status == 'approve'): ?>
                                     <label class="form-label">Bill Payment Pay-In Slip </label>
                                     <a href="payin.php" target="_blank" class="btn btn-outline-dark">ดาวน์โหลด Pay-In Slip <i class="fa-solid fa-download"></i></a>
+                                    <?php endif; ?>
                                 </div>
                                
 
                                 <div class="col-md-6">
+                                <?php if ($status == 'approve'): ?>
                                     <label class="form-label">หลักฐานการชำระ(Slip) </label>
                                     <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png" required>
-                                    <a href="../config/uploads/<?php echo $formData["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
+                                    <a href="./config/uploads/<?php echo $formData["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
                                         <img id="previewImg4" src="./config/uploads/<?php echo $formData["slip2000"]; ?>" width="100%" alt="">
                                     </a>
                                     <input type="hidden" class="form-control" name="slip20002" value="<?php echo $formData["slip2000"]; ?>">
+                                    
                                 </div>
-                                <div class="col-md-6 ms-auto">
+                                <div class="col-md-6 ms-auto mt-2">
                                 <button type="submit" name="submit" class="btn w-100  py-2 btn-1">ยืนยัน
                                     <i class="fas fa-check"></i>
                                 </button>
+                                <?php endif; ?>
                                 </div>
                             </form>
 

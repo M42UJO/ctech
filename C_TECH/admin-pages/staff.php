@@ -101,13 +101,14 @@ if (!isset($_SESSION['admin_login'])) {
                     <ol class="breadcrumb mb-4 mt-4">
                         <h3>
                             <li class="breadcrumb-item active">แก้ไขเจ้าหน้าที่ </li>
-                        </h3><a href="./addStaff.php" class="btn btn-info ms-auto">เพิ่มเจ้าหน้าที่ <i class="fa-solid fa-plus"></i></a>
+                        </h3>
                     </ol>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Staff
+                            Staff 
                         </div>
+                        <a href="./addStaff.php" class="btn btn-info ms-auto m-3">เพิ่มเจ้าหน้าที่ <i class="fa-solid fa-plus"></i></a>
                         <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>

@@ -100,101 +100,96 @@ if (isset($_POST['update'])) {
     $uploadp = $_FILES['profile_image']['name'];
     $target_dir = "../config/uploads/";
 
-        if ($uploadp != '') {
-            $allow = array('jpg', 'jpeg', 'png');
-            $extension = explode('.', $profile_image['name']);
-            $fileActExt = strtolower(end($extension));
-            $fileNewp = rand() . "." . $fileActExt;  // rand function create the rand number 
-            $filePath = $target_dir .$fileNewp;
+    if ($uploadp != '') {
+        $allow = array('jpg', 'jpeg', 'png');
+        $extension = explode('.', $profile_image['name']);
+        $fileActExt = strtolower(end($extension));
+        $fileNewp = rand() . "." . $fileActExt;  // rand function create the rand number 
+        $filePath = $target_dir . $fileNewp;
 
-            if (in_array($fileActExt, $allow)) {
-                if ($profile_image['size'] > 0 && $profile_image['error'] == 0) {
-                   move_uploaded_file($profile_image['tmp_name'], $filePath);
-                }
+        if (in_array($fileActExt, $allow)) {
+            if ($profile_image['size'] > 0 && $profile_image['error'] == 0) {
+                move_uploaded_file($profile_image['tmp_name'], $filePath);
             }
-
-        } else {
-            $fileNewp = $profile_image2;
         }
+    } else {
+        $fileNewp = $profile_image2;
+    }
     $uploadt = $_FILES['transcript']['name'];
 
-        if ($uploadt != '') {
-            $allow = array('jpg', 'jpeg', 'png');
-            $extension = explode('.', $transcript['name']);
-            $fileActExt = strtolower(end($extension));
-            $fileNewt = rand() . "." . $fileActExt;  // rand function create the rand number 
-            $filePath = $target_dir .$fileNewt;
+    if ($uploadt != '') {
+        $allow = array('jpg', 'jpeg', 'png');
+        $extension = explode('.', $transcript['name']);
+        $fileActExt = strtolower(end($extension));
+        $fileNewt = rand() . "." . $fileActExt;  // rand function create the rand number 
+        $filePath = $target_dir . $fileNewt;
 
-            if (in_array($fileActExt, $allow)) {
-                if ($transcript['size'] > 0 && $transcript['error'] == 0) {
-                   move_uploaded_file($transcript['tmp_name'], $filePath);
-                }
+        if (in_array($fileActExt, $allow)) {
+            if ($transcript['size'] > 0 && $transcript['error'] == 0) {
+                move_uploaded_file($transcript['tmp_name'], $filePath);
             }
-
-        } else {
-            $fileNewt = $transcript2;
         }
+    } else {
+        $fileNewt = $transcript2;
+    }
     $uploadh = $_FILES['house_registration']['name'];
 
-        if ($uploadh != '') {
-            $allow = array('jpg', 'jpeg', 'png');
-            $extension = explode('.', $house_registration['name']);
-            $fileActExt = strtolower(end($extension));
-            $fileNewh = rand() . "." . $fileActExt;  // rand function create the rand number 
-            $filePath = $target_dir .$fileNewh;
+    if ($uploadh != '') {
+        $allow = array('jpg', 'jpeg', 'png');
+        $extension = explode('.', $house_registration['name']);
+        $fileActExt = strtolower(end($extension));
+        $fileNewh = rand() . "." . $fileActExt;  // rand function create the rand number 
+        $filePath = $target_dir . $fileNewh;
 
-            if (in_array($fileActExt, $allow)) {
-                if ($house_registration['size'] > 0 && $house_registration['error'] == 0) {
-                   move_uploaded_file($house_registration['tmp_name'], $filePath);
-                }
+        if (in_array($fileActExt, $allow)) {
+            if ($house_registration['size'] > 0 && $house_registration['error'] == 0) {
+                move_uploaded_file($house_registration['tmp_name'], $filePath);
             }
-
-        } else {
-            $fileNewh = $house_registration2;
         }
+    } else {
+        $fileNewh = $house_registration2;
+    }
     $uploadi = $_FILES['id_card']['name'];
 
-        if ($uploadi != '') {
-            $allow = array('jpg', 'jpeg', 'png');
-            $extension = explode('.', $id_card['name']);
-            $fileActExt = strtolower(end($extension));
-            $fileNewi = rand() . "." . $fileActExt;  // rand function create the rand number 
-            $filePath = $target_dir .$fileNewi;
+    if ($uploadi != '') {
+        $allow = array('jpg', 'jpeg', 'png');
+        $extension = explode('.', $id_card['name']);
+        $fileActExt = strtolower(end($extension));
+        $fileNewi = rand() . "." . $fileActExt;  // rand function create the rand number 
+        $filePath = $target_dir . $fileNewi;
 
-            if (in_array($fileActExt, $allow)) {
-                if ($id_card['size'] > 0 && $id_card['error'] == 0) {
-                   move_uploaded_file($id_card['tmp_name'], $filePath);
-                }
+        if (in_array($fileActExt, $allow)) {
+            if ($id_card['size'] > 0 && $id_card['error'] == 0) {
+                move_uploaded_file($id_card['tmp_name'], $filePath);
             }
-
-        } else {
-            $fileNewi = $id_card2;
         }
+    } else {
+        $fileNewi = $id_card2;
+    }
     $uploads = $_FILES['slip2000']['name'];
 
-        if ($uploads != '') {
-            $allow = array('jpg', 'jpeg', 'png');
-            $extension = explode('.', $slip2000['name']);
-            $fileActExt = strtolower(end($extension));
-            $fileNews = rand() . "." . $fileActExt;  // rand function create the rand number 
-            $filePath = $target_dir .$fileNews;
+    if ($uploads != '') {
+        $allow = array('jpg', 'jpeg', 'png');
+        $extension = explode('.', $slip2000['name']);
+        $fileActExt = strtolower(end($extension));
+        $fileNews = rand() . "." . $fileActExt;  // rand function create the rand number 
+        $filePath = $target_dir . $fileNews;
 
-            if (in_array($fileActExt, $allow)) {
-                if ($slip2000['size'] > 0 && $slip2000['error'] == 0) {
-                   move_uploaded_file($slip2000['tmp_name'], $filePath);
-                }
+        if (in_array($fileActExt, $allow)) {
+            if ($slip2000['size'] > 0 && $slip2000['error'] == 0) {
+                move_uploaded_file($slip2000['tmp_name'], $filePath);
             }
-
-        } else {
-            $fileNews = $slip20002;
         }
+    } else {
+        $fileNews = $slip20002;
+    }
 
-    
 
 
-try {
 
-            $sql_update = $conn->prepare("UPDATE applicant SET
+    try {
+
+        $sql_update = $conn->prepare("UPDATE applicant SET
                 prefix = :prefix,
                 name = :name,
                 lastname = :lastname,
@@ -218,33 +213,33 @@ try {
                 profile_image = :profile_image
                 WHERE User_ID = :user_id");
 
-            // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_update->execute([
-                ':prefix' => $prefix,
-                ':name' => $name,
-                ':lastname' => $lastname,
-                ':eng_name' => $eng_name,
-                ':id_card_number' => $id_card_number,
-                ':nickname' => $nickname,
-                ':birth_day' => $birth_day,
-                ':birth_month' => $birth_month,
-                ':birth_year' => $birth_year,
-                ':blood_group' => $blood_group,
-                ':height' => $height,
-                ':weight' => $weight,
-                ':nationality' => $nationality,
-                ':citizenship' => $citizenship,
-                ':religion' => $religion,
-                ':siblings_count' => $siblings_count,
-                ':studying_siblings_count' => $studying_siblings_count,
-                ':phone_number' => $phone_number,
-                ':line_id' => $line_id,
-                ':facebook' => $facebook,
-                ':profile_image' => $fileNewp,
-                ':user_id' => $user_id
-            ]);
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->execute([
+            ':prefix' => $prefix,
+            ':name' => $name,
+            ':lastname' => $lastname,
+            ':eng_name' => $eng_name,
+            ':id_card_number' => $id_card_number,
+            ':nickname' => $nickname,
+            ':birth_day' => $birth_day,
+            ':birth_month' => $birth_month,
+            ':birth_year' => $birth_year,
+            ':blood_group' => $blood_group,
+            ':height' => $height,
+            ':weight' => $weight,
+            ':nationality' => $nationality,
+            ':citizenship' => $citizenship,
+            ':religion' => $religion,
+            ':siblings_count' => $siblings_count,
+            ':studying_siblings_count' => $studying_siblings_count,
+            ':phone_number' => $phone_number,
+            ':line_id' => $line_id,
+            ':facebook' => $facebook,
+            ':profile_image' => $fileNewp,
+            ':user_id' => $user_id
+        ]);
 
-            $sql_update = $conn->prepare("UPDATE current_address SET
+        $sql_update = $conn->prepare("UPDATE current_address SET
                 house_number = :house_number,
                 village = :village,
                 lane = :lane,
@@ -255,19 +250,19 @@ try {
                 postal_code = :postal_code
                 WHERE User_ID = :user_id");
 
-            // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_update->bindParam(':house_number', $house_number);
-            $sql_update->bindParam(':village', $village);
-            $sql_update->bindParam(':lane', $lane);
-            $sql_update->bindParam(':road', $road);
-            $sql_update->bindParam(':sub_district', $sub_district);
-            $sql_update->bindParam(':district', $district);
-            $sql_update->bindParam(':province', $province);
-            $sql_update->bindParam(':postal_code', $postal_code);
-            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_update->execute();
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':house_number', $house_number);
+        $sql_update->bindParam(':village', $village);
+        $sql_update->bindParam(':lane', $lane);
+        $sql_update->bindParam(':road', $road);
+        $sql_update->bindParam(':sub_district', $sub_district);
+        $sql_update->bindParam(':district', $district);
+        $sql_update->bindParam(':province', $province);
+        $sql_update->bindParam(':postal_code', $postal_code);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();
 
-            $sql_update = $conn->prepare("UPDATE education_info SET
+        $sql_update = $conn->prepare("UPDATE education_info SET
                 school_name = :school_name,
                 school_sub_district = :school_sub_district,
                 school_district = :school_district,
@@ -281,22 +276,22 @@ try {
                 major_other = :major_other
                 WHERE User_ID = :user_id");
 
-            // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_update->bindParam(':school_name', $school_name);
-            $sql_update->bindParam(':school_sub_district', $school_sub_district);
-            $sql_update->bindParam(':school_district', $school_district);
-            $sql_update->bindParam(':school_province', $school_province);
-            $sql_update->bindParam(':school_postal_code', $school_postal_code);
-            $sql_update->bindParam(':graduation_year', $graduation_year);
-            $sql_update->bindParam(':grade_result', $grade_result);
-            $sql_update->bindParam(':class_level', $class_level);
-            $sql_update->bindParam(':major', $major);
-            $sql_update->bindParam(':degree_other', $degree_other);
-            $sql_update->bindParam(':major_other', $major_other);
-            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_update->execute();
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':school_name', $school_name);
+        $sql_update->bindParam(':school_sub_district', $school_sub_district);
+        $sql_update->bindParam(':school_district', $school_district);
+        $sql_update->bindParam(':school_province', $school_province);
+        $sql_update->bindParam(':school_postal_code', $school_postal_code);
+        $sql_update->bindParam(':graduation_year', $graduation_year);
+        $sql_update->bindParam(':grade_result', $grade_result);
+        $sql_update->bindParam(':class_level', $class_level);
+        $sql_update->bindParam(':major', $major);
+        $sql_update->bindParam(':degree_other', $degree_other);
+        $sql_update->bindParam(':major_other', $major_other);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();
 
-            $sql_update = $conn->prepare("UPDATE parent_info SET
+        $sql_update = $conn->prepare("UPDATE parent_info SET
                 father_name = :father_name,
                 father_status = :father_status,
                 father_occupation = :father_occupation,
@@ -312,24 +307,24 @@ try {
                 father_phone_number = :father_phone_number
                 WHERE User_ID = :user_id");
 
-            // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_update->bindParam(':father_name', $father_name);
-            $sql_update->bindParam(':father_status', $father_status);
-            $sql_update->bindParam(':father_occupation', $father_occupation);
-            $sql_update->bindParam(':father_income', $father_income);
-            $sql_update->bindParam(':father_house_number', $father_house_number);
-            $sql_update->bindParam(':father_village', $father_village);
-            $sql_update->bindParam(':father_lane', $father_lane);
-            $sql_update->bindParam(':father_road', $father_road);
-            $sql_update->bindParam(':father_sub_district', $father_sub_district);
-            $sql_update->bindParam(':father_district', $father_district);
-            $sql_update->bindParam(':father_province', $father_province);
-            $sql_update->bindParam(':father_postal_code', $father_postal_code);
-            $sql_update->bindParam(':father_phone_number', $father_phone_number);
-            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_update->execute();;
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':father_name', $father_name);
+        $sql_update->bindParam(':father_status', $father_status);
+        $sql_update->bindParam(':father_occupation', $father_occupation);
+        $sql_update->bindParam(':father_income', $father_income);
+        $sql_update->bindParam(':father_house_number', $father_house_number);
+        $sql_update->bindParam(':father_village', $father_village);
+        $sql_update->bindParam(':father_lane', $father_lane);
+        $sql_update->bindParam(':father_road', $father_road);
+        $sql_update->bindParam(':father_sub_district', $father_sub_district);
+        $sql_update->bindParam(':father_district', $father_district);
+        $sql_update->bindParam(':father_province', $father_province);
+        $sql_update->bindParam(':father_postal_code', $father_postal_code);
+        $sql_update->bindParam(':father_phone_number', $father_phone_number);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();;
 
-            $sql_update = $conn->prepare("UPDATE parent_info SET
+        $sql_update = $conn->prepare("UPDATE parent_info SET
                 mother_name = :mother_name,
                 mother_status = :mother_status,
                 mother_occupation = :mother_occupation,
@@ -345,24 +340,24 @@ try {
                 mother_phone_number = :mother_phone_number
                 WHERE User_ID = :user_id");
 
-            // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_update->bindParam(':mother_name', $mother_name);
-            $sql_update->bindParam(':mother_status', $mother_status);
-            $sql_update->bindParam(':mother_occupation', $mother_occupation);
-            $sql_update->bindParam(':mother_income', $mother_income);
-            $sql_update->bindParam(':mother_house_number', $mother_house_number);
-            $sql_update->bindParam(':mother_village', $mother_village);
-            $sql_update->bindParam(':mother_lane', $mother_lane);
-            $sql_update->bindParam(':mother_road', $mother_road);
-            $sql_update->bindParam(':mother_sub_district', $mother_sub_district);
-            $sql_update->bindParam(':mother_district', $mother_district);
-            $sql_update->bindParam(':mother_province', $mother_province);
-            $sql_update->bindParam(':mother_postal_code', $mother_postal_code);
-            $sql_update->bindParam(':mother_phone_number', $mother_phone_number);
-            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_update->execute();
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':mother_name', $mother_name);
+        $sql_update->bindParam(':mother_status', $mother_status);
+        $sql_update->bindParam(':mother_occupation', $mother_occupation);
+        $sql_update->bindParam(':mother_income', $mother_income);
+        $sql_update->bindParam(':mother_house_number', $mother_house_number);
+        $sql_update->bindParam(':mother_village', $mother_village);
+        $sql_update->bindParam(':mother_lane', $mother_lane);
+        $sql_update->bindParam(':mother_road', $mother_road);
+        $sql_update->bindParam(':mother_sub_district', $mother_sub_district);
+        $sql_update->bindParam(':mother_district', $mother_district);
+        $sql_update->bindParam(':mother_province', $mother_province);
+        $sql_update->bindParam(':mother_postal_code', $mother_postal_code);
+        $sql_update->bindParam(':mother_phone_number', $mother_phone_number);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();
 
-            $sql_update = $conn->prepare("UPDATE parent_info SET
+        $sql_update = $conn->prepare("UPDATE parent_info SET
                 guardian_name = :guardian_name,
                 guardian_relationship = :guardian_relationship,
                 guardian_house_number = :guardian_house_number,
@@ -376,23 +371,23 @@ try {
                 guardian_phone_number = :guardian_phone_number
                 WHERE User_ID = :user_id");
 
-            // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_update->bindParam(':guardian_name', $guardian_name);
-            $sql_update->bindParam(':guardian_relationship', $guardian_relationship);
-            $sql_update->bindParam(':guardian_house_number', $guardian_house_number);
-            $sql_update->bindParam(':guardian_village', $guardian_village);
-            $sql_update->bindParam(':guardian_lane', $guardian_lane);
-            $sql_update->bindParam(':guardian_road', $guardian_road);
-            $sql_update->bindParam(':guardian_sub_district', $guardian_sub_district);
-            $sql_update->bindParam(':guardian_district', $guardian_district);
-            $sql_update->bindParam(':guardian_province', $guardian_province);
-            $sql_update->bindParam(':guardian_postal_code', $guardian_postal_code);
-            $sql_update->bindParam(':guardian_phone_number', $guardian_phone_number);
-            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_update->execute();
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':guardian_name', $guardian_name);
+        $sql_update->bindParam(':guardian_relationship', $guardian_relationship);
+        $sql_update->bindParam(':guardian_house_number', $guardian_house_number);
+        $sql_update->bindParam(':guardian_village', $guardian_village);
+        $sql_update->bindParam(':guardian_lane', $guardian_lane);
+        $sql_update->bindParam(':guardian_road', $guardian_road);
+        $sql_update->bindParam(':guardian_sub_district', $guardian_sub_district);
+        $sql_update->bindParam(':guardian_district', $guardian_district);
+        $sql_update->bindParam(':guardian_province', $guardian_province);
+        $sql_update->bindParam(':guardian_postal_code', $guardian_postal_code);
+        $sql_update->bindParam(':guardian_phone_number', $guardian_phone_number);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();
 
 
-            $sql_update = $conn->prepare("UPDATE form 
+        $sql_update = $conn->prepare("UPDATE form 
             SET transcript = :transcript, 
                 id_card = :id_card, 
                 house_registration = :house_registration, 
@@ -400,25 +395,24 @@ try {
                  
             WHERE User_ID = :user_id");
 
-            // ผูกค่าพารามิเตอร์กับตัวแปร
-            $sql_update->bindParam(':transcript', $fileNewt);
-            $sql_update->bindParam(':id_card', $fileNewi);
-            $sql_update->bindParam(':house_registration', $fileNewh);
-            $sql_update->bindParam(':slip2000', $fileNews);      
-            $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-            $sql_update->execute();
-            
+        // ผูกค่าพารามิเตอร์กับตัวแปร
+        $sql_update->bindParam(':transcript', $fileNewt);
+        $sql_update->bindParam(':id_card', $fileNewi);
+        $sql_update->bindParam(':house_registration', $fileNewh);
+        $sql_update->bindParam(':slip2000', $fileNews);
+        $sql_update->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sql_update->execute();
 
-            $_SESSION['success'] = "Data has been inserted or updated successfully";
-            header("Location: edituser.php");
-            exit();
-        } catch (PDOException $e) {
-            // กำหนดข้อความข้อผิดพลาดในเซสชันและเปลี่ยนเส้นทางกลับไปที่หน้าที่อยู่ปัจจุบัน
-            $_SESSION['error'] = "Database Error: " . $e->getMessage();
-            //  header("Location: eddit.php");
-            exit();
-        }
-        
+
+        $_SESSION['success'] = "Data has been inserted or updated successfully";
+        header("Location: edituser.php");
+        exit();
+    } catch (PDOException $e) {
+        // กำหนดข้อความข้อผิดพลาดในเซสชันและเปลี่ยนเส้นทางกลับไปที่หน้าที่อยู่ปัจจุบัน
+        $_SESSION['error'] = "Database Error: " . $e->getMessage();
+        //  header("Location: eddit.php");
+        exit();
+    }
 }
 ?>
 
@@ -445,6 +439,15 @@ try {
     <script src="path/to/lightbox-plus-jquery.js"></script>
 
 </head>
+<style>
+    .btn:hover {
+        background-position: right center;
+    }
+
+    .btn-1 {
+        background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+    }
+</style>
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark navbar-custom">
@@ -717,7 +720,7 @@ try {
                                     <input type="text" id="facebook" class="form-control" placeholder="Facebook" name="facebook" value="<?php echo $Data_view["facebook"]; ?>">
                                     <input type="hidden" class="form-control" name="User_ID" value="<?php echo htmlspecialchars($Data_view["User_ID"]); ?>">
 
-                                    
+
                                 </div>
                                 <div class="col-md-6">
                                     <label for="photo" class="form-label">รูปภาพ 1 นิ้วครึ่ง </label>
@@ -1037,45 +1040,49 @@ try {
 
                                 <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
 
-                                    <div class="col-md-3 mt-5">
-                                        <label class="form-label">สำเนาใบรบ. </label>
-                                        <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
-                                        <a href="../config/uploads/<?php echo $Data_view["transcript"]; ?>" data-lightbox="documents" data-title="สำเนาใบรบ.">
-                                            <img id="previewImg1" class="img-thumbnail" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
-                                        </a>
-                                        <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
-                                    </div>
+                                <div class="col-md-3 mt-5">
+                                    <label class="form-label">สำเนาใบรบ. </label>
+                                    <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["transcript"]; ?>" data-lightbox="documents" data-title="สำเนาใบรบ.">
+                                        <img id="previewImg1" class="img-thumbnail" src="../config/uploads/<?php echo $Data_view["transcript"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
+                                </div>
 
-                                    <div class="col-md-3 mt-5">
-                                        <label class="form-label">สำเนาทะเบียนบ้าน </label>
-                                        <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
-                                        <a href="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" data-lightbox="documents" data-title="สำเนาทะเบียนบ้าน">
-                                            <img id="previewImg2" class="img-thumbnail" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
-                                        </a>
-                                        <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
-                                    </div>
+                                <div class="col-md-3 mt-5">
+                                    <label class="form-label">สำเนาทะเบียนบ้าน </label>
+                                    <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" data-lightbox="documents" data-title="สำเนาทะเบียนบ้าน">
+                                        <img id="previewImg2" class="img-thumbnail" src="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
+                                </div>
 
-                                    <div class="col-md-3 mt-5">
-                                        <label class="form-label">สำเนาบัตรประชาชน </label>
-                                        <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
-                                        <a href="../config/uploads/<?php echo $Data_view["id_card"]; ?>" data-lightbox="documents" data-title="สำเนาบัตรประชาชน">
-                                            <img id="previewImg3" class="img-thumbnail" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
-                                        </a>
-                                        <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
-                                    </div>
+                                <div class="col-md-3 mt-5">
+                                    <label class="form-label">สำเนาบัตรประชาชน </label>
+                                    <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["id_card"]; ?>" data-lightbox="documents" data-title="สำเนาบัตรประชาชน">
+                                        <img id="previewImg3" class="img-thumbnail" src="../config/uploads/<?php echo $Data_view["id_card"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
+                                </div>
 
-                                    <div class="col-md-3 mt-5">
-                                        <label class="form-label">หลักฐานการชำระ </label>
-                                        <input type="file" id="imgInput4" class="form-control" class="img-thumbnail" name="slip2000" accept=".jpg,.jpeg,.png">
-                                        <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
-                                            <img id="previewImg4" class="img-thumbnail" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
-                                        </a>
-                                        <input type="hidden"  class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
-                                    </div>
+                                <div class="col-md-3 mt-5">
+                                    <label class="form-label">หลักฐานการชำระ </label>
+                                    <input type="file" id="imgInput4" class="form-control" class="img-thumbnail" name="slip2000" accept=".jpg,.jpeg,.png">
+                                    <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
+                                        <img id="previewImg4" class="img-thumbnail" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
+                                    </a>
+                                    <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
+                                </div>
 
-                                <div>
-                                    <a href="edituser.php" class="btn btn-secondary"> Back</a>
-                                    <button type="submit" class="btn btn-primary" name="update">update</button>
+                                <div class="row">
+                                    <div class="col-md-2 mt-5">
+                                        <a href="edituser.php" class="btn w-100 py-2 btn-1"> <i class="fas fa-arrow-left"></i> ย้อนกลับ</a>
+                                    </div>
+                                    <div class="col-md-2 mt-5 ms-auto">
+                                        <button type="submit" class="btn w-100 py-2 btn-1" name="update">update</button>
+                                    </div>
                                 </div>
 
 

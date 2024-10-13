@@ -162,13 +162,13 @@ if (isset($_GET['not_approve'])) {
                 <div class="container-fluid px-4">
                     <ol class="breadcrumb mb-4 mt-4">
                         <h3>
-                            <li class="breadcrumb-item active">ตารางข้อมูล slip ที่รอการ อนุมัติ</li>
+                            <li class="breadcrumb-item active">Slip ที่รอการ "อนุมัติ"</li>
                     </ol>
                     </h3>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            ตารางข้อมูล slip ที่รอการ อนุมัติ
+                            ข้อมูล slip ที่รอการ อนุมัติ
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
@@ -212,7 +212,7 @@ if (isset($_GET['not_approve'])) {
                                                                 LEFT JOIN 
                                                                     coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
                                                                     WHERE 
-                                                                    f.status_slip = 'pending' OR f.status_slip = 'not_approve' OR f.status_slip = 'approve' OR f.status_slip = 'update'
+                                                                    f.status_slip = 'pending' OR f.status_slip = 'not_approve' OR f.status_slip = 'update'
                                                                 
                                                             ");
 
