@@ -408,12 +408,6 @@ if (!isset($_SESSION['admin_login'])) {
                                     <input type="text " class="form-control " placeholder="รหัสไปรษณีย์ " name="postal_code" maxlength="5" value="<?php echo $Data_view["postal_code"]; ?>"readonly required>
                                 </div>
 
-
-
-
-
-
-
                                 <div class="panel-heading mt-5">ข้อมูลการศึกษา</div>
                                 <div class="col-md-8">
                                     <label class="form-label">จบจากโรงเรียน </label>

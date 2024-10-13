@@ -26,36 +26,41 @@ try {
     die('เกิดข้อผิดพลาดในการสร้าง PDF: ' . $e->getMessage());
 }
 
-$selectYear = $_POST['selectYear'] ?? date("Y");
+// รับค่าช่วงวันที่จาก GET
+$startDate = $_GET['startDate'] ?? null;
+$endDate = $_GET['endDate'] ?? null;
 
+if (!$startDate || !$endDate) {
+    die('กรุณาเลือกวันที่เริ่มต้นและวันที่สิ้นสุด');
+}
 
 $stmt = $conn->prepare("
-SELECT 
-    b.name, 
-    b.lastname, 
-    b.id_card_number, 
-    c.created_at, 
-    c.status, 
-    c.Major_ID,
-    d.Major_Name
-FROM user a, applicant b, form c, major d 
-WHERE 
-    a.User_ID = b.User_ID and a.User_ID = c.User_ID and c.Major_ID = d.Major_ID and 
-    YEAR(c.created_at) = :year
-GROUP BY 
-    d.Major_ID
+    SELECT 
+        b.name, 
+        b.lastname, 
+        b.id_card_number, 
+        c.created_at, 
+        c.status, 
+        c.Major_ID,
+        d.Major_Name
+    FROM user a, applicant b, form c, major d 
+    WHERE 
+        a.User_ID = b.User_ID AND a.User_ID = c.User_ID AND c.Major_ID = d.Major_ID AND 
+        c.created_at BETWEEN :startDate AND :endDate
+    GROUP BY 
+        d.Major_ID
 ");
-$stmt->bindParam(':year', $selectYear, PDO::PARAM_INT);
 
+$stmt->bindParam(':startDate', $startDate);
+$stmt->bindParam(':endDate', $endDate);
 
 $stmt->execute();
-
 
 $applicants = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $row = $stmt->rowCount();
 
 if (empty($applicants)) {
-    die('กรุณาเลือกปีที่แสดง');
+    die('ไม่มีผู้สมัครในช่วงวันที่ที่เลือก');
 }
 
 $html = '<style>
@@ -97,77 +102,91 @@ $html = '<style>
 
 $currentMajor = '';
 $index = 1; 
-$i=0;
+$i = 0;
+
 foreach ($applicants as $applicant) {
     $stmt_view = $conn->prepare("
-    SELECT 
-        b.name, 
-        b.lastname, 
-        b.id_card_number, 
-        c.created_at, 
-        c.status, 
-        c.Major_ID,
-        d.Major_Name
-    FROM user a, applicant b, form c, major d 
-    WHERE 
-        a.User_ID = b.User_ID and a.User_ID = c.User_ID and c.Major_ID = d.Major_ID and 
-        YEAR(c.created_at) = :year and c.Major_ID = :majorID
-    ORDER BY 
-        d.Major_ID
+        SELECT 
+            b.name, 
+            b.lastname, 
+            b.id_card_number, 
+            c.created_at, 
+            c.status, 
+            c.Major_ID,
+            g.CourseType_Name,
+            l.Level_Name,
+            e.Type_Name,
+            d.Major_Name
+        FROM user a
+        JOIN applicant b ON a.User_ID = b.User_ID
+        JOIN form c ON a.User_ID = c.User_ID
+        JOIN major d ON c.Major_ID = d.Major_ID
+        JOIN subjecttype e ON d.Type_ID = e.Type_ID 
+        JOIN educationlevel l ON e.Level_ID = l.Level_ID 
+        JOIN coursetype g ON l.CourseType_ID = g.CourseType_ID 
+        WHERE 
+            c.created_at BETWEEN :startDate AND :endDate 
+            AND c.Major_ID = :majorID
+        ORDER BY 
+            d.Major_ID
     ");
-    $stmt_view->bindParam(':year', $selectYear, PDO::PARAM_INT);
+    
+    $stmt_view->bindParam(':startDate', $startDate);
+    $stmt_view->bindParam(':endDate', $endDate);
     $stmt_view->bindParam(':majorID', $applicant['Major_ID'], PDO::PARAM_INT);
 
     $stmt_view->execute();
 
     $user_views = $stmt_view->fetchAll(PDO::FETCH_ASSOC);
-
-        $currentMajor = $applicant['Major_Name'];
-
-        $html .= '
-        <div class="header-container">
-            <div>
-                <img src="../imagee/logo.jpg" class="logo">
-            </div>
-            <div class="header-text">
-                <h1>รายงานรายชื่อผู้สมัครเข้าศึกษา</h1>
-                <h2>วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา</h2>
-                <h3>ประจำปีการศึกษา ' . htmlspecialchars($selectYear) . ' สาขา ' . htmlspecialchars($currentMajor) . '</h3>
-            </div>
-        </div>
-        <h3>รายชื่อผู้สมัคร สาขา ' . htmlspecialchars($currentMajor) . '</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>ลำดับ</th>
-                    <th>ชื่อ-นามสกุล</th>
-                    <th>เลขบัตรประชาชน</th>
-                    <th>วันที่สมัคร</th>
-                    <th>สถานะ</th>
-                </tr>
-            </thead>
-            <tbody>';
-        $index = 1;
-
-    foreach ($user_views as $user_view) {
+    $currentMajor = $applicant['Major_Name'];
 
     $html .= '
-    <tr>
-        <td>' . $index++ . '</td> 
-        <td>' . htmlspecialchars($user_view['name'] . ' ' . $user_view['lastname']) . '</td> 
-        <td>' . htmlspecialchars($user_view['id_card_number']) . '</td> 
-        <td>' . htmlspecialchars($user_view['created_at']) . '</td> 
-        <td>' . htmlspecialchars($user_view['status']) . '</td> 
-    </tr>';
+    <div class="header-container">
+        <div>
+            <img src="../imagee/logo.jpg" class="logo">
+        </div>
+        <div class="header-text">
+            <h1>รายงานรายชื่อผู้สมัครเข้าศึกษา</h1>
+            <h2>วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา</h2>
+            <h3>ระหว่างวันที่ ' . htmlspecialchars($startDate) . ' ถึง ' . htmlspecialchars($endDate) . ' สาขา ' . htmlspecialchars($currentMajor) . '</h3>
+        </div>
+    </div>
+    <h3>รายชื่อผู้สมัคร สาขา ' . htmlspecialchars($currentMajor) . '</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ลำดับ</th>
+                <th>ชื่อ-นามสกุล</th>
+                <th>เลขบัตรประชาชน</th>
+                <th>สาขาวิชา</th>
+                <th>วันที่สมัคร</th>
+                <th>สถานะ</th>
+            </tr>
+        </thead>
+        <tbody>';
+    $index = 1;
+
+    foreach ($user_views as $user_view) {
+        $html .= '
+        <tr>
+            <td>' . $index++ . '</td> 
+            <td>' . htmlspecialchars($user_view['name'] . ' ' . $user_view['lastname']) . '</td> 
+            <td>' . htmlspecialchars($user_view['id_card_number']) . '</td> 
+            <td>' . htmlspecialchars($user_view['CourseType_Name'] .' '.$user_view['Level_Name'] .' '. $user_view['Type_Name'].' '. $user_view['Major_Name']) . '</td> 
+            
+            <td>' . htmlspecialchars($user_view['created_at']) . '</td> 
+            <td>' . htmlspecialchars($user_view['status']) . '</td> 
+        </tr>';
     }
     $html .= '</tbody></table>';
 
     $i++;
 
-    if($row == $i){}else{
+    if ($row == $i) {
+        // Last iteration, do nothing
+    } else {
         $html .= '<div style="page-break-after: always"></div>';
     }
-
 }
 
 $mpdf->WriteHTML($html);
