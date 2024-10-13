@@ -7,25 +7,6 @@ if (!isset($_SESSION['admin_login'])) {
     exit();
 }
 
-$stmt = $conn->prepare("
-    SELECT major.Major_Name, 
-           COALESCE(COUNT(form.Major_ID), 0) AS applicant_count,
-           COALESCE(SUM(CASE WHEN form.status = 'approve' THEN 1 ELSE 0 END), 0) AS approve_count
-    FROM major
-    LEFT JOIN form ON form.Major_ID = major.Major_ID
-    GROUP BY major.Major_Name;
-");
-$stmt->execute();
-
-$yearStmt = $conn->prepare("
-    SELECT DISTINCT YEAR(created_at) AS year
-    FROM form
-    ORDER BY year DESC;
-");
-$yearStmt->execute();
-$years = $yearStmt->fetchAll(PDO::FETCH_ASSOC);
-
-$selectedYear = isset($_GET['selectYear']) ? $_GET['selectYear'] : null;
 
 $query = "
     SELECT major.Major_Name, 
@@ -34,28 +15,45 @@ $query = "
     FROM major
     LEFT JOIN form ON form.Major_ID = major.Major_ID";
 
-if ($selectedYear) {
-    $query .= " WHERE YEAR(form.created_at) = :selectedYear";
+// ตรวจสอบว่าผู้ใช้เลือกช่วงวันที่หรือไม่
+$conditions = [];
+$params = [];
+
+if (isset($_GET['startDate']) && !empty($_GET['startDate'])) {
+    $conditions[] = "form.created_at >= :startDate";
+    $params[':startDate'] = $_GET['startDate'];
+}
+
+if (isset($_GET['endDate']) && !empty($_GET['endDate'])) {
+    $conditions[] = "form.created_at <= :endDate";
+    $params[':endDate'] = $_GET['endDate'];
+}
+
+// ถ้ามีเงื่อนไขเพิ่ม ให้รวมเข้าไปใน query
+if (!empty($conditions)) {
+    $query .= " WHERE " . implode(" AND ", $conditions);
 }
 
 $query .= " GROUP BY major.Major_Name";
 
+// Prepare และ Execute Query
 $stmt = $conn->prepare($query);
-
-if ($selectedYear) {
-    $stmt->bindParam(':selectedYear', $selectedYear, PDO::PARAM_INT);
+foreach ($params as $key => $value) {
+    $stmt->bindValue($key, $value);
 }
 
 $stmt->execute();
 
-
-
+// ดึงข้อมูลทั้งหมดมาเก็บไว้ใน $results
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -65,10 +63,10 @@ $stmt->execute();
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-
-
 </head>
+
 <style>
+
     .order-card {
         color: #fff;
     }
@@ -117,6 +115,7 @@ $stmt->execute();
 </style>
 
 <body class="sb-nav-fixed">
+
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark navbar-custom">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="indexadmin.php">Admin C-TECH</a>
@@ -124,14 +123,12 @@ $stmt->execute();
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
@@ -183,39 +180,42 @@ $stmt->execute();
         </div>
         <div id="layoutSidenav_content">
             <main>
-
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Dashboard</h1>
                     <div class="row">
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ol>
-                </div>
-                <div class="row d-flex align-items-center">
-                    <form action="./reportAd.php" method="post" class="d-flex">
-                        <div class="col-md-1 mb-4 ms-auto">
-                            <button target="_blank" class="btn btn-outline-danger" name="pdf">รายงาน PDF</button>
-                        </div>
-                    
-                        <div class="col-md-2 mb-4">
-                            <select class="form-select" name="selectYear" id="selectYear" onchange="filterByYear()">
-                                <option value="">==เลือกปีที่แสดง==</option>
-                                <?php foreach ($years as $year) { ?>
-                                    <option value="<?php echo htmlspecialchars($year['year']); ?>"
-                                        <?php echo isset($_GET['selectYear']) && $_GET['selectYear'] == $year['year'] ? 'selected' : ''; ?>>
-                                        <?php echo htmlspecialchars($year['year']); ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </form>
-                </div>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div>
+                    <div class="row d-flex align-items-center">
+                        <form action="" method="get" class="d-flex">
 
+                            <div class="col-md-1 mb-4 m-2 ms-auto">
+                                <label for="startDate" class="form-label">ตั้งแต่วันที่:</label>
+                                <input type="date" class="form-control" name="startDate" id="startDate" value="<?php echo isset($_GET['startDate']) ? htmlspecialchars($_GET['startDate']) : ''; ?>">
+                            </div>
+
+                            <div class="col-md-1 mb-4 m-2">
+                                <label for="endDate" class="form-label">ถึงวันที่:</label>
+                                <input type="date" class="form-control" name="endDate" id="endDate" value="<?php echo isset($_GET['endDate']) ? htmlspecialchars($_GET['endDate']) : ''; ?>">
+
+                            </div>
+
+
+                            <div class="col-md-1 mb-4 m-2 mt-3">
+                                <label for="" class="form-label"></label>
+                                <button type="submit" class="btn btn-outline-primary w-100">ดูรายงาน</button>
+
+                            </div>
+                            <div class="col-md-1 mb-4 m-2 mt-3">
+                            <label for="" class="form-label"></label>
+                                <button type="submit" class="btn btn-outline-danger w-100" name="pdf" value="1" target="_blank">รายงาน PDF</button>
+                            </div>
+                        </form>
+                    </div>
 
                     <div class="row">
-                        <?php
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            // Set icon and card color based on Major_Name
+                        <?php foreach ($results as $row) { 
                             $icon = '';
                             $cardColor = '';
 
@@ -229,9 +229,6 @@ $stmt->execute();
                                     $cardColor = 'bg-c-green';
                                     break;
                                 case 'เทคโนโลยีธุรกิจดิจิทัล':
-                                    $icon = 'fa-microchip';
-                                    $cardColor = 'bg-c-pink';
-                                    break;
                                 case 'เทคโนโลยีสารสนเทศ':
                                     $icon = 'fa-microchip';
                                     $cardColor = 'bg-c-pink';
@@ -253,9 +250,6 @@ $stmt->execute();
                                     $cardColor = 'bg-c-pink';
                                     break;
                                 case 'ช่างไฟฟ้า':
-                                    $icon = 'fa-plug';
-                                    $cardColor = 'bg-c-blue';
-                                    break;
                                 case 'ช่างไฟฟ้ากำลัง':
                                     $icon = 'fa-plug';
                                     $cardColor = 'bg-c-blue';
@@ -269,8 +263,8 @@ $stmt->execute();
                                     $cardColor = 'bg-c-yellow';
                                     break;
                                 default:
-                                    $icon = 'fa-question'; // Default case
-                                    $cardColor = 'bg-c-gray'; // Default color
+                                    $icon = 'fa-question'; 
+                                    $cardColor = 'bg-c-gray'; 
                                     break;
                             }
                         ?>
@@ -278,23 +272,20 @@ $stmt->execute();
                                 <div class="card <?php echo $cardColor; ?> order-card">
                                     <div class="card-block">
                                         <h5 class="m-b-20">จำนวนผู้สมัคร <?php echo htmlspecialchars($row['Major_Name']); ?></h5>
-                                        <h2 class="text-right"><i class="fa-solid <?php echo $icon; ?>"></i><span> <?php echo htmlspecialchars($row['applicant_count']); ?></span></h2>
+                                        <h2 class="text-right">
+                                            <i class="fa-solid <?php echo $icon; ?>"></i>
+                                            <span> <?php echo htmlspecialchars($row['applicant_count']); ?></span>
+                                        </h2>
                                         <p class="m-b-0">Completed Approve<span class="f-right"><?php echo htmlspecialchars($row['approve_count']); ?></span></p>
                                     </div>
                                 </div>
                             </div>
-                        <?php
-                        }
-                        ?>
+                        <?php } ?>
                     </div>
 
                 </div>
-
-
+            </main>
         </div>
-        </main>
-
-    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
@@ -304,17 +295,8 @@ $stmt->execute();
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
     <script>
-    function filterByYear() {
-        const year = document.getElementById('selectYear').value;
-        const urlParams = new URLSearchParams(window.location.search);
-        if (year) {
-            urlParams.set('selectYear', year);
-        } else {
-            urlParams.delete('selectYear');
-        }
-        window.location.search = urlParams.toString();
-    }
-</script>
+
+    </script>
 
 </body>
 

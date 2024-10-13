@@ -679,7 +679,7 @@ if (!isset($_SESSION['admin_login'])) {
 
                                 <div class="panel-heading mt-5">หลักฐานที่ใช้ในการสมัคร</div>
 
-                                <div class="col-md-3 mt-5">
+                                <div class="col-md-4 mt-5">
                                     <label class="form-label">สำเนาใบรบ. </label>
                                     <input type="file" id="imgInput1" class="form-control" name="transcript" accept=".jpg,.jpeg,.png">
                                     <a href="../config/uploads/<?php echo $Data_view["transcript"]; ?>" data-lightbox="documents" data-title="สำเนาใบรบ.">
@@ -688,7 +688,7 @@ if (!isset($_SESSION['admin_login'])) {
                                     <input type="hidden" class="form-control" name="transcript2" value="<?php echo $Data_view["transcript"]; ?>">
                                 </div>
 
-                                <div class="col-md-3 mt-5">
+                                <div class="col-md-4 mt-5">
                                     <label class="form-label">สำเนาทะเบียนบ้าน </label>
                                     <input type="file" id="imgInput2" class="form-control" name="house_registration" accept=".jpg,.jpeg,.png">
                                     <a href="../config/uploads/<?php echo $Data_view["house_registration"]; ?>" data-lightbox="documents" data-title="สำเนาทะเบียนบ้าน">
@@ -697,7 +697,7 @@ if (!isset($_SESSION['admin_login'])) {
                                     <input type="hidden" class="form-control" name="house_registration2" value="<?php echo $Data_view["house_registration"]; ?>">
                                 </div>
 
-                                <div class="col-md-3 mt-5">
+                                <div class="col-md-4 mt-5">
                                     <label class="form-label">สำเนาบัตรประชาชน </label>
                                     <input type="file" id="imgInput3" class="form-control" name="id_card" accept=".jpg,.jpeg,.png">
                                     <a href="../config/uploads/<?php echo $Data_view["id_card"]; ?>" data-lightbox="documents" data-title="สำเนาบัตรประชาชน">
@@ -706,14 +706,7 @@ if (!isset($_SESSION['admin_login'])) {
                                     <input type="hidden" class="form-control" name="id_card2" value="<?php echo $Data_view["id_card"]; ?>">
                                 </div>
 
-                                <div class="col-md-3 mt-5">
-                                    <label class="form-label">หลักฐานการชำระ </label>
-                                    <input type="file" id="imgInput4" class="form-control" name="slip2000" accept=".jpg,.jpeg,.png">
-                                    <a href="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" data-lightbox="documents" data-title="หลักฐานการชำระ">
-                                        <img class="img-thumbnail" id="previewImg4" src="../config/uploads/<?php echo $Data_view["slip2000"]; ?>" width="100%" alt="">
-                                    </a>
-                                    <input type="hidden" class="form-control" name="slip20002" value="<?php echo $Data_view["slip2000"]; ?>">
-                                </div>
+
                                 <div class="col-md-2 mt-5">
                                     <a href="./tables.php" type="button" class="btn  w-100 py-2 btn-1">
                                     <i class="fa-solid fa-angles-left"></i> ย้อนกลับ
