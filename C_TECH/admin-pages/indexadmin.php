@@ -71,21 +71,73 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         color: #fff;
     }
 
-    .bg-c-blue {
-        background: linear-gradient(45deg, #4099ff, #73b4ff);
-    }
 
-    .bg-c-green {
-        background: linear-gradient(45deg, #2ed8b6, #59e0c5);
-    }
+.bg-c-accounting {
+    background: linear-gradient(45deg, #FF5733, #FF9F43); 
+}
 
-    .bg-c-yellow {
-        background: linear-gradient(45deg, #FFB64D, #ffcb80);
-    }
+.bg-c-business-computer {
+    background: linear-gradient(45deg, #FF9F43, #FFEA00); 
+}
 
-    .bg-c-pink {
-        background: linear-gradient(45deg, #FF5370, #ff869a);
-    }
+.bg-c-digital-tech {
+    background: linear-gradient(45deg, #FFEA00, #8BC34A); 
+}
+
+.bg-c-digital-techs {
+    background: linear-gradient(45deg, #8BC34A, #00B0FF); 
+}
+
+.bg-c-retail-management {
+    background: linear-gradient(45deg, #00B0FF, #00E5FF); 
+}
+
+.bg-c-logistics {
+    background: linear-gradient(45deg, #00E5FF, #3F51B5); 
+}
+
+.bg-c-marketing {
+    background: linear-gradient(45deg, #3F51B5, #673AB7); 
+}
+
+.bg-c-auto-mechanics {
+    background: linear-gradient(45deg, #673AB7, #FF4081); 
+}
+
+.bg-c-electrical {
+    background: linear-gradient(45deg, #FF4081, #FF80AB); 
+}
+
+.bg-c-electricals {
+    background: linear-gradient(45deg, #FF80AB, #FF1493); 
+}
+
+.bg-c-electronics {
+    background: linear-gradient(45deg, #FF1493, #FF6F61); 
+}
+
+.bg-c-construction {
+    background: linear-gradient(45deg, #FFD740, #FFC107); 
+}
+
+.bg-c-gray {
+    background: linear-gradient(45deg, #D3D3D3, #A9A9A9); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     .card {
         border-radius: 5px;
@@ -222,51 +274,58 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             switch ($row['Major_Name']) {
                                 case 'การบัญชี':
                                     $icon = 'fa-calculator';
-                                    $cardColor = 'bg-c-blue';
+                                    $cardColor = 'bg-c-accounting';
                                     break;
                                 case 'คอมพิวเตอร์ธุรกิจ':
                                     $icon = 'fa-computer';
-                                    $cardColor = 'bg-c-green';
+                                    $cardColor = 'bg-c-business-computer';
                                     break;
-                                case 'เทคโนโลยีธุรกิจดิจิทัล':
                                 case 'เทคโนโลยีสารสนเทศ':
                                     $icon = 'fa-microchip';
-                                    $cardColor = 'bg-c-pink';
+                                    $cardColor = 'bg-c-digital-techs';
+                                    break;
+                                case 'เทคโนโลยีธุรกิจดิจิทัล':
+                                    $icon = 'fa-microchip';
+                                    $cardColor = 'bg-c-digital-tech';
                                     break;
                                 case 'การจัดการธุรกิจค้าปลีก':
                                     $icon = 'fa-truck';
-                                    $cardColor = 'bg-c-blue';
+                                    $cardColor = 'bg-c-retail-management';
                                     break;
                                 case 'การจัดการโลจิสติกส์':
                                     $icon = 'fa-plane';
-                                    $cardColor = 'bg-c-green';
+                                    $cardColor = 'bg-c-logistics';
                                     break;
                                 case 'การตลาด':
                                     $icon = 'fa-store';
-                                    $cardColor = 'bg-c-yellow';
+                                    $cardColor = 'bg-c-marketing';
                                     break;
                                 case 'ช่างเทคนิคยานยนต์':
                                     $icon = 'fa-wrench';
-                                    $cardColor = 'bg-c-pink';
+                                    $cardColor = 'bg-c-auto-mechanics';
                                     break;
                                 case 'ช่างไฟฟ้า':
+                                    $icon = 'fa-plug';
+                                    $cardColor = 'bg-c-electricals';
+                                    break;
                                 case 'ช่างไฟฟ้ากำลัง':
                                     $icon = 'fa-plug';
-                                    $cardColor = 'bg-c-blue';
+                                    $cardColor = 'bg-c-electrical';
                                     break;
                                 case 'ช่างอิเล็กทรอนิกส์':
                                     $icon = 'fa-code-fork';
-                                    $cardColor = 'bg-c-green';
+                                    $cardColor = 'bg-c-electronics';
                                     break;
                                 case 'ช่างก่อสร้าง':
                                     $icon = 'fa-road';
-                                    $cardColor = 'bg-c-yellow';
+                                    $cardColor = 'bg-c-construction';
                                     break;
                                 default:
                                     $icon = 'fa-question'; 
                                     $cardColor = 'bg-c-gray'; 
                                     break;
                             }
+                            
                         ?>
                             <div class="col-md-4 col-xl-3">
                                 <div class="card <?php echo $cardColor; ?> order-card">
