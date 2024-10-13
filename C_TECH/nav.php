@@ -86,8 +86,9 @@ if ($isLoggedIn) {
                             <i class="fas fa-user fa-fw"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMobile">
-                            <li><hr class="dropdown-divider" /></li>
+                            <!-- <li><hr class="dropdown-divider" /></li>                           -->
                             <li><a class="dropdown-item" href="config/logout.php">Logout</a></li>
+                            
                         </ul>
                     </li>
                 <?php else : ?>
@@ -98,7 +99,6 @@ if ($isLoggedIn) {
             </ul>
         </div>
 
-        <!-- ปุ่ม Login/Logout อยู่ด้านขวาของ navbar ในหน้าจอขนาดใหญ่ -->
         <div class="d-none d-lg-flex">
             <ul class="navbar-nav">
                 <?php if ($isLoggedIn) : ?>
@@ -108,6 +108,11 @@ if ($isLoggedIn) {
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><hr class="dropdown-divider" /></li>
+                            <p class="dropdown-item"><?php echo $row["id_card_number"]; ?> </p>
+
+                            <li><a class="dropdown-item" href="personal_info.php">กรอกข้อมูลส่วนตัว</a></li>
+                            <li><a class="dropdown-item" href="checkstatus.php">ตรวจสอบสถานะ</a></li>
+
                             <li><a class="dropdown-item" href="config/logout.php">Logout</a></li>
                         </ul>
                     </li>
