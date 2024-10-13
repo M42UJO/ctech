@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once("../config/db.php");
 
@@ -7,14 +7,29 @@ if (!isset($_SESSION['admin_login'])) {
     exit();
 }
 
-// ดึงข้อมูลจำนวนผู้สมัครต่อสาขา
-$stmt = $conn->prepare("
+// Check for date range filter input
+$startDate = $_GET['startDate'] ?? '';
+$endDate = $_GET['endDate'] ?? '';
+
+// Query based on date filters
+$query = "
     SELECT major.Major_Name, 
            COUNT(form.Major_ID) AS applicant_count
     FROM major
-    LEFT JOIN form ON form.Major_ID = major.Major_ID
-    GROUP BY major.Major_Name
-");
+    LEFT JOIN form ON form.Major_ID = major.Major_ID";
+
+if (!empty($startDate) && !empty($endDate)) {
+    $query .= " WHERE form.created_at BETWEEN :startDate AND :endDate";
+}
+
+$query .= " GROUP BY major.Major_Name";
+$stmt = $conn->prepare($query);
+
+if (!empty($startDate) && !empty($endDate)) {
+    $stmt->bindParam(':startDate', $startDate);
+    $stmt->bindParam(':endDate', $endDate);
+}
+
 $stmt->execute();
 
 $chartData = [];
@@ -22,12 +37,11 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $chartData[] = [$row['Major_Name'], (int)$row['applicant_count']];
 }
 
-// ดึงข้อมูลจำนวนผู้สมัครต่อปี
+// Fetch yearly applicant count
 $yearStmt = $conn->prepare("
     SELECT YEAR(created_at) AS year, COUNT(*) AS applicant_count
     FROM form
-    GROUP BY YEAR(created_at)
-    ORDER BY year ASC
+    GROUP BY YEAR(created_at) ORDER BY year ASC
 ");
 $yearStmt->execute();
 
@@ -36,6 +50,7 @@ while ($row = $yearStmt->fetch(PDO::FETCH_ASSOC)) {
     $yearData[] = [(int)$row['year'], (int)$row['applicant_count']];
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -180,6 +195,28 @@ while ($row = $yearStmt->fetch(PDO::FETCH_ASSOC)) {
                         <li class="breadcrumb-item"><a href="indexadmin.php">Dashboard</a></li>
                         <li class="breadcrumb-item active">Charts</li>
                     </ol>
+                    <div class="row d-flex align-items-center">
+                        <form action="" method="get" class="d-flex">
+
+                            <div class="col-md-1 mb-4 m-2 ms-auto">
+                                <label for="startDate" class="form-label">ตั้งแต่วันที่:</label>
+                                <input type="date" class="form-control" name="startDate" id="startDate" value="<?php echo isset($_GET['startDate']) ? htmlspecialchars($_GET['startDate']) : ''; ?>">
+                            </div>
+
+                            <div class="col-md-1 mb-4 m-2">
+                                <label for="endDate" class="form-label">ถึงวันที่:</label>
+                                <input type="date" class="form-control" name="endDate" id="endDate" value="<?php echo isset($_GET['endDate']) ? htmlspecialchars($_GET['endDate']) : ''; ?>">
+
+                            </div>
+
+
+                            <div class="col-md-1 mb-4 m-2 mt-3">
+                                <label for="" class="form-label"></label>
+                                <button type="submit" class="btn btn-outline-primary w-100">ดูรายงาน</button>
+
+                            </div>
+                        </form>
+                    </div>
                     <div class="col-md-12 mx-auto text-center">
                         <div id="piechart" style="width: 1100px; height: 700px; margin: 0 auto;"></div>
                         <div id="BarChart" style="width: 1100px; height: 700px; margin: 0 auto;"></div>
