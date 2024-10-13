@@ -36,7 +36,7 @@ if (!isset($_SESSION['admin_login'])) {
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            
+
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -62,14 +62,17 @@ if (!isset($_SESSION['admin_login'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="edituser.php">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
-                            แก้ไขผู้ใช้
-                        </a>
-                        
                         <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
+                        </a>
+                        <a class="nav-link" href="edituser.php">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
+                            แก้ไขข้อมูลผู้สมัคร
+                        </a>
+                        <a class="nav-link" href="staff.php">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
+                            แก้ไขผู้ใช้
                         </a>
                         <a class="nav-link" href="tables.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -77,7 +80,7 @@ if (!isset($_SESSION['admin_login'])) {
                         </a>
                         <a class="nav-link" href="approve.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
-                            อนุมัติ
+                            อนุมัติ การสมัคร
                         </a>
                         <a class="nav-link" href="slip.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
@@ -88,7 +91,7 @@ if (!isset($_SESSION['admin_login'])) {
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
                     <!-- Display logged in user's name -->
-                    
+
                 </div>
             </nav>
         </div>
@@ -96,12 +99,14 @@ if (!isset($_SESSION['admin_login'])) {
             <main>
                 <div class="container-fluid px-4">
                     <ol class="breadcrumb mb-4 mt-4">
-                       <h3> <li class="breadcrumb-item active">แก้ไขเจ้าหน้าที่ </li></h3><a href="./addStaff.php" class="btn btn-info ms-auto">เพิ่มเจ้าหน้าที่ <i class="fa-solid fa-plus"></i></a>
+                        <h3>
+                            <li class="breadcrumb-item active">แก้ไขเจ้าหน้าที่ </li>
+                        </h3><a href="./addStaff.php" class="btn btn-info ms-auto">เพิ่มเจ้าหน้าที่ <i class="fa-solid fa-plus"></i></a>
                     </ol>
                     <div class="card mb-4 mt-3">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Staff 
+                            Staff
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
@@ -118,7 +123,7 @@ if (!isset($_SESSION['admin_login'])) {
                                 <tbody>
                                     <?php
                                     $stmt = $conn->query("SELECT *  FROM user WHERE urole='staff' or urole='admin'");
-             
+
                                     $stmt->execute();
                                     $applicants = $stmt->fetchAll();
 
@@ -134,7 +139,7 @@ if (!isset($_SESSION['admin_login'])) {
                                                 <td><?php echo htmlspecialchars($applicant['username']); ?></td>
                                                 <td><?php echo htmlspecialchars($applicant['urole']); ?></td>
                                                 <td>
-                                                    <a  href="editStaff.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-warning">แก้ไข <i class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a href="editStaff.php?user_id=<?php echo $applicant['User_ID']; ?>" class="btn btn-warning">แก้ไข <i class="fa-solid fa-pen-to-square"></i></a>
                                                     <a onclick="return confirm('Are you sure you want to delete?');" href="delete.php?user_id=<?php echo htmlspecialchars($applicant['User_ID']); ?>" class="btn btn-danger">ลบ <i class="fa-solid fa-trash-can"></i></a>
 
                                                 </td>

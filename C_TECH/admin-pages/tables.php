@@ -124,16 +124,17 @@ if (isset($_GET['not_approve'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="edituser.php">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
-                            แก้ไขผู้ใช้
-                        </a>
-
-
-
                         <a class="nav-link" href="charts.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
+                        </a>
+                        <a class="nav-link" href="edituser.php">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
+                            แก้ไขข้อมูลผู้สมัคร
+                        </a>
+                        <a class="nav-link" href="staff.php">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
+                            แก้ไขผู้ใช้
                         </a>
                         <a class="nav-link" href="tables.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -141,7 +142,7 @@ if (isset($_GET['not_approve'])) {
                         </a>
                         <a class="nav-link" href="approve.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
-                            อนุมัติ
+                            อนุมัติ การสมัคร
                         </a>
                         <a class="nav-link" href="slip.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-check"></i></div>
