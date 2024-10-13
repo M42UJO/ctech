@@ -117,7 +117,7 @@ if (!isset($_SESSION['admin_login'])) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $stmt = $conn->query("SELECT a.User_ID, u.name, u.lastname, a.email, u.id_card_number 
+                                    $stmt = $conn->query("SELECT a.User_ID, u.name, u.lastname, u.id_card_number 
                                     FROM user a
                                     JOIN applicant u ON u.User_ID = a.User_ID");
              

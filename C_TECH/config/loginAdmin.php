@@ -3,15 +3,11 @@ session_start();
 require_once("db.php");
 
 if (isset($_POST['login'])) {
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if (empty($email)) {
-        $_SESSION['error'] = 'กรุณากรอกอีเมล';
-        header("location: ../admin.php");
-        exit();
-    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['error'] = 'รูปแบบอีเมลไม่ถูกต้อง';
+    if (empty($username)) {
+        $_SESSION['error'] = 'กรุณากรอก username';
         header("location: ../admin.php");
         exit();
     } else if (empty($password)) {
@@ -24,8 +20,8 @@ if (isset($_POST['login'])) {
         exit();
     } else {
         try {
-            $check_data = $conn->prepare("SELECT * FROM user WHERE email = :email");
-            $check_data->bindParam(":email", $email);
+            $check_data = $conn->prepare("SELECT * FROM user WHERE username = :username");
+            $check_data->bindParam(":username", $username);
             $check_data->execute();
             $row = $check_data->fetch(PDO::FETCH_ASSOC);
 

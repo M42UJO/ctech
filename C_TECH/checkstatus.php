@@ -64,7 +64,7 @@ try {
         $statusClass_slip = 'status-approve';
         $panelheading_slip = 'panel-headingS';
     } else {
-        $message_slip = "กรุณาเพิ่มหลักฐานการชำระค่าแรกเข้า (Slip) เพื่อดำเนินการตรวจสอบและอนุมัติการชำระค่าแรกเข้าของคุณ  กรุณาอัปโหลดหลักฐานการชำระค่าแรกเข้าผ่านทางระบบ และตรวจสอบข้อมูลให้ถูกต้อง";
+        $message_slip = "เมื่อการสมัครของคุณได้รับการอนุมัติเรียบร้อยแล้ว กรุณาเพิ่มหลักฐานการชำระค่าแรกเข้า (Slip) เพื่อดำเนินการตรวจสอบและอนุมัติการชำระค่าแรกเข้าของคุณ  กรุณาอัปโหลดหลักฐานการชำระค่าแรกเข้าผ่านทางระบบ";
         $statusClass_slip = 'status-incomplete';
         $panelheading_slip = 'panel-headingD';
     }
@@ -289,7 +289,7 @@ try {
                             <div class="<?php echo $panelheading_slip; ?>">สถานะการชำระเงิน</div>
                             <label id="" class="announce mt-3 mb-3   ">วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา <br> Chanapolkhan Technological College, Nakhon Ratchasima <br> กรุณาชำระค่าแรกเข้า จำนวน <span class="highlight">2,000</span> บาท หลังจากกรอกข้อมูลครบถ้วน
                               <br>  ยอดเงินนี้จะถูกนำไปเป็นส่วนลดค่าเทอมของนักศึกษา
-                              <br>  โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์ เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span> </label>
+                              <br>  โอนเงินผ่านบัญชีธนาคาร ชื่อบัญชี: วิทยาลัยเทคโนโลยีชนะพลขันธ์   เลขที่บัญชี: <span class="highlight">374-105-5883 ธนาคารกรุงไทย</span><br> <span class="required">**หมายเหตุ เมื่อชำระค่าแรกเข้าแล้วทางวิทยาลัยจะไม่คืนเงินทุกกรณี**</span></label>
 
                             <h4 class="alert-heading mt-3">สถานะการชำระเงิน</h4>
                             <p><?php echo $message_slip; ?></p>
