@@ -33,8 +33,6 @@ try {
             "major_other" => "",
         ];
     }
-
-
 } catch (PDOException $e) {
     echo "Error: " . htmlspecialchars($e->getMessage());
     exit();
@@ -71,32 +69,31 @@ try {
 </head>
 <style>
     .btn {
-    flex: 1 1 auto;
-    margin: 10px;
-    padding: 30px;
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
-    text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-    box-shadow: 0 0 20px #eee;
-    border-radius: 10px;
-}
+        flex: 1 1 auto;
+        margin: 10px;
+        padding: 30px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+    }
 
-.btn:hover {
-    background-position: right center;
-    
-}
+    .btn:hover {
+        background-position: right center;
 
-.btn-1 {
-    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
-}
+    }
 
+    .btn-1 {
+        background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+    }
 </style>
 
 <body>
-<?php
+    <?php
     require_once("nav.php");
     ?>
 
@@ -128,7 +125,7 @@ try {
                     <span class="progress-count">6</span>
                     <span class="progress-label">ข้อมูลผู้ปกครอง</span>
                 </li>
-              
+
             </ul>
         </section>
 
@@ -147,31 +144,31 @@ try {
                     <div class="panel-heading">ข้อมูลการศึกษา</div>
                     <div class="col-md-8">
                         <label class="form-label">จบจากโรงเรียน <span class="required">**</span></label>
-                        <input class="form-control " type="text " placeholder="จบจากโรงเรียน " name="school_name" value="<?php echo $Data_view["school_name"];?>" required>
+                        <input class="form-control " type="text " placeholder="จบจากโรงเรียน " name="school_name" value="<?php echo $Data_view["school_name"]; ?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">ตำบล <span class="required">**</span></label>
-                        <input type="text " class="form-control " id="district" placeholder="ตำบล " name="school_sub_district" value="<?php echo $Data_view["school_sub_district"];?>" required>
+                        <input type="text " class="form-control " id="district" placeholder="ตำบล " name="school_sub_district" value="<?php echo $Data_view["school_sub_district"]; ?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">อำเภอ <span class="required">**</span></label>
-                        <input type="text " class="form-control " id="amphoe" placeholder="อำเภอ " name="school_district" value="<?php echo $Data_view["school_district"];?>" required>
+                        <input type="text " class="form-control " id="amphoe" placeholder="อำเภอ " name="school_district" value="<?php echo $Data_view["school_district"]; ?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">จังหวัด <span class="required">**</span></label>
-                        <input type="text " class="form-control " id="province" placeholder="จังหวัด " name="school_province" value="<?php echo $Data_view["school_province"];?>" required>
+                        <input type="text " class="form-control " id="province" placeholder="จังหวัด " name="school_province" value="<?php echo $Data_view["school_province"]; ?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">รหัสไปรษณีย์ <span class="required">** ตัวเลขเท่านั้น</span></label>
-                        <input type="text " class="form-control " id="zipcode" placeholder="รหัสไปรษณีย์ " name="school_postal_code" value="<?php echo $Data_view["school_postal_code"];?>" maxlength="5 " required>
+                        <input type="text " class="form-control " id="zipcode" placeholder="รหัสไปรษณีย์ " name="school_postal_code" value="<?php echo $Data_view["school_postal_code"]; ?>" maxlength="5 " required>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">จบเมื่อ พ.ศ. <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="graduation_year" value="<?php echo $Data_view["graduation_year"];?>" required>
+                        <input type="text " class="form-control " placeholder="จบเมื่อ พ.ศ. " name="graduation_year" value="<?php echo $Data_view["graduation_year"]; ?>" required>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">เกรดเฉลี่ยสะสม <span class="required">**</span></label>
-                        <input type="text " class="form-control " placeholder="เกรดเฉลี่ยสะสม " name="grade_result" value="<?php echo $Data_view["grade_result"];?>" required>
+                        <input type="number " class="form-control " placeholder="เกรดเฉลี่ยสะสม " name="grade_result" value="<?php echo $Data_view["grade_result"]; ?>" step="0.01" min="0" max="4" required  oninput="checkGrade(this)">
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">ระดับชั้น <span class="required">**</span></label>
@@ -185,26 +182,26 @@ try {
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">สาขาวิชา </label>
-                        <input type="text " class="form-control " placeholder="สาขาวิชา" name="major" value="<?php echo $Data_view["major"];?>">
+                        <input type="text " class="form-control " placeholder="สาขาวิชา" name="major" value="<?php echo $Data_view["major"]; ?>">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">วุฒิการศึกษาอื่นๆ </label>
-                        <input type="text " class="form-control " placeholder="วุฒิการศึกษาอื่นๆ" name="degree_other" value="<?php echo $Data_view["degree_other"];?>">
+                        <input type="text " class="form-control " placeholder="วุฒิการศึกษาอื่นๆ" name="degree_other" value="<?php echo $Data_view["degree_other"]; ?>">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">สาขาวิชา </label>
-                        <input type="text " class="form-control " placeholder="สาขาวิชา " name="major_other" value="<?php echo $Data_view["major_other"];?>">
+                        <input type="text " class="form-control " placeholder="สาขาวิชา " name="major_other" value="<?php echo $Data_view["major_other"]; ?>">
                     </div>
                     <div class="col-md-2">
                         <a href="./Current_address.php" type="button" class="btn  w-100 py-2 btn-1">
-                        <i class="fa-solid fa-angles-left"></i> ย้อนกลับ
+                            <i class="fa-solid fa-angles-left"></i> ย้อนกลับ
                         </a>
                     </div>
                     <div class="col-md-8">
                     </div>
                     <div class="col-md-2">
                         <button type="submit" name="submit" class="btn  w-100 py-2 btn-1">ถัดไป
-                        <i class="fa-solid fa-angles-right"></i>
+                            <i class="fa-solid fa-angles-right"></i>
                         </button>
 
                     </div>
@@ -232,7 +229,14 @@ try {
             });
         });
     </script>
-    
+    <script>
+        function checkGrade(input) {
+            if (parseFloat(input.value) > 4) {
+                input.value = 4;
+            }
+        }
+    </script>
+
 </body>
 
 </html>
