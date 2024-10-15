@@ -7,6 +7,13 @@ if (!isset($_SESSION['admin_login'])) {
     exit();
 }
 
+$user_id = $_SESSION['admin_login'];
+
+
+    $stmt_login = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
+    $stmt_login->execute([$user_id]);
+    $login = $stmt_login->fetch();
+
 if (isset($_POST['update'])) {
     $prefix = htmlspecialchars($_POST['prefix']);
     $name = htmlspecialchars($_POST['name']);
@@ -487,14 +494,17 @@ if (isset($_POST['update'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
                         </a>
+                        <?php if ($login['urole'] == 'admin'){ ?>
                         <a class="nav-link" href="edituser.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
                             แก้ไขข้อมูลผู้สมัคร
-                        </a>
+                        </a> 
+                        
                         <a class="nav-link" href="staff.php">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
                             แก้ไขผู้ใช้
                         </a>
+                        <?php } ?>
                         <a class="nav-link" href="tables.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             ผู้สมัคร
