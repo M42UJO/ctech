@@ -595,7 +595,7 @@ $t3 = '
 						<td valign="bottom" align="right" style="width:90px;padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">FACEBOOK : </font></td>
 						<td style="border-bottom: 1px dotted #000;width:190px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["facebook"].'</b></font></td>
 						<td valign="bottom" align="right" style="width:70px;padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">E-Mail : </font></td>
-						<td style="border-bottom: 1px dotted #000;width:200px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["email"].'</b></font></td>
+						<td style="border-bottom: 1px dotted #000;width:200px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.''.'</b></font></td>
 					</tr>
 				</table>
 			</td>
@@ -687,7 +687,7 @@ $t3 = '
 						<td valign="bottom" style="padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">บิดาชื่อ : </font></td>
 						<td style="border-bottom: 1px dotted #000;width:200px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["father_name"].'</b></font></td>
 						<td valign="bottom" style="padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">ชื่ออังกฤษ : </font></td>
-						<td style="border-bottom: 1px dotted #000;width:220px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["name_f_en"].'</b></font></td>
+						<td style="border-bottom: 1px dotted #000;width:220px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.''.'</b></font></td>
 					</tr>
 				</table>
 			</td>
@@ -715,7 +715,7 @@ $t3 = '
 						<td valign="bottom" align="right" style="width:50px;padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">อาชีพ : </font></td>
 						<td style="border-bottom: 1px dotted #000;width:150px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["father_occupation"].'</b></font></td>
 						<td valign="bottom" align="right" style="width:50px;padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">รายได้ : </font></td>
-						<td style="border-bottom: 1px dotted #000;width:90px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.number_format($applicant["father_income"]).'</b></font></td>
+						<td style="border-bottom: 1px dotted #000;width:90px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.($applicant["father_income"]).'</b></font></td>
 						<td valign="bottom" align="right" style="padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">บาท/เดือน</font></td>
 						<td valign="bottom" align="right" style="padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">ที่อยู่บิดา เลขที่ : </font></td>
 						<td style="border-bottom: 1px dotted #000;width:80px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["father_house_number"].'</b></font></td>
@@ -787,7 +787,7 @@ $t3 = '
 						<td valign="bottom" style="padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">มารดาชื่อ : </font></td>
 						<td style="border-bottom: 1px dotted #000;width:220px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["mother_name"].'</b></font></td>
 						<td valign="bottom" style="padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">ชื่ออังกฤษ : </font></td>
-						<td style="border-bottom: 1px dotted #000;width:220px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["name_m_en"].'</b></font></td>
+						<td style="border-bottom: 1px dotted #000;width:220px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.''.'</b></font></td>
 						<td style="padding-bottom:-3px;padding-left:15px;">';
 						if($applicant["mother_status"]=="มีชีวิต"){
 							$t3 .= '<img src="imagee/check_t.jpg">';
@@ -815,7 +815,7 @@ $t3 = '
 						<td valign="bottom" style="width:50px;padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">อาชีพ : </font></td>
 						<td style="border-bottom: 1px dotted #000;width:120px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["mother_occupation"].'</b></font></td>
 						<td valign="bottom" align="right" style="width:50px;padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">รายได้ : </font></td>
-						<td style="border-bottom: 1px dotted #000;width:90px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.number_format($applicant["mother_income"]).'</b></font></td>
+						<td style="border-bottom: 1px dotted #000;width:90px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.($applicant["mother_income"]).'</b></font></td>
 						<td valign="bottom" align="right" style="padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">บาท/เดือน</font></td>
 						<td valign="bottom" style="padding-bottom:-5px;padding-top:-7px;"><font style="font-size:18px;">ที่อยู่มารดา เลขที่ : </font></td>
 						<td style="border-bottom: 1px dotted #000;width:70px;padding-bottom:-1px;padding-top:-7px;" align="center"><font style="font-size:18px;"><b>'.$applicant["mother_house_number"].'</b></font></td>

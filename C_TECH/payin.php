@@ -27,6 +27,72 @@ try {
     die('เกิดข้อผิดพลาดในการสร้าง PDF: ' . $e->getMessage());
 }
 
+
+$user_id = $_SESSION['user_login'];
+
+$stmt = $conn->prepare("
+SELECT 
+    u.*, 
+    p.*, 
+    f.*, 
+    e.*, 
+    c.*, 
+    a.*,
+    major.Major_Name,
+    subjecttype.Type_Name,
+    educationlevel.Level_Name,
+    coursetype.CourseType_Name
+FROM 
+    user u
+LEFT JOIN 
+    parent_info p ON u.User_ID = p.User_ID
+LEFT JOIN 
+    form f ON u.User_ID = f.User_ID
+LEFT JOIN 
+    education_info e ON u.User_ID = e.User_ID
+LEFT JOIN 
+    current_address c ON u.User_ID = c.User_ID
+LEFT JOIN 
+    applicant a ON u.User_ID = a.User_ID
+LEFT JOIN 
+    major ON f.Major_ID = major.Major_ID
+LEFT JOIN 
+    subjecttype ON major.Type_ID = subjecttype.Type_ID
+LEFT JOIN 
+    educationlevel ON subjecttype.Level_ID = educationlevel.Level_ID
+LEFT JOIN 
+    coursetype ON educationlevel.CourseType_ID = coursetype.CourseType_ID
+WHERE 
+    u.User_ID = :user_id
+");
+
+// Bind parameter and execute the query
+$stmt->bindParam(':user_id', $user_id);
+$stmt->execute();
+
+// Fetch all the results
+$applicants = $stmt->fetchAll();
+
+
+// ตรวจสอบว่ามีการกำหนดวันที่ไว้ใน session หรือยัง
+if (!isset($_SESSION['print_date'])) {
+    $_SESSION['print_date'] = date('d/m/Y'); // บันทึกวันที่ครั้งแรกใน session
+}
+
+$year = date("Y") + 543; // แปลงปีเป็น พ.ศ.
+$date = new DateTime($_SESSION['print_date']);
+
+// บวก 90 วันจากวันที่พิมพ์
+$date->modify('+90 days');
+$Schedule = $date->format('d/m/Y'); // แปลงกลับเป็นรูปแบบวันที่ที่ต้องการ
+
+
+
+
+
+
+
+
 $html = '<style>
     body {
         font-family: "thsarabun";
@@ -130,15 +196,15 @@ $html .= '
     <img src="./imagee/logo.jpg" class="logo">
     <div class="header-text">
         <h4>วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา <br>
-        ใบแจ้งยอดชำระเงินค่าสมัคร ปีการศึกษา(....) <br>
-        วันที่ (....)</h4>
+        ใบแจ้งยอดชำระเงินค่าสมัคร ปีการศึกษา '.$year.' <br>
+        วันที่ '.date('d/m/Y', strtotime($_SESSION['print_date'])).'</h4>
     </div>
 </div>
     <hr style = "margin: 0">
     <h4>REF. NO1: 0000000001</h4>
     <hr style = "margin: 0">
-    <h4>ชื่อ - สกุล: [กรอกชื่อที่นี่]</h4>
-    <h4>เลขประจำตัวประชาชน: [กรอกเลขบัตรประชาชน]</h4>
+    <h4>ชื่อ - สกุล: '.$applicants['name'].'  '.$applicants['lastname'].'</h4>
+    <h4>เลขประจำตัวประชาชน: '.$applicants['id_card_number'].'</h4>
 
 
 <div class="table-container">
@@ -151,10 +217,10 @@ $html .= '
                 <th>จำนวน (Amount)</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style = "height: 200px";>
             <tr>
                 <td>1</td>
-                <td>ค่าสมัครเรียน</td>
+                <td>ค่าธรรมเนียมการสมัคร สาขา '.$applicants['CourseType_Name'].' '.$applicants['Level_Name'].' '.$applicants['Type_Name'].' '.$applicants['Major_Name'].'</td>
                 <td>2,000</td>
             </tr>
             <tr class="total-row">
@@ -170,17 +236,18 @@ $html .= '
     <p><strong>ชื่อบัญชี:</strong> วิทยาลัยเทคโนโลยีชนะพลขันธ์</p>
     <p><strong>เลขที่บัญชี:</strong> 374-105-5883</p>
     <p><strong>ธนาคาร:</strong> กรุงไทย</p>
-    <h4>กำหนดชำระเงินภายในวันที่: [วันที่กำหนด]</h4>
+    <h4>กำหนดชำระเงินภายในวันที่: '.$Schedule.'</h4>
     <p>หากพ้นกำหนดจะไม่สามารถชำระเงินได้ และการสมัครจะเป็นโมฆะ</p>
 </div>
 
 <div class="notice">
-    <p>หมายเหตุ: เก็บเอกสารฉบับนี้ไว้เป็นหลักฐานการชำระเงิน โดยสามารถตรวจสอบสถานะการชำระเงินหลังจากท่านได้ชำระเงินแล้ว 1-2 วันทำการ</p>
+    <p>หมายเหตุ: เก็บเอกสารฉบับนี้ไว้เป็นหลักฐานการชำระเงิน โดยสามารถตรวจสอบสถานะการชำระเงินหลังจากท่านได้ชำระเงินแล้ว 1-3 วันทำการ</p>
 </div>
 
 <div class="contact">
-    <p>หากมีข้อสงสัยเพิ่มเติม โปรดติดต่อฝ่ายการเงิน โทร. <strong>044-123456</strong></p>
-    <p>หรือส่งอีเมล: <strong>finance@chncollege.ac.th</strong></p>
+    <p>หากมีข้อสงสัยเพิ่มเติม โปรดติดต่อ โทร.<strong> 088-3425813
+</strong>  (อ.นา)</p>
+    <p>หรือติดต่อไลน์: <strong>@745wetoo</strong></p>
 </div>
 
 

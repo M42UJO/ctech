@@ -160,12 +160,12 @@ if (isset($_POST['update'])) {
             <main>
                 <div class="container-fluid px-4">
                     <ol class="breadcrumb mb-3">
-                        <li class="breadcrumb-item active">เพิ่มเจ้าหน้าที่</li>
+                        <li class="breadcrumb-item active">แก้ไขข้อมูลเจ้าหน้าที่</li>
                     </ol>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <form id="personal-info-form" class="g-2 mt-2" action="editStaff.php?user_id=<?php echo $user_id; ?>" method="post">
-                                <div class="panel-heading">เพิ่มเจ้าหน้าที่</div>
+                                <div class="panel-heading">แก้ไขข้อมูลเจ้าหน้าที่</div>
 
                                 <?php if (isset($_SESSION['error'])) : ?>
                                     <div class="alert alert-danger" role="alert">
