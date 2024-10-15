@@ -3,12 +3,11 @@ session_start();
 require_once("./config/db.php");
 require_once __DIR__ . '../mPDF/vendor/autoload.php';
 
-// สร้างอ็อบเจกต์ mPDF
 try {
-    $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+    $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
     $fontDirs = $defaultConfig['fontDir'];
 
-    $defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+    $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
     $fontData = $defaultFontConfig['fontdata'];
 
     $mpdf = new \Mpdf\Mpdf([
@@ -23,10 +22,9 @@ try {
         ],
         'default_font' => 'thsarabun'
     ]);
-} catch (\Mpdf\MpdfException $e) { 
+} catch (\Mpdf\MpdfException $e) {
     die('เกิดข้อผิดพลาดในการสร้าง PDF: ' . $e->getMessage());
 }
-
 
 $user_id = $_SESSION['user_login'];
 
@@ -67,12 +65,15 @@ WHERE
 ");
 
 // Bind parameter and execute the query
-$stmt->bindParam(':user_id', $user_id);
+$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
 
-// Fetch all the results
-$applicants = $stmt->fetchAll();
+// Fetch a single result
+$applicants = $stmt->fetch(PDO::FETCH_ASSOC);
 
+if (!$applicants) {
+    die('No applicant found with the provided User ID.');
+}
 
 // ตรวจสอบว่ามีการกำหนดวันที่ไว้ใน session หรือยัง
 if (!isset($_SESSION['print_date'])) {
@@ -80,18 +81,36 @@ if (!isset($_SESSION['print_date'])) {
 }
 
 $year = date("Y") + 543; // แปลงปีเป็น พ.ศ.
-$date = new DateTime($_SESSION['print_date']);
+
+// Use createFromFormat to parse the date correctly
+$date = DateTime::createFromFormat('d/m/Y', $_SESSION['print_date']);
+
+
+$stmt_ref = $conn->prepare("SELECT last_used FROM reference_numbers LIMIT 1");
+$stmt_ref->execute();
+$current_ref = $stmt_ref->fetchColumn();
+
+if ($current_ref === false) {
+    die('Could not fetch the reference number.');
+}
+
+// Increment the reference number
+$new_ref = $current_ref + 1;
+
+// Update the reference number in the database
+$stmt_update = $conn->prepare("UPDATE reference_numbers SET last_used = :new_ref");
+$stmt_update->bindParam(':new_ref', $new_ref, PDO::PARAM_INT);
+$stmt_update->execute();
+
+
+if ($date === false) {
+    // Handle the error if the date format is incorrect
+    die('Invalid print date format!');
+}
 
 // บวก 90 วันจากวันที่พิมพ์
 $date->modify('+90 days');
 $Schedule = $date->format('d/m/Y'); // แปลงกลับเป็นรูปแบบวันที่ที่ต้องการ
-
-
-
-
-
-
-
 
 $html = '<style>
     body {
@@ -103,92 +122,92 @@ $html = '<style>
         margin-left: 0.5cm;
         margin-right: 0.5cm;
     }
-.header-container {
-    margin-bottom: 10px;
-}
-.logo {
-    width: 60px; /* ลดขนาดโลโก้ */
-    margin-bottom: 20px;
-    float: left; /* ชิดซ้าย */
-}
-.header-text {
-    margin-left: 20px; /* เว้นที่ให้ข้อความ */
-    text-align: left; /* ชิดซ้าย */
-}
-
-.header-text h4 {
-    font-size: 20px;
-    color: #333;
-    margin:  0;
-    font-weight: normal;
-}
-.info-section {
-    text-align: left;
-    margin-bottom: 30px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-h4 {
-    font-size: 18px;
-    margin: 5px 0;
-}
-.table-container {
-    margin-bottom: 20px;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 0px;
-    font-size: 16px;
-}
-table, th, td {
-    border: 1px solid #ccc;
-}
-th {
-    background-color: #e7f3fe;
-    font-weight: bold;
-    color: #0056b3;
-    padding: 12px;
-}
-td {
-    padding: 12px;
-    text-align: center;
-}
-.total-row {
-    background-color: #d9edf7;
-    font-weight: bold;
-    color: #0056b3;
-}
-.bank-details, .notice {
-    padding: 15px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    margin: 20px 0;
-    color: #333;
-}
-.bank-details h4, .notice p {
-    margin: 0;
-}
-.contact {
-    text-align: center;
-    font-size: 16px;
-    color: #0056b3;
-    margin-top: 10px;
-}
-.contact strong {
-    color: #333;
-}
-.footer {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 14px;
-    color: #666;
-}
-.footer p {
-    margin: 5px 0;
-}
+    .header-container {
+        margin-bottom: 10px;
+    }
+    .logo {
+        width: 60px; /* ลดขนาดโลโก้ */
+        margin-bottom: 20px;
+        float: left; /* ชิดซ้าย */
+    }
+    .header-text {
+        margin-left: 20px; /* เว้นที่ให้ข้อความ */
+        text-align: left; /* ชิดซ้าย */
+    }
+    
+    .header-text h4 {
+        font-size: 20px;
+        color: #333;
+        margin:  0;
+        font-weight: normal;
+    }
+    .info-section {
+        text-align: left;
+        margin-bottom: 30px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    h4 {
+        font-size: 18px;
+        margin: 5px 0;
+    }
+    .table-container {
+        margin-bottom: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0px;
+        font-size: 16px;
+    }
+    table, th, td {
+        border: 1px solid #ccc;
+    }
+    th {
+        background-color: #e7f3fe;
+        font-weight: bold;
+        color: #0056b3;
+        padding: 12px;
+    }
+    td {
+        padding: 12px;
+        text-align: center;
+    }
+    .total-row {
+        background-color: #d9edf7;
+        font-weight: bold;
+        color: #0056b3;
+    }
+    .bank-details, .notice {
+        padding: 15px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        margin: 20px 0;
+        color: #333;
+    }
+    .bank-details h4, .notice p {
+        margin: 0;
+    }
+    .contact {
+        text-align: center;
+        font-size: 16px;
+        color: #0056b3;
+        margin-top: 10px;
+    }
+    .contact strong {
+        color: #333;
+    }
+    .footer {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+    }
+    .footer p {
+        margin: 5px 0;
+    }
 </style>';
 
 $html .= '
@@ -196,32 +215,34 @@ $html .= '
     <img src="./imagee/logo.jpg" class="logo">
     <div class="header-text">
         <h4>วิทยาลัยเทคโนโลยีชนะพลขันธ์ นครราชสีมา <br>
-        ใบแจ้งยอดชำระเงินค่าสมัคร ปีการศึกษา '.$year.' <br>
-        วันที่ '.date('d/m/Y', strtotime($_SESSION['print_date'])).'</h4>
+        ใบแจ้งยอดชำระเงินค่าสมัคร ปีการศึกษา ' . $year . ' <br>
+       วันที่ ' . date('d/m/', strtotime($applicants['created_at'])) . ($year) . '</h4>
     </div>
 </div>
-    <hr style = "margin: 0">
-    <h4>REF. NO1: 0000000001</h4>
-    <hr style = "margin: 0">
-    <h4>ชื่อ - สกุล: '.$applicants['name'].'  '.$applicants['lastname'].'</h4>
-    <h4>เลขประจำตัวประชาชน: '.$applicants['id_card_number'].'</h4>
-
+    <hr style="margin: 0">
+    <h4>REF. NO1: ' . str_pad($new_ref, 10, '0', STR_PAD_LEFT) . '</h4>
+    <hr style="margin: 0">
+    <h4 style="font-weight: normal;">ชื่อ - สกุล: ' . $applicants['name'] . '  ' . $applicants['lastname'] . '</h4>
+    <h4 style="font-weight: normal;">เลขประจำตัวประชาชน: ' . $applicants['id_card_number'] . '</h4>
 
 <div class="table-container">
-    <h4 style = "margin-top: 20px">รายละเอียดการชำระเงิน</h4>
+    <h4 style="margin-top: 20px; font-weight: normal;">รายละเอียดการชำระเงิน</h4>
     <table>
         <thead>
             <tr>
                 <th>NO.</th>
-                <th>รายการ (Description)</th>
-                <th>จำนวน (Amount)</th>
+                <th>รายการ <br> Description</th>
+                <th>จำนวน <br> Amount (Baht)</th>
             </tr>
         </thead>
-        <tbody style = "height: 200px";>
+        <tbody >
             <tr>
-                <td>1</td>
-                <td>ค่าธรรมเนียมการสมัคร สาขา '.$applicants['CourseType_Name'].' '.$applicants['Level_Name'].' '.$applicants['Type_Name'].' '.$applicants['Major_Name'].'</td>
-                <td>2,000</td>
+                <td>1 <br><br><br><br><br><br><br><br><br><br></td>
+                <td style="text-align: left;"> 
+                    ค่าธรรมเนียมการสมัครเรียน <br> 
+                    สาขา ' . $applicants['Major_Name'] . ' ระดับ ' . $applicants['Level_Name'] . ' ' . $applicants['Type_Name'] . ' ' . $applicants['CourseType_Name'] . '<br><br><br><br><br><br><br><br><br><br>
+                </td>
+                <td style="padding: 10px;">2,000</td>
             </tr>
             <tr class="total-row">
                 <td colspan="2">ยอดรวมทั้งหมด</td>
@@ -236,7 +257,7 @@ $html .= '
     <p><strong>ชื่อบัญชี:</strong> วิทยาลัยเทคโนโลยีชนะพลขันธ์</p>
     <p><strong>เลขที่บัญชี:</strong> 374-105-5883</p>
     <p><strong>ธนาคาร:</strong> กรุงไทย</p>
-    <h4>กำหนดชำระเงินภายในวันที่: '.$Schedule.'</h4>
+    <h4>กำหนดชำระเงินภายในวันที่: ' . $Schedule . '</h4>
     <p>หากพ้นกำหนดจะไม่สามารถชำระเงินได้ และการสมัครจะเป็นโมฆะ</p>
 </div>
 
@@ -249,8 +270,6 @@ $html .= '
 </strong>  (อ.นา)</p>
     <p>หรือติดต่อไลน์: <strong>@745wetoo</strong></p>
 </div>
-
-
 ';
 
 $mpdf->WriteHTML($html);
