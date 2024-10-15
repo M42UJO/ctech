@@ -10,9 +10,9 @@ if (!isset($_SESSION['admin_login'])) {
 $user_id = $_SESSION['admin_login'];
 
 
-    $stmt_login = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
-    $stmt_login->execute([$user_id]);
-    $login = $stmt_login->fetch();
+$stmt_login = $conn->prepare("SELECT * FROM user WHERE User_ID = ?");
+$stmt_login->execute([$user_id]);
+$login = $stmt_login->fetch();
 
 
 
@@ -74,63 +74,62 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <style>
-
     .order-card {
         color: #fff;
     }
 
 
-.bg-c-accounting {
-    background: linear-gradient(45deg, #FF5733, #FF9F43); 
-}
+    .bg-c-accounting {
+        background: linear-gradient(45deg, #FF5733, #FF9F43);
+    }
 
-.bg-c-business-computer {
-    background: linear-gradient(45deg, #FF9F43, #FFEA00); 
-}
+    .bg-c-business-computer {
+        background: linear-gradient(45deg, #FF9F43, #FFEA00);
+    }
 
-.bg-c-digital-tech {
-    background: linear-gradient(45deg, #FFEA00, #8BC34A); 
-}
+    .bg-c-digital-tech {
+        background: linear-gradient(45deg, #FFEA00, #8BC34A);
+    }
 
-.bg-c-digital-techs {
-    background: linear-gradient(45deg, #8BC34A, #00B0FF); 
-}
+    .bg-c-digital-techs {
+        background: linear-gradient(45deg, #8BC34A, #00B0FF);
+    }
 
-.bg-c-retail-management {
-    background: linear-gradient(45deg, #00B0FF, #00E5FF); 
-}
+    .bg-c-retail-management {
+        background: linear-gradient(45deg, #00B0FF, #00E5FF);
+    }
 
-.bg-c-logistics {
-    background: linear-gradient(45deg, #00E5FF, #3F51B5); 
-}
+    .bg-c-logistics {
+        background: linear-gradient(45deg, #00E5FF, #3F51B5);
+    }
 
-.bg-c-marketing {
-    background: linear-gradient(45deg, #3F51B5, #673AB7); 
-}
+    .bg-c-marketing {
+        background: linear-gradient(45deg, #3F51B5, #673AB7);
+    }
 
-.bg-c-auto-mechanics {
-    background: linear-gradient(45deg, #673AB7, #FF4081); 
-}
+    .bg-c-auto-mechanics {
+        background: linear-gradient(45deg, #673AB7, #FF4081);
+    }
 
-.bg-c-electrical {
-    background: linear-gradient(45deg, #FF4081, #FF80AB); 
-}
+    .bg-c-electrical {
+        background: linear-gradient(45deg, #FF4081, #FF80AB);
+    }
 
-.bg-c-electricals {
-    background: linear-gradient(45deg, #FF80AB, #FF1493); 
-}
+    .bg-c-electricals {
+        background: linear-gradient(45deg, #FF80AB, #FF1493);
+    }
 
-.bg-c-electronics {
-    background: linear-gradient(45deg, #FF1493, #FF6F61); 
-}
+    .bg-c-electronics {
+        background: linear-gradient(45deg, #FF1493, #FF6F61);
+    }
 
-.bg-c-construction {
-    background: linear-gradient(45deg, #FFD740, #FFC107); 
-}
+    .bg-c-construction {
+        background: linear-gradient(45deg, #FFD740, #FFC107);
+    }
 
-.bg-c-gray {
-    background: linear-gradient(45deg, #D3D3D3, #A9A9A9); 
-}
+    .bg-c-gray {
+        background: linear-gradient(45deg, #D3D3D3, #A9A9A9);
+    }
 
 
 
@@ -211,16 +210,16 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Charts
                         </a>
-                        <?php if ($login['urole'] == 'admin'){ ?>
-                        <a class="nav-link" href="edituser.php">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
-                            แก้ไขข้อมูลผู้สมัคร
-                        </a> 
-                        
-                        <a class="nav-link" href="staff.php">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
-                            แก้ไขผู้ใช้
-                        </a>
+                        <?php if ($login['urole'] == 'admin') { ?>
+                            <a class="nav-link" href="edituser.php">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
+                                แก้ไขข้อมูลผู้สมัคร
+                            </a>
+
+                            <a class="nav-link" href="staff.php">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-user-pen"></i></div>
+                                แก้ไขผู้ใช้
+                            </a>
                         <?php } ?>
                         <a class="nav-link" href="tables.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -251,8 +250,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </ol>
                     </div>
                     <div class="row d-flex align-items-center">
-                        <form action="./reportAd.php" method="get" class="d-flex">
-
+                        <form id="reportForm" action="indexadmin.php" method="get" class="d-flex">
                             <div class="col-md-1 mb-4 m-2 ms-auto">
                                 <label for="startDate" class="form-label">ตั้งแต่วันที่:</label>
                                 <input type="date" class="form-control" name="startDate" id="startDate" value="<?php echo isset($_GET['startDate']) ? htmlspecialchars($_GET['startDate']) : ''; ?>">
@@ -261,24 +259,21 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="col-md-1 mb-4 m-2">
                                 <label for="endDate" class="form-label">ถึงวันที่:</label>
                                 <input type="date" class="form-control" name="endDate" id="endDate" value="<?php echo isset($_GET['endDate']) ? htmlspecialchars($_GET['endDate']) : ''; ?>">
-
                             </div>
-
 
                             <div class="col-md-1 mb-4 m-2 mt-3">
                                 <label for="" class="form-label"></label>
-                                <button type="submit" class="btn btn-outline-primary w-100">ดูรายงาน</button>
-
+                                <button type="submit" class="btn btn-outline-primary w-100" onclick="submitTo('indexadmin.php')">ดูรายงาน</button>
                             </div>
                             <div class="col-md-1 mb-4 m-2 mt-3">
-                            <label for="" class="form-label"></label>
-                                <button type="submit" class="btn btn-outline-danger w-100" name="pdf" value="1" target="_blank">รายงาน PDF</button>
+                                <label for="" class="form-label"></label>
+                                <button type="submit" class="btn btn-outline-danger w-100" onclick="submitTo('reportAd.php')">รายงาน PDF</button>
                             </div>
                         </form>
                     </div>
 
                     <div class="row">
-                        <?php foreach ($results as $row) { 
+                        <?php foreach ($results as $row) {
                             $icon = '';
                             $cardColor = '';
 
@@ -332,11 +327,11 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     $cardColor = 'bg-c-construction';
                                     break;
                                 default:
-                                    $icon = 'fa-question'; 
-                                    $cardColor = 'bg-c-gray'; 
+                                    $icon = 'fa-question';
+                                    $cardColor = 'bg-c-gray';
                                     break;
                             }
-                            
+
                         ?>
                             <div class="col-md-4 col-xl-3">
                                 <div class="card <?php echo $cardColor; ?> order-card">
@@ -365,8 +360,11 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
     <script>
-
-    </script>
+    function submitTo(action) {
+        // เปลี่ยน action ของฟอร์ม
+        document.getElementById('reportForm').action = action;
+    }
+</script>
 
 </body>
 

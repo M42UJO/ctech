@@ -266,18 +266,18 @@ $t2 .= '</td>
                     <table width="100%" style="padding:0px;border-collapse: collapse;">
                         <tr>
                             <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[0] . '</b></td>
-                            <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[1] . '</b></td>
                             <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[2] . '</b></td>
                             <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[3] . '</b></td>
                             <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[4] . '</b></td>
-                            <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[4] . '</b></td>
-                            <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[6] . '</b></td>
+                            <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[5] . '</b></td>
                             <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[7] . '</b></td>
                             <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[8] . '</b></td>
                             <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[9] . '</b></td>
                             <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[10] . '</b></td>
                             <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[11] . '</b></td>
-                            <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[12] . '</b></td>
+                            <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[13] . '</b></td>
+                            <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[14] . '</b></td>
+                            <td style="border:2px solid #000;width:16px;height:16px;padding-bottom:-1px;padding-top:-3px;" align="center"><b>' . $arr_id_card[16] . '</b></td>
                         </tr>
                     </table>
                     </td>
