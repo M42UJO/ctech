@@ -8,6 +8,8 @@ if (!isset($_SESSION['admin_login'])) {
 }
 
 
+
+
 $query = "
     SELECT major.Major_Name, 
            COALESCE(COUNT(form.Major_ID), 0) AS applicant_count,
